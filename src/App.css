@@ -1,0 +1,12 @@
+.application-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  flex-direction: column;
+  height: 100%;
+}
+
+.content {
+  flex-grow: 1;
+  flex-shrink: 1;
+}

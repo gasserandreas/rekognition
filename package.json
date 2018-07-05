@@ -1,0 +1,37 @@
+{
+    "name": "aws-rekognition",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "prop-types": "^15.6.1",
+        "react": "^16.3.2",
+        "react-dom": "^16.3.2",
+        "react-redux": "^5.0.7",
+        "react-router-dom": "^4.2.2",
+        "react-scripts": "1.1.4",
+        "redux": "^4.0.0",
+        "redux-devtools-extension": "^2.13.2",
+        "redux-thunk": "^2.2.0",
+        "uuid": "^3.2.1"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test --env=jsdom",
+        "eject": "react-scripts eject",
+        "storybook": "start-storybook -p 9009 -s public",
+        "build-storybook": "build-storybook -s public"
+    },
+    "devDependencies": {
+        "@storybook/addon-actions": "^3.4.5",
+        "@storybook/addon-knobs": "^3.4.5",
+        "@storybook/addon-links": "^3.4.5",
+        "@storybook/addon-options": "^3.4.5",
+        "@storybook/addons": "^3.4.5",
+        "@storybook/react": "^3.4.5",
+        "babel-core": "^6.26.3",
+        "babel-runtime": "^6.26.0",
+        "storybook-readme": "^3.3.0"
+    },
+    "generatedWith": "create-wag-app 0.0.1-develop"
+}
