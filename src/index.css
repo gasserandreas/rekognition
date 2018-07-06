@@ -9,6 +9,8 @@ body {
     padding: 0;
     height: 100%;
     min-height: 100%;
+    background-color: #F7F7F9;
+    min-width: 600px;
 }
 
 body {
@@ -16,6 +18,7 @@ body {
   padding: 0;
   font-family: sans-serif;
   font-weight: 16px;
+  font-weight: 300;
 }
 
 body,
