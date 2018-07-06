@@ -24,6 +24,12 @@ addUnhandledPromiseCatcher(store);
 // init application
 dispatch(initApplication());
 
+const user = {
+  firstname: 'Andreas',
+  name: 'Gasser',
+  shortname: 'AG',
+};
+
 class App extends Component {
   render() {
     return (
@@ -31,7 +37,10 @@ class App extends Component {
         <ErrorBoundary>
           <BrowserRouter>
             <div className="application-wrapper">
-              <Header />
+              <div className="application-header">
+                <Header user={user} />
+                Navigation
+              </div>
               <main role="main" className="content">
                 <AppRoutes />
               </main>
