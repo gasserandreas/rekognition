@@ -9,16 +9,30 @@ body {
     padding: 0;
     height: 100%;
     min-height: 100%;
+    background-color: #F7F7F9;
+    min-width: 600px;
 }
 
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  font-weight: 16px;
+  font-weight: 300;
 }
 
 body,
 .application {
   position: relative;
   height: 100%;
+}
+
+h1 {
+  font-weight: 400;
+  font-size: 1.25rem;
+  color: #33334A;
+}
+
+h1.inverse {
+  color: #fff;
 }

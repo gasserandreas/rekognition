@@ -1,21 +1,27 @@
-.app-header {
-  text-align: center;
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  background-color: #133545;
+  padding: 1rem 1rem;
+  color: #fff;
+  max-height: 4.75rem;
 }
 
-.app-title {
-  font-size: 1.5em;
+header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  margin: .5rem 0 .5rem;
+  font-weight: 400;
+  color: #fff;
 }
 
-.app-logo {
-  animation: app-logo-spin infinite 20s linear;
-  height: 80px;
+header .user-info {
+  display: flex;
+  flex-wrap: nowrap;
 }
 
-@keyframes app-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.user-info .user-name {
+  padding: .75rem 1rem;
 }
