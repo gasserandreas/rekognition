@@ -46,7 +46,7 @@ class App extends Component {
               <main role="main" className="content">
                 <AppRoutes />
               </main>
-              <Footer />
+              {/* <Footer /> */}
               <DrawerContainer />
             </div>
           </BrowserRouter>
