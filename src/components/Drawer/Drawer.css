@@ -1,0 +1,35 @@
+.drawer {
+  position: absolute;
+  z-index: 10;
+  top: 4.75rem;
+  left: 0;
+  bottom: 0;
+  width: 17rem;
+  padding: 1rem;
+  background-color: #fff;
+  border-right: 2px solid #ccc;
+  box-shadow: 0 2px 10px 0 #aaa;
+  transition: left 0.8s;
+  transition-timing-function: cubic-bezier(.42, 0, .58, 1);
+}
+
+.drawer.open {
+  left: 0;
+}
+
+.drawer.close {
+  left: -100%;
+}
+
+.drawer .close-indicator {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.25rem;
+}
+
+.drawer .close-indicator:hover {
+  color: #133545;
+  cursor: pointer;
+  font-weight: 600;
+}

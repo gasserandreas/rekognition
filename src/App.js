@@ -5,7 +5,8 @@ import { Provider } from 'react-redux';
 
 import ErrorBoundary from './common/error/ErrorBoundary';
 import Header from './components/Header/Header';
-import Navigation from './components/Navigation/Navigation';
+import NavigationContainer from './components/Navigation/NavigationContainer';
+import DrawerContainer from './components/Drawer/DrawerContainer';
 import Footer from './components/Footer/Footer';
 import AppRoutes from './routes/app';
 
@@ -40,12 +41,13 @@ class App extends Component {
             <div className="application-wrapper">
               <div className="application-header">
                 <Header user={user} />
-                <Navigation />
+                <NavigationContainer />
               </div>
               <main role="main" className="content">
                 <AppRoutes />
               </main>
               <Footer />
+              <DrawerContainer />
             </div>
           </BrowserRouter>
         </ErrorBoundary>

@@ -26,3 +26,13 @@ body,
   position: relative;
   height: 100%;
 }
+
+h1 {
+  font-weight: 400;
+  font-size: 1.25rem;
+  color: #33334A;
+}
+
+h1.inverse {
+  color: #fff;
+}
