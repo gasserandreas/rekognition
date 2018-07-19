@@ -10,5 +10,6 @@
   background-color: #fff;
   border-top: 1px solid #ccc;
   box-shadow: -1px 5px 10px 0px #aaa;
-  padding: 10rem;
+  padding: 1rem;
+  overflow-y: scroll;
 }

@@ -1,0 +1,7 @@
+.data-view .divider {
+  /* border-bottom: 1px solid #F6F6F8; */
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  opacity: .5;
+  border: none;
+}

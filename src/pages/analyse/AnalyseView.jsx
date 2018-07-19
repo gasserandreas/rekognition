@@ -1,5 +1,7 @@
 import React from 'react';
 
+import DataContainer from './data/DataContainer';
+
 import './AnalyseView.css';
 
 const AnalyseView = () => (
@@ -9,7 +11,7 @@ const AnalyseView = () => (
       IMAGE
     </div>
     <div className="data-container">
-      DATA
+      <DataContainer />
     </div>
   </React.Fragment>
   // </div>
