@@ -1,0 +1,11 @@
+.picture-view {
+  width: 96%;
+  height: 96%;
+  margin: 2%;
+  overflow: hidden;
+}
+
+.picture-view .image-wrapper {
+  width: 100%;
+  height: 100%;
+}
