@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
 
 const DRAWER_SET_VISIBILITY = 'DRAWER_SET_VISIBILITY';
-const DRAWER_SET_CONTENT = 'DRAWER_SET_CONTENT';
 
 // simple actions
 const drawerSetVisibility = (open) => ({
@@ -9,26 +8,13 @@ const drawerSetVisibility = (open) => ({
   open,
 });
 
-const drawerSetContent = content => ({
-  type: DRAWER_SET_CONTENT,
-  content,
-});
-
 // complex actions
-const openDrawer = (content = undefined) => (dispatch) => {
-  if (content) {
-    dispatch(drawerSetContent(content));
-  }
-
+const openDrawer = () => (dispatch) => {
   dispatch(drawerSetVisibility(true));
 };
 
 const closeDrawer = () => (dispatch) => {
   dispatch(drawerSetVisibility(false));
-};
-
-const setDrawerContent = (content) => (dispatch) => {
-  dispatch(drawerSetContent(content));
 };
 
 // reducers
@@ -41,22 +27,11 @@ const open = (state = false, action) => {
   }
 };
 
-const content = (state = null, action) => {
-  switch (action.type) {
-    case DRAWER_SET_CONTENT:
-      return action.content;
-    default:
-      return state;
-  }
-};
-
 export {
   openDrawer,
   closeDrawer,
-  setDrawerContent,
 }
 
 export default combineReducers({
   open,
-  content,
 });

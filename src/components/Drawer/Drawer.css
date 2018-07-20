@@ -33,3 +33,28 @@
   cursor: pointer;
   font-weight: 600;
 }
+
+.picture-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.picture-list li {
+  margin-bottom: .5rem;
+}
+
+.picture-list li img {
+  -webkit-filter: brightness(100%);
+  width: 100%;
+  height: auto;
+}
+
+.picture-list li img:hover {
+  cursor: pointer;
+  -webkit-filter: brightness(70%);
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  -ms-transition: all .3s ease;
+  transition: all .3s ease;
+}
