@@ -1,4 +1,16 @@
 .image {
-  height: 100%;
+  display: block;
+  /* height: 100%; */
+  
+}
+
+.image.max-width {
   width: 100%;
+  height: auto;
+}
+
+.image.max-heigth {
+  width: auto;
+  height: 100%;
+  margin: 0 auto;
 }

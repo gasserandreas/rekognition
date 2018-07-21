@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import './Image.css';
 
@@ -11,6 +12,14 @@ class Image extends Component {
 
   imageOnLoad = this.imageOnLoad.bind(this);
 
+  static propTypes = {
+    className: PropTypes.string.isRequired,
+  }
+
+  static defaultProps = {
+    className: '',
+  }
+
   imageOnLoad(obj) {
     this.setState({ loading: false });
 
@@ -21,7 +30,12 @@ class Image extends Component {
 
   render() {
     const { loading } = this.state;
-    const style = { opacity: loading ? 0 : 1 };
+
+    const style = {
+      opacity: loading ? 0 : 1,
+      display: 'block'
+    };
+
     return (
       <div className="image-wrapper">
         {loading ? 'LOADING IMAGE' : ''}

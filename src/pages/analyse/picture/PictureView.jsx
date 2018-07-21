@@ -31,23 +31,27 @@ class PictureView extends Component {
     const { naturalWidth, naturalHeight } = img;
     this.setState({
       dimension: {
-        width: naturalWidth > naturalHeight ? '100%' : 'auto',
-        height: naturalWidth > naturalHeight ? 'auto%' : '100%',
+        width: naturalWidth,
+        height: naturalHeight,
       }
     })
   }
 
   render() {
     console.log(this.state.dimension);
+    const { dimension } = this.state;
+    const { width, height } = dimension;
+
+    const className = width > height ? 'max-width' : 'max-height';
+
     return (
       <div className="picture-view">
-        <div className="image-wrapper">
-          <Image
-            src={`${basePath}${this.props.imageId}`}
-            alt=""
-            onLoad={this.onImgLoad}
-          />
-        </div>
+        <Image
+          src={`${basePath}${this.props.imageId}`}
+          alt=""
+          onLoad={this.onImgLoad}
+          className={className}
+        />
       </div>
     );
   }
