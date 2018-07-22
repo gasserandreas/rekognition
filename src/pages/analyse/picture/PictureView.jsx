@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Image from '../../../components/Image/Image';
+import FaceMarker from '../../../components/FaceMarker/FaceMarker';
 
 import './PictureView.css';
 
@@ -27,6 +28,11 @@ class PictureView extends Component {
     imagePath: undefined,
   };
 
+  onFaceClick(face) {
+    console.log('onFaceClick');
+    console.log(face);
+  }
+
   onImgLoad({ target: img }) {
     const { naturalWidth, naturalHeight } = img;
     this.setState({
@@ -38,7 +44,6 @@ class PictureView extends Component {
   }
 
   render() {
-    console.log(this.state.dimension);
     const { dimension } = this.state;
     const { width, height } = dimension;
 
@@ -46,6 +51,16 @@ class PictureView extends Component {
 
     return (
       <div className="picture-view">
+        <FaceMarker
+          id="1234"
+          className="face-1"
+          x={162}
+          y={100}
+          width={116}
+          height={135}
+          text="Face 1"
+          onClick={this.onFaceClick}
+        />
         <Image
           src={`${basePath}${this.props.imageId}`}
           alt=""

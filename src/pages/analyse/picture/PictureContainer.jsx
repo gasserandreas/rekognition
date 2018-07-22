@@ -5,7 +5,7 @@ import PictureView from './PictureView';
 const mapStateToProps = (state) => {
 
   return {
-    imageId: 'picture_2.jpg',
+    imageId: 'picture_1.jpg',
   };
 };
 
