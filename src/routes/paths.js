@@ -1,5 +1,5 @@
 const HOME = '/';
-const INDEX = '/index';
+const REGISTER = '/register';
 const DETAIL = '/detail';
 
 // detail path
@@ -7,7 +7,7 @@ const DETAIL_ADD = `${DETAIL}/add`;
 
 export {
   HOME,
-  INDEX,
+  REGISTER,
   DETAIL,
   DETAIL_ADD,
 };

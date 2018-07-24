@@ -1,0 +1,30 @@
+.register-view {
+  width: 100%
+}
+
+.register-card .title {
+  font-size: 2rem;
+  color: #133545;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.register-card {
+  padding: 1.5rem;
+  background-color: #fff;
+  width: 50%;
+  margin: 5rem auto;
+}
+
+.register-card p {
+  line-height: 1.4rem;
+  letter-spacing: -.2px;
+  margin: 1.5rem 0;
+}
+
+.register-card .registration-button {
+  display: inline-block;
+  width: 100%;
+  margin-top: 1rem;
+}

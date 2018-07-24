@@ -26,11 +26,15 @@ addUnhandledPromiseCatcher(store);
 // init application
 dispatch(initApplication());
 
-const user = {
-  firstname: 'Andreas',
-  name: 'Gasser',
-  shortname: 'AG',
-};
+// check initial auth
+const { auth } = store.getState();
+const { user, isAuthenticated } = auth;
+
+// const user = {
+//   firstname: 'Andreas',
+//   name: 'Gasser',
+//   shortname: 'AG',
+// };
 
 class App extends Component {
   render() {
@@ -39,10 +43,12 @@ class App extends Component {
         <ErrorBoundary>
           <BrowserRouter>
             <div className="application-wrapper">
-              <div className="application-header">
-                <Header user={user} />
-                <NavigationContainer />
-              </div>
+              {isAuthenticated && (
+                <div className="application-header">
+                  <Header user={user} />
+                  <NavigationContainer />
+                </div>
+              )}
               <main role="main" className="content">
                 <AppRoutes />
               </main>

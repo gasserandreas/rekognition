@@ -1,0 +1,26 @@
+.input-group {
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+.input-group label {
+  font-weight: 400;
+  display: inline-block;
+  margin-bottom: .5rem;
+}
+
+.input-group.error .input {
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+.input-group .error-message {
+  color: #dc3545;
+}
+
+.input-group .error-message span {
+  display: block;
+  margin: .5rem .25rem;
+  font-weight: 400;
+
+}
