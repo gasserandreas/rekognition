@@ -19,7 +19,7 @@ const setAuth = ({ firstname, lastname }) => (dispatch) => {
   const credentials = {
     firstname,
     lastname,
-    shortName: `${firstname.x.charAt(0)}${firstname.x.charAt(0)}`,
+    shortname: `${firstname.charAt(0)}${lastname.charAt(0)}`,
     key: uuid.v4(),
   };
 
@@ -45,7 +45,7 @@ const isAuthenticated = (state = false, action) => {
 const accessKey = (state = '', action) => {
   switch (action.type) {
     case AUTH_SET:
-      return state.credentials.key;
+      return action.credentials.key;
     case AUTH_UNSET:
       return '';
     default:
@@ -64,7 +64,7 @@ const user = (state = initialUserState, action) => {
       return {
         firstname: action.credentials.firstname,
         lastname: action.credentials.lastname,
-        shortName: action.credentials.shortName,
+        shortname: action.credentials.shortname,
       };
     case AUTH_UNSET:
       return initialUserState;

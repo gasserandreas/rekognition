@@ -1,5 +1,8 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import * as Paths from './paths';
 
 const PrivateRoute = ({ component: Component, auth, ...rest }) => (
   <Route
@@ -9,7 +12,7 @@ const PrivateRoute = ({ component: Component, auth, ...rest }) => (
       ) : (
         <Redirect
           to={{
-            pathname: "/login",
+            pathname: Paths.REGISTER,
             state: { from: props.location }
           }}
         />
@@ -30,5 +33,13 @@ const PrivateRoute = ({ component: Component, auth, ...rest }) => (
   />
 );
 
-export default PrivateRoute;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+const mapDispatchToProps = ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PrivateRoute);
+
+// export default PrivateRoute;
 

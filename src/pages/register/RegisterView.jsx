@@ -5,10 +5,12 @@ import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import InputGroup from '../../components/InputGroup/InputGroup';
 
+import * as Paths from '../../routes/paths';
+
 import './RegisterView.css';
 
 const rules = {
-  minLength: (l) => (v) => v.length <= l ? 'Please specify more than 3 chars' : undefined,
+  minLength: (l) => (v) => v.length <= l ? `Please specify more than ${l} chars` : undefined,
 };
 
 const initialState = {
@@ -111,7 +113,15 @@ class RegisterView extends Component {
     });
 
     if (valid) {
-      console.log('login user');
+      const user = {
+        firstname: this.getValue('firstname').trim(),
+        lastname: this.getValue('lastname').trim(),
+      };
+
+      this.props.registerUser(user);
+
+      // navigate to home
+      this.props.history.push(Paths.HOME);
     }
   }
 
@@ -134,7 +144,7 @@ class RegisterView extends Component {
                 type="text"
                 onChange={this.onInputChange('firstname')}
                 placeholder="Steve"
-                rules={[rules.minLength(3)]}
+                rules={[rules.minLength(2)]}
               />
             </InputGroup>
             <InputGroup
@@ -146,7 +156,7 @@ class RegisterView extends Component {
                 type="text"
                 onChange={this.onInputChange('lastname')}
                 placeholder="Jobs"
-                rules={[rules.minLength(3)]}
+                rules={[rules.minLength(2)]}
               />
             </InputGroup>
             <Button
@@ -162,7 +172,7 @@ class RegisterView extends Component {
 }
 
 RegisterView.propTypes = {
-
+  registerUser: PropTypes.func.isRequired,
 };
 
 RegisterView.defaultProps = {

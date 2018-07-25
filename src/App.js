@@ -4,10 +4,11 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import ErrorBoundary from './common/error/ErrorBoundary';
-import Header from './components/Header/Header';
-import NavigationContainer from './components/Navigation/NavigationContainer';
+import AppHeader from './AppHeader';
+// import Header from './components/Header/Header';
+// import NavigationContainer from './components/Navigation/NavigationContainer';
 import DrawerContainer from './components/Drawer/DrawerContainer';
-import Footer from './components/Footer/Footer';
+// import Footer from './components/Footer/Footer';
 import AppRoutes from './routes/app';
 
 import { initApplication } from './redux/application';
@@ -27,8 +28,8 @@ addUnhandledPromiseCatcher(store);
 dispatch(initApplication());
 
 // check initial auth
-const { auth } = store.getState();
-const { user, isAuthenticated } = auth;
+// const { auth } = store.getState();
+// const { user, isAuthenticated } = auth;
 
 // const user = {
 //   firstname: 'Andreas',
@@ -43,12 +44,7 @@ class App extends Component {
         <ErrorBoundary>
           <BrowserRouter>
             <div className="application-wrapper">
-              {isAuthenticated && (
-                <div className="application-header">
-                  <Header user={user} />
-                  <NavigationContainer />
-                </div>
-              )}
+              <AppHeader />
               <main role="main" className="content">
                 <AppRoutes />
               </main>
