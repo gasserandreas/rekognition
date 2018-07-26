@@ -22,10 +22,12 @@ Button.propTypes = {
   onClick: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
   color: PropTypes.oneOf(['default', 'blue', 'green']),
+  type: PropTypes.oneOf(['button', 'submit']),
 };
 
 Button.defaultProps = {
   color: 'default',
+  type: 'button',
 };
 
 export default Button;

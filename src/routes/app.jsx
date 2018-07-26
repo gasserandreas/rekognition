@@ -1,19 +1,18 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-// import HomeContainer from '../pages/home/HomeContainer';
-import AnalyseView from '../pages/analyse/AnalyseView';
-import NotFound from '../pages/misc/NotFound';
+import PrivateRoute from './PrivateRoute';
 
-import DetailsRoutes from './details';
+import AnalyseView from '../pages/analyse/AnalyseView';
+import RegisterContainer from '../pages/register/RegisterContainer';
+import NotFound from '../pages/misc/NotFound';
 
 import * as Paths from './paths';
 
 const AppRoutes = () => (
   <Switch>
-    <Route exact path={Paths.INDEX} component={AnalyseView} />
-    <Route exact path={Paths.HOME} component={AnalyseView} />
-    <Route path={Paths.DETAIL} component={DetailsRoutes} />
+    <PrivateRoute exact path={Paths.HOME} component={AnalyseView} />
+    <Route exact path={Paths.REGISTER} component={RegisterContainer} />
     <Route path="*" component={NotFound} />
   </Switch>
 );
