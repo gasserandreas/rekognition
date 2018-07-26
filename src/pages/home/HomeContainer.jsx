@@ -4,7 +4,7 @@ import HomeView from './HomeView';
 
 const mapStateToProps = (state) => {
   const { application } = state;
-
+  
   return {
     ...application,
   };

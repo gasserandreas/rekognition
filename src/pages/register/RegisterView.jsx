@@ -25,10 +25,15 @@ class RegisterView extends Component {
   getValue = this.getValue.bind(this);
   getError = this.getError.bind(this);
   onInputChange = this.onInputChange.bind(this);
+  onInputKeyDown = this.onInputKeyDown.bind(this);
   onRegisterButtonClick = this.onRegisterButtonClick.bind(this);
 
   componentWillMount() {
-    this.initForm();
+    if (this.props.user) {
+      this.props.history.push(Paths.HOME);
+    } else {
+      this.initForm();
+    }
   }
 
   initForm() {
@@ -104,7 +109,18 @@ class RegisterView extends Component {
     };
   }
 
+  onInputKeyDown(e) {
+    const { which } = e;
+    if (which === 13) {
+      this.handleRegister();
+    }
+  }
+
   onRegisterButtonClick() {
+    this.handleRegister();
+  }
+
+  handleRegister() {
     const valid = this.validateForm(this.state.form);
 
     this.setState({
@@ -143,6 +159,7 @@ class RegisterView extends Component {
               <Input
                 type="text"
                 onChange={this.onInputChange('firstname')}
+                onKeyDown={this.onInputKeyDown}
                 placeholder="Steve"
                 rules={[rules.minLength(2)]}
               />
@@ -155,6 +172,7 @@ class RegisterView extends Component {
               <Input
                 type="text"
                 onChange={this.onInputChange('lastname')}
+                onKeyDown={this.onInputKeyDown}
                 placeholder="Jobs"
                 rules={[rules.minLength(2)]}
               />
@@ -172,11 +190,12 @@ class RegisterView extends Component {
 }
 
 RegisterView.propTypes = {
+  isAuthenticated: PropTypes.bool,
   registerUser: PropTypes.func.isRequired,
 };
 
 RegisterView.defaultProps = {
-
+  user: false,
 }
 
 export default RegisterView;

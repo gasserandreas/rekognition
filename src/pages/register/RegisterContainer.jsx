@@ -5,8 +5,11 @@ import { setAuth } from '../../redux/auth';
 import RegisterView from './RegisterView';
 
 const mapStateToProps = (state) => {
-  return {
+  const { auth } = state;
+  const { isAuthenticated } = auth;
 
+  return {
+    isAuthenticated,
   };
 };
 

@@ -26,7 +26,7 @@ const selectFace = faceId => (dispatch) => {
   console.log(faceId);
 }
 
-const mapStateToProps = (action) => {
+const mapStateToProps = (state) => {
 
   return {
     tags,

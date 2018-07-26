@@ -5,9 +5,10 @@ const AUTH_SET = 'AUTH_SET';
 const AUTH_UNSET = 'AUTH_UNSET';
 
 // simple actions
-const authSet = (credentials) => ({
+const authSet = ({ credentials, meta }) => ({
   type: AUTH_SET,
   credentials,
+  meta,
 });
 
 const authUnset = () => ({
@@ -23,7 +24,12 @@ const setAuth = ({ firstname, lastname }) => (dispatch) => {
     key: uuid.v4(),
   };
 
-  dispatch(authSet(credentials));
+  const meta = {
+    loggedInSince: new Date().getTime(),
+    loggedInVersion: process.env.REACT_APP_VERSION,
+  }
+
+  dispatch(authSet({ credentials, meta }));
 };
 
 const unsetAuth = () => (dispatch) => {
@@ -37,6 +43,21 @@ const isAuthenticated = (state = false, action) => {
       return true;
     case AUTH_UNSET:
       return false;
+    default:
+      return state;
+  }
+};
+
+const initalMetaState = {
+  loggedInSince: undefined,
+  loggedInVersion: undefined,
+}
+const meta = (state = initalMetaState, action) => {
+  switch (action.type) {
+    case AUTH_SET:
+      return action.meta;
+    case AUTH_UNSET:
+      return { ...initalMetaState };
     default:
       return state;
   }
@@ -82,4 +103,5 @@ export default combineReducers({
   isAuthenticated,
   accessKey,
   user,
+  meta,
 });
