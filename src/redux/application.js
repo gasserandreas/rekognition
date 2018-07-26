@@ -7,10 +7,10 @@ const applicationDidLoad = () => ({
   type: APPLICATION_DID_LOAD,
 });
 
-const applicationUserSet = (user) => ({
-  type: APPLICATION_USER_SET,
-  user,
-});
+// const applicationUserSet = (user) => ({
+//   type: APPLICATION_USER_SET,
+//   user,
+// });
 
 // complex actions
 const initApplication = () => (dispatch) => {

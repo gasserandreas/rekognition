@@ -6,7 +6,14 @@
   height: 100%;
 }
 
+.application-header {
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
 .content {
+  position: relative;
   flex-grow: 1;
   flex-shrink: 1;
+  display: flex;
 }

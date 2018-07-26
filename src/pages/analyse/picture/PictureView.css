@@ -1,0 +1,27 @@
+.picture-view {
+  width: 96%;
+  height: 96%;
+  margin: 2%;
+  overflow: hidden;
+}
+
+.picture-view .image-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.picture-view img {
+  display: block;
+}
+
+.picture-view img.max-width {
+  width: 100%;
+  height: auto;
+  margin-top: 3rem;
+}
+
+.picture-view img.max-height {
+  width: auto;
+  height: 100%;
+  margin: 0 auto;
+}

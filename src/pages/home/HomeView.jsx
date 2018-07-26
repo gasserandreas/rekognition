@@ -14,12 +14,14 @@ class HomeView extends Component {
     const { didLoad } = this.props;
 
     return (
-      <div className="details-view">
-        <h1>Home View</h1>
-        { didLoad
-          ? <p>Application is initialized</p>
-          : <p>Loading...</p> }
-        <Link to={Paths.DETAIL}>Go to detail page</Link>
+      <div className="view">
+        
+          <h1>Home View</h1>
+          { didLoad
+            ? <p>Application is initialized</p>
+            : <p>Loading...</p> }
+          <Link to={Paths.DETAIL}>Go to detail page</Link>
+        
       </div>
     );
   }
