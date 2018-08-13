@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import Dropzone from 'react-dropzone';
 
 import Image from '../../../components/Image/Image';
 import FaceMarker from '../../../components/FaceMarker/FaceMarker';
 
 import './PictureView.css';
 
-const basePath = '//localhost:3000/img/';
+const basePath = '//s3.amazonaws.com/529821714029-rekognition-backend-image-bucket';
 
 const initialState = {
   dimension: {
@@ -19,13 +20,16 @@ class PictureView extends Component {
   state = initialState;
 
   onImgLoad = this.onImgLoad.bind(this);
+  onFaceClick = this.onFaceClick.bind(this);
+  onDropFiles = this.onDropFiles.bind(this);
 
   static propTypes = {
-    imagePath: PropTypes.string,
+    image: PropTypes.shape({}),
+    imageBase: PropTypes.string.isRequired,
   };
   
   static defaultProps = {
-    imagePath: undefined,
+    image: undefined,
   };
 
   onFaceClick(face) {
@@ -43,14 +47,35 @@ class PictureView extends Component {
     })
   }
 
-  render() {
+  onDropFiles(files) {
+    if (files.length === 1) {
+      this.props.addImage(files[0]);
+    }
+  }
+
+  renderDropzone() {
+    return (
+      <Dropzone
+        // ref={(el) => { this.dropZoneRef = el; }}
+        onDrop={this.onDropFiles}
+        className="dropzone"
+        multiple={false}
+      >
+        <div className="dropzoneLabel">Add image</div>
+      </Dropzone>
+    );
+  }
+
+  renderImage() {
     const { dimension } = this.state;
     const { width, height } = dimension;
 
+    const { image, imageBase } = this.props;
+    const { id: imageId, name } = image;
     const className = width > height ? 'max-width' : 'max-height';
 
     return (
-      <div className="picture-view">
+      <Fragment>
         <FaceMarker
           id="1234"
           className="face-1"
@@ -62,11 +87,20 @@ class PictureView extends Component {
           onClick={this.onFaceClick}
         />
         <Image
-          src={`${basePath}${this.props.imageId}`}
+          src={`${basePath}/${imageBase}/${name}`}
           alt=""
           onLoad={this.onImgLoad}
           className={className}
         />
+      </Fragment>
+    )
+  }
+
+  render() {
+    const { image } = this.props
+    return (
+      <div className="picture-view">
+        { image ? this.renderImage() : this.renderDropzone()}
       </div>
     );
   }

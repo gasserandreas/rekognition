@@ -1,3 +1,5 @@
+import { setAWSConfig } from '../common/services/aws';
+
 // action types
 const APPLICATION_DID_LOAD = 'APPLICATION_DID_LOAD';
 const APPLICATION_USER_SET = 'APPLICATION_USER_SET';
@@ -7,14 +9,18 @@ const applicationDidLoad = () => ({
   type: APPLICATION_DID_LOAD,
 });
 
-// const applicationUserSet = (user) => ({
-//   type: APPLICATION_USER_SET,
-//   user,
-// });
-
 // complex actions
 const initApplication = () => (dispatch) => {
-  // dispatch(applicationUserSet(user));
+  
+  // init aws
+  const awsConfig = {
+    accessKeyId: process.env.REACT_APP_AWS_DEFAULT_ACCESS_KEY_ID,
+    secretAccessKey: process.env.REACT_APP_AWS_DEFAULT_SECRET_ACCESS_KEY,
+    region: process.env.REACT_APP_AWS_DEFAULT_REGION,
+  };
+  // init AWS
+  setAWSConfig({ awsConfig, userId: process.env.REACT_APP_AWS_USER_ID });
+
   dispatch(applicationDidLoad());
 };
 
