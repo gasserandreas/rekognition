@@ -10,7 +10,6 @@ const mapStateToProps = (state) => {
   const { selectedImage, imageById } = images;
 
   const image = imageById[selectedImage];
-  console.log(state);
 
   return {
     imageBase: accessKey,

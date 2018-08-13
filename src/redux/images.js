@@ -3,6 +3,8 @@ import uuid from 'uuid';
 
 import { uploadToS3 } from '../common/services/aws';
 
+import * as RequestStatus from '../enums/RequestStatus';
+
 // helper functions
 const readAsDataURL = (file) => {
   const fileReader = new FileReader();
@@ -57,7 +59,7 @@ const imageUploadFailure = (imageId, error) => ({
 // complex actions
 const addImage = file => (dispatch, getState) => {
   dispatch(async (dispatch, getState) => {
-    console.log(file);
+    dispatch(imageUploadRequest());
 
     // create base image information
     const imageId = uuid.v4();
@@ -86,7 +88,6 @@ const addImage = file => (dispatch, getState) => {
 
     const rawImageString = await readAsDataURL(file)
     const imageString = rawImageString.replace(/^data:image\/\w+;base64,/, '');
-    console.log(imageString);
     const buffer = Buffer.from(imageString, 'base64');
 
     const newName = `${imageId}${filetype}`;
@@ -108,7 +109,10 @@ const addImage = file => (dispatch, getState) => {
 
       // TODO: add S3 upload
       const s3Upload = await uploadToS3(bucketName, imageName, buffer)
-        .then(() => Promise.resolve(true));
+        .then((obj) => {
+          console.log(obj);
+          return Promise.resolve(true)
+        });
 
       console.log(`s3Upload: ${s3Upload}`);
       console.log(image);
@@ -266,6 +270,19 @@ const selectedImage = (state = '', action) => {
   }
 };
 
+const request = (state = RequestStatus.INITIAL, action) => {
+  switch (action.type) {
+    case IMAGES_UPLOAD_REQUEST:
+      return RequestStatus.PENDING;
+    case IMAGES_UPLOAD_SUCCESS:
+      return RequestStatus.SUCCESS;
+    case IMAGES_UPLOAD_FAILURE:
+      return RequestStatus.FAILRUE;
+    default:
+      return state;
+  }
+};
+
 export {
   addImage,
 };
@@ -274,4 +291,5 @@ export default combineReducers({
   imageById,
   imageIds,
   selectedImage,
+  request,
 });

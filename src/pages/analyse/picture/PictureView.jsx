@@ -72,7 +72,7 @@ class PictureView extends Component {
 
     const { image, imageBase } = this.props;
     const { id: imageId, name } = image;
-    const className = width > height ? 'max-width' : 'max-height';
+    const className = width < height ? 'max-height' : 'max-width';
 
     return (
       <Fragment>
@@ -97,10 +97,10 @@ class PictureView extends Component {
   }
 
   render() {
-    const { image } = this.props
+    const { image, request } = this.props
     return (
       <div className="picture-view">
-        { image ? this.renderImage() : this.renderDropzone()}
+        { (image) ? this.renderImage() : this.renderDropzone()}
       </div>
     );
   }
