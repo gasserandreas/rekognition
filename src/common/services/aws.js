@@ -44,8 +44,62 @@ const getBucket = name => {
   return bucket;
 }
 
-// const getImageName = imageId => `${userId}/${imageId}.jpg`;
+// parse face object
+const parseDefaultAWSInformation = info => ({
+  value: info.Value,
+  confidence: info.Confidence,
+});
 
+const parseAWSFaceObject = (face) => {
+  const {
+    AgeRange,
+    Beard,
+    Emotions,
+    Eyeglasses,
+    EyesOpen,
+    Gender,
+    MouthOpen,
+    Mustache,
+    Quality,
+    Smile,
+    Sunglasses,
+    BoundingBox,
+    Landmarks,
+    Pose,
+  } = face;
+
+  const emotions = Emotions.map(emotion => ({
+    value: emotion.Type,
+    confidence: emotion.Confidence,
+  }));
+
+  // create new face object
+  const parsedFace = {
+    ageRange: `${AgeRange.Low} - ${AgeRange.High}`,
+    beard: parseDefaultAWSInformation(Beard),
+    emotions,
+    eyeglasses: parseDefaultAWSInformation(Eyeglasses),
+    eyesOpen: parseDefaultAWSInformation(EyesOpen),
+    gender: parseDefaultAWSInformation(Gender),
+    mouthOpen: parseDefaultAWSInformation(MouthOpen),
+    mustache: parseDefaultAWSInformation(Mustache),
+    smile: parseDefaultAWSInformation(Smile),
+    sunglasses: parseDefaultAWSInformation(Sunglasses),
+    brightness: {
+      value: Quality.Brightness,
+      confidence: 100.0,
+    },
+    sharpness: {
+      value: Quality.Sharpness,
+      confidence: 100.0,
+    },
+    boundingBox: BoundingBox,
+    landmarks: Landmarks,
+    pose: Pose,
+  };
+
+  return parsedFace;
+};
 
 // s3 functions
 const uploadToS3 = (bucketName, imageName, buffer) => {
@@ -66,9 +120,43 @@ const uploadToS3 = (bucketName, imageName, buffer) => {
   ).promise();
 };
 
+// rekognition functions
+const detectFaces = (bucket, imageName) => {
+  if (!initialized) {
+    return Promise.reject(notInitializedError);
+  }
+
+  if (!rekognition) {
+    initRekognition();
+  }
+
+  const attributes = ['ALL'];
+
+  // create options for api
+  const options = {
+    Image: {
+      S3Object: {
+        Bucket: bucket,
+        Name: imageName,
+      },
+    },
+    Attributes: attributes,
+  };
+
+  // detect faces
+  return rekognition.detectFaces(options).promise()
+    .then(({ FaceDetails }) => {
+      // parse information
+      const faces = FaceDetails.map(face => parseAWSFaceObject(face));
+
+      return faces;
+    });
+};
+
 export {
   setAWSConfig,
   uploadToS3,
+  detectFaces,
 };
 
 // // property definitions

@@ -1,7 +1,10 @@
 import { combineReducers } from 'redux';
 import uuid from 'uuid';
 
-import { uploadToS3 } from '../common/services/aws';
+import { facesAdd } from './faces';
+
+import { uploadToS3, detectFaces } from '../common/services/aws';
+import { uploadImage } from '../common/services/networkUtils';
 
 import * as RequestStatus from '../enums/RequestStatus';
 
@@ -105,18 +108,36 @@ const addImage = file => (dispatch, getState) => {
     // start async job
     try {
 
-      // TODO: add DynamoDB
-
-      // TODO: add S3 upload
+      // upload to s3
       const s3Upload = await uploadToS3(bucketName, imageName, buffer)
         .then((obj) => {
           console.log(obj);
           return Promise.resolve(true)
         });
-
-      console.log(`s3Upload: ${s3Upload}`);
-      console.log(image);
       
+      // analyse image
+      const rawFaces = await detectFaces(bucketName, imageName);
+      
+      // process faces
+      const faceById = {};
+      const faceIds = [];
+      rawFaces.forEach((properties, i) => {
+        const id = uuid.v4();
+        const face = {
+          id,
+          name: `Face ${i + 1}`,
+          properties,
+        };
+        faceById[id] = face;
+        faceIds.push(id);
+      });
+
+      // add faces
+      dispatch(facesAdd(imageId, faceById, faceIds));
+
+      // add to dynamo
+      const dbRequest = await uploadImage(accessKey, image);
+
       dispatch(imageSelectImage(imageId));
       dispatch(imageAddImage({ image, imageId }));
 
@@ -288,8 +309,8 @@ export {
 };
 
 export default combineReducers({
-  imageById,
-  imageIds,
+  byId: imageById,
+  ids: imageIds,
   selectedImage,
   request,
 });
