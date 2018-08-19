@@ -68,7 +68,11 @@ const uploadImage = (userId, image) => {
   const body = {
     imageId: image.id,
     filename: image.name,
+    faces: image.faces,
+    labels: image.labels,
   };
+
+  console.log(image);
 
   const url = `${getUrl('api')}/user/${userId}/image`;
   const config = {

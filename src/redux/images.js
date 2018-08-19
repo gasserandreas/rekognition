@@ -76,11 +76,20 @@ const imagesFetchSuccess = (images) => {
 
   const byId = {};
   const ids = [];
+
+  const labelsByImageId = {};
+
+  let facesById = {};
+  let facesIds = [];
+  const facesByImageId = {};
+
   images.forEach((image) => {
     const {
       imageId,
       value,
       created,
+      faces,
+      labels,
     } = image;
 
     const newImage = {
@@ -88,6 +97,17 @@ const imagesFetchSuccess = (images) => {
       name: value,
       lastModified: created,
     };
+
+    // save labels
+    labelsByImageId[imageId] = labels;
+
+    // save faces
+    facesById = {
+      ...facesById,
+      ...faces,
+    };
+    facesIds = [...new Set([...facesIds, ...Object.keys(faces)])];
+    facesByImageId[imageId] = Object.keys(faces);
 
     // store image
     byId[imageId] = newImage;
@@ -97,6 +117,10 @@ const imagesFetchSuccess = (images) => {
   return {
     byId,
     ids,
+    labelsByImageId,
+    facesById,
+    facesIds,
+    facesByImageId,
     type: IMAGES_FETCH_SUCCESS,
   };
 };
@@ -179,10 +203,24 @@ const addImage = file => (dispatch) => {
 
       // process labels
       const rawLabels = await detectLabels(bucketName, imageName);
-      dispatch(labelsAdd(imageId, rawLabels));
+      const labels = rawLabels.Labels.map((label) => {
+        const { Name, Confidence } = label;
+        return {
+          key: Name,
+          value: Confidence,
+        };
+      });
+      dispatch(labelsAdd(imageId, labels));
+
+      // create new images object
+      const newImage = {
+        ...image,
+        labels,
+        faces: faceById,
+      };
 
       // add to dynamo
-      const dbRequest = await uploadImage(accessKey, image);
+      const dbRequest = await uploadImage(accessKey, newImage);
 
       dispatch(imageSelectImage(imageId));
       dispatch(imageAddImage({ image, imageId }));
@@ -209,6 +247,11 @@ const fetchImages = () => (dispatch) => {
         dispatch(imagesFetchFailure());
       }
   });
+}
+
+const selectImage = id => (dispatch) => {
+  console.log(id);
+  dispatch(imageSelectImage(id));
 }
 
 // reducers
@@ -265,6 +308,8 @@ const request = (state = RequestStatus.INITIAL, action) => {
 export {
   addImage,
   fetchImages,
+  selectImage,
+  IMAGES_FETCH_SUCCESS,
 };
 
 export default combineReducers({

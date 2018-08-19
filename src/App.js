@@ -34,8 +34,13 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  // console.log(state);
+  return {};
+}
+
 const mapDispatchToProps = ({
   initApplication,
 });
 
-export default connect(() => ({}), mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

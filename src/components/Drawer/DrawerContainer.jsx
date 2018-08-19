@@ -5,7 +5,7 @@ import { selectDrawerOpen } from '../../selectors/drawer';
 import { selectAuthKey } from '../../selectors/auth';
 
 import { closeDrawer } from '../../redux/drawer';
-import { selectImageIds } from '../../redux/images';
+import { selectImage } from '../../redux/images';
 
 import Drawer from './Drawer';
 
@@ -18,6 +18,7 @@ const select = state => ({
 
 const mapDispatchToProps = ({
   onCloseClick: closeDrawer,
+  selectImage: selectImage,
 });
 
 export default connect(select, mapDispatchToProps)(Drawer);
