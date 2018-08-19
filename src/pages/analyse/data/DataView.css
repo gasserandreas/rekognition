@@ -5,3 +5,9 @@
   opacity: .5;
   border: none;
 }
+
+.data-view .face-name {
+  font-weight: 400;
+  margin: .25rem .25rem .5rem;
+  font-size: 1rem;
+}
