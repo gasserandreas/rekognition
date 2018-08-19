@@ -9,7 +9,9 @@ import {
   detectFaces,
   detectLabels,
 } from '../common/services/aws';
-import { uploadImage } from '../common/services/networkUtils';
+import { uploadImage, getImages } from '../common/services/networkUtils';
+
+import { selectAuthKey } from '../selectors/auth';
 
 import * as RequestStatus from '../enums/RequestStatus';
 
@@ -39,6 +41,10 @@ const IMAGES_UPLOAD_REQUEST = 'IMAGES_UPLOAD_REQUEST';
 const IMAGES_UPLOAD_SUCCESS = 'IMAGES_UPLOAD_SUCCESS';
 const IMAGES_UPLOAD_FAILURE = 'IMAGES_UPLOAD_FAILURE';
 
+const IMAGES_FETCH_REQUEST = 'IMAGES_FETCH_REQUEST';
+const IMAGES_FETCH_SUCCESS = 'IMAGES_FETCH_SUCCESS';
+const IMAGES_FETCH_FAILURE = 'IMAGES_FETCH_FAILURE';
+
 // simple actions
 const imageAddImage = (data) => ({
   type: IMAGES_ADD_IMAGE,
@@ -62,8 +68,45 @@ const imageUploadFailure = (imageId, error) => ({
   type: IMAGES_UPLOAD_FAILURE,
 });
 
+const imagesFetchRequest = () => ({
+  type: IMAGES_FETCH_REQUEST,
+});
+
+const imagesFetchSuccess = (images) => {
+
+  const byId = {};
+  const ids = [];
+  images.forEach((image) => {
+    const {
+      imageId,
+      value,
+      created,
+    } = image;
+
+    const newImage = {
+      id: imageId,
+      name: value,
+      lastModified: created,
+    };
+
+    // store image
+    byId[imageId] = newImage;
+    ids.push(imageId);
+  });
+
+  return {
+    byId,
+    ids,
+    type: IMAGES_FETCH_SUCCESS,
+  };
+};
+
+const imagesFetchFailure = () => ({
+  type: IMAGES_FETCH_FAILURE,
+});
+
 // complex actions
-const addImage = file => (dispatch, getState) => {
+const addImage = file => (dispatch) => {
   dispatch(async (dispatch, getState) => {
     dispatch(imageUploadRequest());
 
@@ -74,7 +117,6 @@ const addImage = file => (dispatch, getState) => {
 
     const { 
       lastModified,
-      size,
       type,
     } = file;
 
@@ -103,8 +145,6 @@ const addImage = file => (dispatch, getState) => {
       id: imageId,
       lastModified,
       name: newName,
-      type,
-      size,
     };
 
     // start async job
@@ -156,6 +196,21 @@ const addImage = file => (dispatch, getState) => {
   });
 };
 
+const fetchImages = () => (dispatch) => {
+  dispatch(async (dispatch, getState) => {
+    dispatch(imagesFetchRequest());
+      try {
+
+        const userId = selectAuthKey(getState());
+        const images = await getImages(userId);
+
+        dispatch(imagesFetchSuccess(images));
+      } catch (e) {
+        dispatch(imagesFetchFailure());
+      }
+  });
+}
+
 // reducers
 const imageById = (state = {}, action) => {
   switch (action.type) {
@@ -163,6 +218,11 @@ const imageById = (state = {}, action) => {
       return {
         ...state,
         [action.imageId]: action.image,
+      };
+    case IMAGES_FETCH_SUCCESS:
+      return {
+        ...state,
+        ...action.byId,
       };
     default:
       return state;
@@ -173,6 +233,8 @@ const imageIds = (state = [], action) => {
   switch (action.type) {
     case IMAGES_ADD_IMAGE:
       return [...new Set([...state, action.imageId])];
+    case IMAGES_FETCH_SUCCESS:
+      return [...new Set([...state, ...action.ids])];
     default:
       return state;
   }
@@ -202,6 +264,7 @@ const request = (state = RequestStatus.INITIAL, action) => {
 
 export {
   addImage,
+  fetchImages,
 };
 
 export default combineReducers({

@@ -22,21 +22,15 @@ const getEnv = () => {
 
 const getUrl = key => {
   const apiVersion = 'v1';
-  // const apiVersion = '';
   return `${networkEndpoints[key][getEnv()]}/${apiVersion}`;
 };
 
+const getUserUrl = userId => {
+  return `${getUrl('api')}/user/${userId}`;
+}
+
 // generic call definitions
 const genericFetch = (url, config = {}) => {
-  // const newConfig = {
-  //   ...defaultConfig,
-  //   ...config,
-  //   headers: {
-  //     ...defaultConfig.headers,
-  //     ...config.headers,
-  //   },
-  // };
-
   const newConfig = {
     ...defaultConfig,
     ...config,
@@ -83,11 +77,15 @@ const uploadImage = (userId, image) => {
     body: JSON.stringify(body),
   };
 
-  console.log(config);
-
   return genericJsonFetch(url, config);
+};
+
+const getImages = userId => {
+  const url = `${getUserUrl(userId)}/image`;
+  return genericJsonFetch(url, defaultConfig);
 }
 
 export {
   uploadImage,
+  getImages,
 };

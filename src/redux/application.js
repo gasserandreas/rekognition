@@ -1,5 +1,7 @@
 import { setAWSConfig } from '../common/services/aws';
 
+import { fetchImages } from './images';
+
 // action types
 const APPLICATION_DID_LOAD = 'APPLICATION_DID_LOAD';
 const APPLICATION_USER_SET = 'APPLICATION_USER_SET';
@@ -20,6 +22,9 @@ const initApplication = () => (dispatch) => {
   };
   // init AWS
   setAWSConfig({ awsConfig, userId: process.env.REACT_APP_AWS_USER_ID });
+
+  // load images
+  fetchImages()(dispatch);
 
   dispatch(applicationDidLoad());
 };
