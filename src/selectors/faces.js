@@ -9,6 +9,23 @@ export const selectFacesById = createSelector(
   faces => faces.byId,
 );
 
+export const selectSelectedFaceId = createSelector(
+  selectFaceState,
+  faces => faces.selectedFace,
+);
+
+export const selectSelectedFace = createSelector(
+  selectFacesById,
+  selectSelectedFaceId,
+  (facesById, selectedFaceId) => {
+    if (!selectedFaceId) {
+      return null;
+    }
+
+    return facesById[selectedFaceId];
+  }
+);
+
 export const selectImageFaces = createSelector(
   selectFaceState,
   selectSelectedImage,

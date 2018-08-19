@@ -10,26 +10,19 @@ class DataView extends Component {
     labels: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
     faceIds: PropTypes.arrayOf(PropTypes.string).isRequired,
     faceById: PropTypes.shape({}).isRequired,
+    selectedFaceId: PropTypes.string,
     selectFace: PropTypes.func.isRequired,
   };
 
-  static defaultProps = {};
+  static defaultProps = {
+    selectedFaceId: undefined,
+  };
 
   renderFace(face, onClick) {
     if (!face) {
       return null;
     }
     const { id, properties } = face;
-  
-    const tags = Object.keys(properties).map((key) => {
-      const value = properties[key];
-      return {
-        key,
-        value,
-      };
-    });
-
-    console.log(tags);
 
     return (
       <PropertyList
@@ -41,8 +34,7 @@ class DataView extends Component {
   }
 
   render() {
-    const { labels, faceIds, faceById, selectFace } = this.props;
-    console.log(this.props);
+    const { labels, faceIds, faceById, selectFace, selectedFaceId } = this.props;
 
     const properties = labels.reduce((prev, cur) => {
       const { key, value } = cur;
@@ -63,11 +55,13 @@ class DataView extends Component {
         <section className="faces">
           <h1>Faces</h1>
           {faceIds.map((id, i) => (
-            <Fragment key={`face_${id}`}>
+            // <Fragment key={`face_${id}`}>
+            <div className={`face-item ${id === selectedFaceId ? 'selected' : ''}`}>
               {i > 0 && <hr className="divider" />}
               <div className="face-name">{faceById[id].name}</div>
-              {this.renderFace(faceById[id], selectFace)}
-            </Fragment>
+                {this.renderFace(faceById[id], selectFace)}
+            </div>
+            // </Fragment>
           ))}
         </section>
       </div>

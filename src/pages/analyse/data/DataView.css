@@ -1,7 +1,7 @@
 .data-view .divider {
   /* border-bottom: 1px solid #F6F6F8; */
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
   opacity: .5;
   border: none;
 }
@@ -10,4 +10,24 @@
   font-weight: 400;
   margin: .25rem .25rem .5rem;
   font-size: 1rem;
+}
+
+.data-view .faces {
+  margin-left: -1rem;
+  margin-right: -1rem;
+}
+
+.data-view .faces h1 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.data-view .face-item {
+  padding: 0.5rem 1rem;
+}
+
+.data-view .face-item.selected,
+.data-view .face-item:hover {
+  background-color: #eee;
+  cursor: pointer;
 }

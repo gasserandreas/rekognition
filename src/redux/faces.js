@@ -3,6 +3,8 @@ import { combineReducers } from 'redux';
 // action types
 const FACES_ADD = 'FACES_ADD';
 
+const FACES_SELECT = 'FACES_SELECT';
+
 // simple actions
 const facesAdd = (imageId, byId, ids) => ({
   type: FACES_ADD,
@@ -10,6 +12,16 @@ const facesAdd = (imageId, byId, ids) => ({
   ids,
   imageId,
 });
+
+const facesSelect = faceId => ({
+  type: FACES_SELECT,
+  faceId,
+});
+
+// complex actions
+const selectFace = faceId => (dispatch) => {
+  dispatch(facesSelect(faceId));
+};
 
 // reducers
 const byId = (state = {}, action) => {
@@ -45,14 +57,25 @@ const byImageId = (state = {}, action) => {
     default:
       return state;
   }
-}
+};
+
+const selectedFace = (state = null, action) => {
+  switch (action.type) {
+    case FACES_SELECT:
+      return action.faceId;
+    default:
+      return state;
+  }
+};
 
 export {
   facesAdd,
+  selectFace,
 };
 
 export default combineReducers({
   byId,
   ids,
   byImageId,
+  selectedFace,
 });

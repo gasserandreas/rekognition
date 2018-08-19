@@ -5,8 +5,6 @@ const LABELS_ADD = 'LABELS_ADD';
 
 // simple actions
 const labelsAdd = (imageId, rawLabels) => {
-  // translate labels
-  console.log(rawLabels);
   const labels = rawLabels.Labels.map((label) => {
     const { Name, Confidence } = label;
     return {
