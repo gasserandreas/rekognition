@@ -67,9 +67,7 @@ class PictureView extends Component {
   }
 
   renderFaces() {
-    const { faceIds, facesById, selectedFace } = this.props;
-
-    console.log(facesById);
+    const { faceIds, facesById, selectedFace, selectFace } = this.props;
 
     const faces = faceIds.map((id, i) => {
       const { name, properties } = facesById[id];
@@ -87,8 +85,9 @@ class PictureView extends Component {
           width={`${Width * 100}%`}
           height={`${Height * 100}%`}
           text={name}
-          onClick={selectedFace}
+          onClick={selectFace}
           zIndex={(faceIds.length - i) * 100}
+          className={selectedFace === id ? 'selected' : ''}
         />
       );
     });

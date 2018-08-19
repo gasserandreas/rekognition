@@ -48,3 +48,11 @@
   height: 100%;
   margin: 0 auto;
 }
+
+.picture-view .face-marker.selected {
+  border-color: rgb(196, 47, 60);
+}
+
+.picture-view .face-marker.selected label {
+  background-color: rgb(196, 47, 60);
+}
