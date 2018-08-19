@@ -1,19 +1,23 @@
 import { connect } from 'react-redux';
 
+import { selectImagesIds, selectImagesById } from '../../selectors/images';
+import { selectDrawerOpen } from '../../selectors/drawer';
+import { selectAuthKey } from '../../selectors/auth';
+
 import { closeDrawer } from '../../redux/drawer';
+import { selectImageIds } from '../../redux/images';
 
 import Drawer from './Drawer';
 
-const mapStateToProps = ({ drawer }) => {
-  const { open } = drawer;
-  return {
-    open,
-    pictureIds: ['picture_1.jpg', 'picture_2.jpg', 'picture_3.jpg'],
-  };
-};
+const select = state => ({
+  imageBase: selectAuthKey(state),
+  open: selectDrawerOpen(state),
+  imageIds: selectImagesIds(state),
+  imageById: selectImagesById(state),
+})
 
 const mapDispatchToProps = ({
   onCloseClick: closeDrawer,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Drawer);
+export default connect(select, mapDispatchToProps)(Drawer);

@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import Dropzone from 'react-dropzone';
 
 import Image from '../../../components/Image/Image';
 import FaceMarker from '../../../components/FaceMarker/FaceMarker';
 
 import './PictureView.css';
 
-const basePath = '//localhost:3000/img/';
+const basePath = '//s3.amazonaws.com/529821714029-rekognition-backend-image-bucket';
 
 const initialState = {
   dimension: {
@@ -19,19 +20,22 @@ class PictureView extends Component {
   state = initialState;
 
   onImgLoad = this.onImgLoad.bind(this);
+  onDropFiles = this.onDropFiles.bind(this);
 
   static propTypes = {
-    imagePath: PropTypes.string,
+    image: PropTypes.shape({}),
+    imageBase: PropTypes.string.isRequired,
+    faceIds: PropTypes.arrayOf(PropTypes.string).isRequired,
+    facesById: PropTypes.shape({}).isRequired,
+    selectedFace: PropTypes.string,
+    addImage: PropTypes.func.isRequired,
+    selectFace: PropTypes.func.isRequired,
   };
   
   static defaultProps = {
-    imagePath: undefined,
+    image: undefined,
+    selectedFace: undefined,
   };
-
-  onFaceClick(face) {
-    console.log('onFaceClick');
-    console.log(face);
-  }
 
   onImgLoad({ target: img }) {
     const { naturalWidth, naturalHeight } = img;
@@ -43,30 +47,97 @@ class PictureView extends Component {
     })
   }
 
-  render() {
+  onDropFiles(files) {
+    if (files.length === 1) {
+      this.props.addImage(files[0]);
+    }
+  }
+
+  renderDropzone() {
+    return (
+      <Dropzone
+        // ref={(el) => { this.dropZoneRef = el; }}
+        onDrop={this.onDropFiles}
+        className="dropzone"
+        multiple={false}
+      >
+        <div className="dropzoneLabel">Add image</div>
+      </Dropzone>
+    );
+  }
+
+  renderFaces() {
+    const { faceIds, facesById, selectedFace, selectFace } = this.props;
+
+    const faces = faceIds.map((id, i) => {
+      const { name, properties } = facesById[id];
+
+      // calculate sizes / position
+      const { boundingBox } = properties;
+      const { Height, Width, Left, Top } = boundingBox;
+
+      return (
+        <FaceMarker
+          key={`face_marker_${id}`}
+          id={id}
+          y={`${Left * 100}%`}
+          x={`${Top * 100}%`}
+          width={`${Width * 100}%`}
+          height={`${Height * 100}%`}
+          text={name}
+          onClick={selectFace}
+          zIndex={(faceIds.length - i) * 100}
+          className={selectedFace === id ? 'selected' : ''}
+        />
+      );
+    });
+
+    return (
+      <Fragment>
+        {faces}
+      </Fragment>
+    );
+  }
+
+  renderImage() {
     const { dimension } = this.state;
     const { width, height } = dimension;
 
-    const className = width > height ? 'max-width' : 'max-height';
+    const {image, imageBase } = this.props;
+    const { name } = image;
+    const className = width < height ? 'max-height' : 'max-width';
 
     return (
-      <div className="picture-view">
-        <FaceMarker
-          id="1234"
-          className="face-1"
-          x={162}
-          y={100}
-          width={116}
-          height={135}
-          text="Face 1"
-          onClick={this.onFaceClick}
-        />
+      <Fragment>
+        {this.renderFaces()}
         <Image
-          src={`${basePath}${this.props.imageId}`}
+          src={`${basePath}/${imageBase}/${name}`}
           alt=""
           onLoad={this.onImgLoad}
           className={className}
         />
+      </Fragment>
+    )
+  }
+
+  render() {
+    const { dimension } = this.state;
+    const { width, height } = dimension;
+
+    const styles = {};
+    if (width < height) {
+      styles.width = 'inherit';
+    } else {
+      styles.height = 'inherit';
+    }
+
+    const { image } = this.props
+    return (
+      <div
+        style={styles}
+        className="picture-view"
+      >
+        { (image) ? this.renderImage() : this.renderDropzone()}
       </div>
     );
   }

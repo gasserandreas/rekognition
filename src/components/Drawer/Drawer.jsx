@@ -5,9 +5,9 @@ import Image from '../Image/Image';
 
 import './Drawer.css';
 
-const baseUrl = 'http://localhost:3000/img';
+const basePath = '//s3.amazonaws.com/529821714029-rekognition-backend-image-bucket';
 
-const Drawer = ({ open, pictureIds, onCloseClick }) => {
+const Drawer = ({ open, imageIds, imageById, imageBase, onCloseClick }) => {
 
   return (
     <div className={`drawer ${open ? 'open' : 'close'}`}>
@@ -21,7 +21,8 @@ const Drawer = ({ open, pictureIds, onCloseClick }) => {
         <div>
           <h1>Hello world</h1>
           <ul className="picture-list">
-            {pictureIds.map((id) => {
+            {imageIds.map((id) => {
+              const { name } = imageById[id];
               return (
                 <li
                  onClick={() => console.log(`selected picture with id ${id}`)}
@@ -29,7 +30,9 @@ const Drawer = ({ open, pictureIds, onCloseClick }) => {
                  tabIndex="0"
                  key={`picture_${id}`}
                 >
-                  <Image src={`${baseUrl}/${id}`} />
+                  <Image
+                    src={`${basePath}/${imageBase}/${name}`}
+                  />
                 </li>
               )
             })}
@@ -42,7 +45,7 @@ const Drawer = ({ open, pictureIds, onCloseClick }) => {
 
 Drawer.propTypes = {
   open: PropTypes.bool.isRequired,
-  pictureIds: PropTypes.arrayOf(PropTypes.string).isRequired,
+  imageIds: PropTypes.arrayOf(PropTypes.string).isRequired,
   onCloseClick: PropTypes.func,
 };
 
