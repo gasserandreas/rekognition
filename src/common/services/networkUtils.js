@@ -18,17 +18,22 @@ const getEnv = () => {
   }
 
   return process.env.NODE_ENV;
-} 
+}
+
+const getUrl = key => {
+  const apiVersion = 'v1';
+  return `${networkEndpoints[key][getEnv()]}/${apiVersion}`;
+};
+
+const getUserUrl = userId => {
+  return `${getUrl('api')}/user/${userId}`;
+}
 
 // generic call definitions
 const genericFetch = (url, config = {}) => {
   const newConfig = {
     ...defaultConfig,
     ...config,
-    headers: {
-      ...defaultConfig.headers,
-      ...config.headers,
-    },
   };
 
   return fetch(url, newConfig)
@@ -59,11 +64,28 @@ const genericJsonFetch = (url, config) =>
     
 
 // network calls
-const getQuotes = () => {
-  const url = networkEndpoints.quotes[getEnv()];
-  return genericJsonFetch(url);
+const uploadImage = (userId, image) => {
+  const body = {
+    imageId: image.id,
+    filename: image.name,
+  };
+
+  const url = `${getUrl('api')}/user/${userId}/image`;
+  const config = {
+    ...defaultConfig,
+    method: 'POST',
+    body: JSON.stringify(body),
+  };
+
+  return genericJsonFetch(url, config);
+};
+
+const getImages = userId => {
+  const url = `${getUserUrl(userId)}/image`;
+  return genericJsonFetch(url, defaultConfig);
 }
 
 export {
-  getQuotes,
+  uploadImage,
+  getImages,
 };

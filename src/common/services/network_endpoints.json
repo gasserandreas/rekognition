@@ -5,11 +5,11 @@
     "development": "https://uq6v9ecwnd.execute-api.us-east-1.amazonaws.com/productive/react-boilerplate/quotes",
     "local": "https://uq6v9ecwnd.execute-api.us-east-1.amazonaws.com/productive/react-boilerplate/quotes"
   },
-  "quotes-error": {
-    "prod": "https://uq6v9ecwnd.execute-api.us-east-1.amazonaws.com/productive/react-boilerplate/quotes-500",
-    "test": "https://uq6v9ecwnd.execute-api.us-east-1.amazonaws.com/productive/react-boilerplate/quotes-500",
-    "development": "https://uq6v9ecwnd.execute-api.us-east-1.amazonaws.com/productive/react-boilerplate/quotes-500",
-    "local": "https://uq6v9ecwnd.execute-api.us-east-1.amazonaws.com/productive/react-boilerplate/quotes-500"
+  "api": {
+    "prod": "https://api.rekognition.gasserandreas.com",
+    "test": "https://api.rekognition.gasserandreas.com",
+    "development": "https://api.rekognition.gasserandreas.com",
+    "local": "https://api.rekognition.gasserandreas.com"
   },
   "log": "https://uq6v9ecwnd.execute-api.us-east-1.amazonaws.com/productive/react-boilerplate/log"
 }

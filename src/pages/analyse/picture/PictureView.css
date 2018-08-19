@@ -3,6 +3,30 @@
   height: 96%;
   margin: 2%;
   overflow: hidden;
+  position: relative;
+}
+
+.picture-view .dropzone {
+  display: block;
+  width: 10rem;
+  border: 1px dashed #666;
+  height: 10rem;
+  margin: 10rem auto;
+  border-radius: 2px;
+}
+
+.picture-view .dropzone:hover {
+  border-color: #133545;
+  background-color: #eee;
+  cursor: pointer;
+  color: #133545;
+}
+
+.picture-view .dropzone .dropzoneLabel {
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 4.25rem;
+  vertical-align: middle;
 }
 
 .picture-view .image-wrapper {
@@ -17,11 +41,18 @@
 .picture-view img.max-width {
   width: 100%;
   height: auto;
-  margin-top: 3rem;
 }
 
 .picture-view img.max-height {
   width: auto;
   height: 100%;
   margin: 0 auto;
+}
+
+.picture-view .face-marker.selected {
+  border-color: rgb(196, 47, 60);
+}
+
+.picture-view .face-marker.selected label {
+  background-color: rgb(196, 47, 60);
 }
