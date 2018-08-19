@@ -1,13 +1,10 @@
 /*global Uint8Array */
-import uuid from 'uuid';
-
 import 'aws-sdk/dist/aws-sdk';
 
 const notInitializedError = new Error('AWS is not initialized');
 
 const AWS = window.AWS;
 
-let userId;
 let rekognition;
 let initialized = false;
 let buckets = [];
@@ -18,7 +15,7 @@ const setAWSConfig = (config) => {
   AWS.config.update(config.awsConfig);
 
   // save userId global
-  userId = config.userId;
+  // userId = config.userId;
 
   // enable initialized
   initialized = true;

@@ -31,8 +31,6 @@ const readAsDataURL = (file) => {
   });
 };
 
-const createImageString = event => event.target.result.replace(/^data:image\/\w+;base64,/, '');
-
 // action types
 const IMAGES_ADD_IMAGE = 'IMAGES_ADD_IMAGE';
 const IMAGES_SELECT_IMAGE = 'IMAGES_SELECT_IMAGE';
@@ -76,7 +74,6 @@ const addImage = file => (dispatch, getState) => {
 
     const { 
       lastModified,
-      name,
       size,
       type,
     } = file;
@@ -158,117 +155,6 @@ const addImage = file => (dispatch, getState) => {
     }
   });
 };
-
-  // console.log(file);
-  // const imageId = uuid.v4();
-  // const bucketName = process.env.REACT_APP_S3_UPLOAD_BUCKET;
-  // const { auth: { accessKey } } = getState();
-
-  // const { 
-  //   lastModified,
-  //   name,
-  //   size,
-  //   type,
-  // } = file;
-
-  // let filetype = undefined;
-  // switch (type) {
-  //   case 'image/jpeg':
-  //     filetype = '.jpeg';
-  //     break;
-  //   case 'image/png':
-  //     filetype = '.png';
-  //     break;
-  //   default:
-  //     filetype = undefined;
-  // }
-
-  // read file
-  // readAsDataURL(file)
-  //   .then((imageString) => {
-  //     // create image object
-  //     const newName = `${imageId}${filetype}`;
-  //     const imageName = `${accessKey}/${newName}`;
-
-  //     const image = {
-  //       id: imageId,
-  //       lastModified,
-  //       name: newName,
-  //       type,
-  //       size,
-  //     };
-      
-  //     console.log(imageString);
-
-  //     // translate to base64
-  //     // const imageString = createImageString(event);
-  //     const buffer = Buffer.from(imageString, 'base64');
-
-  //     const s3Promise = uploadToS3(bucketName, imageName, buffer)
-  //       .then(() => {
-  //         return Promise.resolve({ image: image, imageId });
-  //       });
-  //       // .then(() => {
-  //       //   dispatch(imageUploadSuccess(imageId));
-  //       //   dispatch(imageAddImage({ image, imageId }));
-  //       //   // dispatch(imageAddImage({ image, imageId }));
-  //       //   dispatch(imageSelectImage(imageId));
-  //       // })
-  //       // .catch((error) => {
-  //       //   dispatch(imageUploadFailure(imageId, error));
-  //       // });
-
-  //     return Promise.all([s3Promise]);
-  //   })
-  //   .then(() => {
-  //     // const imageResults = results[0];
-  //     // const { image } = imageResults;
-
-  //     dispatch(imageUploadSuccess(imageId));
-  //     dispatch(imageAddImage({ image, imageId }));
-  //     console.log(image);
-  //   })
-  //   .catch((error) => {
-  //     dispatch(imageUploadFailure(imageId, error));
-  //   });
-
-  // const split = name.split('.');
-
-  // if (filetype) {
-  //   const newName = `${imageId}${filetype}`;
-  //   const imageName = `${accessKey}/${newName}`;
-
-  //   const image = {
-  //     id: imageId,
-  //     lastModified,
-  //     name: newName,
-  //     type,
-  //     size,
-  //   }
-  
-  //   fileReader.onload = (event) => {
-  //     const imageString = createImageString(event);
-  //     const buffer = Buffer.from(imageString, 'base64');
-  
-  //     // do upload
-  //     uploadToS3(bucketName, imageName, buffer)
-  //       .then(() => {
-  //         dispatch(imageUploadSuccess(imageId));
-  //         dispatch(imageAddImage({ image, imageId }));
-  //         // dispatch(imageAddImage({ image, imageId }));
-  //         dispatch(imageSelectImage(imageId));
-  //       })
-  //       .catch((error) => {
-  //         dispatch(imageUploadFailure(imageId, error));
-  //       });
-  //   };
-  
-  //   // read file and start upload
-  //   // fileReader.readAsDataURL(file);
-  // } else {
-  //   console.log('invalid file');
-  // }
-// };
 
 // reducers
 const imageById = (state = {}, action) => {

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import PropertyList from '../../../components/PropertyList/PropertyList';
@@ -56,7 +56,10 @@ class DataView extends Component {
           <h1>Faces</h1>
           {faceIds.map((id, i) => (
             // <Fragment key={`face_${id}`}>
-            <div className={`face-item ${id === selectedFaceId ? 'selected' : ''}`}>
+            <div
+              key={`face_item_${id}`}
+              className={`face-item ${id === selectedFaceId ? 'selected' : ''}`}
+            >
               {i > 0 && <hr className="divider" />}
               <div className="face-name">{faceById[id].name}</div>
                 {this.renderFace(faceById[id], selectFace)}
