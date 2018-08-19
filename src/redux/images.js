@@ -2,8 +2,13 @@ import { combineReducers } from 'redux';
 import uuid from 'uuid';
 
 import { facesAdd } from './faces';
+import { labelsAdd } from './labels';
 
-import { uploadToS3, detectFaces } from '../common/services/aws';
+import {
+  uploadToS3,
+  detectFaces,
+  detectLabels,
+} from '../common/services/aws';
 import { uploadImage } from '../common/services/networkUtils';
 
 import * as RequestStatus from '../enums/RequestStatus';
@@ -135,6 +140,10 @@ const addImage = file => (dispatch, getState) => {
       // add faces
       dispatch(facesAdd(imageId, faceById, faceIds));
 
+      // process labels
+      const rawLabels = await detectLabels(bucketName, imageName);
+      dispatch(labelsAdd(imageId, rawLabels));
+
       // add to dynamo
       const dbRequest = await uploadImage(accessKey, image);
 
@@ -144,6 +153,7 @@ const addImage = file => (dispatch, getState) => {
       // success
       dispatch(imageUploadSuccess(imageId));
     } catch(error) {
+      console.log(error);
       dispatch(imageUploadFailure(imageId, error));
     }
   });

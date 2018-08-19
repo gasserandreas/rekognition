@@ -5,6 +5,7 @@ import drawerReducer from '../drawer';
 import authReducer from '../auth';
 import imagesReducer from '../images';
 import facesReducer from '../faces';
+import labelsReducer from '../labels';
 
 const reducers = combineReducers({
   application: applicationReducer,
@@ -12,6 +13,7 @@ const reducers = combineReducers({
   auth: authReducer,
   images: imagesReducer,
   faces: facesReducer,
+  labels: labelsReducer,
 });
 
 export default reducers;
