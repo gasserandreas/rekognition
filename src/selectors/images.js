@@ -2,10 +2,19 @@ import { createSelector } from 'reselect';
 
 const selectImageState = state => state.images;
 
+export const selectImagesById = createSelector(
+  selectImageState,
+  images => images.byId,
+);
+
+export const selectImagesIds = createSelector(
+  selectImageState,
+  images => images.ids,
+);
+
 export const selectSelectedImage = createSelector(
   selectImageState,
   images => {
-    console.log(images);
     const { selectedImage } = images;
 
     if (!selectedImage) {
