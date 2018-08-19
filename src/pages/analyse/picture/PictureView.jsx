@@ -86,7 +86,7 @@ class PictureView extends Component {
           height={`${Height * 100}%`}
           text={name}
           onClick={selectFace}
-          zIndex={(faceIds.length - i) * 100}
+          zIndex={(faceIds.length - i) + 10}
           className={selectedFace === id ? 'selected' : ''}
         />
       );
