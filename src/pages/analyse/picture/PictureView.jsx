@@ -20,22 +20,22 @@ class PictureView extends Component {
   state = initialState;
 
   onImgLoad = this.onImgLoad.bind(this);
-  onFaceClick = this.onFaceClick.bind(this);
   onDropFiles = this.onDropFiles.bind(this);
 
   static propTypes = {
     image: PropTypes.shape({}),
     imageBase: PropTypes.string.isRequired,
+    faceIds: PropTypes.arrayOf(PropTypes.string).isRequired,
+    facesById: PropTypes.shape({}).isRequired,
+    selectedFace: PropTypes.string,
+    addImage: PropTypes.func.isRequired,
+    selectFace: PropTypes.func.isRequired,
   };
   
   static defaultProps = {
     image: undefined,
+    selectedFace: undefined,
   };
-
-  onFaceClick(face) {
-    console.log('onFaceClick');
-    console.log(face);
-  }
 
   onImgLoad({ target: img }) {
     const { naturalWidth, naturalHeight } = img;
@@ -66,26 +66,51 @@ class PictureView extends Component {
     );
   }
 
+  renderFaces() {
+    const { faceIds, facesById, selectedFace } = this.props;
+
+    console.log(facesById);
+
+    const faces = faceIds.map((id, i) => {
+      const { name, properties } = facesById[id];
+
+      // calculate sizes / position
+      const { boundingBox } = properties;
+      const { Height, Width, Left, Top } = boundingBox;
+
+      return (
+        <FaceMarker
+          key={`face_marker_${id}`}
+          id={id}
+          y={`${Left * 100}%`}
+          x={`${Top * 100}%`}
+          width={`${Width * 100}%`}
+          height={`${Height * 100}%`}
+          text={name}
+          onClick={selectedFace}
+          zIndex={(faceIds.length - i) * 100}
+        />
+      );
+    });
+
+    return (
+      <Fragment>
+        {faces}
+      </Fragment>
+    );
+  }
+
   renderImage() {
     const { dimension } = this.state;
     const { width, height } = dimension;
 
-    const { image, imageBase } = this.props;
-    const { id: imageId, name } = image;
+    const {image, imageBase } = this.props;
+    const { name } = image;
     const className = width < height ? 'max-height' : 'max-width';
 
     return (
       <Fragment>
-        <FaceMarker
-          id="1234"
-          className="face-1"
-          x={162}
-          y={100}
-          width={116}
-          height={135}
-          text="Face 1"
-          onClick={this.onFaceClick}
-        />
+        {this.renderFaces()}
         <Image
           src={`${basePath}/${imageBase}/${name}`}
           alt=""
@@ -97,9 +122,22 @@ class PictureView extends Component {
   }
 
   render() {
-    const { image, request } = this.props
+    const { dimension } = this.state;
+    const { width, height } = dimension;
+
+    const styles = {};
+    if (width < height) {
+      styles.width = 'inherit';
+    } else {
+      styles.height = 'inherit';
+    }
+
+    const { image } = this.props
     return (
-      <div className="picture-view">
+      <div
+        style={styles}
+        className="picture-view"
+      >
         { (image) ? this.renderImage() : this.renderDropzone()}
       </div>
     );

@@ -3,6 +3,7 @@
   height: 96%;
   margin: 2%;
   overflow: hidden;
+  position: relative;
 }
 
 .picture-view .dropzone {
@@ -40,7 +41,6 @@
 .picture-view img.max-width {
   width: 100%;
   height: auto;
-  margin-top: 3rem;
 }
 
 .picture-view img.max-height {
