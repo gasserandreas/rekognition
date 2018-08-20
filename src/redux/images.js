@@ -180,9 +180,17 @@ const addImage = file => (dispatch) => {
           console.log(obj);
           return Promise.resolve(true)
         });
-      
-      // analyse image
-      const rawFaces = await detectFaces(bucketName, imageName);
+
+
+      // start rekognition
+      const { rawFaces, rawLabels } = await Promise.all([
+        detectFaces(bucketName, imageName),
+        detectLabels(bucketName, imageName),
+      ])
+      .then((response) => ({
+        rawFaces: response[0],
+        rawLabels: response[1],
+      }));
       
       // process faces
       const faceById = {};
@@ -202,7 +210,7 @@ const addImage = file => (dispatch) => {
       dispatch(facesAdd(imageId, faceById, faceIds));
 
       // process labels
-      const rawLabels = await detectLabels(bucketName, imageName);
+      // const rawLabels = await detectLabels(bucketName, imageName);
       const labels = rawLabels.Labels.map((label) => {
         const { Name, Confidence } = label;
         return {

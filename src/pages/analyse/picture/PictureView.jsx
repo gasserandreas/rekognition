@@ -27,6 +27,7 @@ class PictureView extends Component {
     imageBase: PropTypes.string.isRequired,
     faceIds: PropTypes.arrayOf(PropTypes.string).isRequired,
     facesById: PropTypes.shape({}).isRequired,
+    loading: PropTypes.bool.isRequired,
     selectedFace: PropTypes.string,
     addImage: PropTypes.func.isRequired,
     selectFace: PropTypes.func.isRequired,
@@ -120,6 +121,16 @@ class PictureView extends Component {
     )
   }
 
+  renderImageContent() {
+    const { loading, image } = this.props;
+
+    if (loading) {
+      return <p>Loading</p>;
+    }
+
+    return (image) ? this.renderImage() : this.renderDropzone();
+  }
+
   render() {
     const { dimension } = this.state;
     const { width, height } = dimension;
@@ -131,13 +142,12 @@ class PictureView extends Component {
       styles.height = 'inherit';
     }
 
-    const { image } = this.props
     return (
       <div
         style={styles}
         className="picture-view"
       >
-        { (image) ? this.renderImage() : this.renderDropzone()}
+        {this.renderImageContent()}
       </div>
     );
   }

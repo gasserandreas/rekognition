@@ -7,7 +7,10 @@ import {
   selectFacesById,
   selectSelectedFaceId,
 } from '../../../selectors/faces';
+
 import { selectLabelsForSelectedImage } from '../../../selectors/labels';
+
+import { selectImageIsLoading } from '../../../selectors/images';
 
 import DataView from './DataView';
 
@@ -16,7 +19,8 @@ const select = state => {
     labels: selectLabelsForSelectedImage(state),
     faceIds: selectImageFaces(state),
     faceById: selectFacesById(state),
-    selectedFaceId: selectSelectedFaceId(state), 
+    selectedFaceId: selectSelectedFaceId(state),
+    loading: selectImageIsLoading(state),
   };
 };
 
