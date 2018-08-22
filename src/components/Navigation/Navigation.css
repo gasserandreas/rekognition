@@ -1,5 +1,5 @@
 nav {
-  background-color: #fff;
+  background-color: #FCFCFF;
   display: flex;
   flex-flow: row;
   flex-wrap: nowrap;
@@ -9,7 +9,7 @@ nav {
 }
 
 nav .previous {
-  color: #333;
+  color: #1C1C1E;
   padding: 1.25rem .5rem;
 }
 
