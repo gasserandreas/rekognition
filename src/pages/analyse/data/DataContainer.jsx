@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 
 import { selectFace } from '../../../redux/faces';
+import { setSettingShowFaceLabel } from '../../../redux/settings';
 
 import {
   selectImageFaces,
@@ -12,6 +13,8 @@ import { selectLabelsForSelectedImage } from '../../../selectors/labels';
 
 import { selectImageIsLoading } from '../../../selectors/images';
 
+import { selectFaceSetting } from '../../../selectors/settings';
+
 import DataView from './DataView';
 
 const select = state => {
@@ -21,11 +24,13 @@ const select = state => {
     faceById: selectFacesById(state),
     selectedFaceId: selectSelectedFaceId(state),
     loading: selectImageIsLoading(state),
+    faceLabelSetting: selectFaceSetting(state),
   };
 };
 
 const mapDispatchToProps = ({
   selectFace,
+  setSettingShowFaceLabel,
 });
 
 export default connect(select, mapDispatchToProps)(DataView);

@@ -14,6 +14,7 @@ const FaceMarker = (props) => {
     height,
     onClick,
     zIndex,
+    showLabel,
   } = props;
 
   const customClassName = `face-marker ${className ? className : ''}`;
@@ -26,15 +27,13 @@ const FaceMarker = (props) => {
     zIndex,
   };
 
-  const charSize = 9;
-
   return (
     <div
       style={style}
       className={customClassName}
       onClick={() => onClick(id)}
     >
-      {text && text * charSize < width && (<label >{text}</label>)}
+      {showLabel && text && <label >{text}</label>}
     </div>
   );
 };
@@ -49,12 +48,14 @@ FaceMarker.propTypes = {
   onClick: PropTypes.func,
   className: PropTypes.string,
   zIndex: PropTypes.number,
+  showLabel: PropTypes.bool,
 };
 
 FaceMarker.defaultProps = {
   text: undefined,
   className: undefined,
   zIndex: 0,
+  showLabel: true,
   onClick: () => ({}),
 };
 

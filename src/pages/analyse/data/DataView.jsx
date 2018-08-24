@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import PropertyList from '../../../components/PropertyList/PropertyList';
+import Toggle from '../../../components/Toggle/Toggle';
 
 import './DataView.css';
 
@@ -12,7 +13,9 @@ class DataView extends Component {
     faceById: PropTypes.shape({}).isRequired,
     loading: PropTypes.bool.isRequired,
     selectedFaceId: PropTypes.string,
+    faceLabelSetting: PropTypes.bool.isRequired,
     selectFace: PropTypes.func.isRequired,
+    setSettingShowFaceLabel: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -83,17 +86,36 @@ class DataView extends Component {
     ));
   }
 
+  renderSettings() {
+    const { faceLabelSetting, setSettingShowFaceLabel } = this.props;
+
+    return (
+        <Toggle
+          defaultChecked={faceLabelSetting}
+          icons={false}
+          onChange={() => setSettingShowFaceLabel(!faceLabelSetting)}
+          text="Show face labels"
+        />
+    );
+  }
+
   render() {
     return (
       <div className="data-view">
-        <section className="tags">
-          <h1>Labels</h1>
-          {this.renderLabels()}
-        </section>
-        <section className="faces">
-          <h1>Faces</h1>
-          {this.renderFaces()}
-        </section>
+        <div className="settings">
+          <h1>Settings</h1>
+          {this.renderSettings()}
+        </div>
+        <div className="data-result">
+          <section className="tags">
+            <h1>Labels</h1>
+            {this.renderLabels()}
+          </section>
+          <section className="faces">
+            <h1>Faces</h1>
+            {this.renderFaces()}
+          </section>
+        </div>
       </div>
     );
   }

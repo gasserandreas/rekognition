@@ -28,6 +28,7 @@ class PictureView extends Component {
     faceIds: PropTypes.arrayOf(PropTypes.string).isRequired,
     facesById: PropTypes.shape({}).isRequired,
     loading: PropTypes.bool.isRequired,
+    faceLabelSetting: PropTypes.bool.isRequired,
     selectedFace: PropTypes.string,
     addImage: PropTypes.func.isRequired,
     selectFace: PropTypes.func.isRequired,
@@ -68,7 +69,7 @@ class PictureView extends Component {
   }
 
   renderFaces() {
-    const { faceIds, facesById, selectedFace, selectFace } = this.props;
+    const { faceIds, facesById, selectedFace, selectFace, faceLabelSetting } = this.props;
 
     const faces = faceIds.map((id, i) => {
       const { name, properties } = facesById[id];
@@ -89,6 +90,7 @@ class PictureView extends Component {
           onClick={selectFace}
           zIndex={(faceIds.length - i) + 10}
           className={selectedFace === id ? 'selected' : ''}
+          showLabel={faceLabelSetting}
         />
       );
     });
