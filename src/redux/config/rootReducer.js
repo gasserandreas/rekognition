@@ -6,6 +6,7 @@ import authReducer from '../auth';
 import imagesReducer from '../images';
 import facesReducer from '../faces';
 import labelsReducer from '../labels';
+import settingsReducer from '../settings';
 
 const reducers = combineReducers({
   application: applicationReducer,
@@ -14,6 +15,7 @@ const reducers = combineReducers({
   images: imagesReducer,
   faces: facesReducer,
   labels: labelsReducer,
+  settings: settingsReducer,
 });
 
 export default reducers;

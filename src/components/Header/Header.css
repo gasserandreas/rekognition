@@ -3,9 +3,9 @@ header {
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
-  background-color: #133545;
+  background-color: #122442;
   padding: 1rem 1rem;
-  color: #fff;
+  color: #FCFCFF;
   max-height: 4.75rem;
 }
 
@@ -14,7 +14,7 @@ header h1 {
   font-size: 1.5rem;
   margin: .5rem 0 .5rem;
   font-weight: 400;
-  color: #fff;
+  color: #FCFCFF;
 }
 
 header .user-info {

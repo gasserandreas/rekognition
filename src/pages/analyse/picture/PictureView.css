@@ -9,10 +9,11 @@
 .picture-view .dropzone {
   display: block;
   width: 10rem;
-  border: 1px dashed #666;
+  border: 1px solid #999;
   height: 10rem;
   margin: 10rem auto;
   border-radius: 2px;
+  background-color: #E6E6E8;
 }
 
 .picture-view .dropzone:hover {

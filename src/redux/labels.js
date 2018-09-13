@@ -1,18 +1,12 @@
 import { combineReducers } from 'redux';
 
+import { IMAGES_FETCH_SUCCESS } from './images';
+
 // type definition
 const LABELS_ADD = 'LABELS_ADD';
 
 // simple actions
-const labelsAdd = (imageId, rawLabels) => {
-  const labels = rawLabels.Labels.map((label) => {
-    const { Name, Confidence } = label;
-    return {
-      key: Name,
-      value: Confidence,
-    };
-  });
-
+const labelsAdd = (imageId, labels) => {
   return {
     type: LABELS_ADD,
     imageId,
@@ -28,6 +22,11 @@ const byImageId = (state  = {}, action) => {
         ...state,
         [action.imageId]: action.labels,
       };
+    case IMAGES_FETCH_SUCCESS:
+      return {
+        ...state,
+        ...action.labelsByImageId,
+      }
     default:
       return state;
   }

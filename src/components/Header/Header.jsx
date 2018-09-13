@@ -8,7 +8,7 @@ import './Header.css';
 const Header = ({ user }) => {
   return (
     <header>
-      <h1 className="application-title">AWS Rekognition</h1>
+      <h1 className="application-title">AWS Rekognition Study</h1>
       { user && (
         <div className="user-info">
           <div className="user-name">{user.firstname} {user.lastname}</div>
