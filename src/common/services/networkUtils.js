@@ -1,5 +1,5 @@
 import networkEndpoints from './network_endpoints.json';
-import { createNetworkError, createInvalidDataError } from '../error/errorUtils';
+import { createNetworkError, createInvalidDataError, createAuthError } from '../error/errorUtils';
 
 const defaultConfig = {
   method: 'GET',
@@ -18,16 +18,9 @@ const getEnv = () => {
   }
 
   return process.env.NODE_ENV;
-}
+} 
 
-const getUrl = key => {
-  const apiVersion = 'v1';
-  return `${networkEndpoints[key][getEnv()]}/${apiVersion}`;
-};
-
-const getUserUrl = userId => {
-  return `${getUrl('api')}/user/${userId}`;
-}
+const getUrl = key => networkEndpoints[key][getEnv()];
 
 // generic call definitions
 const genericFetch = (url, config = {}) => {
@@ -39,13 +32,24 @@ const genericFetch = (url, config = {}) => {
   return fetch(url, newConfig)
     .catch(error => Promise.reject(createNetworkError(error, undefined)))
     .then((response) => {
-      const { ok, status } = response;
-      if (!ok || status >= 300 || status < 200) {
+      const { status } = response;
+      
+      if (status === 401) {
+        const error = createAuthError();
+        return Promise.reject(error);
+      } else if (status >= 300 || status < 200 ) {
         // invalid
         const message = `Network error detected, status code: ${status}`;
         const error = createNetworkError(new Error(message), response);
         return Promise.reject(error);
       }
+
+      // if (!ok || status >= 300 || status < 200) {
+      //   // invalid
+      //   const message = `Network error detected, status code: ${status}`;
+      //   const error = createNetworkError(new Error(message), response);
+      //   return Promise.reject(error);
+      // }
 
       return Promise.resolve(response);
     });
@@ -64,32 +68,16 @@ const genericJsonFetch = (url, config) =>
     
 
 // network calls
-const uploadImage = (userId, image) => {
-  const body = {
-    imageId: image.id,
-    filename: image.name,
-    faces: image.faces,
-    labels: image.labels,
-  };
+// const getImages = () => {
+//   const userId = '12d4cddc-2011-4a86-be10-f7e3286676f7';
+//   const url = `${getUrl('api')}/user/${userId}/image/`;
 
-  console.log(image);
-
-  const url = `${getUrl('api')}/user/${userId}/image`;
-  const config = {
-    ...defaultConfig,
-    method: 'POST',
-    body: JSON.stringify(body),
-  };
-
-  return genericJsonFetch(url, config);
-};
-
-const getImages = userId => {
-  const url = `${getUserUrl(userId)}/image`;
-  return genericJsonFetch(url, defaultConfig);
-}
+//   return genericJsonFetch(url);
+// }
 
 export {
-  uploadImage,
-  getImages,
+  defaultConfig,
+  // getImages,
+  getUrl,
+  genericJsonFetch,
 };

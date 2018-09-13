@@ -1,42 +1,34 @@
 import { combineReducers } from 'redux';
 
-import { IMAGES_FETCH_SUCCESS } from './images';
-
 // action types
-const FACES_ADD = 'FACES_ADD';
-
+const FACES_ADD_FACES = 'FACES_ADD_FACES';
 const FACES_SELECT = 'FACES_SELECT';
 
 // simple actions
-const facesAdd = (imageId, byId, ids) => ({
-  type: FACES_ADD,
+const facesAddFaces = (byId, ids, byImageId) => ({
+  type: FACES_ADD_FACES,
   byId,
   ids,
-  imageId,
+  byImageId,
 });
 
-const facesSelect = faceId => ({
+const facesSelect = id => ({
   type: FACES_SELECT,
-  faceId,
+  id,
 });
 
 // complex actions
-const selectFace = faceId => (dispatch) => {
-  dispatch(facesSelect(faceId));
+const selectFace = id => (dispatch) => {
+  dispatch(facesSelect(id));
 };
 
 // reducers
 const byId = (state = {}, action) => {
   switch (action.type) {
-    case FACES_ADD:
+    case FACES_ADD_FACES:
       return {
         ...state,
         ...action.byId,
-      };
-    case IMAGES_FETCH_SUCCESS:
-      return {
-        ...state,
-        ...action.facesById,
       };
     default:
       return state;
@@ -45,10 +37,8 @@ const byId = (state = {}, action) => {
 
 const ids = (state = [], action) => {
   switch (action.type) {
-    case FACES_ADD:
+    case FACES_ADD_FACES:
       return [...new Set([...state, ...action.ids])];
-    case IMAGES_FETCH_SUCCESS:
-      return [...new Set([...state, ...action.facesIds])];
     default:
       return state;
   }
@@ -56,34 +46,27 @@ const ids = (state = [], action) => {
 
 const byImageId = (state = {}, action) => {
   switch (action.type) {
-    case FACES_ADD:
+    case FACES_ADD_FACES:
       return {
         ...state,
-        [action.imageId]: [
-          ...new Set([...state[action.imageId] || [], ...action.ids])
-        ],
+        ...action.byImageId,
       };
-    case IMAGES_FETCH_SUCCESS:
-      return {
-        ...state,
-        ...action.facesByImageId,
-      }
     default:
       return state;
   }
 };
 
-const selectedFace = (state = null, action) => {
+const selected = (state = null, action) => {
   switch (action.type) {
     case FACES_SELECT:
-      return action.faceId;
+      return action.id;
     default:
       return state;
   }
 };
 
 export {
-  facesAdd,
+  facesAddFaces,
   selectFace,
 };
 
@@ -91,5 +74,5 @@ export default combineReducers({
   byId,
   ids,
   byImageId,
-  selectedFace,
+  selected,
 });

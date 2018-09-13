@@ -14,6 +14,21 @@ const createError = (type, message, title, ui, log, error, payload) => ({
   payload,
 });
 
+const createAuthError = () => {
+  const message = 'Not Authorized'
+  const title = 'Auth Error';
+
+  return createError(
+    ErrorTypes.AuthError,
+    message,
+    title,
+    false,
+    false,
+    null,
+    null,
+  );
+};
+
 const createNetworkError = (error, response) => {
   const message = error.message;
   const title = 'Network Error';
@@ -115,6 +130,7 @@ const logToServer = (error) => {
 
 export {
   logToServer,
+  createAuthError,
   createUnknownError,
   createNetworkError,
   createInvalidDataError,

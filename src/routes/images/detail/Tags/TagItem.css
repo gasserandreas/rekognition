@@ -1,0 +1,16 @@
+.tag {
+  border: 1px solid #00a862;
+  border-radius: 3px;
+  padding: .15rem;
+  margin: .2rem;
+  display: inline-block;
+}
+
+@media (min-width: 768px) {
+  .tag {
+    border-width: 1.5px;
+    border-radius: 4px;
+    padding: .2rem;
+    margin: .25rem;
+  }
+}

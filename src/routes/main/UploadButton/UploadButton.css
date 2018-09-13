@@ -1,0 +1,39 @@
+.upload-button {
+  position: fixed;
+  border-width: 1.5px;
+  -webkit-box-shadow: 0 0 6px rgba(0,0,0,.24), 0 8px 12px rgba(0,0,0,.14);
+  box-shadow: 0 0 6px rgba(0,0,0,.24), 0 8px 12px rgba(0,0,0,.14);
+  z-index: 10;
+}
+
+.upload-button .text, 
+.upload-button .icon {
+  display: none;
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  .upload-button {
+    bottom: 36px;
+    right: 26px;
+    padding: .8rem .9rem;
+  }
+
+  .upload-button .icon {
+    display: inherit;
+  }
+}
+
+@media (min-width: 768px) {
+  .upload-button {
+    padding: 1.2rem 1.6rem;
+    bottom: 42px;
+    right: 42px;
+    text-transform: uppercase;
+    font-size: 1.4rem;
+  }
+
+  .upload-button .text {
+    display: inherit;
+  }
+}

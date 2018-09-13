@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
-import ErrorBoundary from './common/error/ErrorBoundary';
-import AppHeader from './AppHeader';
-import DrawerContainer from './components/Drawer/DrawerContainer';
-import AppRoutes from './routes/app';
+import AppHeader from './routes/main/AppHeader/AppHeader';
+import AppLoadingBar from './routes/main/AppLoadingBar/AppLoadingBarContainer';
+import footerRoutes from './routes/main/AppFooter/routes';
+import uploadRoutes from './routes/main/UploadButton/routes';
 
-import { initApplication } from './redux/application';
+import appRoutes from './routes/main/routes';
+
+import { initApplication } from './redux/app';
+import { fetchImages } from './redux/images';
 
 import './App.css';
 
@@ -18,29 +21,29 @@ class App extends Component {
 
   render() {
     return (
-      <ErrorBoundary>
-        <BrowserRouter>
-          <div className="application-wrapper">
-            <AppHeader />
-            <main role="main" className="content">
-              <AppRoutes />
-            </main>
-            {/* <Footer /> */}
-            <DrawerContainer />
-          </div>
-        </BrowserRouter>
-      </ErrorBoundary>
+      <section className="app-wrapper">
+        <AppLoadingBar />
+        <AppHeader />
+        <section className="app-content">
+          {appRoutes()}
+        </section>
+        {footerRoutes()}
+        {uploadRoutes()}
+      </section>
     );
   }
 }
 
-const mapStateToProps = state => {
-  // console.log(state);
+
+const select = state => {
+  console.log(state);
   return {};
-}
+};
 
 const mapDispatchToProps = ({
   initApplication,
+  fetchImages,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+// ATTENTION: withRouter is needed to get React router proper update location!!
+export default withRouter(connect(select, mapDispatchToProps)(App));
