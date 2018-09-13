@@ -1,19 +1,25 @@
-.application-wrapper {
+.app-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: stretch;
   flex-direction: column;
   height: 100%;
+  padding-top: 50px;
 }
 
-.application-header {
-  flex-shrink: 0;
-  flex-grow: 0;
-}
-
-.content {
-  position: relative;
+.app-content {
   flex-grow: 1;
   flex-shrink: 1;
-  display: flex;
+  max-width: 100%;
+  /* padding: .5rem; */
+}
+
+@media (min-width: 488px) {
+  .app-wrapper {
+    padding-top: 74px;
+  }
+
+  /* .app-content {
+    padding: 1rem;
+  } */
 }

@@ -1,0 +1,16 @@
+.registration-view .title {
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.registration-view a {
+  color: #048248;
+  font-weight: 600;
+}
+
+.registration-view a:hover {
+  color: #383838;
+  cursor: pointer;
+  text-decoration: underline;
+}

@@ -1,0 +1,20 @@
+.not-found-view .title {
+  font-size: 4rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 4px;
+  margin-bottom: 0;
+}
+
+.not-found-view p {
+  font-size: 2rem;
+}
+
+.not-found-view .colored {
+  color: #048248;
+}
+
+.not-found-view .route {
+  color: #048248;
+  font-weight: 600;
+}

@@ -1,21 +1,30 @@
 import { combineReducers } from 'redux';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage'
 
-import applicationReducer from '../application';
-import drawerReducer from '../drawer';
-import authReducer from '../auth';
+import appReducer from '../app';
+import networkReducer from '../network';
 import imagesReducer from '../images';
 import facesReducer from '../faces';
-import labelsReducer from '../labels';
-import settingsReducer from '../settings';
+
+const facesPersistConfig = {
+  key: 'faces',
+  storage,
+  blacklist: ['selected'],
+};
+
+const imagesPersistConfig = {
+  key: 'images',
+  storage,
+  blacklist: ['selected'],
+}
 
 const reducers = combineReducers({
-  application: applicationReducer,
-  drawer: drawerReducer,
-  auth: authReducer,
-  images: imagesReducer,
-  faces: facesReducer,
-  labels: labelsReducer,
-  settings: settingsReducer,
+  appTime: Date.now,
+  app: appReducer,
+  network: networkReducer,
+  images: persistReducer(imagesPersistConfig, imagesReducer),
+  faces: persistReducer(facesPersistConfig, facesReducer),
 });
 
 export default reducers;
