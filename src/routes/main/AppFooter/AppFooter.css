@@ -1,0 +1,62 @@
+footer[aria-label='app-footer'] {
+  padding: 1rem .5rem;
+  padding-top: 2rem;
+  font-size: 1.2rem;
+  border-top: 1px solid #ccc;
+  height: 130px;
+}
+
+footer[aria-label='app-footer'] a {
+  display: block;
+  color: #383838;
+  text-decoration: none;
+  margin: .5rem;
+}
+
+footer[aria-label='app-footer'] a:hover {
+  text-decoration: underline;
+  color: #048248;
+}
+
+footer[aria-label='app-footer'] .wrapper {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: nowrap;
+  align-content: space-between;
+  height: 100%
+}
+
+footer[aria-label='app-footer'] .left,
+footer[aria-label='app-footer'] .right {
+  flex-grow: 1;
+  flex-shrink: 1;
+  padding: 0;
+  width: 46%;
+}
+
+@media (min-width: 768px) {
+  footer[aria-label='app-footer'] {
+    padding: 3rem 1.5rem 2rem;
+  }
+
+  footer[aria-label='app-footer'] .left,
+  footer[aria-label='app-footer'] .right {
+    padding: 0 1.6rem;
+  }
+
+  footer[aria-label='app-footer'].sidebar {
+    margin-left: 24rem;
+  }
+}
+
+@media (min-width: 1140px) {
+  footer[aria-label='app-footer'].sidebar {
+    margin-left: 30rem;
+  }
+}
+
+@media (min-width: 1600px) {
+  footer[aria-label='app-footer'].sidebar {
+    margin-left: 40rem;
+  }
+}

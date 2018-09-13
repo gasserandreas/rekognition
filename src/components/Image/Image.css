@@ -1,16 +1,20 @@
 .image {
-  display: block;
-  /* height: 100%; */
-  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.image.max-width {
-  width: 100%;
-  height: auto;
+.image p {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  font-size: 1.3rem;
+  color: #333;
+  padding: 1rem;
+  text-align: center;
 }
 
-.image.max-heigth {
-  width: auto;
-  height: 100%;
-  margin: 0 auto;
+.image .error {
+  color: rgb(211, 26, 62);
 }

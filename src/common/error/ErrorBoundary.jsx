@@ -1,14 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
-import { handleError } from './errorMiddleware';
 import { createUnknownError } from './errorUtils';
-
-// redux dispatcher
-const dispatchError = (error) => (dispatch) => {
-  dispatch(handleError(error));
-};
 
 class ErrorBoundary extends Component {
   static propTypes = {
@@ -38,11 +31,4 @@ class ErrorBoundary extends Component {
   }
 }
 
-// redux code
-const mapStateToProps = () => ({});
-
-const mapDispatchToProps = ({
-  dispatchError,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ErrorBoundary);
+export default ErrorBoundary;

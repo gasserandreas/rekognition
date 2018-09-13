@@ -1,3 +1,4 @@
+export const AuthError = 'AuthError';
 export const NetworkError = 'NetworkError';
 export const InvalidDataError = 'InvalidDataError';
 export const UncaughtPromiseError = 'UncaughtPromiseError';

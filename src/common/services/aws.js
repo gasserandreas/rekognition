@@ -14,9 +14,6 @@ const setAWSConfig = (config) => {
   // set aws config
   AWS.config.update(config.awsConfig);
 
-  // save userId global
-  // userId = config.userId;
-
   // enable initialized
   initialized = true;
 };

@@ -1,15 +1,21 @@
 {
-  "quotes": {
-    "prod": "https://uq6v9ecwnd.execute-api.us-east-1.amazonaws.com/productive/react-boilerplate/quotes",
-    "test": "https://uq6v9ecwnd.execute-api.us-east-1.amazonaws.com/productive/react-boilerplate/quotes",
-    "development": "https://uq6v9ecwnd.execute-api.us-east-1.amazonaws.com/productive/react-boilerplate/quotes",
-    "local": "https://uq6v9ecwnd.execute-api.us-east-1.amazonaws.com/productive/react-boilerplate/quotes"
-  },
   "api": {
-    "prod": "https://api.rekognition.gasserandreas.com",
-    "test": "https://api.rekognition.gasserandreas.com",
-    "development": "https://api.rekognition.gasserandreas.com",
-    "local": "https://api.rekognition.gasserandreas.com"
+    "prod": "https://api.rekognition.gasserandreas.com/v1",
+    "test": "https://api.rekognition.gasserandreas.com/v1",
+    "development": "https://api.rekognition.gasserandreas.com/v1",
+    "local": "https://api.rekognition.gasserandreas.com/v1"
+  },
+  "image-thumb": {
+    "prod": "https://s3.amazonaws.com/529821714029-rekognition-backend-thumb-bucket",
+    "test": "https://s3.amazonaws.com/529821714029-rekognition-backend-thumb-bucket",
+    "development": "https://s3.amazonaws.com/529821714029-rekognition-backend-thumb-bucket",
+    "local": "https://s3.amazonaws.com/529821714029-rekognition-backend-thumb-bucket"
+  },
+  "image-full": {
+    "prod": "https://s3.amazonaws.com/529821714029-rekognition-backend-thumb-bucket",
+    "test": "https://s3.amazonaws.com/529821714029-rekognition-backend-thumb-bucket",
+    "development": "https://s3.amazonaws.com/529821714029-rekognition-backend-thumb-bucket",
+    "local": "https://s3.amazonaws.com/529821714029-rekognition-backend-thumb-bucket"
   },
   "log": "https://uq6v9ecwnd.execute-api.us-east-1.amazonaws.com/productive/react-boilerplate/log"
 }
