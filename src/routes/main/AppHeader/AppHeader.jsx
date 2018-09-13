@@ -36,8 +36,13 @@ class AppHeader extends Component {
     const className =  user ? 'fixed' : '';
     return (
       <header aria-label="app-header" className={className}>
-        <div className="brand">
-          <Link to={Paths.IMAGES}>REK0</Link>
+        <div className="brand-section">
+          <div className="brand">
+            <Link to={Paths.INDEX}>REK0</Link>
+          </div>
+          <div className="navigation">
+            {/* <Link to={Paths.IMAGES}>Images</Link> */}
+          </div>
         </div>
         {user && this.renderDefaultHeader()}
       </header>

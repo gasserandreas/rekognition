@@ -8,7 +8,7 @@ import UserRoutes from '../user/routes';
 
 import Register from '../register/RegisterContainer';
 import Login from '../login/LoginContainer';
-import IndexView from '../index/IndexView';
+import IndexView from '../index/IndexContainer';
 
 import NotFound from '../misc/not-found/NotFound';
 import Privacy from '../misc/privacy/PrivacyView'; 

@@ -70,7 +70,7 @@ class UserForm extends Component {
           return true;
         }
 
-        return key !== 'ID';
+        return key !== 'id';
       })
       .map((key) => {
         const value = initialData[key];
@@ -109,10 +109,17 @@ class UserForm extends Component {
   }
 
   onInputChange(key) {
+    const { withId } = this.props;
     return (e, obj) => {
 
       // get state validation
       const stateValidation = Object.values(Form)
+        .filter((key) => {
+          if (withId) {
+            return true;
+          }
+          return key !== 'id';
+        })
         .filter(validationKey => validationKey !== key)
         .map((validationKey) => {
           const validation = this.getFormValidation(validationKey);
@@ -156,6 +163,7 @@ class UserForm extends Component {
   }
 
   render() {
+    console.log(this.state);
     const { cancelLabel, onClickCancel, withId } = this.props;
     return (
       <form className="user-form">

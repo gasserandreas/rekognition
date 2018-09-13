@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
@@ -11,10 +12,27 @@ import './IndexView.css';
 class IndexView extends Component {
 
   static propTypes = {
+    isAuthenticated: PropTypes.bool.isRequired,
   }
 
   static defaultProps = {
    
+  }
+
+  componentWillMount() {
+    if (this.props.isAuthenticated) {
+      this.navigateToImages();
+    }
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (newProps.isAuthenticated) {
+      this.navigateToImages();
+    }
+  }
+
+  navigateToImages() {
+    this.props.history.push(Paths.IMAGES);
   }
 
   getDayTimeMessage() {

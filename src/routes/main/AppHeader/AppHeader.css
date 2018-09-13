@@ -26,22 +26,32 @@ header.fixed {
   position: fixed;
 }
 
-header .brand a {
-  font-weight: 500;
+header .brand-section {
   flex-shrink: 1;
   flex-grow: 1;
   order: 1;
+  display: flex;
+  flex-flow: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+header .brand a {
+  font-weight: 500;
   color: #333;
   font-weight: 600;
   text-decoration: none;
   letter-spacing: 1px;
   font-size: 2rem;
+  flex-grow: 0;
+  flex-shrink: 0;
 }
 
-header .header-items {
-  flex-shrink: 2;
-  flex-grow: 2;
-  order: 2;
+header .navigation {
+  flex-grow: 1;
+  flex-shrink: 1;
+  margin-left: 1rem;
 }
 
 header .user {
@@ -69,10 +79,6 @@ header .user .shortname {
   color: #f9f9f9;
 }
 
-/* @media (min-width: 488px) {
-@media (min-width: 1024px) {
-} */
-
 @media (min-width: 768px) {
   header {
     padding: .25rem 1.6rem;
@@ -85,20 +91,11 @@ header .user .shortname {
     flex-grow: 0;
     width: 6rem;
     font-weight: 500;
-    order: 1;
-  }
-
-  header .header-items {
-    flex-shrink: 1;
-    flex-grow: 1;
-    padding: 0 1rem;
-    order: 1;
   }
   
   header .user {
     flex-shrink: 0;
     flex-grow: 0;
-    order: 1;
     width: auto;
     max-width: 12rem;
     color: #048248;
