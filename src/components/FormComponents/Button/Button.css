@@ -11,6 +11,7 @@
   line-height: 1.2;
   text-align: center;
   text-decoration: none;
+  /* text-transform: lowercase; */
 }
 
 .button:hover {
@@ -22,10 +23,6 @@
 }
 
 .button.default,
-.button.default:visited,
-.button.default:active,
-.button.default:focus,
-.button.default:focus-within,
 .button.default[disabled]:hover,
 .button.default.filled:hover {
   border-color: #00a862;
@@ -34,10 +31,6 @@
 }
 
 .button.default.filled,
-.button.default.filled:visited,
-.button.default.filled:active,
-.button.default.filled:focus,
-.button.default.filled:focus-within,
 .button.default.filled[disabled]:hover,
 .button.default:hover {
   background-color: #00a862;
