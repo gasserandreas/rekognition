@@ -1,0 +1,12 @@
+.custom-toggle {
+  display: inline-block;
+}
+
+.custom-toggle span {
+  display: inline-block;
+  padding: .25rem .5rem;
+}
+
+.custom-toggle .react-toggle {
+  vertical-align: middle;
+}

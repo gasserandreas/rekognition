@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux';
 
+import { IMAGES_FETCH_SUCCESS } from './images';
+
 // action types
 const FACES_ADD = 'FACES_ADD';
 
@@ -31,6 +33,11 @@ const byId = (state = {}, action) => {
         ...state,
         ...action.byId,
       };
+    case IMAGES_FETCH_SUCCESS:
+      return {
+        ...state,
+        ...action.facesById,
+      };
     default:
       return state;
   }
@@ -40,6 +47,8 @@ const ids = (state = [], action) => {
   switch (action.type) {
     case FACES_ADD:
       return [...new Set([...state, ...action.ids])];
+    case IMAGES_FETCH_SUCCESS:
+      return [...new Set([...state, ...action.facesIds])];
     default:
       return state;
   }
@@ -54,6 +63,11 @@ const byImageId = (state = {}, action) => {
           ...new Set([...state[action.imageId] || [], ...action.ids])
         ],
       };
+    case IMAGES_FETCH_SUCCESS:
+      return {
+        ...state,
+        ...action.facesByImageId,
+      }
     default:
       return state;
   }

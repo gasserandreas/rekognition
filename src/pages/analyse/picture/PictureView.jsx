@@ -27,6 +27,8 @@ class PictureView extends Component {
     imageBase: PropTypes.string.isRequired,
     faceIds: PropTypes.arrayOf(PropTypes.string).isRequired,
     facesById: PropTypes.shape({}).isRequired,
+    loading: PropTypes.bool.isRequired,
+    faceLabelSetting: PropTypes.bool.isRequired,
     selectedFace: PropTypes.string,
     addImage: PropTypes.func.isRequired,
     selectFace: PropTypes.func.isRequired,
@@ -67,7 +69,7 @@ class PictureView extends Component {
   }
 
   renderFaces() {
-    const { faceIds, facesById, selectedFace, selectFace } = this.props;
+    const { faceIds, facesById, selectedFace, selectFace, faceLabelSetting } = this.props;
 
     const faces = faceIds.map((id, i) => {
       const { name, properties } = facesById[id];
@@ -86,8 +88,9 @@ class PictureView extends Component {
           height={`${Height * 100}%`}
           text={name}
           onClick={selectFace}
-          zIndex={(faceIds.length - i) * 100}
+          zIndex={(faceIds.length - i) + 10}
           className={selectedFace === id ? 'selected' : ''}
+          showLabel={faceLabelSetting}
         />
       );
     });
@@ -120,6 +123,16 @@ class PictureView extends Component {
     )
   }
 
+  renderImageContent() {
+    const { loading, image } = this.props;
+
+    if (loading) {
+      return <p>Loading</p>;
+    }
+
+    return (image) ? this.renderImage() : this.renderDropzone();
+  }
+
   render() {
     const { dimension } = this.state;
     const { width, height } = dimension;
@@ -131,13 +144,12 @@ class PictureView extends Component {
       styles.height = 'inherit';
     }
 
-    const { image } = this.props
     return (
       <div
         style={styles}
         className="picture-view"
       >
-        { (image) ? this.renderImage() : this.renderDropzone()}
+        {this.renderImageContent()}
       </div>
     );
   }

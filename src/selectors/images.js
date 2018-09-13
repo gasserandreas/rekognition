@@ -1,5 +1,7 @@
 import { createSelector } from 'reselect';
 
+import * as RequestStatus from '../enums/RequestStatus';
+
 const selectImageState = state => state.images;
 
 export const selectImagesById = createSelector(
@@ -25,4 +27,14 @@ export const selectSelectedImage = createSelector(
 
     return image || null;
   }
+);
+
+export const selectImageRequest = createSelector(
+  selectImageState,
+  images => images.request,
+);
+
+export const selectImageIsLoading = createSelector(
+  selectImageRequest,
+  request => request === RequestStatus.PENDING,
 );

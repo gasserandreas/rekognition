@@ -7,7 +7,7 @@ import './Drawer.css';
 
 const basePath = '//s3.amazonaws.com/529821714029-rekognition-backend-image-bucket';
 
-const Drawer = ({ open, imageIds, imageById, imageBase, onCloseClick }) => {
+const Drawer = ({ open, imageIds, imageById, imageBase, onCloseClick, selectImage }) => {
 
   return (
     <div className={`drawer ${open ? 'open' : 'close'}`}>
@@ -25,7 +25,10 @@ const Drawer = ({ open, imageIds, imageById, imageBase, onCloseClick }) => {
               const { name } = imageById[id];
               return (
                 <li
-                 onClick={() => console.log(`selected picture with id ${id}`)}
+                 onClick={() => {
+                   selectImage(id);
+                   onCloseClick();
+                 }}
                  role="button"
                  tabIndex="0"
                  key={`picture_${id}`}
