@@ -57,6 +57,6 @@ footer[aria-label='app-footer'] .right {
 
 @media (min-width: 1600px) {
   footer[aria-label='app-footer'].sidebar {
-    margin-left: 40rem;
+    margin-left: 36rem;
   }
 }
