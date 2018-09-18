@@ -35,7 +35,7 @@ class ImageList extends Component {
             <div className="image-list">
             {images.map((image) => {
               const { imageId, value, created } = image;
-              const label = `added: ${moment(created).format('MMM Do YYYY')}`
+              const label = `added: ${moment.unix(created).format('MMM Do YYYY')}`
               return (
                 <ImageItem
                   imageId={imageId}
