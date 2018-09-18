@@ -48,7 +48,10 @@ class UploadButton extends Component {
           >
             <Fragment>
               <span className="text">Upload</span>
-              <i className="fas fa-plus icon" />
+              <span className="full-size">
+                <i className="fas fa-plus icon" />&nbsp;
+                Upload new
+              </span>
             </Fragment>
         </Button>
       </Fragment>
