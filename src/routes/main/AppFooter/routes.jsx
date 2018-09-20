@@ -7,7 +7,8 @@ import * as Paths from '../../../enums/Paths';
 
 const showSideBarPaths = [
   Paths.GET_IMAGES_DETAILS(Paths.ID),
-  // Paths.HOME,
+  Paths.INDEX,
+  Paths.HOME,
 ];
 
 const DefaultFooter = () => <AppFooter />;
@@ -16,7 +17,7 @@ const SideBarFooter = () => <AppFooter sidebar />;
 const footerRoutes = () => (
   <Switch>
     {showSideBarPaths.map((path) => (
-      <Route key={`footer_route_for_${path}`} path={path} component={SideBarFooter} />
+      <Route key={`footer_route_for_${path}`} exact path={path} component={SideBarFooter} />
     ))}
     <Route path="*" component={DefaultFooter} />
   </Switch>
