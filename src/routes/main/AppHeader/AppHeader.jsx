@@ -33,9 +33,8 @@ class AppHeader extends Component {
 
   render() {
     const { user } = this.props;
-    const className =  user ? 'fixed' : '';
     return (
-      <header aria-label="app-header" className={className}>
+      <header aria-label="app-header" className="fixed">
         <div className="brand-section">
           <div className="brand">
             <Link to={Paths.INDEX}>REK0</Link>
