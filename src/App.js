@@ -67,15 +67,15 @@ class App extends Component {
 
   render() {
     return (
-      <section className="app-wrapper">
+      <div className="app-wrapper">
         <AppLoadingBar />
         <AppHeader />
-        <section className="app-content">
+        <div className="app-content">
           {appRoutes()}
-        </section>
+        </div>
         {footerRoutes()}
         {uploadRoutes()}
-      </section>
+      </div>
     );
   }
 }
