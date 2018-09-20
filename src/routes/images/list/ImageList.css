@@ -20,7 +20,7 @@
 .image-list {
   padding: 0 1.6rem;
   display: inline-block;
-  margin: 0 auto 12rem;
+  margin: 0 auto 6rem;
   display: flex;
   flex-flow: row;
   flex-wrap: wrap;
