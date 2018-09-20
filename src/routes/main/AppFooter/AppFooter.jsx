@@ -15,14 +15,11 @@ const AppFooter = ({ sidebar }) => {
           <a href="https://aws.amazon.com/rekognition/" rel="noreferrer noopener" target="_blank">AWS Rekognition</a>
         </div>
         <div className="right">
-          <span>
-            &copy; 2018
             <a
               href="https://andreasgasser.com"
               rel="noreferrer noopener"
               target="_blank"
-            >Andreas Gasser</a>
-          </span>
+            >&copy; 2018 Andreas Gasser</a>
         </div>
       </div>
     </footer>
