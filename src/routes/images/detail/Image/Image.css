@@ -7,19 +7,12 @@
 .image-wrapper .image {
   background-color: #333;
   display: block;
-  height: auto;
-}
-
-/* styling for portrait / landsacpe mode */
-.image-wrapper .image.landscape img {
   width: 100%;
   height: auto;
 }
 
-.image-wrapper .image.portrait img {
-  height: 100%;
-  width: auto;
-  margin: 0 auto;
+.image-wrapper .image img {
+  width: 100%;
 }
 
 /* show hide image before / after load */

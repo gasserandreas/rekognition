@@ -8,7 +8,6 @@ import './Image.css';
 
 const initialState = {
   showImage: false, // hide image before 'onLoad' was fired
-  landscape: true,
   imageLoaded: false,
 };
 
@@ -35,11 +34,8 @@ class Image extends Component {
 
   // set image landscape / portrait style classes after load
   onImageLoad(target) {
-    const { clientWidth, clientHeight } = target;
-
     this.setState({
       showImage: true,
-      landscape: clientWidth >= clientHeight,
       imageLoaded: true,
     });
   }
@@ -77,13 +73,12 @@ class Image extends Component {
   }
 
   render() {
-    const { showImage, landscape, imageLoaded } = this.state;
+    const { showImage, imageLoaded } = this.state;
     const { src, className, loadingContent } = this.props;
 
     const cssClasses = [
       className,
       showImage ? 'show' : 'hide',
-      landscape ? 'landscape' : 'portrait',
     ].filter(cssClass => cssClass !== undefined);
 
     return (
