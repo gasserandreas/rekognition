@@ -41,6 +41,16 @@ class ImageDetail extends Component {
     selectImage(id);
   }
 
+  componentWillReceiveProps(newProps) {
+    const { id: newId } = newProps.match.params;
+    const { id: oldId } = this.props.match.params;
+
+    if (newId !== oldId) {
+      this.props.selectImage(newId);
+    }
+    
+  }
+
   renderAnalyseContent() {
     const { image, faces, selectedFaceId, selectFace } = this.props;
     return (
