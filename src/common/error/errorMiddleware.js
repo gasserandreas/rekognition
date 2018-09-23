@@ -31,7 +31,7 @@ const errorMiddleware = store => next => (action) => {
     // do ui stuff
     if (error.ui) {
       // TODO: add UI dispatcher (like notification center)
-      console.log('log to ui');
+      // console.log('log to ui');
     }
 
     // do log stuff

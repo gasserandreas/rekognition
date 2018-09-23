@@ -82,7 +82,9 @@ class App extends Component {
 
 
 const select = state => {
-  console.log(state);
+  if (process.env.NODE_ENV !== 'production') {
+    console.log(state);
+  }
   return {};
 };
 

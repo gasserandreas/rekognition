@@ -38,35 +38,3 @@ export default dispatch => (path, options = {}) => {
       return Promise.reject(error);
     });
 };
-
-// export default onError => (urlPath, opts = {}) => {
-//   // create config
-//   const config = {
-//     ...defaultConfig,
-//     ...opts,
-//   };
-
-//   console.log(sessionStorage.getItem('userId'));
-
-//   // create url
-//   const baseUrl = getUrl('api');
-//   const userId = getUserId();
-
-//   if (!userId) {
-//     return Promise.reject(createAuthError());
-//   }
-
-//   const url = `${baseUrl}/user/${userId}/${urlPath}`;
-
-//   return genericJsonFetch(url, config)
-//     .then(data => {
-//       console.log(data);
-//       return Promise.resolve(data);
-//     })
-//     .catch((error) => {
-//       // fire error handler
-//       onError(error);
-
-//       throw error;
-//     });
-// };

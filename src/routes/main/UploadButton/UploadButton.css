@@ -15,11 +15,11 @@
 /* mobile */
 @media (max-width: 768px) {
   .upload-button {
-    bottom: 0;
+    bottom: -4px;
     left: 0;
     right: 0;
     width: 100%;
-    padding: .8rem .9rem;
+    padding: 10px .9rem 14px;
     border-radius: 0;
     
   }

@@ -163,7 +163,6 @@ class UserForm extends Component {
   }
 
   render() {
-    console.log(this.state);
     const { cancelLabel, onClickCancel, withId } = this.props;
     return (
       <form className="user-form">
