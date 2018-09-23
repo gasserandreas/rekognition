@@ -50,9 +50,7 @@ class Image extends Component {
     return faces.map(({ id, name, properties: { boundingBox } }) => {
       const { Height, Width, Left, Top } = boundingBox;
 
-      if (Width * 100 <= 5) {
-        return null;
-      }
+      const showText = (Width * 100) >= 5;
 
       const position = {
         top: this.getPosition(Top),
@@ -67,6 +65,7 @@ class Image extends Component {
           selected={id === selectedFaceId}
           position={position}
           onClick={() => selectFace(id)}
+          showText={showText}
         />
       );
     });
