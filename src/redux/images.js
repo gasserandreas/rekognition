@@ -1,19 +1,18 @@
-import { combineReducers } from 'redux';
 import uuid from 'uuid';
+import { combineReducers } from 'redux';
 
-import { facesAdd } from './faces';
-import { labelsAdd } from './labels';
+// hoc redux
+import hocReducer from './config/hocReducer';
+import { hocAsyncAction } from './config/hocAction';
+import { createHocTypes } from './config/hocUtils';
 
-import {
-  uploadToS3,
-  detectFaces,
-  detectLabels,
-} from '../common/services/aws';
-import { uploadImage, getImages } from '../common/services/networkUtils';
+import { uploadToS3, detectFaces, detectLabels } from '../common/services/aws';
+import { defaultConfig } from '../common/services/networkUtils';
 
-import { selectAuthKey } from '../selectors/auth';
+import { facesAddFaces } from './faces';
+import { networkRequestStart, networkRequestComplete } from './network';
 
-import * as RequestStatus from '../enums/RequestStatus';
+import { selectUser } from './selectors/app';
 
 // helper functions
 const readAsDataURL = (file) => {
@@ -34,295 +33,258 @@ const readAsDataURL = (file) => {
 };
 
 // action types
-const IMAGES_ADD_IMAGE = 'IMAGES_ADD_IMAGE';
-const IMAGES_SELECT_IMAGE = 'IMAGES_SELECT_IMAGE';
+const IMAGE_FETCH_TYPES = createHocTypes('IMAGE_FETCH_TYPES');
+const IMAGE_POST_TYPES = createHocTypes('IMAGE_POST_TYPES');
 
-const IMAGES_UPLOAD_REQUEST = 'IMAGES_UPLOAD_REQUEST';
-const IMAGES_UPLOAD_SUCCESS = 'IMAGES_UPLOAD_SUCCESS';
-const IMAGES_UPLOAD_FAILURE = 'IMAGES_UPLOAD_FAILURE';
+const IMAGE_SELECT = 'IMAGE_SELECT';
 
-const IMAGES_FETCH_REQUEST = 'IMAGES_FETCH_REQUEST';
-const IMAGES_FETCH_SUCCESS = 'IMAGES_FETCH_SUCCESS';
-const IMAGES_FETCH_FAILURE = 'IMAGES_FETCH_FAILURE';
-
-// simple actions
-const imageAddImage = (data) => ({
-  type: IMAGES_ADD_IMAGE,
-  ...data,
-});
-
-const imageSelectImage = imageId => ({
-  type: IMAGES_SELECT_IMAGE,
-  imageId,
-});
-
-const imageUploadRequest = () => ({
-  type: IMAGES_UPLOAD_REQUEST,
-});
-
-const imageUploadSuccess = (imageId = '') => ({
-  type: IMAGES_UPLOAD_SUCCESS,
-})
-
-const imageUploadFailure = (imageId, error) => ({
-  type: IMAGES_UPLOAD_FAILURE,
-});
-
-const imagesFetchRequest = () => ({
-  type: IMAGES_FETCH_REQUEST,
-});
-
-const imagesFetchSuccess = (images) => {
-
-  const byId = {};
-  const ids = [];
-
-  const labelsByImageId = {};
-
-  let facesById = {};
-  let facesIds = [];
-  const facesByImageId = {};
-
-  images.forEach((image) => {
-    const {
-      imageId,
-      value,
-      created,
-      faces,
-      labels,
-    } = image;
-
-    const newImage = {
-      id: imageId,
-      name: value,
-      lastModified: created,
-    };
-
-    // save labels
-    labelsByImageId[imageId] = labels;
-
-    // save faces
-    facesById = {
-      ...facesById,
-      ...faces,
-    };
-    facesIds = [...new Set([...facesIds, ...Object.keys(faces)])];
-    facesByImageId[imageId] = Object.keys(faces);
-
-    // store image
-    byId[imageId] = newImage;
-    ids.push(imageId);
-  });
-
-  return {
-    byId,
-    ids,
-    labelsByImageId,
-    facesById,
-    facesIds,
-    facesByImageId,
-    type: IMAGES_FETCH_SUCCESS,
-  };
-};
-
-const imagesFetchFailure = () => ({
-  type: IMAGES_FETCH_FAILURE,
+// simples actions
+const imageSelect = id => ({
+  type: IMAGE_SELECT,
+  id,
 });
 
 // complex actions
-const addImage = file => (dispatch) => {
-  dispatch(async (dispatch, getState) => {
-    dispatch(imageUploadRequest());
+const selectImage = id => (dispatch) => {
+  dispatch(imageSelect(id));
+};
+
+const fetchImages = hocAsyncAction(
+  IMAGE_FETCH_TYPES,
+  (item) => (dispatch, _, { api }) => {
+    return api('image/')
+      .then((images) => {
+        // TODO: refactor later
+
+        // images
+        const byId = {};
+        const ids = [];
+
+        // faces
+        const facesById = {};
+        const facesByImageId = {};
+        const faceIds = [];
+
+        images.forEach((image) => {
+          // get data
+          const { imageId, faces } = image;
+
+          // save
+          byId[imageId] = image;
+          ids.push(imageId);
+          facesByImageId[imageId] = Object.keys(faces);
+
+          // save faces
+          Object.values(faces).forEach((face) => {
+            const faceId = face.id;
+            facesById[faceId] = face;
+            faceIds.push(faceId);
+          });
+        })
+
+        // extract labels and faces
+        dispatch(facesAddFaces(facesById, faceIds, facesByImageId));
+
+        return Promise.resolve({
+          byId,
+          ids,
+        })
+      });
+    }
+);
+
+const postImage = hocAsyncAction(
+  IMAGE_POST_TYPES,
+  (imageId, file) => (dispatch, getState, { api }) => {
+    dispatch(networkRequestStart());
 
     // create base image information
-    const imageId = uuid.v4();
+    // const imageId = uuid.v4();
     const bucketName = process.env.REACT_APP_S3_UPLOAD_BUCKET;
-    const { auth: { accessKey } } = getState();
+    const user = selectUser(getState());
+    const userId = user.id;
 
     const { 
       lastModified,
       type,
     } = file;
 
-    // get file ending
-    let filetype = undefined;
-    switch (type) {
-      case 'image/jpeg':
-        filetype = '.jpeg';
-        break;
-      case 'image/png':
-        filetype = '.png';
-        break;
-      default:
-        filetype = undefined;
-    }
+     // get file ending
+     let filetype = undefined;
+     switch (type) {
+       case 'image/jpeg':
+         filetype = '.jpeg';
+         break;
+       case 'image/png':
+         filetype = '.png';
+         break;
+       default:
+         filetype = undefined;
+     }
+ 
+     return readAsDataURL(file)
+      .then((rawImageString) => {
+        const imageString = rawImageString.replace(/^data:image\/\w+;base64,/, '');
+        const buffer = Buffer.from(imageString, 'base64');
+    
+        const newName = `${imageId}${filetype}`;
+        const imageName = `${userId}/${newName}`;
+    
+        // image object
+        const image = {
+          id: imageId,
+          lastModified,
+          name: newName,
+        };
 
-    const rawImageString = await readAsDataURL(file)
-    const imageString = rawImageString.replace(/^data:image\/\w+;base64,/, '');
-    const buffer = Buffer.from(imageString, 'base64');
+        return uploadToS3(bucketName, imageName, buffer)
+          .then(() => {
+            return Promise.resolve({ bucketName, imageName, image });
+          });
+      })
+      .then((options) => {
+        const { bucketName, imageName, image } = options;
+        return Promise.all([
+          detectFaces(bucketName, imageName),
+          detectLabels(bucketName, imageName),
+        ])
+        .then((response) => {
+          return Promise.resolve({
+            rawFaces: response[0],
+            rawLabels: response[1],
+            image,
+          });
+        })
+      })
+      .then(({ rawLabels, rawFaces, image }) => {
 
-    const newName = `${imageId}${filetype}`;
-    const imageName = `${accessKey}/${newName}`;
-
-    // image object
-    const image = {
-      id: imageId,
-      lastModified,
-      name: newName,
-    };
-
-    // start async job
-    try {
-
-      // upload to s3
-      const s3Upload = await uploadToS3(bucketName, imageName, buffer)
-        .then((obj) => {
-          console.log(obj);
-          return Promise.resolve(true)
+        // process faces
+        const faceById = {};
+        const faceIds = [];
+        rawFaces.forEach((properties, i) => {
+          const id = uuid.v4();
+          const face = {
+            id,
+            name: `Face ${i + 1}`,
+            properties,
+          };
+          faceById[id] = face;
+          faceIds.push(id);
         });
 
+        // process labels
+        const labels = rawLabels.Labels.map((label) => {
+          const { Name, Confidence } = label;
+          return {
+            key: Name,
+            value: Confidence,
+          };
+        });
 
-      // start rekognition
-      const { rawFaces, rawLabels } = await Promise.all([
-        detectFaces(bucketName, imageName),
-        detectLabels(bucketName, imageName),
-      ])
-      .then((response) => ({
-        rawFaces: response[0],
-        rawLabels: response[1],
-      }));
-      
-      // process faces
-      const faceById = {};
-      const faceIds = [];
-      rawFaces.forEach((properties, i) => {
-        const id = uuid.v4();
-        const face = {
-          id,
-          name: `Face ${i + 1}`,
-          properties,
+        // create new images object
+        const newImage = {
+          ...image,
+          labels,
+          faces: faceById,
         };
-        faceById[id] = face;
-        faceIds.push(id);
-      });
 
-      // add faces
-      dispatch(facesAdd(imageId, faceById, faceIds));
-
-      // process labels
-      // const rawLabels = await detectLabels(bucketName, imageName);
-      const labels = rawLabels.Labels.map((label) => {
-        const { Name, Confidence } = label;
-        return {
-          key: Name,
-          value: Confidence,
+        const options = {
+          ...defaultConfig,
+          method: 'POST',
+          body: JSON.stringify({
+            imageId: newImage.id,
+            filename: newImage.name,
+            faces: newImage.faces,
+            labels: newImage.labels,
+          }),
         };
-      });
-      dispatch(labelsAdd(imageId, labels));
 
-      // create new images object
-      const newImage = {
-        ...image,
-        labels,
-        faces: faceById,
-      };
+        // save to dynamo db
+        return api('image/', options)
+          .then((image) => {
+            return Promise.resolve({
+              faceById,
+              faceIds,
+              labels,
+              image,
+            });
+          });
+      })
+      .then(({ faceById, faceIds, image }) => {
+        const byImageId = {
+          [image.imageId]: faceIds,
+        };
+        dispatch(facesAddFaces(faceById, faceIds, byImageId));
 
-      // add to dynamo
-      const dbRequest = await uploadImage(accessKey, newImage);
-
-      dispatch(imageSelectImage(imageId));
-      dispatch(imageAddImage({ image, imageId }));
-
-      // success
-      dispatch(imageUploadSuccess(imageId));
-    } catch(error) {
-      console.log(error);
-      dispatch(imageUploadFailure(imageId, error));
-    }
-  });
-};
-
-const fetchImages = () => (dispatch) => {
-  dispatch(async (dispatch, getState) => {
-    dispatch(imagesFetchRequest());
-      try {
-
-        const userId = selectAuthKey(getState());
-        const images = await getImages(userId);
-
-        dispatch(imagesFetchSuccess(images));
-      } catch (e) {
-        dispatch(imagesFetchFailure());
-      }
-  });
-}
-
-const selectImage = id => (dispatch) => {
-  console.log(id);
-  dispatch(imageSelectImage(id));
-}
+        dispatch(networkRequestComplete());
+        return Promise.resolve(image);
+      })
+      .catch((error) => {
+        dispatch(networkRequestComplete());
+        return Promise.reject(error);
+      })
+  },
+  true
+);
 
 // reducers
-const imageById = (state = {}, action) => {
+const fetchRequest = hocReducer({
+  ACTION_TYPE: IMAGE_FETCH_TYPES,
+  noData: true,
+});
+
+const postRequest = hocReducer({
+  ACTION_TYPE: IMAGE_POST_TYPES,
+  noData: true,
+});
+
+const byId = (state = {}, action) => {
   switch (action.type) {
-    case IMAGES_ADD_IMAGE:
+    case IMAGE_FETCH_TYPES.SUCCESS:
       return {
         ...state,
-        [action.imageId]: action.image,
+        ...action.payload.byId,
       };
-    case IMAGES_FETCH_SUCCESS:
+    case IMAGE_POST_TYPES.SUCCESS:
       return {
         ...state,
-        ...action.byId,
+        [action.payload.imageId]: action.payload,
       };
     default:
       return state;
   }
 };
 
-const imageIds = (state = [], action) => {
+const ids = (state = [], action) => {
   switch (action.type) {
-    case IMAGES_ADD_IMAGE:
-      return [...new Set([...state, action.imageId])];
-    case IMAGES_FETCH_SUCCESS:
-      return [...new Set([...state, ...action.ids])];
+    case IMAGE_FETCH_TYPES.SUCCESS:
+      return [...new Set([...state, ...action.payload.ids])];
+    case IMAGE_POST_TYPES.SUCCESS:
+      return [...new Set([...state, action.payload.imageId])];
     default:
       return state;
   }
 };
 
-const selectedImage = (state = '', action) => {
+const selected = (state = null, action) => {
   switch (action.type) {
-    case IMAGES_SELECT_IMAGE:
-      return action.imageId;
-    default:
-      return state;
-  }
-};
-
-const request = (state = RequestStatus.INITIAL, action) => {
-  switch (action.type) {
-    case IMAGES_UPLOAD_REQUEST:
-      return RequestStatus.PENDING;
-    case IMAGES_UPLOAD_SUCCESS:
-      return RequestStatus.SUCCESS;
-    case IMAGES_UPLOAD_FAILURE:
-      return RequestStatus.FAILRUE;
+    case IMAGE_SELECT:
+      return action.id;
     default:
       return state;
   }
 };
 
 export {
-  addImage,
-  fetchImages,
   selectImage,
-  IMAGES_FETCH_SUCCESS,
+  fetchImages,
+  postImage,
 };
 
 export default combineReducers({
-  byId: imageById,
-  ids: imageIds,
-  selectedImage,
-  request,
+  byId,
+  ids,
+  selected,
+  fetchRequest,
+  postRequest,
 });

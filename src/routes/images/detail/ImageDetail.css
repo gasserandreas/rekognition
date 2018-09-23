@@ -1,0 +1,129 @@
+/* basic styling */
+.image-detail {
+  display: flex;
+  position: relative;
+}
+
+.image-detail h3 {
+  margin: 1.2rem 0 .3rem;
+  letter-spacing: .5px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.image-detail h3 .badge {
+  margin-left: .5rem;
+  margin-top: -4px;
+}
+
+.image-detail a {
+  color: #048248;
+  text-decoration: none;
+}
+
+.image-detail a:hover {
+  color: #383838;
+  cursor: pointer;
+}
+
+.image-container {
+  /* overflow: hidden; */
+  position: relative;
+}
+
+.loading-image,
+.loading-content {
+  color: #048248;
+  margin: 3.6rem auto;
+  text-align: center;
+}
+
+.loading-content {
+  margin-right: 2.6rem;
+  margin-left: 2.6rem;
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  .image-detail {
+    flex-flow: column;
+    flex-wrap: nowrap;
+  }
+
+  .image-detail .back-link {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    z-index: 10;
+    font-size: 1.2rem;
+    padding: .5rem;
+    border-bottom-right-radius: 3px;
+    background-color: rgba(255, 255, 255, .85);
+  }
+}
+
+@media (min-width: 480px) and (max-width: 768px) {
+  .image-detail .image-container {
+    height: 50vh;
+  }
+
+  .image-detail .analysis-container {
+    margin-top: 50vh;
+  }
+}
+
+/* full size */
+@media (min-width: 768px) {
+  .image-detail .image-container {
+    margin: 4rem;
+    margin-left: 28rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .image-detail .analysis-container {
+    position: fixed;
+    left: 0;
+    top: 74px;
+    bottom: 0;
+    width: 24rem;
+    z-index: 2;
+    padding-top: 5rem;
+    -webkit-box-shadow: 1px 2px 4px 0 rgba(0,0,0,.24), 0 4px 4px 0 rgba(0,0,0,.12);
+    box-shadow: 1px 2px 4px 0 rgba(0,0,0,.24), 0 4px 4px 0 rgba(0,0,0,.12);
+    background-color: #fff;
+  }
+
+  .image-detail .analysis-container .analysis-content {
+    overflow: scroll;
+    max-height: 100%;
+  }
+
+  .image-detail .back-link {
+    position: fixed;
+    top: 8rem;
+    left: 1rem;
+    z-index: 10;
+  }
+}
+
+@media (min-width: 1140px) {
+  .image-detail .image-container {
+    margin-left: 34rem;
+  }
+
+  .image-detail .analysis-container {
+    width: 30rem;
+  }
+}
+
+@media (min-width: 1600px) {
+  .image-detail .image-container {
+    margin-left: 40rem;
+  }
+
+  .image-detail .analysis-container {
+    width: 36rem;
+  }
+}

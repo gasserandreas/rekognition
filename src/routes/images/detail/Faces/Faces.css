@@ -1,0 +1,15 @@
+.faces {
+  font-size: 1.1rem;
+  padding: 0 .6rem;
+}
+
+@media (min-width: 768px) {
+  .faces {
+    font-size: inherit;
+  }
+  
+  .faces h3 {
+    padding: 0 1.2rem;
+    margin: 1.6rem 0;
+  }
+}

@@ -1,0 +1,27 @@
+/* .image-wrapper is used to proper position face-markers */
+.image-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.image-wrapper .image {
+  background-color: #333;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.image-wrapper .image img {
+  width: 100%;
+}
+
+/* show hide image before / after load */
+.image-wrapper .image.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.image-wrapper .image.show {
+  opacity: 1;
+  visibility: visible;
+}

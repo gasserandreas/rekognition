@@ -3,24 +3,15 @@ import PropTypes from 'prop-types';
 
 import './Badge.css';
 
-const Badge = ({ text, bgColor }) => {
-
-  const styles = {
-    backgroundColor: bgColor,
-  };
+const Badge = ({ text }) => {
 
   return (
-    <div style={styles} className="badge">{text}</div>
+    <span className="badge green">{text}</span>
   );
 };
 
 Badge.propTypes = {
-  text: PropTypes.string.isRequired,
-  bgColor: PropTypes.string,
-};
-
-Badge.defaultProps = {
-  bgColor: '#ccc',
-};
+  text: PropTypes.node.isRequired,
+}
 
 export default Badge;
