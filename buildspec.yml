@@ -3,6 +3,8 @@ version: 0.2
 phases:
   install:
     commands:
+      - echo Copy .env.* files into project
+      - aws s3 cp $S3_UTILS_BUCKET/$ENV_VAR ./
       - echo Entered the install phase...
       - apt-get update -y
       - apt-get install apt-transport-https
@@ -29,8 +31,8 @@ phases:
           echo "Set new version ${NEW_VERSION}"
           npm --no-git-tag-version version $NEW_VERSION
         fi
-      - echo Copy .env.* files into project
-      - aws s3 cp "${S3_UTILS_BUCKET}/${ENV_VAR} ./"
+#       - echo Copy .env.* files into project
+#       - aws s3 cp "${S3_UTILS_BUCKET}/${ENV_VAR} ./"
   build:
     commands:
       - echo "Build started on $CODEBUILD_START_TIME"
