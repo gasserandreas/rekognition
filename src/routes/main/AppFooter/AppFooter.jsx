@@ -20,6 +20,7 @@ const AppFooter = ({ sidebar }) => {
               rel="noreferrer noopener"
               target="_blank"
             >&copy; 2018 Andreas Gasser</a>
+            <a>Build: {process.env.REACT_APP_VERSION}</a>
         </div>
       </div>
     </footer>
