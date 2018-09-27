@@ -20,7 +20,11 @@ const getEnv = () => {
   return process.env.NODE_ENV;
 } 
 
-const getUrl = key => networkEndpoints[key][getEnv()];
+const getApiVersion = () => process.env.REACT_APP_API_VERSION;
+
+const getUrl = key => `${networkEndpoints[key][getEnv()]}`;
+
+const getVersionedUrl = key => `${networkEndpoints[key][getEnv()]}/${getApiVersion()}`;
 
 // generic call definitions
 const genericFetch = (url, config = {}) => {
@@ -65,19 +69,10 @@ const genericJsonFetch = (url, config) =>
         // handle invalid json payload
         .catch(error => Promise.reject(createInvalidDataError(error, response)));
     });
-    
-
-// network calls
-// const getImages = () => {
-//   const userId = '12d4cddc-2011-4a86-be10-f7e3286676f7';
-//   const url = `${getUrl('api')}/user/${userId}/image/`;
-
-//   return genericJsonFetch(url);
-// }
 
 export {
   defaultConfig,
-  // getImages,
   getUrl,
+  getVersionedUrl,
   genericJsonFetch,
 };

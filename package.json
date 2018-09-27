@@ -29,7 +29,9 @@
         "build": "react-scripts build",
         "test": "react-scripts test --env=jsdom",
         "eject": "react-scripts eject",
-        "release": "aws s3 sync --delete ./build s3://529821714029-rekognition.gasserandreas.com/"
+        "release": "aws s3 sync --delete ./build s3://529821714029-rekognition.gasserandreas.com/",
+        "env-push-prod": "aws s3 cp .env.production.local s3:529821714029-rekognition.gasserandreas.com-utils/",
+        "env-push-test": "aws s3 cp .env.development.local s3:529821714029-rekognition.gasserandreas.com-utils/"
     },
     "description": "Imgae Rekognition"
 }

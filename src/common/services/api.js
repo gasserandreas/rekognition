@@ -1,4 +1,4 @@
-import { getUrl, defaultConfig, genericJsonFetch } from './networkUtils';
+import { getVersionedUrl, defaultConfig, genericJsonFetch } from './networkUtils';
 
 import { createAuthError } from '../error/errorUtils';
 import { getUserId } from '../sessionUtils';
@@ -14,7 +14,7 @@ export default dispatch => (path, options = {}) => {
   };
 
   // create url
-  const baseUrl = getUrl('api');
+  const baseUrl = getVersionedUrl('api');
   const userId = getUserId();
 
   if (!userId) {
