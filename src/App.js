@@ -1,97 +1,66 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import GoogleAnalytics from 'react-ga';
+import { withRouter, Switch, Route } from 'react-router-dom';
+import { css } from 'emotion';
 
-import AppHeader from './routes/main/AppHeader/AppHeader';
-import AppLoadingBar from './routes/main/AppLoadingBar/AppLoadingBarContainer';
-import footerRoutes from './routes/main/AppFooter/routes';
-import uploadRoutes from './routes/main/UploadButton/routes';
+import NotFound from './ui/NotFound';
 
-import appRoutes from './routes/main/routes';
+import * as Paths from './paths';
 
-import { initApplication } from './redux/app';
-import { fetchImages } from './redux/images';
+import HomeContainer from './home/HomeContainer';
 
-import './App.css';
+import { reportReactError, createUnknownError } from './util/ErrorHandler';
+import { loadApplication } from './redux/application';
+
+const Styles = {
+  ApplicationWrapper: css`
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-direction: column;
+    height: 100%;
+  `,
+  Content: css`
+    flex-grow: 1;
+    flex-shrink: 1;
+  `,
+};
 
 class App extends Component {
-  state = {
-    enabledAnalytics: false,
-  };
+  static propTypes = {
+    loadApplication: PropTypes.func.isRequired,
+    reportReactError: PropTypes.func.isRequired,
+  }
 
   componentWillMount() {
-    this.props.initApplication();
-
-    // enable analytics
-    this.initGoogleAnalytics(this.props);
+    this.props.loadApplication();
   }
 
-  initGoogleAnalytics(props) {
-    const key = process.env.REACT_APP_GOOGLE_ANALYTICS_KEY;
-
-    if (!key || key === '') {
-      return;
-    }
-
-    // analytics only on prod
-    if (process.env.NODE_ENV !== 'production') {
-      return;
-    }
-
-    // init GA
-    GoogleAnalytics.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_KEY);
-
-    // call init analytics
-    GoogleAnalytics.pageview(this.getPage(props));
-
-    this.setState({
-      enabledAnalytics: true,
-    });
-  }
-
-  componentWillReceiveProps(newProps) {
-    const page = this.getPage(this.props);
-    const newPage = this.getPage(newProps);
-
-    if (page !== newPage) {
-      GoogleAnalytics.pageview(page);
-    }
-  }
-
-  getPage(props) {
-    const { location } = props;
-    const { pathname, search } = location;
-    return `${pathname}${search}`;
+  componentDidCatch(error, info) {
+    // handle error on root level
+    this.props.reportReactError(createUnknownError(error, info));
   }
 
   render() {
     return (
-      <div className="app-wrapper">
-        <AppLoadingBar />
-        <AppHeader />
-        <div className="app-content">
-          {appRoutes()}
-        </div>
-        {footerRoutes()}
-        {uploadRoutes()}
+      <div className={Styles.ApplicationWrapper}>
+        <main role="main" className={Styles.Content}>
+          <Switch>
+            <Route exact path={Paths.HOME} component={HomeContainer} />
+            <Route path="*" component={NotFound} />
+          </Switch>
+        </main>
       </div>
     );
   }
 }
 
-
-const select = state => {
-  if (process.env.NODE_ENV !== 'production') {
-    console.log(state);
-  }
-  return {};
-};
+const select = () => ({});
 
 const mapDispatchToProps = ({
-  initApplication,
-  fetchImages,
+  reportReactError,
+  loadApplication,
 });
 
-// ATTENTION: withRouter is needed to get React router proper update location!!
 export default withRouter(connect(select, mapDispatchToProps)(App));
