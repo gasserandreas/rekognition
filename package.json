@@ -3,6 +3,15 @@
     "version": "0.0.1",
     "private": true,
     "dependencies": {
+        "@atlaskit/avatar": "^14.1.7",
+        "@atlaskit/css-reset": "^3.0.5",
+        "@atlaskit/global-navigation": "^5.3.8",
+        "@atlaskit/icon": "^15.0.3",
+        "@atlaskit/logo": "^9.2.6",
+        "@atlaskit/modal-dialog": "^7.1.1",
+        "@atlaskit/navigation-next": "^4.0.10",
+        "@atlaskit/page": "^8.0.12",
+        "@atlaskit/theme": "^7.0.1",
         "aws-sdk": "^2.377.0",
         "emotion": "9.2.12",
         "lodash": "^4.17.11",
@@ -16,6 +25,7 @@
         "redux-thunk": "^2.3.0",
         "reselect": "^4.0.0",
         "ric-shim": "^1.0.0",
+        "styled-components": "^3.2.6",
         "uuid": "^3.3.2"
     },
     "scripts": {
