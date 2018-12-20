@@ -1,21 +1,49 @@
-import React from 'react';
+/** @jsx jsx */
 import PropTypes from 'prop-types';
 
-import { css, cx } from 'emotion';
+import { jsx, css } from '@emotion/core';
+
+import Page, { Grid, GridColumn } from '@atlaskit/page';
+import PageHeader from '@atlaskit/page-header';
 
 const Styles = {
-  Jumbotron: css`
-    width: 60%;
-    margin: 8rem auto;
-  `,
 };
 
 const HomeView = (props) => {
   const { user } = props;
 
+  const playgroundActions = [
+    {
+      method: props.requestNow,
+      name: 'Request NOW',
+    },
+    {
+      method: () => props.loginUser({
+        email: 'andreas.safe@gmail.com',
+        password: 'testtest',
+      }),
+      name: 'Login User',
+    },
+  ]
+
   return (
-    <div className="details-view">
-      Hello ;-)
+    <div>
+      <Page>
+        <Grid>
+          <GridColumn medium={12}>
+            <PageHeader>Home page</PageHeader>
+            Home Page
+            {playgroundActions.map((item, i) => (
+              <div key={`item_${i}`}>
+                <p><strong>{item.name}</strong></p>
+                <button onClick={item.method}>Execute action</button>
+                <br /><br />
+              </div>
+            ))}
+            {/* <button onClick={() => props.loginUser()}>Test</button> */}
+          </GridColumn>
+        </Grid>
+      </Page>
     </div>
   );
 };

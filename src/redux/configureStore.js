@@ -8,6 +8,10 @@ import rootReducer from './rootReducer';
 
 import configureReactors from './reactors/configureReactors';
 import { APP_IDLE } from './application';
+import { logOutUser } from './auth';
+
+import GraphApi from '../util/GraphApi';
+import { getUrl } from '../util/services/networkUtils';
 
 const configureStore = (initialState = {}) => {
   const {
@@ -16,8 +20,21 @@ const configureStore = (initialState = {}) => {
 
   const errorMiddleware = createMiddleware();
 
+  const graphApiOptions = {
+    url: getUrl('graphql'),
+
+  }
+
   const enhancers = [];
-  const middleware = [thunkMiddleware, errorMiddleware];
+  const middleware = [
+    thunkMiddleware.withExtraArgument({
+      GraphApi: new GraphApi({
+        endpoint: getUrl('graphql'),
+        onAuthError: (message) => store.dispatch(logOutUser(message)), //AUTH_LOG_OUT
+      }),
+    }),
+    errorMiddleware,
+  ];
 
   let composeEnhancers = compose;
   if (NODE_ENV === 'development') {

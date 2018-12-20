@@ -1,21 +1,24 @@
-import React from 'react';
+/** @jsx jsx */
 import PropTypes from 'prop-types';
+import { jsx, css } from '@emotion/core';
 
-import { css, cx } from 'emotion';
+import Page, { Grid, GridColumn } from '@atlaskit/page';
+import PageHeader from '@atlaskit/page-header';
 
 const Styles = {
-  Jumbotron: css`
-    width: 60%;
-    margin: 8rem auto;
-  `,
 };
 
 const UserView = (props) => {
-  const { user } = props;
-
   return (
-    <div className="details-view">
-      User
+    <div>
+      <Page>
+        <Grid>
+          <GridColumn medium={12}>
+            <PageHeader>Profile information</PageHeader>
+            Profile
+          </GridColumn>
+        </Grid>
+      </Page>
     </div>
   );
 };

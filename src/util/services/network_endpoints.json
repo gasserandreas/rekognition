@@ -1,8 +1,8 @@
 {
-  "your-url": {
+  "graphql": {
     "prod": "",
     "test": "",
-    "development": "",
-    "local": ""
+    "development": "https://nho0mk9zbf.execute-api.us-east-1.amazonaws.com/dev/graph",
+    "local": "http://localhost:4000/"
   }
 }

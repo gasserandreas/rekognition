@@ -1,14 +1,78 @@
-import React, { Component } from 'react';
+/** @jsx jsx */
+import { Component } from 'react';
 import uuid from 'uuid';
 import { Link } from 'react-router-dom';
+import { jsx, css } from '@emotion/core';
+import PropTypes from 'prop-types';
 
-import { GlobalNav, GlobalItem } from '@atlaskit/navigation-next';
+import { GlobalItem } from '@atlaskit/navigation-next';
 import { JiraIcon } from '@atlaskit/logo';
 import AddIcon from '@atlaskit/icon/glyph/add';
 import EditorImageIcon from '@atlaskit/icon/glyph/editor/image';
 import Avatar from '@atlaskit/avatar';
 
 import * as Paths from '../paths';
+
+import { MediaSize } from '../styles';
+
+const Styles = {
+  GlobalNavigation: css`
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-shrink: 0;
+    justify-content: space-between;
+    transition: background-color 0.3s cubic-bezier(0.2,0,0,1),color 0.3s cubic-bezier(0.2,0,0,1);
+    background-color: #0747A6;
+    color: #FFFFFF;
+    fill: #0747A6;
+
+    padding: 6px 12px;
+
+    @media (min-width: ${MediaSize.Tablet}) {
+      padding: 24px 0px;
+      height: 100vh;
+      width: 64px;
+      flex-direction: column;
+    }
+  `,
+  NavItems: css`
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    width: 50%;
+    flex-direction: row;
+
+    @media (min-width: ${MediaSize.Tablet}) {
+      width: 100%;
+      flex-direction: column;
+    }
+  `,
+  PrimaryItems: css`
+    @media (max-width: ${MediaSize.Tablet}) {
+      justify-content: flex-start;
+    }
+    @media (min-width: ${MediaSize.Tablet}) {
+      padding-bottom: 16px;
+    }
+  `,
+  SecondaryItems: css`
+    @media (min-width: ${MediaSize.Tablet}) {
+      padding-top: 8px;
+    }
+    @media (max-width: ${MediaSize.Tablet}) {
+      justify-content: flex-end;
+    }
+  `,
+  AddItem: css`
+    @media (max-width: ${MediaSize.Tablet}) {
+      display: none;
+      visibility: hidden;
+    }
+  `,
+}
 
 // navigation configuration
 const primaryItems = [
@@ -27,6 +91,7 @@ const primaryItems = [
     id: 'add',
     // TODO: add to redux later on
     onClick: () => console.log('add new image'),
+    css: Styles.AddItem,
   }
 ];
 const secondaryItems = [
@@ -45,28 +110,39 @@ const secondaryItems = [
   }
 ];
 
-class GlobalNavigation extends Component {
-  // override basic render method to support react-router-dom link comp
-  renderGlobalNavItems({ id, path, onClick, ...props }) {
+export default class GlobalNav extends Component {
+  static propTypes = {
+    authenticated: PropTypes.bool.isRequired,
+  }
+
+  renderGlobalNavItems({
+    id,
+    path,
+    onClick,
+    css = {},
+    name = '',
+    ...props
+  }) {
     const key = id || uuid.v4();
 
     // return simple GlobalItem if no path available
     if (!path) {
       const newProps = {
         id,
-        key,
         onClick,
         ...props,
       };
 
       return (
-        <GlobalItem {...newProps} />
+        <span key={key} css={css}>
+          <GlobalItem {...newProps} />
+        </span>
       );
     }
 
     // Note: we do not allow to pass `onClick` to avoid multi action dispatch
     return (
-      <Link to={path} key={key}>
+      <Link to={path} key={key} css={css}>
         <GlobalItem {...props} />
       </Link>
     )
@@ -74,13 +150,14 @@ class GlobalNavigation extends Component {
 
   render() {
     return (
-      <GlobalNav
-        itemComponent={this.renderGlobalNavItems}
-        primaryItems={primaryItems}
-        secondaryItems={secondaryItems}
-      />
+      <div css={Styles.GlobalNavigation}>
+        <div css={[Styles.NavItems, Styles.PrimaryItems]}>
+          {primaryItems.map(item => this.renderGlobalNavItems(item))}
+        </div>
+        <div css={[Styles.NavItems, Styles.SecondaryItems]}>
+          {secondaryItems.map(item => this.renderGlobalNavItems(item))}
+        </div>
+      </div>
     );
   }
-}
-
-export default GlobalNavigation;
+};
