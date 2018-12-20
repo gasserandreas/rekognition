@@ -6,6 +6,8 @@ import { jsx, css } from '@emotion/core';
 import Page, { Grid, GridColumn } from '@atlaskit/page';
 import PageHeader from '@atlaskit/page-header';
 
+import { setToken } from '../util/sessionUtil';
+
 const Styles = {
 };
 
@@ -18,11 +20,19 @@ const HomeView = (props) => {
       name: 'Request NOW',
     },
     {
-      method: () => props.loginUser({
+      method: () => props.logInUser({
         email: 'andreas.safe@gmail.com',
         password: 'testtest',
       }),
       name: 'Login User',
+    },
+    {
+      method: () => props.logOutUser(),
+      name: 'Logout User',
+    },
+    {
+      method: () => props.getUserInfo('64511a6f-fc7c-41fc-bd81-ab3019137404'),
+      name: 'User Info',
     },
   ]
 

@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 
 import { applicationUserSelector } from '../redux/application/selectors';
 
-// import { loginUser } from '../redux/auth';
-import { requestNow, loginUser } from '../redux/playground';
+import { logInUser, logOutUser } from '../redux/auth';
+import { requestNow, getUserInfo } from '../redux/playground';
 
 import HomeView from './HomeView';
 
@@ -12,8 +12,10 @@ const select = state => ({
 });
 
 const mapDispatchToProps = ({
-  loginUser,
+  logInUser,
+  logOutUser,
   requestNow,
+  getUserInfo
 });
 
 export default connect(select, mapDispatchToProps)(HomeView);

@@ -2,10 +2,12 @@ import { combineReducers } from 'redux';
 import gql from "graphql-tag";
 
 import hocReducer, { hocCreateTypes ,hocAsyncAction } from '../HOC';
+import { setToken } from '../../util/sessionUtil';
 
 // action types
 const PLAYGROUND_NOW_REQUEST = hocCreateTypes('PLAYGROUND_NOW_REQUEST');
 const PLAYGROUND_LOGIN_REQUEST = hocCreateTypes('PLAYGROUND_LOGIN_REQUEST');
+const PLAYGROUND_GET_USER_INFO_REQUEST = hocCreateTypes('PLAYGROUND_GET_USER_INFO_REQUEST');
 
 // simple actions
 
@@ -46,7 +48,36 @@ export const loginUser = hocAsyncAction(
       email,
       password,
     };
-    return GraphApi.mutation(LOGIN_USER, variables);
+    return GraphApi.mutation(LOGIN_USER, variables)
+      .then((data) => {
+        const { loginUser: { token } } = data;
+        
+        // save token
+        setToken(token);
+        
+        return data;
+      });
+  }
+);
+
+export const getUserInfo = hocAsyncAction(
+  PLAYGROUND_GET_USER_INFO_REQUEST,
+  (userId) => (_, __, { GraphApi }) => {
+    const GET_USER_INFO = gql`
+      query getUserInfo($userId: ID!) {
+        getUserInfo(user_id: $userId) {
+          id
+          email
+          lastname
+          firstname
+        }
+      }
+    `;
+    const variables = {
+      userId,
+    };
+
+    return GraphApi.query(GET_USER_INFO, variables);
   }
 );
 
@@ -61,7 +92,13 @@ const login = hocReducer({
   noData: false,
 });
 
+const userInfo = hocReducer({
+  ACTION_TYPE: PLAYGROUND_GET_USER_INFO_REQUEST,
+  noData: false,
+});
+
 export default combineReducers({
   now,
   login,
+  userInfo
 });

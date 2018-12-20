@@ -3,7 +3,7 @@ import thunkMiddleware from 'redux-thunk';
 import { debounce } from 'lodash';
 import ric from 'ric-shim';
 
-import { createMiddleware, addUnhandledPromiseCatcher } from '../util/ErrorHandler';
+import { createMiddleware, addUnhandledPromiseCatcher, reportCustomError } from '../util/ErrorHandler';
 import rootReducer from './rootReducer';
 
 import configureReactors from './reactors/configureReactors';
@@ -20,17 +20,13 @@ const configureStore = (initialState = {}) => {
 
   const errorMiddleware = createMiddleware();
 
-  const graphApiOptions = {
-    url: getUrl('graphql'),
-
-  }
-
   const enhancers = [];
   const middleware = [
     thunkMiddleware.withExtraArgument({
       GraphApi: new GraphApi({
         endpoint: getUrl('graphql'),
         onAuthError: (message) => store.dispatch(logOutUser(message)), //AUTH_LOG_OUT
+        onError: error => store.dispatch(reportCustomError(error)),
       }),
     }),
     errorMiddleware,

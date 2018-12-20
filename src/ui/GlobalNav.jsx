@@ -75,44 +75,60 @@ const Styles = {
 }
 
 // navigation configuration
-const primaryItems = [
-  {
-    icon: JiraIcon,
-    id: 'home',
-    path: Paths.HOME,
-  },
-  {
-    icon: () => <EditorImageIcon size="large" />,
-    id: 'images',
-    path: Paths.IMAGES,
-  },
-  {
-    icon: () => <AddIcon />,
-    id: 'add',
-    // TODO: add to redux later on
-    onClick: () => console.log('add new image'),
-    css: Styles.AddItem,
+const primaryItems = (isAuthenticated) => {
+  const base = [
+    {
+      icon: JiraIcon,
+      id: 'home',
+      path: Paths.HOME,
+    },
+  ];
+
+  if (!isAuthenticated) {
+    return base;
   }
-];
-const secondaryItems = [
-  {
-    icon: () => (
-      <Avatar
-        borderColor="transparent"
-        isActive={true}
-        isHover={false}
-        size="small"
-      />
-    ),
-    size: 'small',
-    path: Paths.USER,
-    id: 'user',
+
+  return [
+    ...base,
+    {
+      icon: () => <EditorImageIcon size="large" />,
+      id: 'images',
+      path: Paths.IMAGES,
+    },
+    {
+      icon: () => <AddIcon />,
+      id: 'add',
+      // TODO: add to redux later on
+      onClick: () => console.log('add new image'),
+      css: Styles.AddItem,
+    },
+  ];
+};
+
+const secondaryItems = (isAuthenticated) => {
+  if (!isAuthenticated) {
+    return [];
   }
-];
+  return [
+    {
+      icon: () => (
+        <Avatar
+          borderColor="transparent"
+          isActive={true}
+          isHover={false}
+          size="small"
+        />
+      ),
+      size: 'small',
+      path: Paths.USER,
+      id: 'user',
+    }
+  ];
+};
 
 export default class GlobalNav extends Component {
   static propTypes = {
-    authenticated: PropTypes.bool.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired,
   }
 
   renderGlobalNavItems({
@@ -149,13 +165,14 @@ export default class GlobalNav extends Component {
   }
 
   render() {
+    const { isAuthenticated } = this.props;
     return (
       <div css={Styles.GlobalNavigation}>
         <div css={[Styles.NavItems, Styles.PrimaryItems]}>
-          {primaryItems.map(item => this.renderGlobalNavItems(item))}
+          {primaryItems(isAuthenticated).map(item => this.renderGlobalNavItems(item))}
         </div>
         <div css={[Styles.NavItems, Styles.SecondaryItems]}>
-          {secondaryItems.map(item => this.renderGlobalNavItems(item))}
+          {secondaryItems(isAuthenticated).map(item => this.renderGlobalNavItems(item))}
         </div>
       </div>
     );

@@ -1,4 +1,4 @@
-// import { createNetworkError, createInvalidDataError } from './ErrorHandler';
+import { createNetworkError, createInvalidDataError } from './ErrorHandler';
 import { getToken } from './sessionUtil';
 
 import { ApolloLink } from 'apollo-link';
@@ -6,18 +6,19 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { setContext } from 'apollo-link-context';
 import { createHttpLink } from 'apollo-link-http';
-import { onError } from "apollo-link-error";
+import { onError as onErrorLink } from "apollo-link-error";
 
 class GraphApi {
   client = null;
-
   onAuthError = null;
+  onError = null;
   endpoint = null;
 
   constructor(props) {
-    const { endpoint, onAuthError } = props;
+    const { endpoint, onError, onAuthError } = props;
 
     this.endpoint = endpoint;
+    this.onError = onError;
     this.onAuthError = onAuthError;
 
     // create apollo link
@@ -39,17 +40,25 @@ class GraphApi {
     });
 
     // error handler
-    const errorLink = onError(({ graphQLErrors, networkError }) => {
+    const errorLink = onErrorLink((obj) => {
+      console.log(obj);
+      const { graphQLErrors, networkError, response } = obj;
       if (graphQLErrors) {
-        graphQLErrors.map(({ message, locations, path }) =>
-          console.log(
-            `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
-          ),
-        );
+        const authError = graphQLErrors.find(error => error.extensions.code === 'UNAUTHENTICATED');
+
+        
+        if (authError) {
+          const { message } = authError;
+          onAuthError(message);
+        } else {
+          // create graphql error
+          const dataError = createInvalidDataError(new Error(JSON.stringify(graphQLErrors)), response);
+          onError(dataError);
+        }
       }
 
       if (networkError) {
-        console.log(networkError);
+        onError(createNetworkError(networkError, response));
       }
     });
 
@@ -61,7 +70,6 @@ class GraphApi {
 
     // create apollo client
     const client = new ApolloClient({
-      // link: authLink.concat(link),
       link,
       cache: new InMemoryCache(),
     });
