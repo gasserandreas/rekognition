@@ -1,5 +1,12 @@
 
-export const Colors = {};
+export const Colors = {
+  Blue: {
+    Background: '#0747A6',
+  },
+  White: {
+    default: '#ffffff',
+  }
+};
 
 export const MediaSize = {
   Mobile: '360px',

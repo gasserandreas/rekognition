@@ -18,6 +18,7 @@ import PrivateRoute from './PrivateRoute';
 import HomeContainer from '../home/HomeContainer';
 import ImagesContainer from '../images/ImagesContainer';
 import UserContainer from '../user/UserContainer';
+import LoginContainer from '../login/Container';
 
 import NotFound from './NotFound';
 
@@ -57,6 +58,7 @@ class App extends Component {
         <div css={Styles.Page}>
           <Switch>
             <Route exact path={Paths.HOME} component={HomeContainer} />
+            <Route exact path={Paths.LOGIN} component={LoginContainer} />
             <PrivateRoute exact path={Paths.IMAGES} component={ImagesContainer} isAuthenticated={isAuthenticated} />
             <PrivateRoute exact path={Paths.USER} component={UserContainer} isAuthenticated={isAuthenticated} />
             <Route path="*" component={NotFound} />
