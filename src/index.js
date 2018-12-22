@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import App from './ui/App';
 import * as serviceWorker from './serviceWorker';
@@ -12,16 +13,20 @@ import * as serviceWorker from './serviceWorker';
 import configureStore from './redux/configureStore';
 
 // create store object
-const store = configureStore();
+const {
+  store,
+  persistor,
+} = configureStore();
 
 class Index extends Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       <Provider store={store}>
-        <BrowserRouter>
-          <App />
-        {/* <MainRouter /> */}
-        </BrowserRouter>
+        <PersistGate loading={null} persistor={persistor}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </PersistGate>
       </Provider>    
     );
   }

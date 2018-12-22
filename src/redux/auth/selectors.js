@@ -14,6 +14,20 @@ export const selectAuthUserId = createSelector(
   ({ userId }) => userId || null,
 );
 
+export const selectToken = createSelector(
+  selectAuthState,
+  ({ token }) => token || null,
+);
+
+export const selectAuthMeta = createSelector(
+  selectAuthState,
+  ({ meta }) => meta,
+);
+
+export const selectAuthRemember = createSelector(
+  selectAuthMeta,
+  ({ remember }) => remember || false,
+);
 
 export const selectLoginRequest = createSelector(
   selectAuthState,

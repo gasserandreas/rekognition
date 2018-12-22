@@ -23,6 +23,7 @@ const HomeView = (props) => {
       method: () => props.logInUser({
         email: 'andreas.safe@gmail.com',
         password: 'testtest',
+        remember: true,
       }),
       name: 'Login User',
     },

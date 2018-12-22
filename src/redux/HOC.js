@@ -103,12 +103,13 @@ export default ({
         };
       case ACTION_TYPE.SUCCESS:
         return {
-          ...initialState || defaultInitialState,
+          ...(initialState || defaultInitialState),
           data: noData ? null : action.payload,
           lastFetch: Date.now(),
         };
       case ACTION_TYPE.ERROR:
         return {
+          ...(initialState || defaultInitialState),
           lastError: Date.now(),
           error: action.error,
           loading: false,

@@ -9,6 +9,7 @@ import '@atlaskit/css-reset';
 
 // redux
 import { selectIsAuthenticated } from '../redux/auth/selectors';
+import { loadApplication } from '../redux/application';
 
 // base style components
 import GlobalNav from './GlobalNav';
@@ -49,6 +50,10 @@ class App extends Component {
   static propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
   }
+  componentWillMount() {
+    this.props.loadApplication();
+  }
+
   render() {
     const { isAuthenticated } = this.props;
 
@@ -73,6 +78,8 @@ const mapStateToProps = (state) => ({
   isAuthenticated: selectIsAuthenticated(state),
 });
 
-const mapDispatchToProps = ({});
+const mapDispatchToProps = ({
+  loadApplication,
+});
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

@@ -1,22 +1,29 @@
 import { combineReducers } from 'redux';
 import gql from "graphql-tag";
 
-import { setToken } from '../../util/sessionUtil';
+import { setToken, setUserId } from '../../util/sessionUtil';
 import hocReducer, { hocAsyncAction, hocCreateTypes  } from '../HOC';
+
+import { selectAuthRemember } from './selectors';
+
+import { loadApplicationAuthenticated } from '../application';
 
 // action def
 export const AUTH_LOG_IN = 'AUTH_LOG_IN';
 export const AUTH_LOG_OUT = 'AUTH_LOG_OUT';
 
+export const AUTH_SET_TOKEN = 'AUTH_SET_TOKEN';
+export const AUTH_SET_USER_ID = 'AUTH_SET_USER_ID'
+
 const AUTH_LOGIN_REQUEST = hocCreateTypes('AUTH_LOGIN_REQUEST');
 
 // simple actions
-const authLogin = (userId) => ({
+const authLogin = (remember) => ({
   type: AUTH_LOG_IN,
   payload: {
-    userId,
     loggedIn: true,
     loggedInSince: Date.now(),
+    remember,
   },
 });
 
@@ -24,6 +31,33 @@ const authLogOut = message => ({
   type: AUTH_LOG_OUT,
   payload: message,
 });
+
+const authSetToken = token => ({
+  type: AUTH_SET_TOKEN,
+  payload: token,
+});
+
+const authSetUserId = userId => ({
+  type: AUTH_SET_USER_ID,
+  payload: userId,
+});
+
+// internal actions
+
+// handle auth / login / refresh
+const handleAuth = (token, userId, remember) => (dispatch) => {
+  // save token
+  setToken(token);
+  setUserId(userId);
+
+  // persist if needed
+  if (remember) {
+    dispatch(authSetToken(token));
+    dispatch(authSetUserId(userId));
+  }
+
+  dispatch(authLogin(remember));
+}
 
 // complex actions
 export const logOutUser = (message, broadcast = true) => (dispatch) => {
@@ -34,7 +68,6 @@ export const logOutUser = (message, broadcast = true) => (dispatch) => {
   dispatch(authLogOut(message));
 
   // clean up state
-
   try {
     if (broadcast) {
       window.localStorage.logout = true;
@@ -83,27 +116,48 @@ export const logInUser = hocAsyncAction(
         const { loginUser: { token, user } } = data;
         const { id } = user;
         
-        // save token
-        setToken(token);
+        dispatch(handleAuth(token, id, remember));
 
-        dispatch(authLogin(id));
-        
+        // logged in init
+        dispatch(loadApplicationAuthenticated());
+
         return data;
       });
   }
 );
+
+export const refreshToken = (token, userId) => (dispatch, getState) => {
+  const state = getState();
+  const remember = selectAuthRemember(state);
+
+  console.log('refresh');
+  console.log(userId);
+
+  dispatch(handleAuth(token, userId, remember));
+}
 
 // reducers
 const userId = (state = null, action) => {
   switch (action.type) {
     case AUTH_LOG_OUT:
       return null;
-    case AUTH_LOG_IN:
-      return action.payload.userId;
+    case AUTH_SET_USER_ID:
+      return action.payload;
     default:
       return state;
   }
 }
+
+const token = (state = null, action) => {
+  switch (action.type) {
+    case AUTH_LOG_OUT:
+      return null;
+    case AUTH_SET_TOKEN:
+      return action.payload;
+    default:
+      return state;
+  }
+};
 
 const meta = (state = {}, action) => {
   switch (action.type) {
@@ -114,6 +168,7 @@ const meta = (state = {}, action) => {
         ...state,
         loggedIn: action.payload.loggedIn,
         loggedInSince: action.payload.loggedInSince,
+        remember: action.payload.remember,
       };
     default:
       return state;
@@ -127,6 +182,7 @@ const loginRequest = hocReducer({
 
 export default combineReducers({
   userId,
+  token,
   meta,
   loginRequest,
 });

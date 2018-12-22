@@ -3,6 +3,10 @@ import thunkMiddleware from 'redux-thunk';
 import { debounce } from 'lodash';
 import ric from 'ric-shim';
 
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
+
 import { createMiddleware, addUnhandledPromiseCatcher, reportCustomError } from '../util/ErrorHandler';
 import rootReducer from './rootReducer';
 
@@ -12,6 +16,16 @@ import { logOutUser } from './auth';
 
 import GraphApi from '../util/GraphApi';
 import { getUrl } from '../util/services/networkUtils';
+
+// configure persist store
+const persistConfig = {
+  key: 'fullsize-app',
+  storage,
+  whitelist: ['auth'],
+  stateReconciler: autoMergeLevel2,
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const configureStore = (initialState = {}) => {
   const {
@@ -42,13 +56,15 @@ const configureStore = (initialState = {}) => {
   }
 
   const store = createStore(
-    rootReducer,
+    persistedReducer,
     initialState,
     composeEnhancers(
       applyMiddleware(...middleware),
       ...enhancers
     )
   );
+
+  const persistor = persistStore(store);
 
   // add reactors
   store.subscribe(configureReactors(store));
@@ -76,7 +92,10 @@ const configureStore = (initialState = {}) => {
   // add error handler
   addUnhandledPromiseCatcher(store);
 
-  return store;
+  return {
+    store,
+    persistor,
+  };
 };
 
 export default configureStore;
