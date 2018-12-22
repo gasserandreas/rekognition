@@ -13,3 +13,9 @@ export const selectAuthUserId = createSelector(
   selectAuthState,
   ({ userId }) => userId || null,
 );
+
+
+export const selectLoginRequest = createSelector(
+  selectAuthState,
+  ({ loginRequest }) => loginRequest,
+);

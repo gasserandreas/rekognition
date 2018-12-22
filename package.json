@@ -4,7 +4,10 @@
     "private": true,
     "dependencies": {
         "@atlaskit/avatar": "^14.1.7",
+        "@atlaskit/button": "^10.1.1",
+        "@atlaskit/checkbox": "^5.0.10",
         "@atlaskit/css-reset": "^3.0.5",
+        "@atlaskit/form": "^5.1.0",
         "@atlaskit/global-navigation": "^5.3.8",
         "@atlaskit/icon": "^15.0.3",
         "@atlaskit/logo": "^9.2.6",
@@ -13,6 +16,7 @@
         "@atlaskit/navigation-next": "^4.0.10",
         "@atlaskit/page": "^8.0.12",
         "@atlaskit/page-header": "^6.1.1",
+        "@atlaskit/textfield": "^0.1.5",
         "@atlaskit/theme": "^7.0.1",
         "@emotion/core": "^10.0.5",
         "@emotion/styled": "^10.0.5",

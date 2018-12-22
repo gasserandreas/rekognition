@@ -57,7 +57,7 @@ export const logOutUser = (message, broadcast = true) => (dispatch) => {
 export const logInUser = hocAsyncAction(
   AUTH_LOGIN_REQUEST,
   (credentials) => (dispatch, __, { GraphApi }) => {
-    const { email, password } = credentials;
+    const { email, password, remember } = credentials;
 
     const LOGIN_USER = gql`
       mutation loginUser($email: String!, $password: String!) {
