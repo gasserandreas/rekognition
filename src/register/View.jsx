@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { jsx, css } from '@emotion/core';
 import { Link } from 'react-router-dom';
 
-import LoginForm from './LoginForm';
+import RegisterForm from './RegisterForm';
 
 import Card from '../ui/Card';
 
@@ -29,13 +29,9 @@ const Styles = {
     font-size: 2.2rem;
     color: ${Colors.White.default};
     text-align: center;
+    margin-bottom: 2rem;
   `,
-  SubHeader: css`
-    color: ${Colors.White.default};
-    margin: 3rem 0;
-    text-align: center;
-  `,
-  SignUpLink: css`
+  LoginLink: css`
     color: ${Colors.White.default};
     text-align: center;
     margin: 2.5rem 0 0;
@@ -52,7 +48,8 @@ const Styles = {
 class View extends Component {
   static propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
-    loginRequest: HOCRequestPropTypes.isRequired,
+    signupRequest: HOCRequestPropTypes.isRequired,
+    signupUser: PropTypes.func.isRequired,
   }
 
   state = {
@@ -82,22 +79,21 @@ class View extends Component {
   }
 
   render() {
-    const { loginRequest: { loading } } = this.props;
+    const { signupRequest: { loading } } = this.props;
     return (
       <div css={Styles.View}>
         <div css={Styles.Content}>
           <h1 css={Styles.PageHeader}>AWS Rekognition</h1>
-          <h2 css={Styles.SubHeader}>Login to get started</h2>
           <Card>
-            <LoginForm
-              onSubmit={this.props.logInUser}
+            <RegisterForm
+              onSubmit={this.props.signupUser}
               submitting={loading}
             />
           </Card>
           <Link
-            css={Styles.SignUpLink}
-            to={Paths.REGISTER}
-          >Sign up for an account</Link>
+            css={Styles.LoginLink}
+            to={Paths.LOGIN}
+          >Use login credentials instead</Link>
         </div>
       </div>
     );

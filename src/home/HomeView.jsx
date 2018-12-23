@@ -6,10 +6,7 @@ import { jsx, css } from '@emotion/core';
 import Page, { Grid, GridColumn } from '@atlaskit/page';
 import PageHeader from '@atlaskit/page-header';
 
-import { setToken } from '../util/sessionUtil';
-
-const Styles = {
-};
+import * as Paths from '../paths';
 
 const HomeView = (props) => {
   const { user } = props;
@@ -35,6 +32,10 @@ const HomeView = (props) => {
       method: () => props.getUserInfo('64511a6f-fc7c-41fc-bd81-ab3019137404'),
       name: 'User Info',
     },
+    {
+      method: () => props.history.push(Paths.LOGIN),
+      name: 'Navigate to login',
+    },
   ]
 
   return (
@@ -51,7 +52,6 @@ const HomeView = (props) => {
                 <br /><br />
               </div>
             ))}
-            {/* <button onClick={() => props.loginUser()}>Test</button> */}
           </GridColumn>
         </Grid>
       </Page>

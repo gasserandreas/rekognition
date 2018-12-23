@@ -19,7 +19,7 @@ import { getUrl } from '../util/services/networkUtils';
 
 // configure persist store
 const persistConfig = {
-  key: 'fullsize-app',
+  key: 'rekognition',
   storage,
   whitelist: ['auth'],
   stateReconciler: autoMergeLevel2,

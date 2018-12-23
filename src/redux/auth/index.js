@@ -1,4 +1,7 @@
 import { combineReducers } from 'redux';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage'
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import gql from "graphql-tag";
 
 import { setToken, setUserId } from '../../util/sessionUtil';
@@ -16,6 +19,7 @@ export const AUTH_SET_TOKEN = 'AUTH_SET_TOKEN';
 export const AUTH_SET_USER_ID = 'AUTH_SET_USER_ID'
 
 const AUTH_LOGIN_REQUEST = hocCreateTypes('AUTH_LOGIN_REQUEST');
+const AUTH_SIGNUP_REQUEST = hocCreateTypes('AUTH_SIGNUP_REQUEST');
 
 // simple actions
 const authLogin = (remember) => ({
@@ -89,7 +93,7 @@ export const logOutUser = (message, broadcast = true) => (dispatch) => {
 
 export const logInUser = hocAsyncAction(
   AUTH_LOGIN_REQUEST,
-  (credentials) => (dispatch, __, { GraphApi }) => {
+  (credentials) => (dispatch, _, { GraphApi }) => {
     const { email, password, remember } = credentials;
 
     const LOGIN_USER = gql`
@@ -115,6 +119,62 @@ export const logInUser = hocAsyncAction(
       .then((data) => {
         const { loginUser: { token, user } } = data;
         const { id } = user;
+        
+        dispatch(handleAuth(token, id, remember));
+
+        // logged in init
+        dispatch(loadApplicationAuthenticated());
+
+        return data;
+      });
+  }
+);
+
+export const signupUser = hocAsyncAction(
+  AUTH_SIGNUP_REQUEST,
+  (credentials) => (dispatch, _, { GraphApi }) => {
+    const {
+      email,
+      password,
+      remember,
+      firstname,
+      lastname
+    } = credentials;
+
+    const SIGNUP_USER = gql`
+      mutation signupUser(
+        $email: String!,
+        $password: String!,
+        $firstname: String!,
+        $lastname: String!
+      ) {
+        signUpUser(input: {
+          firstname: $firstname,
+          lastname: $lastname,
+          email: $email,
+          password: $password,
+        }) {
+          user {
+            id
+            firstname
+            lastname
+          }
+          token
+        }
+      }
+    `;
+    const variables = {
+      email,
+      password,
+      firstname,
+      lastname,
+    };
+    
+    return GraphApi.mutation(SIGNUP_USER, variables)
+      .then((data) => {
+        const { signUpUser: { token, user } } = data;
+        const { id } = user;
+
         
         dispatch(handleAuth(token, id, remember));
 
@@ -180,9 +240,25 @@ const loginRequest = hocReducer({
   noData: true,
 });
 
-export default combineReducers({
-  userId,
-  token,
-  meta,
-  loginRequest,
+const signupRequest = hocReducer({
+  ACTION_TYPE: AUTH_SIGNUP_REQUEST,
+  noData: true,
 });
+
+// define sub persist config
+const persistConfig = {
+  key: 'rekognition-auth',
+  storage,
+  whitelist: ['userId', 'token', 'meta'],
+  stateReconciler: autoMergeLevel2,
+};
+
+export default persistReducer(
+  persistConfig,
+  combineReducers({
+    userId,
+    token,
+    meta,
+    loginRequest,
+    signupRequest,
+  }));

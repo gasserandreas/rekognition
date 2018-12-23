@@ -20,6 +20,7 @@ import HomeContainer from '../home/HomeContainer';
 import ImagesContainer from '../images/ImagesContainer';
 import UserContainer from '../user/UserContainer';
 import LoginContainer from '../login/Container';
+import RegisterContainer from '../register/Container';
 
 import NotFound from './NotFound';
 
@@ -64,6 +65,7 @@ class App extends Component {
           <Switch>
             <Route exact path={Paths.HOME} component={HomeContainer} />
             <Route exact path={Paths.LOGIN} component={LoginContainer} />
+            <Route exact path={Paths.REGISTER} component={RegisterContainer} />
             <PrivateRoute exact path={Paths.IMAGES} component={ImagesContainer} isAuthenticated={isAuthenticated} />
             <PrivateRoute exact path={Paths.USER} component={UserContainer} isAuthenticated={isAuthenticated} />
             <Route path="*" component={NotFound} />

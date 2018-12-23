@@ -33,3 +33,8 @@ export const selectLoginRequest = createSelector(
   selectAuthState,
   ({ loginRequest }) => loginRequest,
 );
+
+export const selectSignUpRequest = createSelector(
+  selectAuthState,
+  ({ signupRequest }) => signupRequest,
+);
