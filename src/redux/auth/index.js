@@ -186,14 +186,43 @@ export const signupUser = hocAsyncAction(
   }
 );
 
-export const refreshToken = (token, userId) => (dispatch, getState) => {
+export const refreshToken = (token, userId) => (dispatch, getState, { GraphApi }) => {
   const state = getState();
   const remember = selectAuthRemember(state);
+
+  const REFRESH_TOKEN = gql`
+    mutation refreshToken($token: String!, $userId: String!) {
+      refreshToken(input: {
+        token: $token,
+        userId: $userId,
+      }) {
+        user {
+          id
+          firstname
+          lastname
+        }
+        token
+      }
+    }
+  `;
+
+  const variables = {
+    token,
+    userId,
+  };
 
   console.log('refresh');
   console.log(userId);
 
-  dispatch(handleAuth(token, userId, remember));
+  return GraphApi.mutation(REFRESH_TOKEN, variables)
+    .then((data) => {
+      console.log(data);
+      const { refreshToken: { token }} = data;
+      dispatch(handleAuth(token, userId, remember));
+    })
+    .catch((error) => {
+      dispatch(logOutUser('Could not refresh token', true));
+    })
 }
 
 // reducers
