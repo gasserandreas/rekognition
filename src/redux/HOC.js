@@ -59,6 +59,7 @@ export const hocAsyncAction = (ACTION_TYPE, createThunk, rejectable = false) => 
         dispatch({
           type: ACTION_TYPE.ERROR,
           payload: error,
+          error: true,
         });
 
         console.log('error');
@@ -111,7 +112,7 @@ export default ({
         return {
           ...(initialState || defaultInitialState),
           lastError: Date.now(),
-          error: action.error,
+          error: action.payload,
           loading: false,
         };
       default:

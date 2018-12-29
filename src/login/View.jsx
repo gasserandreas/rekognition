@@ -15,7 +15,6 @@ import { Colors } from '../styles';
 const Styles = {
   View: css`
     background-color: ${Colors.Blue.Background};
-    color: ${Colors.White.default};
     min-height: 100vh;
   `,
   Content: css`
@@ -82,7 +81,7 @@ class View extends Component {
   }
 
   render() {
-    const { loginRequest: { loading } } = this.props;
+    const { loginRequest: { error, loading } } = this.props;
     return (
       <div css={Styles.View}>
         <div css={Styles.Content}>
@@ -92,6 +91,7 @@ class View extends Component {
             <LoginForm
               onSubmit={this.props.logInUser}
               submitting={loading}
+              error={error}
             />
           </Card>
           <Link

@@ -46,9 +46,6 @@ export const loadApplication = () => (async (dispatch, getState) => {
   let token = getToken();
   let userId = getUserId();
 
-  console.log(token);
-  console.log(userId);
-
   if (!token) {
     // try fetch local token
     token = selectToken(state);
@@ -89,15 +86,6 @@ const status = (state = AppStatus.INITIAL, action) => {
       return state;
   }
 };
-
-// const user = (state = null, action) => {
-//   switch (action.type) {
-//     case APPLICATION_USER_SET:
-//       return action.payload;
-//     default:
-//       return state;
-//   }
-// };
 
 export default combineReducers({
   status,

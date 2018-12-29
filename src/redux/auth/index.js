@@ -18,8 +18,12 @@ export const AUTH_LOG_OUT = 'AUTH_LOG_OUT';
 export const AUTH_SET_TOKEN = 'AUTH_SET_TOKEN';
 export const AUTH_SET_USER_ID = 'AUTH_SET_USER_ID'
 
+export const AUTH_SET_VALID_EMAIL = 'AUTH_SET_VALID_EMAIL';
+export const AUTH_SET_INVALID_EMAIL = 'AUTH_SET_INVALID_EMAIL';
+
 const AUTH_LOGIN_REQUEST = hocCreateTypes('AUTH_LOGIN_REQUEST');
 const AUTH_SIGNUP_REQUEST = hocCreateTypes('AUTH_SIGNUP_REQUEST');
+const AUTH_CHECK_EMAIL_REQUEST = hocCreateTypes('AUTH_CHECK_EMAIL_REQUEST');
 
 // simple actions
 const authLogin = (remember) => ({
@@ -44,6 +48,16 @@ const authSetToken = token => ({
 const authSetUserId = userId => ({
   type: AUTH_SET_USER_ID,
   payload: userId,
+});
+
+const authSetValidEmail = () => ({
+  type: AUTH_SET_VALID_EMAIL,
+  payload: true,
+});
+
+const authSetInvalidEmail = () => ({
+  type: AUTH_SET_INVALID_EMAIL,
+  payload: false,
 });
 
 // internal actions
@@ -117,6 +131,7 @@ export const logInUser = hocAsyncAction(
     };
     return GraphApi.mutation(LOGIN_USER, variables)
       .then((data) => {
+        console.log(data);
         const { loginUser: { token, user } } = data;
         const { id } = user;
         
@@ -186,6 +201,34 @@ export const signupUser = hocAsyncAction(
   }
 );
 
+export const checkEmail = hocAsyncAction(
+  AUTH_CHECK_EMAIL_REQUEST,
+  (email) => (dispatch, _, { GraphApi }) => {
+    const CHECK_EMAIL = gql`
+      mutation emailInUse($email: String!) {
+        emailInUse(input: {
+          email: $email,
+        })
+      }
+    `;
+
+    const variables = {
+      email,
+    };
+
+    return GraphApi.mutation(CHECK_EMAIL, variables)
+      .then((data) => {
+        const { emailInUse } = data;
+
+        if (emailInUse) {
+          dispatch(authSetInvalidEmail());
+        } else {
+          dispatch(authSetValidEmail());
+        }
+      });
+  }
+);
+
 export const refreshToken = (token, userId) => (dispatch, getState, { GraphApi }) => {
   const state = getState();
   const remember = selectAuthRemember(state);
@@ -211,12 +254,8 @@ export const refreshToken = (token, userId) => (dispatch, getState, { GraphApi }
     userId,
   };
 
-  console.log('refresh');
-  console.log(userId);
-
   return GraphApi.mutation(REFRESH_TOKEN, variables)
     .then((data) => {
-      console.log(data);
       const { refreshToken: { token }} = data;
       dispatch(handleAuth(token, userId, remember));
     })
@@ -248,6 +287,17 @@ const token = (state = null, action) => {
   }
 };
 
+const validEmail = (state = null, action) => {
+  switch (action.type) {
+    case AUTH_SET_VALID_EMAIL:
+      return true;
+    case AUTH_SET_INVALID_EMAIL:
+      return false;
+    default:
+      return state;
+  }
+};
+
 const meta = (state = {}, action) => {
   switch (action.type) {
     case AUTH_LOG_OUT:
@@ -266,11 +316,16 @@ const meta = (state = {}, action) => {
 
 const loginRequest = hocReducer({
   ACTION_TYPE: AUTH_LOGIN_REQUEST,
-  noData: true,
+  noData: false,
 });
 
 const signupRequest = hocReducer({
   ACTION_TYPE: AUTH_SIGNUP_REQUEST,
+  noData: true,
+});
+
+const checkEmailRequest = hocReducer({
+  ACTION_TYPE: AUTH_CHECK_EMAIL_REQUEST,
   noData: true,
 });
 
@@ -288,6 +343,8 @@ export default persistReducer(
     userId,
     token,
     meta,
+    validEmail,
     loginRequest,
     signupRequest,
+    checkEmailRequest,
   }));

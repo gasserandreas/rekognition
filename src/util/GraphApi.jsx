@@ -1,4 +1,4 @@
-import { createNetworkError, createInvalidDataError } from './ErrorHandler';
+import { createNetworkError } from './ErrorHandler';
 import { getToken } from './sessionUtil';
 
 import { ApolloLink } from 'apollo-link';
@@ -6,19 +6,18 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { setContext } from 'apollo-link-context';
 import { createHttpLink } from 'apollo-link-http';
-import { onError as onErrorLink } from "apollo-link-error";
 
 class GraphApi {
   client = null;
   onAuthError = null;
-  onError = null;
   endpoint = null;
 
+  handleResponse = this.handleResponse.bind(this);
+
   constructor(props) {
-    const { endpoint, onError, onAuthError } = props;
+    const { endpoint, onAuthError } = props;
 
     this.endpoint = endpoint;
-    this.onError = onError;
     this.onAuthError = onAuthError;
 
     // create apollo link
@@ -39,31 +38,7 @@ class GraphApi {
       };
     });
 
-    // error handler
-    const errorLink = onErrorLink((obj) => {
-      console.log(obj);
-      const { graphQLErrors, networkError, response } = obj;
-      if (graphQLErrors) {
-        const authError = graphQLErrors.find(error => error.extensions.code === 'UNAUTHENTICATED');
-
-        
-        if (authError) {
-          const { message } = authError;
-          onAuthError(message);
-        } else {
-          // create graphql error
-          const dataError = createInvalidDataError(new Error(JSON.stringify(graphQLErrors)), response);
-          onError(dataError);
-        }
-      }
-
-      if (networkError) {
-        onError(createNetworkError(networkError, response));
-      }
-    });
-
     const link = ApolloLink.from([
-      errorLink,
       authLink,
       httpLink,
     ]);
@@ -83,20 +58,58 @@ class GraphApi {
     }
   }
 
+  handleNetworkError(error) {
+    const networkError = createNetworkError(error, {});
+    return Promise.reject(networkError);
+  }
+
+  handleGraphError({ extensions, message, path }) {
+    const error = {
+      code: extensions ? extensions.code : null,
+      message,
+      path,
+    };
+
+    if (error.code === 'UNAUTHENTICATED') {
+      // handle auth error
+      this.onAuthError(error);
+    }
+
+    return error;
+  }
+
+  handleResponse(response) {
+    const { data } = response;
+    const errors = response.errors || [];
+
+    switch (errors.length) {
+      case 0:
+        return Promise.resolve(data);
+      case 1:
+        return Promise.reject(this.handleGraphError(errors[0]));
+      default:
+        return Promise.reject(errors.map(error => this.handleGraphError(error)));
+    }
+  }
+
   query(query, variables = {}) {
     return this.client.query({
       query,
       variables,
+      errorPolicy: 'all',
     })
-    .then(({ data }) => data);
+    .catch(this.handleNetworkError)
+    .then(this.handleResponse);
   }
 
   mutation(mutation, variables = {}) {
     return this.client.mutate({
       mutation,
       variables,
+      errorPolicy: 'all',
     })
-    .then(({ data }) => data);
+    .catch(this.handleNetworkError)
+    .then(this.handleResponse);
   }
 }
 

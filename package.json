@@ -7,6 +7,7 @@
         "@atlaskit/button": "^10.1.1",
         "@atlaskit/checkbox": "^5.0.10",
         "@atlaskit/css-reset": "^3.0.5",
+        "@atlaskit/flag": "^9.1.8",
         "@atlaskit/form": "^5.1.0",
         "@atlaskit/global-navigation": "^5.3.8",
         "@atlaskit/icon": "^15.0.3",
@@ -42,6 +43,7 @@
         "reselect": "^4.0.0",
         "ric-shim": "^1.0.0",
         "styled-components": "^3.2.6",
+        "throttle-debounce": "^2.0.1",
         "uuid": "^3.3.2"
     },
     "scripts": {

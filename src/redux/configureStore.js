@@ -21,7 +21,7 @@ import { getUrl } from '../util/services/networkUtils';
 const persistConfig = {
   key: 'rekognition',
   storage,
-  whitelist: ['auth'],
+  whitelist: [],
   stateReconciler: autoMergeLevel2,
 };
 
@@ -40,7 +40,6 @@ const configureStore = (initialState = {}) => {
       GraphApi: new GraphApi({
         endpoint: getUrl('graphql'),
         onAuthError: (message) => store.dispatch(logOutUser(message)), //AUTH_LOG_OUT
-        onError: error => store.dispatch(reportCustomError(error)),
       }),
     }),
     errorMiddleware,

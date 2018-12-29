@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { jsx, css } from '@emotion/core';
 import { Link } from 'react-router-dom';
 
+import CheckEmailForm from './CheckEmailForm';
 import RegisterForm from './RegisterForm';
 
 import Card from '../ui/Card';
@@ -50,10 +51,15 @@ class View extends Component {
     isAuthenticated: PropTypes.bool.isRequired,
     signupRequest: HOCRequestPropTypes.isRequired,
     signupUser: PropTypes.func.isRequired,
+    checkEmail: PropTypes.func.isRequired,
   }
+
+  onCheckEmail = this.onCheckEmail.bind(this);
+  onSignupUser = this.onSignupUser.bind(this);
 
   state = {
     submitting: false,
+    email: '',
   };
 
   componentWillMount() {
@@ -78,17 +84,44 @@ class View extends Component {
     }
   }
 
+  onCheckEmail(email) {
+    this.setState({ email });
+    this.props.checkEmail(email);
+  }
+
+  onSignupUser({ email_disabled, ...data }) {
+    const newData = {
+      ...data,
+      email: this.state.email,
+    };
+    
+    this.props.signupUser(newData);
+  }
+
   render() {
-    const { signupRequest: { loading } } = this.props;
+    const {
+      signupRequest,
+      checkEmailRequest,
+      validEmail,
+    } = this.props;
     return (
       <div css={Styles.View}>
         <div css={Styles.Content}>
           <h1 css={Styles.PageHeader}>AWS Rekognition</h1>
           <Card>
-            <RegisterForm
-              onSubmit={this.props.signupUser}
-              submitting={loading}
-            />
+            {!validEmail ? (
+              <CheckEmailForm
+                onSubmit={this.onCheckEmail}
+                submitting={checkEmailRequest.loading}
+                validEmail={validEmail}
+              />
+            ) : (
+              <RegisterForm
+                onSubmit={this.onSignupUser}
+                submitting={signupRequest.loading}
+                email={this.state.email}
+              />
+            )}
           </Card>
           <Link
             css={Styles.LoginLink}

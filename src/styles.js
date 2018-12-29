@@ -5,6 +5,9 @@ export const Colors = {
   },
   White: {
     default: '#ffffff',
+  },
+  Red: {
+    default: '#FF5630',
   }
 };
 
