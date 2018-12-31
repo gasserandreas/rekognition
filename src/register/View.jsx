@@ -10,7 +10,7 @@ import RegisterForm from './RegisterForm';
 import Card from '../ui/Card';
 
 import * as Paths from '../paths';
-import { HOCRequestPropTypes } from '../ui/PropTypes';
+import { HOCRequestPropTypes } from '../util/PropTypes';
 import { Colors } from '../styles';
 
 const Styles = {

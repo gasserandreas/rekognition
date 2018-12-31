@@ -7,7 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
-import App from './ui/App';
+import App from './app/App';
 import * as serviceWorker from './serviceWorker';
 
 import configureStore from './redux/configureStore';
