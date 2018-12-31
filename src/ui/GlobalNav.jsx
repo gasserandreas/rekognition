@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import { GlobalItem } from '@atlaskit/navigation-next';
 import { JiraIcon } from '@atlaskit/logo';
 import AddIcon from '@atlaskit/icon/glyph/add';
+import SignOutIcon from '@atlaskit/icon/glyph/sign-out';
 import EditorImageIcon from '@atlaskit/icon/glyph/editor/image';
 import Avatar from '@atlaskit/avatar';
 
@@ -111,6 +112,12 @@ const secondaryItems = (isAuthenticated) => {
   }
   return [
     {
+      icon: () => <SignOutIcon size="large" />,
+      size: 'small',
+      path: Paths.USER,
+      id: 'user',
+    },
+    {
       icon: () => (
         <Avatar
           borderColor="transparent"
@@ -122,13 +129,75 @@ const secondaryItems = (isAuthenticated) => {
       size: 'small',
       path: Paths.USER,
       id: 'user',
-    }
+    },
   ];
 };
 
 export default class GlobalNav extends Component {
   static propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
+  }
+
+  primaryItems(){
+    const { isAuthenticated, addImage } = this.props;
+
+    const base = [
+      {
+        icon: JiraIcon,
+        id: 'home',
+        path: Paths.HOME,
+      },
+    ];
+  
+    if (!isAuthenticated) {
+      return base;
+    }
+  
+    return [
+      ...base,
+      {
+        icon: () => <EditorImageIcon size="large" />,
+        id: 'images',
+        path: Paths.IMAGES,
+      },
+      {
+        icon: () => <AddIcon />,
+        id: 'add',
+        // TODO: add to redux later on
+        onClick: addImage,
+        css: Styles.AddItem,
+      },
+    ];
+  }
+
+  secondaryItems() {
+    const { isAuthenticated, doLogout } = this.props;
+
+    if (!isAuthenticated) {
+      return [];
+    }
+
+    return [
+      {
+        icon: () => <SignOutIcon />,
+        size: 'small',
+        id: 'logout',
+        onClick: doLogout,
+      },
+      {
+        icon: () => (
+          <Avatar
+            borderColor="transparent"
+            isActive={true}
+            isHover={false}
+            size="small"
+          />
+        ),
+        size: 'small',
+        path: Paths.USER,
+        id: 'user',
+      },
+    ];
   }
 
   renderGlobalNavItems({
@@ -165,14 +234,13 @@ export default class GlobalNav extends Component {
   }
 
   render() {
-    const { isAuthenticated } = this.props;
     return (
       <div css={Styles.GlobalNavigation}>
         <div css={[Styles.NavItems, Styles.PrimaryItems]}>
-          {primaryItems(isAuthenticated).map(item => this.renderGlobalNavItems(item))}
+          {this.primaryItems().map(item => this.renderGlobalNavItems(item))}
         </div>
         <div css={[Styles.NavItems, Styles.SecondaryItems]}>
-          {secondaryItems(isAuthenticated).map(item => this.renderGlobalNavItems(item))}
+          {this.secondaryItems().map(item => this.renderGlobalNavItems(item))}
         </div>
       </div>
     );

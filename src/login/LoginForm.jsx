@@ -38,48 +38,55 @@ const Styles = {
 const LoginForm = (props) => (
   <div css={Styles.Form}>
     <Form onSubmit={props.onSubmit}>
-      {({ formProps }) => (
-        <form {...formProps}>
-          <Field name="email" isRequired defaultValue="andreas.safe@gmail.com">
-            {({ fieldProps, error }) => (
-              <div css={Styles.FieldWrapper}>
-                <TextField type="email" autoComplete="off" placeholder="Enter email"  {...fieldProps} />
+      {(data) => {
+        console.log(data);
+        const { formProps} = data;
+        
+        console.log(formProps.ref.current);
+
+        return (
+          <form {...formProps}>
+            <Field name="email" isRequired defaultValue="">
+              {({ fieldProps, error }) => (
+                <div css={Styles.FieldWrapper}>
+                  <TextField type="email" autoComplete="off" placeholder="Enter email"  {...fieldProps} />
+                </div>
+              )}
+            </Field>
+            <Field
+              name="password"
+              defaultValue=""
+              isRequired
+              validate={value => (value.length < 4 ? 'TOO_SHORT' : undefined)}
+            >
+              {({ fieldProps, error, meta }) => (
+                <div css={Styles.FieldWrapper}>
+                  <TextField type="password" placeholder="Enter your secret password" {...fieldProps} />
+                </div>
+              )}
+            </Field>
+            <CheckboxField name="remember" label="Remember me" defaultIsChecked>
+              {({ fieldProps }) => (
+                <Checkbox {...fieldProps} label="Always sign in on this device" />
+              )}
+            </CheckboxField>
+            {props.error && (
+              <div css={Styles.ErrorWrapper}>
+                <ErrorIcon />
+                <span className="message">Invalid credentials, please change and re-try.</span>
               </div>
             )}
-          </Field>
-          <Field
-            name="password"
-            defaultValue="testtest"
-            isRequired
-            validate={value => (value.length < 4 ? 'TOO_SHORT' : undefined)}
-          >
-            {({ fieldProps, error, meta }) => (
-              <div css={Styles.FieldWrapper}>
-                <TextField type="password" placeholder="Enter your secret password" {...fieldProps} />
-              </div>
-            )}
-          </Field>
-          <CheckboxField name="remember" label="Remember me" defaultIsChecked>
-            {({ fieldProps }) => (
-              <Checkbox {...fieldProps} label="Always sign in on this device" />
-            )}
-          </CheckboxField>
-          {props.error && (
-            <div css={Styles.ErrorWrapper}>
-              <ErrorIcon />
-              <span className="message">Invalid credentials, please change and re-try.</span>
-            </div>
-          )}
-          <FormFooter>
-            <ButtonGroup>
-              <Button appearance="subtle">Cancel</Button>
-              <Button type="submit" appearance="primary" isLoading={props.submitting}>
-                Login
-              </Button>
-            </ButtonGroup>
-          </FormFooter>
-        </form>
-      )}
+            <FormFooter>
+              <ButtonGroup>
+                <Button appearance="subtle" onClick={() => formProps.ref.current.reset()} >Cancel</Button>
+                <Button type="submit" appearance="primary" isLoading={props.submitting}>
+                  Login
+                </Button>
+              </ButtonGroup>
+            </FormFooter>
+          </form>
+        );
+      }}
     </Form>
   </div>
 );

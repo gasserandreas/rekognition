@@ -9,6 +9,8 @@ import '@atlaskit/css-reset';
 
 // redux
 import { selectIsAuthenticated } from '../redux/auth/selectors';
+
+import { logOutUser } from '../redux/auth';
 import { loadApplication } from '../redux/application';
 
 // base style components
@@ -60,7 +62,11 @@ class App extends Component {
 
     return (
       <div css={Styles.AppWrapper}>
-        <GlobalNav isAuthenticated={isAuthenticated} />
+        <GlobalNav
+          isAuthenticated={isAuthenticated}
+          doLogout={this.props.logOutUser}
+          addImage={() => console.log('addImage')}
+        />
         <div css={Styles.Page}>
           <Switch>
             <Route exact path={Paths.HOME} component={HomeContainer} />
@@ -82,6 +88,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = ({
   loadApplication,
+  logOutUser,
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
