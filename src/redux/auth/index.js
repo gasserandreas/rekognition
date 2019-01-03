@@ -7,7 +7,7 @@ import gql from "graphql-tag";
 import { setToken, setUserId } from '../../util/sessionUtil';
 import hocReducer, { hocAsyncAction, hocCreateTypes  } from '../HOC';
 
-import { selectAuthRemember } from './selectors';
+import { authRememberSelector, authUsernameSelector } from './selectors';
 
 import { loadApplicationAuthenticated } from '../application';
 
@@ -20,18 +20,20 @@ export const AUTH_SET_USER_ID = 'AUTH_SET_USER_ID'
 
 export const AUTH_SET_VALID_EMAIL = 'AUTH_SET_VALID_EMAIL';
 export const AUTH_SET_INVALID_EMAIL = 'AUTH_SET_INVALID_EMAIL';
+export const AUTH_RESET_VALID_EMAIL = 'AUTH_RESET_VALID_EMAIL';
 
 const AUTH_LOGIN_REQUEST = hocCreateTypes('AUTH_LOGIN_REQUEST');
 const AUTH_SIGNUP_REQUEST = hocCreateTypes('AUTH_SIGNUP_REQUEST');
 const AUTH_CHECK_EMAIL_REQUEST = hocCreateTypes('AUTH_CHECK_EMAIL_REQUEST');
 
 // simple actions
-const authLogin = (remember) => ({
+const authLogin = (remember, username) => ({
   type: AUTH_LOG_IN,
   payload: {
     loggedIn: true,
     loggedInSince: Date.now(),
     remember,
+    username,
   },
 });
 
@@ -52,21 +54,27 @@ const authSetUserId = userId => ({
 
 const authSetValidEmail = () => ({
   type: AUTH_SET_VALID_EMAIL,
-  payload: true,
 });
 
 const authSetInvalidEmail = () => ({
   type: AUTH_SET_INVALID_EMAIL,
-  payload: false,
+});
+
+const authResetValidEmail = () => ({
+  type: AUTH_RESET_VALID_EMAIL,
 });
 
 // internal actions
 
 // handle auth / login / refresh
-const handleAuth = (token, userId, remember) => (dispatch) => {
+const handleAuth = (token, user, remember) => (dispatch) => {
+  const { id, firstname } = user;
+
+  const username = firstname;
+
   // save token
   setToken(token);
-  setUserId(userId);
+  setUserId(id);
 
   // persist if needed
   if (remember) {
@@ -74,10 +82,14 @@ const handleAuth = (token, userId, remember) => (dispatch) => {
     dispatch(authSetUserId(userId));
   }
 
-  dispatch(authLogin(remember));
+  dispatch(authLogin(remember, username));
 }
 
 // complex actions
+export const invalidateEmail = () => (dispatch) => {
+  dispatch(authResetValidEmail());
+};
+
 export const logOutUser = (message, broadcast = true) => (dispatch) => {
   // invalidate token
   setToken(null);
@@ -133,9 +145,8 @@ export const logInUser = hocAsyncAction(
       .then((data) => {
         console.log(data);
         const { loginUser: { token, user } } = data;
-        const { id } = user;
         
-        dispatch(handleAuth(token, id, remember));
+        dispatch(handleAuth(token, user, remember));
 
         // logged in init
         dispatch(loadApplicationAuthenticated());
@@ -188,10 +199,8 @@ export const signupUser = hocAsyncAction(
     return GraphApi.mutation(SIGNUP_USER, variables)
       .then((data) => {
         const { signUpUser: { token, user } } = data;
-        const { id } = user;
-
         
-        dispatch(handleAuth(token, id, remember));
+        dispatch(handleAuth(token, user, remember));
 
         // logged in init
         dispatch(loadApplicationAuthenticated());
@@ -231,7 +240,9 @@ export const checkEmail = hocAsyncAction(
 
 export const refreshToken = (token, userId) => (dispatch, getState, { GraphApi }) => {
   const state = getState();
-  const remember = selectAuthRemember(state);
+
+  const remember = authRememberSelector(state);
+  const username = authUsernameSelector(state);
 
   const REFRESH_TOKEN = gql`
     mutation refreshToken($token: String!, $userId: String!) {
@@ -257,7 +268,7 @@ export const refreshToken = (token, userId) => (dispatch, getState, { GraphApi }
   return GraphApi.mutation(REFRESH_TOKEN, variables)
     .then((data) => {
       const { refreshToken: { token }} = data;
-      dispatch(handleAuth(token, userId, remember));
+      dispatch(handleAuth(token, { firstname: username }, remember));
     })
     .catch((error) => {
       dispatch(logOutUser('Could not refresh token', true));
@@ -265,6 +276,18 @@ export const refreshToken = (token, userId) => (dispatch, getState, { GraphApi }
 }
 
 // reducers
+const username = (state = null, action) => {
+  switch (action.type) {
+    case AUTH_LOG_IN:
+      console.log(action);
+      return action.payload.username;
+    case AUTH_LOG_OUT:
+      return null;
+    default:
+      return state;
+  }
+};
+
 const userId = (state = null, action) => {
   switch (action.type) {
     case AUTH_LOG_OUT:
@@ -293,6 +316,8 @@ const validEmail = (state = null, action) => {
       return true;
     case AUTH_SET_INVALID_EMAIL:
       return false;
+    case AUTH_RESET_VALID_EMAIL:
+      return null;
     default:
       return state;
   }
@@ -341,6 +366,7 @@ export default persistReducer(
   persistConfig,
   combineReducers({
     userId,
+    username,
     token,
     meta,
     validEmail,

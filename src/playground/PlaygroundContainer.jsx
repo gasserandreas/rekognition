@@ -5,7 +5,7 @@ import { applicationUserSelector } from '../redux/application/selectors';
 import { logInUser, logOutUser } from '../redux/auth';
 import { requestNow, getUserInfo } from '../redux/playground';
 
-import HomeView from './HomeView';
+import PlaygroundView from './PlaygroundView';
 
 const select = state => ({
   user: applicationUserSelector(state),
@@ -18,4 +18,4 @@ const mapDispatchToProps = ({
   getUserInfo
 });
 
-export default connect(select, mapDispatchToProps)(HomeView);
+export default connect(select, mapDispatchToProps)(PlaygroundView);

@@ -1,50 +1,55 @@
 import { createSelector } from 'reselect';
 
-const selectAuthState = state => state.auth;
+const authStateSelector = state => state.auth;
 
-export const selectIsAuthenticated = createSelector(
-  selectAuthState,
+export const isAuthenticatedSelector = createSelector(
+  authStateSelector,
   ({ meta }) => {
     return meta.loggedIn || false;
   }
 );
 
-export const selectAuthUserId = createSelector(
-  selectAuthState,
+export const authUserIdSelector = createSelector(
+  authStateSelector,
   ({ userId }) => userId || null,
 );
 
-export const selectToken = createSelector(
-  selectAuthState,
+export const tokenSelector = createSelector(
+  authStateSelector,
   ({ token }) => token || null,
 );
 
-export const selectAuthMeta = createSelector(
-  selectAuthState,
+export const authMetaSelector = createSelector(
+  authStateSelector,
   ({ meta }) => meta,
 );
 
-export const selectAuthRemember = createSelector(
-  selectAuthMeta,
+export const authRememberSelector = createSelector(
+  authMetaSelector,
   ({ remember }) => remember || false,
 );
 
-export const selectValidEmail = createSelector(
-  selectAuthState,
+export const authUsernameSelector = createSelector(
+  authStateSelector,
+  ({ username }) => username,
+);
+
+export const isValidEmailSelector = createSelector(
+  authStateSelector,
   ({ validEmail }) => validEmail
 );
 
-export const selectLoginRequest = createSelector(
-  selectAuthState,
+export const loginRequestSelector = createSelector(
+  authStateSelector,
   ({ loginRequest }) => loginRequest,
 );
 
-export const selectSignUpRequest = createSelector(
-  selectAuthState,
+export const signUpRequestSelector = createSelector(
+  authStateSelector,
   ({ signupRequest }) => signupRequest,
 );
 
-export const selectCheckEmailRequest = createSelector(
-  selectAuthState,
+export const checkEmailRequestSelector = createSelector(
+  authStateSelector,
   ({ checkEmailRequest }) => checkEmailRequest,
 );

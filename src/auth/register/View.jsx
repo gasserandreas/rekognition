@@ -1,66 +1,56 @@
-/** @jsx jsx */
-import { Component } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { jsx, css } from '@emotion/core';
-import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+import {
+  AuthHeader,
+  AuthFooter,
+} from '../AuthComponents';
 
 import CheckEmailForm from './CheckEmailForm';
 import RegisterForm from './RegisterForm';
 
-import Card from '../ui/Card';
+import Card from '../../ui/Card';
 
-import * as Paths from '../paths';
-import { HOCRequestPropTypes } from '../util/PropTypes';
-import { Colors } from '../styles';
+import * as Paths from '../../paths';
+import { HOCRequestPropTypes } from '../../util/PropTypes';
+import { Colors } from '../../styles';
 
-const Styles = {
-  View: css`
-    background-color: ${Colors.Blue.Background};
-    color: ${Colors.White.default};
-    min-height: 100vh;
-  `,
-  Content: css`
+
+const StyledView = styled.div`
+  background-color: ${Colors.ColorsPalette.Background};
+  min-height: 100vh;
+
+  .content {
     width: 90%;
     max-width: 400px;
     margin: 0 auto;
     padding: 3rem 0;
-  `,
-  PageHeader: css`
-    text-transform: uppercase;
-    font-size: 2.2rem;
-    color: ${Colors.White.default};
-    text-align: center;
-    margin-bottom: 2rem;
-  `,
-  LoginLink: css`
-    color: ${Colors.White.default};
-    text-align: center;
-    margin: 2.5rem 0 0;
-    display: block;
-
-    &:hover {
-      color: ${Colors.White.default};
-      text-decoration: underline;
-      cursor: pointer;
-    }
-  `,
-}
+  }
+`;
 
 class View extends Component {
   static propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
     signupRequest: HOCRequestPropTypes.isRequired,
+    validEmail: PropTypes.bool,
     signupUser: PropTypes.func.isRequired,
     checkEmail: PropTypes.func.isRequired,
+    invalidateEmail: PropTypes.func.isRequired,
   }
 
+  static defaultProps = {
+    validEmail: null,
+  };
+
   onCheckEmail = this.onCheckEmail.bind(this);
-  onSignupUser = this.onSignupUser.bind(this);
+  onCancelSignUp = this.onCancelSignUp.bind(this);
 
   state = {
-    submitting: false,
+    loading: false,
     email: '',
-  };
+  }
+
 
   componentWillMount() {
     const { isAuthenticated } = this.props;
@@ -80,22 +70,18 @@ class View extends Component {
       //
       setTimeout(() => {
         this.props.history.push(Paths.HOME);
-      }, 500);
+      }, 300);
     }
   }
 
-  onCheckEmail(email) {
+  onCheckEmail({ email }) {
     this.setState({ email });
     this.props.checkEmail(email);
   }
 
-  onSignupUser({ email_disabled, ...data }) {
-    const newData = {
-      ...data,
-      email: this.state.email,
-    };
-    
-    this.props.signupUser(newData);
+  onCancelSignUp() {
+    // cancel valid email
+    this.props.invalidateEmail();
   }
 
   render() {
@@ -103,32 +89,37 @@ class View extends Component {
       signupRequest,
       checkEmailRequest,
       validEmail,
+      signupUser,
     } = this.props;
+
+    const { email } = this.state;
+
     return (
-      <div css={Styles.View}>
-        <div css={Styles.Content}>
-          <h1 css={Styles.PageHeader}>AWS Rekognition</h1>
+      <StyledView>
+        <AuthHeader>Sinup for Rekognition</AuthHeader>
+        <div className="content">
           <Card>
-            {!validEmail ? (
+            { !validEmail ? (
               <CheckEmailForm
+                user={{ email }}
                 onSubmit={this.onCheckEmail}
                 submitting={checkEmailRequest.loading}
+                error={checkEmailRequest.error ? checkEmailRequest.error.message : null}
                 validEmail={validEmail}
               />
             ) : (
               <RegisterForm
-                onSubmit={this.onSignupUser}
+                user={{ email, password: '', firstname: '', lastname: '', remember: false }}
+                onSubmit={signupUser}
+                onCancel={this.onCancelSignUp}
                 submitting={signupRequest.loading}
-                email={this.state.email}
+                error={signupRequest.error ? signupRequest.error.message : null}
               />
             )}
           </Card>
-          <Link
-            css={Styles.LoginLink}
-            to={Paths.LOGIN}
-          >Use login credentials instead</Link>
         </div>
-      </div>
+        <AuthFooter href={Paths.LOGIN}>Use login credentials instead</AuthFooter>
+      </StyledView>
     );
   }
 }

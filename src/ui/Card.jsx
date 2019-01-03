@@ -1,24 +1,20 @@
-/** @jsx jsx */
+import React from 'react';
 import PropTypes from 'prop-types';
-import { jsx, css } from '@emotion/core';
+import styled from 'styled-components';
 
 import { Colors } from '../styles';
 
-const Styles = {
-  Card: css`
-    background-color: ${Colors.White.default};
-    padding: 3rem 2rem;
-    border-radius: 3px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 10px;
-    box-sizing: border-box;
-  `,
-};
+const StyledCard = styled.div`
+  background-color: ${Colors.ColorsPalette.White};
+  padding: 3rem 2rem;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 10px;
+  box-sizing: border-box;
+`;
 
-const Card = (props) => (
-  <div css={Styles.Card}>
-    {props.children}
-  </div>
-);
+const Card = (props) => {
+  return <StyledCard>{props.children}</StyledCard>;
+};
 
 Card.propTypes = {
   children: PropTypes.node.isRequired,
