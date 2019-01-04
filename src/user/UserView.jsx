@@ -1,24 +1,15 @@
-/** @jsx jsx */
+import React from 'react';
 import PropTypes from 'prop-types';
-import { jsx, css } from '@emotion/core';
 
-import Page, { Grid, GridColumn } from '@atlaskit/page';
-import PageHeader from '@atlaskit/page-header';
-
-const Styles = {
-};
+import { Heading } from 'grommet';
 
 const UserView = (props) => {
   return (
-    <div>
-      <Page>
-        <Grid>
-          <GridColumn medium={12}>
-            <PageHeader>Profile information</PageHeader>
-            Profile
-          </GridColumn>
-        </Grid>
-      </Page>
+      <div>
+        <Heading level="2">Profile information</Heading>
+        <p>
+          Profile
+        </p>
     </div>
   );
 };

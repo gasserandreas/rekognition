@@ -1,25 +1,15 @@
-/** @jsx jsx */
+import React from 'react';
 import PropTypes from 'prop-types';
-import { jsx, css } from '@emotion/core';
 
-import Page, { Grid, GridColumn } from '@atlaskit/page';
-import PageHeader from '@atlaskit/page-header';
-
-const Styles = {
-
-}
+import { Heading } from 'grommet';
 
 const ImagesView = (props) => {
   return (
     <div>
-      <Page>
-        <Grid>
-          <GridColumn medium={12}>
-            <PageHeader>Image collection</PageHeader>
-            ImageView
-          </GridColumn>
-        </Grid>
-      </Page>
+      <Heading level="2">Image collection</Heading>
+      <p>
+        ImageView
+      </p>
     </div>
   );
 };
