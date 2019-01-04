@@ -143,7 +143,6 @@ export const logInUser = hocAsyncAction(
     };
     return GraphApi.mutation(LOGIN_USER, variables)
       .then((data) => {
-        console.log(data);
         const { loginUser: { token, user } } = data;
         
         dispatch(handleAuth(token, user, remember));
