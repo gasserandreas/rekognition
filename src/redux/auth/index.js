@@ -79,7 +79,7 @@ const handleAuth = (token, user, remember) => (dispatch) => {
   // persist if needed
   if (remember) {
     dispatch(authSetToken(token));
-    dispatch(authSetUserId(userId));
+    dispatch(authSetUserId(id));
   }
 
   dispatch(authLogin(remember, username));
@@ -214,7 +214,7 @@ export const checkEmail = hocAsyncAction(
   AUTH_CHECK_EMAIL_REQUEST,
   (email) => (dispatch, _, { GraphApi }) => {
     const CHECK_EMAIL = gql`
-      mutation emailInUse($email: String!) {
+      mutation EmailInUseMutation($email: String!) {
         emailInUse(input: {
           email: $email,
         })
@@ -268,7 +268,11 @@ export const refreshToken = (token, userId) => (dispatch, getState, { GraphApi }
   return GraphApi.mutation(REFRESH_TOKEN, variables)
     .then((data) => {
       const { refreshToken: { token }} = data;
-      dispatch(handleAuth(token, { firstname: username }, remember));
+      const user = {
+        id: userId,
+        firstname: username,
+      };
+      dispatch(handleAuth(token, user, remember));
     })
     .catch((error) => {
       dispatch(logOutUser('Could not refresh token', true));
@@ -279,7 +283,6 @@ export const refreshToken = (token, userId) => (dispatch, getState, { GraphApi }
 const username = (state = null, action) => {
   switch (action.type) {
     case AUTH_LOG_IN:
-      console.log(action);
       return action.payload.username;
     case AUTH_LOG_OUT:
       return null;
@@ -358,7 +361,7 @@ const checkEmailRequest = hocReducer({
 const persistConfig = {
   key: 'rekognition-auth',
   storage,
-  whitelist: ['userId', 'token', 'meta'],
+  whitelist: ['username', 'userId', 'token', 'meta'],
   stateReconciler: autoMergeLevel2,
 };
 
