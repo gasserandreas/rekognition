@@ -2,7 +2,7 @@
   "graphql": {
     "prod": "",
     "test": "",
-    "development": "https://nho0mk9zbf.execute-api.us-east-1.amazonaws.com/dev/graph",
+    "development": "https://vrg3am9vvg.execute-api.us-east-1.amazonaws.com/dev/graph",
     "local": "http://localhost:4000/"
   }
 }
