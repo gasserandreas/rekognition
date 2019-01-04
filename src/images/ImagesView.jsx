@@ -1,16 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Heading } from 'grommet';
+import { View, ViewHeading } from '../ui/View';
+
+import AddImageButton from './AddImageButton';
 
 const ImagesView = (props) => {
   return (
-    <div>
-      <Heading level="2">Image collection</Heading>
+    <View>
+      <ViewHeading>Image collection</ViewHeading>
       <p>
         ImageView
       </p>
-    </div>
+      <AddImageButton />
+    </View>
   );
 };
 
