@@ -95,11 +95,12 @@ Button.propTypes = {
     BUTTON_TYPES.ERROR,
     BUTTON_TYPES.LINK,
   ]),
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
 
 Button.defaultProps = {
   buttonStyle: BUTTON_TYPES.DEFAULT,
+  children: null,
 };
 
 export default Button;
