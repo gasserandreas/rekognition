@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Dropzone from 'react-dropzone'
 
 import Button from '../ui/Button';
 import { Add } from 'grommet-icons';
+
+import { addImage } from '../redux/images';
 
 import { Colors } from '../styles';
 
@@ -23,6 +26,15 @@ class AddImageButton extends Component {
     if (files.length > 0) {
       console.log('uploadImage');
       console.log(files);
+
+      files.forEach((file) => {
+        this.props.addImage(file);
+      });
+
+      // get selected file
+      // const file = files[0];
+      // console.log('uploadImage');
+      // console.log(files);
       // const id = uuid.v4();
       // this.props.postImage(id, files[0]);
 
@@ -54,4 +66,11 @@ class AddImageButton extends Component {
   }
 }
 
-export default AddImageButton;
+// redux
+const select = () => ({});
+
+const mapDispatchToProps = ({
+  addImage,
+});
+
+export default connect(select, mapDispatchToProps)(AddImageButton);

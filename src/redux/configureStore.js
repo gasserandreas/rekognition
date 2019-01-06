@@ -7,7 +7,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 
-import { createMiddleware, addUnhandledPromiseCatcher, reportCustomError } from '../util/ErrorHandler';
+import { createMiddleware, addUnhandledPromiseCatcher } from '../util/ErrorHandler';
 import rootReducer from './rootReducer';
 
 import configureReactors from './reactors/configureReactors';
@@ -15,6 +15,7 @@ import { APP_IDLE } from './application';
 import { logOutUser } from './auth';
 
 import GraphApi from '../util/GraphApi';
+import AwsApi from '../util/AwsApi';
 import { getUrl } from '../util/services/networkUtils';
 
 // configure persist store
@@ -30,6 +31,9 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 const configureStore = (initialState = {}) => {
   const {
     NODE_ENV,
+    REACT_APP_AWS_DEFAULT_ACCESS_KEY_ID,
+    REACT_APP_AWS_DEFAULT_SECRET_ACCESS_KEY,
+    REACT_APP_AWS_DEFAULT_REGION,
   } = process.env;
 
   const errorMiddleware = createMiddleware();
@@ -37,9 +41,18 @@ const configureStore = (initialState = {}) => {
   const enhancers = [];
   const middleware = [
     thunkMiddleware.withExtraArgument({
+      // init graphql api
       GraphApi: new GraphApi({
         endpoint: getUrl('graphql'),
         onAuthError: (message) => store.dispatch(logOutUser(message)), //AUTH_LOG_OUT
+      }),
+      // init aws api
+      AwsApi: new AwsApi({
+        awsConfig: {
+          accessKeyId: REACT_APP_AWS_DEFAULT_ACCESS_KEY_ID,
+          secretAccessKey: REACT_APP_AWS_DEFAULT_SECRET_ACCESS_KEY,
+          region: REACT_APP_AWS_DEFAULT_REGION,
+        },
       }),
     }),
     errorMiddleware,
