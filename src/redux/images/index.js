@@ -8,7 +8,6 @@ import gql from "graphql-tag";
 
 import hocReducer, { hocAsyncAction, hocCreateTypes } from '../HOC';
 
-import { authUserIdSelector } from '../auth/selectors';
 import { readAsDataURL } from './util';
 
 // action types
@@ -28,8 +27,6 @@ export const addImage = hocAsyncAction(
   (file, shouldAnalyse = true) => (dispatch, getState, { GraphApi, AwsApi }) => {
     // base attributes
     const imageId = uuid.v4();
-    const userId = authUserIdSelector(getState());
-    const bucketName = process.env.REACT_APP_S3_UPLOAD_BUCKET;
 
     // get file ending
     let filetype = undefined;
@@ -47,27 +44,19 @@ export const addImage = hocAsyncAction(
 
     // create new image name
     const imageName = `${imageId}.${filetype}`;
-    const s3ImagePath = `${userId}/${imageName}`;
 
-    // handle upload and db put
     return readAsDataURL(file)
       .then((rawImageString) => {
-        // handle file
+        // prepare file upload
         const imageString = rawImageString.replace(/^data:image\/\w+;base64,/, '');
         const imageBuffer = Buffer.from(imageString, 'base64');
 
-        // upload to S3
-        return AwsApi.uploadImageToS3(bucketName, s3ImagePath, type, imageBuffer);
-      })
-      // add to db
-      .then((data) => {
-        // graphql request
         const ADD_IMAGE = gql`
-          mutation addImage($id: String!, $name: String!, $type: String!) {
+          mutation addImage($file: Upload!, $type: String!, $name: String!) {
             addImage(input: {
-              id: $id
-              name: $name
-              type: $type
+              file: $file,
+              name: $name,
+              type: $type,
             }) {
               image {
                 id
@@ -81,44 +70,20 @@ export const addImage = hocAsyncAction(
         `;
 
         const variables = {
-          id: imageId,
+          file: imageBuffer,
           name: imageName,
-          type: filetype,
+          type,
         };
 
         return GraphApi.mutation(ADD_IMAGE, variables)
           .then((data) => {
             const { addImage: { image } } = data;
 
+            // save to redux
             dispatch(imagesAddImage(image))
 
             return data;
-          })
-          // delete uploaded image if db insert fails
-          .catch((error) => {
-            // delete object from s3
-            // always return GraphQL error to proper handle upload error
-            return AwsApi.deleteS3Object(bucketName, s3ImagePath)
-              .catch((deleteError) => {
-                console.log('Could not delete object');
-                console.log(deleteError);
-                return Promise.reject(error);
-              })
-              .then(() => {
-                return Promise.reject(error);
-              });
           });
-      })
-      .then((graphData) => {
-        const { addImage: { image } } = graphData;
-        
-        dispatch(imagesAddImage(image));
-
-        if (shouldAnalyse) {
-          console.log('start rekognition');
-        }
-
-        return graphData;
       });
   }
 );
