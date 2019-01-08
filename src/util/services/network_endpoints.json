@@ -4,5 +4,17 @@
     "test": "",
     "development": "https://vrg3am9vvg.execute-api.us-east-1.amazonaws.com/dev/graph",
     "local": "http://localhost:4000/"
+  },
+  "thumb": {
+    "prod": "",
+    "test": "",
+    "development": "https://s3.amazonaws.com/529821714029-rekognition-backend-dev-thumb-bucket",
+    "local": "https://s3.amazonaws.com/529821714029-rekognition-backend-dev-thumb-bucket"
+  },
+  "image": {
+    "prod": "",
+    "test": "",
+    "development": "https://s3.amazonaws.com/529821714029-rekognition-backend-dev-image-bucket",
+    "local": "https://s3.amazonaws.com/529821714029-rekognition-backend-dev-image-bucket"
   }
 }

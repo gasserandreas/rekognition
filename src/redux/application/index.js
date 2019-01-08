@@ -9,6 +9,8 @@ import {
   isAuthenticatedSelector,
 } from '../auth/selectors';
 
+import { listImages } from '../images';
+
 import { getToken, getUserId } from '../../util/sessionUtil';
 
 export const AppStatus = {
@@ -93,6 +95,8 @@ export const loadApplicationAuthenticated = () => (dispatch) => {
   // do more stuff in here
 
   console.log('auth init stuff');
+
+  dispatch(listImages());
 
   dispatch(applicationDidLoad());
 }
