@@ -52,11 +52,12 @@ export const addImage = hocAsyncAction(
         const imageBuffer = Buffer.from(imageString, 'base64');
 
         const ADD_IMAGE = gql`
-          mutation addImage($file: Upload!, $type: String!, $name: String!) {
+          mutation addImage($file: Upload!, $type: String!, $name: String!, $analyse: Boolean) {
             addImage(input: {
               file: $file,
               name: $name,
               type: $type,
+              analyse: $analyse
             }) {
               image {
                 id
@@ -64,6 +65,40 @@ export const addImage = hocAsyncAction(
                 name
                 path
                 created
+                labels {
+                  id
+                  name
+                  confidence
+                  parents
+                  instances {
+                    height
+                    width
+                    left
+                    top
+                  }
+                }
+                faces {
+                  id
+                  age {
+                    low
+                    high
+                  }
+                  position {
+                    height
+                    width
+                    left
+                    top
+                  }
+                  emotions {
+                    name
+                    confidence
+                  }
+                  attributes {
+                    name
+                    confidence
+                    value
+                  }
+                }
               }
             }
           }
@@ -73,11 +108,16 @@ export const addImage = hocAsyncAction(
           file: imageBuffer,
           name: imageName,
           type,
+          analyse: shouldAnalyse,
+          // analyse: false,
         };
 
         return GraphApi.mutation(ADD_IMAGE, variables)
           .then((data) => {
             const { addImage: { image } } = data;
+
+            console.log(data);
+            console.log(image);
 
             // save to redux
             dispatch(imagesAddImage(image))
@@ -117,7 +157,7 @@ const byId = (state = {}, action) => {
 
 // define sub persist config
 const persistConfig = {
-  key: 'rekognition-auth',
+  key: 'rekognition-images',
   storage,
   whitelist: ['ids', 'byId'],
   stateReconciler: autoMergeLevel2,
