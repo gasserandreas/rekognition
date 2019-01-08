@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import { View, ViewHeading } from '../ui/View';
 
+import Button from '../ui/Button';
+
 import AddImageButton from './AddImageButton';
 
 const ImagesView = (props) => {
@@ -11,6 +13,7 @@ const ImagesView = (props) => {
       <ViewHeading>Image collection</ViewHeading>
       <p>
         ImageView
+        <Button onClick={props.listImages}>Request images</Button>
       </p>
       <AddImageButton />
     </View>
@@ -19,6 +22,7 @@ const ImagesView = (props) => {
 
 ImagesView.propTypes = {
   user: PropTypes.shape({}),
+  listImages: PropTypes.func.isRequired,
 };
 
 ImagesView.defaultProps = {
