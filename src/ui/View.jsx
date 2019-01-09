@@ -10,7 +10,7 @@ import { Sizes } from '../styles';
 const StyledView = styled(Box)`
   position: relative;
   ${props => props.topBar
-    ? `padding-top: ${Sizes.TopBar.height}`
+    ? `padding-top: ${Sizes.Header.number + Sizes.TopBar.number}px;`
     : ''
   }
 `;

@@ -7,8 +7,8 @@ import { Box } from 'grommet';
 import { Colors, Sizes } from '../styles';
 
 const StyledTopBar = styled(Box)`
-  position: absolute;
-  top: 0;
+  position: fixed;
+  top: ${Sizes.Header.height};
   left: 0;
   right: 0;
   height: ${Sizes.TopBar.height};

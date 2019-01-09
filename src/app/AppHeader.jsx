@@ -36,6 +36,11 @@ const StyledHeader = styled(Box)`
   color: ${Colors.ColorsPalette.White};
   height: ${Sizes.Header.height};
   z-index: 100;
+  padding: 0 12px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
 
   a {
     color: ${Colors.ColorsPalette.White};
@@ -55,7 +60,6 @@ const AppHeader = (props) => {
       direction="row"
       align='center'
       justify='between'
-      pad={{ left: 'small', right: 'small', vertical: 'none' }}
     >
       <Link to={Paths.HOME}>
         <StyledHeading  level={4}>AWS Rekognition</StyledHeading>

@@ -78,40 +78,38 @@ class App extends Component {
 
     return (
       <Grommet theme={theme} full={true}>
+        <AppHeader isAuthenticated={isAuthenticated} username={username} />
         <Box fill justify='between' direction='column'>
-          <Box>
-            <AppHeader isAuthenticated={isAuthenticated} username={username} />
-            <Box flex fill pad="none">
-              <Switch>
-                <PrivateRoute
-                  exact
-                  path={Paths.HOME}
-                  component={ImagesContainer}
-                  isAuthenticated={isAuthenticated}
-                />
-                <PrivateRoute
-                  exact
-                  path={Paths.IMAGES}
-                  component={ImagesContainer}
-                  isAuthenticated={isAuthenticated}
-                />
-                <PrivateRoute
-                  exact
-                  path={Paths.GET_IMAGES_DETAIL(Paths.ID)}
-                  component={ImagesDetailContainer}
-                  isAuthenticated={isAuthenticated}
-                />
-                <PrivateRoute
-                  exact path={Paths.USER}
-                  component={UserContainer}
-                  isAuthenticated={isAuthenticated}
-                />
-                <Route exact path={Paths.PLAYGROUND} component={PlaygroundContainer} />
-                <Route exact path={Paths.LOGIN} component={LoginContainer} />
-                <Route exact path={Paths.REGISTER} component={RegisterContainer} />
-                <Route path="*" component={NotFound} />
-              </Switch>
-            </Box>
+          <Box flex fill pad="none">
+            <Switch>
+              <PrivateRoute
+                exact
+                path={Paths.HOME}
+                component={ImagesContainer}
+                isAuthenticated={isAuthenticated}
+              />
+              <PrivateRoute
+                exact
+                path={Paths.IMAGES}
+                component={ImagesContainer}
+                isAuthenticated={isAuthenticated}
+              />
+              <PrivateRoute
+                exact
+                path={Paths.GET_IMAGES_DETAIL(Paths.ID)}
+                component={ImagesDetailContainer}
+                isAuthenticated={isAuthenticated}
+              />
+              <PrivateRoute
+                exact path={Paths.USER}
+                component={UserContainer}
+                isAuthenticated={isAuthenticated}
+              />
+              <Route exact path={Paths.PLAYGROUND} component={PlaygroundContainer} />
+              <Route exact path={Paths.LOGIN} component={LoginContainer} />
+              <Route exact path={Paths.REGISTER} component={RegisterContainer} />
+              <Route path="*" component={NotFound} />
+            </Switch>
           </Box>
           { isAuthenticated && (
             <Box tag='footer' direction='column' align='center' pad={{ vertical: 'xsmall' }} >
