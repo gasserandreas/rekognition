@@ -58,7 +58,7 @@ class DetailView extends Component {
   }
 
   render() {
-    // console.log(this.props);
+    console.log(this.props);
     return (
       <View
         topBar={<DetailTopBar onGoBackClick={this.props.history.goBack} />}

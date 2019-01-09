@@ -108,8 +108,7 @@ const StyledListItem = styled(Box)`
 `;
 
 const ListItem = ({ image, ...props }) => {
-  const { id, path } = image;
-  console.log(image);
+  const { path } = image;
   return (
     <StyledListItem {...props}>
       <StyledImage src={getImageSrc(path)} fit="cover" />

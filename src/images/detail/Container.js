@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import { getImage } from '../../redux/images';
 import { imagesByIdSelector } from '../../redux/images/selectors';
 
+import { labelsByImageId } from '../../redux/labels/selectors';
+import { facesByImageId } from '../../redux/faces/selectors';
+
 import DetailView from './DetailView';
 
 const select = (state, props) => {
@@ -14,8 +17,8 @@ const select = (state, props) => {
 
   return {
     image,
-    labels: [],
-    faces: [],
+    labels: labelsByImageId(state, id),
+    faces: facesByImageId(state, id),
   };
 };
 
