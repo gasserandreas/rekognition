@@ -5,12 +5,13 @@ import styled from 'styled-components';
 import { Box, Heading } from 'grommet';
 
 import DetailTopBar from './DetailTopBar';
+import Labels from './Labels';
 
 import { Colors, MediaSize, Sizes } from '../../styles';
 import View from '../../ui/View';
 
 const StyledHeading = styled(Heading)`
-  margin-top: 0;
+  margin-bottom: 0.5rem;
 `;
 
 const StyledImageBox = styled(Box)`
@@ -47,6 +48,18 @@ const StyledDataBox = styled(Box)`
   }
 `;
 
+const StyledScrollableData = styled.div`
+
+  @media (min-width: ${MediaSize.Tablet}) {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+    padding: .25rem 6px .25rem 0;
+    margin: 0;
+  }
+`;
+
 class DetailView extends Component {
   componentWillMount() {
     const { labels, faces, getImage, image: { id } } = this.props;
@@ -58,7 +71,7 @@ class DetailView extends Component {
   }
 
   render() {
-    console.log(this.props);
+    const { labels } = this.props;
     return (
       <View
         topBar={<DetailTopBar onGoBackClick={this.props.history.goBack} />}
@@ -67,7 +80,14 @@ class DetailView extends Component {
           Image
         </StyledImageBox>
         <StyledDataBox pad="small">
-          <StyledHeading level="4">Image Properties</StyledHeading>
+          <StyledScrollableData>
+            <StyledHeading style={{ marginTop: 0 }}level="4">Labels ({labels.length})</StyledHeading>
+            <Labels
+              labels={labels}
+              onLabelClick={(label) => console.log(label)}
+            />
+            {/* <StyledHeading level="4">Faces ()</StyledHeading> */}
+          </StyledScrollableData>
         </StyledDataBox>
       </View>
     );
