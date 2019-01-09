@@ -6,6 +6,7 @@ import { Box, Heading } from 'grommet';
 
 import DetailTopBar from './DetailTopBar';
 import Labels from './Labels';
+import Faces from './Faces';
 
 import { Colors, MediaSize, Sizes } from '../../styles';
 import View from '../../ui/View';
@@ -71,7 +72,7 @@ class DetailView extends Component {
   }
 
   render() {
-    const { labels } = this.props;
+    const { labels, faces } = this.props;
     return (
       <View
         topBar={<DetailTopBar onGoBackClick={this.props.history.goBack} />}
@@ -86,7 +87,11 @@ class DetailView extends Component {
               labels={labels}
               onLabelClick={(label) => console.log(label)}
             />
-            {/* <StyledHeading level="4">Faces ()</StyledHeading> */}
+            <StyledHeading level="4">Faces (faces.length)</StyledHeading>
+            <Faces
+              faces={faces}
+              onFaceClick={(face) => console.log(face)}
+            />
           </StyledScrollableData>
         </StyledDataBox>
       </View>
