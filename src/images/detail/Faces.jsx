@@ -7,10 +7,10 @@ import { Box } from 'grommet';
 import { Colors } from '../../styles';
 
 const StyledAttrLabel = styled.label`
-  font-weight: 600;
+  font-weight: ${props => props.bold ? 600 : 400};
   flex-shrink: 0;
   flex-grow: 0;
-  width: 10rem;
+  width: 7rem;
   margin-right: 0.5rem;
 `;
 
@@ -20,21 +20,24 @@ const StyledAttrContent = styled.div`
 `;
 
 const StyledAttr = styled(Box)`
-  
+  margin-bottom: 0.5rem;
 `;
 
 const Attribute = ({
-  name,
-  confidence,
-  value,
+  attribute: {
+    name,
+    confidence,
+    value,
+  },
   showConfidence,
+  boldLabel,
 }) => (
   <StyledAttr
     fill
     direction="row"
     alignContent="between"
   >
-    <StyledAttrLabel>{name}</StyledAttrLabel>
+    <StyledAttrLabel bold={boldLabel}>{name}</StyledAttrLabel>
     <StyledAttrContent>{value}</StyledAttrContent>
   </StyledAttr>
 )
@@ -42,24 +45,74 @@ const Attribute = ({
 Attribute.propTypes = {
   attribute: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    confidence: PropTypes.number.isRequired,
+    confidence: PropTypes.number,
     value: PropTypes.string,
   }).isRequired,
   showConfidence: PropTypes.bool,
+  boldLabel: PropTypes.bool,
 }
 
 Attribute.defaultProps = {
   showConfidence: false,
-}
+  boldLabel: true,
+};
+
+// emotions
+const StyledEmotions = styled.div``;
+
+const Emotions = ({ faceId, emotions, ...props }) => (
+  <StyledEmotions {...props}>
+    <StyledAttrLabel bold>Emotions</StyledAttrLabel>
+      {emotions.map(({ name, confidence }) => (
+        <Attribute
+          key={`face_emotion_item_${faceId}_${name}`}
+          attribute={{
+            name,
+            value: String(confidence).substring(0, 5),
+          }}
+          boldLabel={false}
+        />
+      ))}
+  </StyledEmotions>
+);
+
+Emotions.propTypes = {
+  faceId: PropTypes.string.isRequired,
+  emotions: PropTypes.arrayOf(AttributePropType).isRequired,
+};
+
+// attributes wrapper
+const StyledAttributesWrapper = styled(Box)``;
 
 // face component
 const StyledFace = styled(Box)``;
 
 const Face = ({ face, ...props }) => {
-  console.log(face);
+  const { id, age, attributes, emotions } = face;
+
+  // generate age attribute
+  const ageAttribute = {
+    name: 'age',
+    confidence: 100,
+    value: `${age.low} - ${age.high}`,
+  };
+
+  // generate other attributes
+  const filteredAttributes = attributes.filter(item => (
+    item.name !== 'brightness' &&
+    item.name !== 'sharpness'
+  ));
+
   return (
     <StyledFace {...props} >
-      
+      <StyledAttributesWrapper>
+        <Attribute attribute={ageAttribute} />
+        {filteredAttributes.map(attr => <Attribute attribute={attr} />)}
+        <Emotions
+          faceId={id}
+          emotions={emotions}
+        />
+      </StyledAttributesWrapper>
     </StyledFace>
   );
 };

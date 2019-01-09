@@ -87,7 +87,7 @@ class DetailView extends Component {
               labels={labels}
               onLabelClick={(label) => console.log(label)}
             />
-            <StyledHeading level="4">Faces (faces.length)</StyledHeading>
+            <StyledHeading level="4">Faces ({faces.length})</StyledHeading>
             <Faces
               faces={faces}
               onFaceClick={(face) => console.log(face)}
