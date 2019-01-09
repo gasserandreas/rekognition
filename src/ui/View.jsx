@@ -5,11 +5,21 @@ import styled from 'styled-components';
 import { Box, Heading } from 'grommet';
 
 // view
-const StyledView = styled(Box)``;
+const StyledView = styled(Box)`
+  position: relative;
+  ${props => props.topBar ? 'padding-top: 2.75rem' : ''}
+`;
 
-export const View = (props) => (
-  <StyledView flex fill pad="small" {...props} />
-);
+export const View = ({ children, ...props }) => {
+  const { topBar } = props;
+
+  return (
+    <StyledView flex fill pad="small" {...props}>
+      {topBar}
+      {children}
+    </StyledView>
+  );
+}
 
 View.propTypes = {
   children: PropTypes.node.isRequired,

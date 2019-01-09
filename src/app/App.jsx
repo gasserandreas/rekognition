@@ -22,7 +22,7 @@ import AppFooter from './AppFooter';
 // route imports
 import PlaygroundContainer from '../playground/PlaygroundContainer';
 
-import ImagesContainer from '../images/ImagesContainer';
+import ImagesContainer from '../images/list/ImagesContainer';
 import UserContainer from '../user/UserContainer';
 
 import LoginContainer from '../auth/login/Container';

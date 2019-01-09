@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Dropzone from 'react-dropzone'
+import { Add } from 'grommet-icons';
 
 import Button from '../ui/Button';
-import { Add } from 'grommet-icons';
 
 import { addImage } from '../redux/images';
 
@@ -23,24 +23,11 @@ class AddImageButton extends Component {
   uploadImage = this.uploadImage.bind(this);
 
   uploadImage(files) {
+    // only supports single files
     if (files.length > 0) {
-      console.log('uploadImage');
-      console.log(files);
-
       files.forEach((file) => {
         this.props.addImage(file);
       });
-
-      // get selected file
-      // const file = files[0];
-      // console.log('uploadImage');
-      // console.log(files);
-      // const id = uuid.v4();
-      // this.props.postImage(id, files[0]);
-
-      // // go to detail page
-      // const url = `${Paths.GET_IMAGES_DETAILS(id)}`;
-      // this.props.history.push(url);
     }
   }
 
