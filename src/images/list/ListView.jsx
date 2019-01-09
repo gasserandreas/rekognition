@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box } from 'grommet';
 
 import { View } from '../../ui/View';
 
@@ -10,7 +9,7 @@ import AddImageButton from '../AddImageButton';
 
 import * as Paths from '../../paths';
 
-const ImagesView = (props) => {
+const ListView = (props) => {
   return (
     <View
       topBar={<ListTopBar listImages={props.listImages} />}
@@ -25,7 +24,7 @@ const ImagesView = (props) => {
   );
 };
 
-ImagesView.propTypes = {
+ListView.propTypes = {
   user: PropTypes.shape({}),
   images: PropTypes.arrayOf(
     PropTypes.shape({})
@@ -33,8 +32,8 @@ ImagesView.propTypes = {
   listImages: PropTypes.func.isRequired,
 };
 
-ImagesView.defaultProps = {
+ListView.defaultProps = {
   user: null,
 };
 
-export default ImagesView;
+export default ListView;

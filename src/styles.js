@@ -75,3 +75,22 @@ export const MediaSize = {
   Desktop: '1180px',
   Fullscreen: '1500px',
 };
+
+export const Sizes = {
+  Header: {
+    height: '50px',
+    number: 50,
+  },
+  TopBar: {
+    height: '44px',
+    number: 44,
+  },
+  LeftBar: {
+    width: {
+      Tablet: '45vw',
+      Notebook: '35vw',
+      Desktop: '30vw',
+      Fullscreen: '20vw',
+    },
+  },
+}

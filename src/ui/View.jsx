@@ -4,10 +4,15 @@ import styled from 'styled-components';
 
 import { Box, Heading } from 'grommet';
 
+import { Sizes } from '../styles';
+
 // view
 const StyledView = styled(Box)`
   position: relative;
-  ${props => props.topBar ? 'padding-top: 2.75rem' : ''}
+  ${props => props.topBar
+    ? `padding-top: ${Sizes.TopBar.height}`
+    : ''
+  }
 `;
 
 export const View = ({ children, ...props }) => {

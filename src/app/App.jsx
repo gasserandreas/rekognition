@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Grommet,
-  Box,
-  Anchor,
-} from 'grommet';
+import { Grommet, Box } from 'grommet';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -22,7 +18,8 @@ import AppFooter from './AppFooter';
 // route imports
 import PlaygroundContainer from '../playground/PlaygroundContainer';
 
-import ImagesContainer from '../images/list/ImagesContainer';
+import ImagesContainer from '../images/list/Container';
+import ImagesDetailContainer from '../images/detail/Container';
 import UserContainer from '../user/UserContainer';
 
 import LoginContainer from '../auth/login/Container';
@@ -86,9 +83,29 @@ class App extends Component {
             <AppHeader isAuthenticated={isAuthenticated} username={username} />
             <Box flex fill pad="none">
               <Switch>
-                <PrivateRoute exact path={Paths.HOME} component={ImagesContainer} isAuthenticated={isAuthenticated} />
-                <PrivateRoute exact path={Paths.IMAGES} component={ImagesContainer} isAuthenticated={isAuthenticated} />
-                <PrivateRoute exact path={Paths.USER} component={UserContainer} isAuthenticated={isAuthenticated} />
+                <PrivateRoute
+                  exact
+                  path={Paths.HOME}
+                  component={ImagesContainer}
+                  isAuthenticated={isAuthenticated}
+                />
+                <PrivateRoute
+                  exact
+                  path={Paths.IMAGES}
+                  component={ImagesContainer}
+                  isAuthenticated={isAuthenticated}
+                />
+                <PrivateRoute
+                  exact
+                  path={Paths.GET_IMAGES_DETAIL(Paths.ID)}
+                  component={ImagesDetailContainer}
+                  isAuthenticated={isAuthenticated}
+                />
+                <PrivateRoute
+                  exact path={Paths.USER}
+                  component={UserContainer}
+                  isAuthenticated={isAuthenticated}
+                />
                 <Route exact path={Paths.PLAYGROUND} component={PlaygroundContainer} />
                 <Route exact path={Paths.LOGIN} component={LoginContainer} />
                 <Route exact path={Paths.REGISTER} component={RegisterContainer} />

@@ -17,4 +17,9 @@ export const imagesListSelector = createSelector(
     return ids.map(id => byId[id])
       .filter(item => item !== null);
   }
-)
+);
+
+export const imagesByIdSelector = createSelector(
+  imagesStateSelector,
+  ({ byId }) => byId,
+);

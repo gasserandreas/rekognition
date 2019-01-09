@@ -4,16 +4,17 @@ import styled from 'styled-components';
 
 import { Box } from 'grommet';
 
-import { Colors } from '../styles';
+import { Colors, Sizes } from '../styles';
 
 const StyledTopBar = styled(Box)`
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 2.75rem;
+  height: ${Sizes.TopBar.height};
   padding: 0.25rem 0.5rem;
   background-color: ${Colors.Neutrals.Light};
+  z-index: 50;
 `;
 
 const TopBar = ({ children, ...props }) => (

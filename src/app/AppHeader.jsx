@@ -8,7 +8,7 @@ import {
   Heading,
 } from 'grommet';
 
-import { Colors } from '../styles';
+import { Colors, Sizes } from '../styles';
 import * as Paths from '../paths';
 
 const StyledHeading = styled(Heading)`
@@ -31,9 +31,11 @@ const UserProfile = (props) => (
   </StyledUserProfile>
 );
 
-const StyledHeader = styled.div`
+const StyledHeader = styled(Box)`
   background-color: ${Colors.ColorsPalette.Background};
   color: ${Colors.ColorsPalette.White};
+  height: ${Sizes.Header.height};
+  z-index: 100;
 
   a {
     color: ${Colors.ColorsPalette.White};
@@ -48,19 +50,17 @@ const StyledHeader = styled.div`
 const AppHeader = (props) => {
   const { isAuthenticated, username } = props;
   return (
-    <StyledHeader>
-      <Box
-        tag="header"
-        direction="row"
-        align='center'
-        justify='between'
-        pad={{ left: 'small', right: 'small', vertical: 'none' }}
-      >
-        <Link to={Paths.HOME}>
-          <StyledHeading  level={4}>AWS Rekognition</StyledHeading>
-        </Link>
-        {isAuthenticated && <UserProfile username={username} />}
-      </Box>
+    <StyledHeader
+      tag="header"
+      direction="row"
+      align='center'
+      justify='between'
+      pad={{ left: 'small', right: 'small', vertical: 'none' }}
+    >
+      <Link to={Paths.HOME}>
+        <StyledHeading  level={4}>AWS Rekognition</StyledHeading>
+      </Link>
+      {isAuthenticated && <UserProfile username={username} />}
     </StyledHeader>
   )
 };
