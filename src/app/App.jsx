@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { Grommet, Box } from 'grommet';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -18,8 +19,8 @@ import AppFooter from './AppFooter';
 // route imports
 import PlaygroundContainer from '../playground/PlaygroundContainer';
 
-import ImagesContainer from '../images/list/Container';
-import ImagesDetailContainer from '../images/detail/Container';
+import ImagesContainer from '../images/Container';
+// import ImagesDetailContainer from '../images/detail/Container';
 import UserContainer from '../user/UserContainer';
 
 import LoginContainer from '../auth/login/Container';
@@ -30,6 +31,8 @@ import NotFound from './NotFound';
 import * as Paths from '../paths';
 
 import { Colors } from '../styles';
+
+import img from './app_background.png';
 
 const theme = {
   global: {
@@ -60,6 +63,11 @@ const theme = {
   },
 };
 
+const StyledAppContent = styled(Box)`
+  background: url(${img});
+  padding-top: 3.5rem;
+`;
+
 /**
  * Attention: Do NOT convert this comp to state-less component due major issues
  * with react-router-dom and state-less root components
@@ -78,7 +86,22 @@ class App extends Component {
 
     return (
       <Grommet theme={theme} full={true}>
-        <AppHeader isAuthenticated={isAuthenticated} username={username} />
+        <AppHeader />
+        <StyledAppContent fill justify="between" direction="column">
+          <Switch>
+            <PrivateRoute
+              exact
+              path={Paths.HOME}
+              component={ImagesContainer}
+              isAuthenticated={isAuthenticated}
+            />
+            <Route exact path={Paths.PLAYGROUND} component={PlaygroundContainer} />
+            <Route exact path={Paths.LOGIN} component={LoginContainer} />
+            <Route exact path={Paths.REGISTER} component={RegisterContainer} />
+            <Route path="*" component={NotFound} />
+          </Switch>
+        </StyledAppContent>
+        {/* <AppHeader isAuthenticated={isAuthenticated} username={username} />
         <Box fill justify='between' direction='column'>
           <Box flex fill pad="none">
             <Switch>
@@ -116,7 +139,7 @@ class App extends Component {
               <AppFooter />
             </Box>
           )}
-        </Box>
+        </Box> */}
       </Grommet>
     );
   }
