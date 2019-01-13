@@ -4,12 +4,16 @@ import styled from 'styled-components';
 
 import { Box, Heading } from 'grommet';
 
-import DetailTopBar from './DetailTopBar';
 import Labels from './Labels';
 import Faces from './Faces';
 
 import { Colors, MediaSize, Sizes } from '../../styles';
+import { getUrl } from '../../util/services/networkUtils';
+
 import View from '../../ui/View';
+import AsyncImage from '../../ui/AsyncImage';
+
+const getImageSrc = path => `${getUrl('thumb')}/${path}`;
 
 const StyledHeading = styled(Heading)`
   margin-bottom: 0.5rem;
@@ -18,6 +22,22 @@ const StyledHeading = styled(Heading)`
 const StyledImageBox = styled(Box)`
   width: 100%;
   position: relative;
+
+  @media (min-width: ${MediaSize.Tablet}) {
+    padding-left: ${Sizes.LeftBar.width.Tablet};
+  }
+
+  @media (min-width: ${MediaSize.Notebook}) {
+    padding-left: ${Sizes.LeftBar.width.Notebook};
+  }
+
+  @media (min-width: ${MediaSize.Desktop}) {
+    padding-left: ${Sizes.LeftBar.width.Desktop};
+  }
+
+  @media (min-width: ${MediaSize.Fullscreen}) {
+    padding-left: ${Sizes.LeftBar.width.Fullscreen};
+  }
 `;
 
 const StyledDataBox = styled(Box)`
@@ -72,11 +92,12 @@ class DetailView extends Component {
   }
 
   render() {
-    const { labels, faces } = this.props;
+    const { labels, faces, image } = this.props;
+    console.log(this.props);
     return (
       <View>
         <StyledImageBox>
-          Image
+          <AsyncImage src={getImageSrc(image.path)} fit="contain" />
         </StyledImageBox>
         <StyledDataBox pad="small">
           <StyledScrollableData>

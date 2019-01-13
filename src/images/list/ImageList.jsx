@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Box, Image } from 'grommet';
-import {  } from 'grommet-icons';
+import { Box } from 'grommet';
+// import {  } from 'grommet-icons';
 
+import AsyncImage from '../../ui/AsyncImage';
 import { Colors, MediaSize } from '../../styles';
 import { getUrl } from '../../util/services/networkUtils';
 
@@ -34,7 +35,7 @@ const ImageAttr = (props) => (
 )
 
 // image
-const StyledImage = styled(Image)``;
+const StyledImage = styled(AsyncImage)``;
 
 // list item
 const StyledListItem = styled(Box)`
