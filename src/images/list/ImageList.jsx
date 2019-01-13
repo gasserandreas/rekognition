@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { Box, Image } from 'grommet';
+import {  } from 'grommet-icons';
 
 import { Colors, MediaSize } from '../../styles';
 import { getUrl } from '../../util/services/networkUtils';
@@ -17,17 +18,33 @@ const ImagePropType = PropTypes.shape({
 
 const getImageSrc = path => `${getUrl('thumb')}/${path}`;
 
-// image
-const StyledImage = styled(Image)`
+// image attribute
+const StyledImageAttr = styled(Box)`
+  background-color: ${Colors.ColorsPalette.White};
+  padding: 0.5rem 1rem;
 `;
+
+const ImageAttr = (props) => (
+  <StyledImageAttr {...props} alignContent="between">
+    <label>Created: </label>
+    <span>
+      Faces: 2
+    </span>
+  </StyledImageAttr>
+)
+
+// image
+const StyledImage = styled(Image)``;
 
 // list item
 const StyledListItem = styled(Box)`
   margin: 0.5rem auto;
+  background-color: #fff;
+  color: ${Colors.ColorsPalette.Text};
 
   @media (min-width: ${MediaSize.Phone}) {
     &:hover {
-      background-color: ${Colors.Neutrals.Dark};
+      // background-color: ${Colors.Neutrals.Dark};
       cursor: pointer;
 
       img {
@@ -112,6 +129,7 @@ const ListItem = ({ image, ...props }) => {
   return (
     <StyledListItem {...props}>
       <StyledImage src={getImageSrc(path)} fit="cover" />
+      <ImageAttr />
     </StyledListItem>
   );
 }

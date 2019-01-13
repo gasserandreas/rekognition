@@ -4,7 +4,13 @@ import styled from 'styled-components';
 
 import { Box } from 'grommet';
 
-import { Colors } from '../../styles';
+import Label from './Label';
+
+const AttributePropType = PropTypes.shape({
+  name: PropTypes.string.isRequired,
+  confidence: PropTypes.number.isRequired,
+  value: PropTypes.string,
+});
 
 const StyledAttrLabel = styled.label`
   font-weight: ${props => props.bold ? 600 : 400};
@@ -12,6 +18,7 @@ const StyledAttrLabel = styled.label`
   flex-grow: 0;
   width: 7rem;
   margin-right: 0.5rem;
+  text-transform: capitalize;
 `;
 
 const StyledAttrContent = styled.div`
@@ -20,7 +27,7 @@ const StyledAttrContent = styled.div`
 `;
 
 const StyledAttr = styled(Box)`
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
 `;
 
 const Attribute = ({
@@ -62,15 +69,14 @@ const StyledEmotions = styled.div``;
 
 const Emotions = ({ faceId, emotions, ...props }) => (
   <StyledEmotions {...props}>
-    <StyledAttrLabel bold>Emotions</StyledAttrLabel>
+    <StyledAttrLabel
+      style={{ display: 'block'}}
+      bold
+    >Emotions</StyledAttrLabel>
       {emotions.map(({ name, confidence }) => (
-        <Attribute
-          key={`face_emotion_item_${faceId}_${name}`}
-          attribute={{
-            name,
-            value: String(confidence).substring(0, 5),
-          }}
-          boldLabel={false}
+        <Label
+          key={`face_${faceId}_emotion_label_${name}`}
+          label={{ name, confidence }}
         />
       ))}
   </StyledEmotions>
@@ -85,9 +91,11 @@ Emotions.propTypes = {
 const StyledAttributesWrapper = styled(Box)``;
 
 // face component
-const StyledFace = styled(Box)``;
+const StyledFace = styled(Box)`
+  margin-bottom: 0.5rem
+`;
 
-const Face = ({ face, ...props }) => {
+const Face = ({ face, number, ...props }) => {
   const { id, age, attributes, emotions } = face;
 
   // generate age attribute
@@ -105,9 +113,15 @@ const Face = ({ face, ...props }) => {
 
   return (
     <StyledFace {...props} >
+      <h3 level="1">Face {number}</h3>
       <StyledAttributesWrapper>
         <Attribute attribute={ageAttribute} />
-        {filteredAttributes.map(attr => <Attribute attribute={attr} />)}
+        {filteredAttributes.map(attr => (
+          <Attribute
+            attribute={attr}
+            key={`face_attribute_${id}_${attr.name}`}
+          />
+        ))}
         <Emotions
           faceId={id}
           emotions={emotions}
@@ -116,12 +130,6 @@ const Face = ({ face, ...props }) => {
     </StyledFace>
   );
 };
-
-const AttributePropType = PropTypes.shape({
-  name: PropTypes.string.isRequired,
-  confidence: PropTypes.number.isRequired,
-  value: PropTypes.string,
-});
 
 Face.propTypes = {
   face: PropTypes.shape({
@@ -147,8 +155,9 @@ const StyledFaces = styled(Box)``;
 
 const Faces = (props) => (
   <StyledFaces>
-    {props.faces.map((face) => (
+    {props.faces.map((face, i) => (
       <Face
+        number={i + 1}
         key={`face_item_${face.id}`}
         face={face}
         onClick={() => props.onFaceClick(face)}
