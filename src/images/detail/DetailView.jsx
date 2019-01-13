@@ -26,7 +26,7 @@ const StyledDataBox = styled(Box)`
 
   @media (min-width: ${MediaSize.Tablet}) {
     position: fixed;
-    top: ${Sizes.Header.number + Sizes.TopBar.number}px;
+    top: ${Sizes.Header.height};
     left: 0;
     bottom: 0;
     background-color: ${Colors.Neutrals.Light};
@@ -74,9 +74,7 @@ class DetailView extends Component {
   render() {
     const { labels, faces } = this.props;
     return (
-      <View
-        topBar={<DetailTopBar onGoBackClick={this.props.history.goBack} />}
-      >
+      <View>
         <StyledImageBox>
           Image
         </StyledImageBox>

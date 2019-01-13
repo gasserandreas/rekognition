@@ -78,8 +78,8 @@ export const MediaSize = {
 
 export const Sizes = {
   Header: {
-    height: '50px',
-    number: 50,
+    height: '56px',
+    number: 56,
   },
   TopBar: {
     height: '44px',

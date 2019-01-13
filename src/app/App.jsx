@@ -35,7 +35,9 @@ const theme = {
   global: {
     colors: {
       brand: Colors.ColorsPalette.Brand,
-      background: Colors.ColorsPalette.White,
+      background: '#F7F8F9',
+      // background: Colors.ColorsPalette.White,
+      // background: 'rgba(0, 82, 204, .05)',
       focus: 'rgba(0, 0, 0, 0.33)',
       'neutral-1': Colors.Neutrals.DarkNeutrals,
       'neutral-2': Colors.Neutrals.MidDark,

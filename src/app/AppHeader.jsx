@@ -13,7 +13,6 @@ import * as Paths from '../paths';
 
 const StyledHeading = styled(Heading)`
   font-weight: 500;
-  color: ${Colors.ColorsPalette.White};
   margin-top: 0.85rem;
   margin-bottom: 0.85rem;
 `;
@@ -32,23 +31,38 @@ const UserProfile = (props) => (
 );
 
 const StyledHeader = styled(Box)`
-  background-color: ${Colors.ColorsPalette.Background};
-  color: ${Colors.ColorsPalette.White};
+  ${(props) => props.isAuthenticated ? `
+      color: ${Colors.ColorsPalette.Text};
+      background-color: ${Colors.ColorsPalette.White};
+
+      a {
+        color: ${Colors.ColorsPalette.Text};
+        &:hover {
+          color: ${Colors.ColorsPalette.TextFaded};
+        }
+      }
+    ` : `
+      background-color: ${Colors.ColorsPalette.Background};
+      color: ${Colors.ColorsPalette.White};
+
+      a {
+        color: ${Colors.ColorsPalette.White};
+        &:hover {
+          color: ${Colors.Neutrals.LightDark};
+        }
+      }
+    `
+  }
   height: ${Sizes.Header.height};
   z-index: 100;
-  padding: 0 12px;
+  border-bottom: 1px solid #c9c9c9;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
 
   a {
-    color: ${Colors.ColorsPalette.White};
     text-decoration: none;
-
-    &:hover {
-      color: ${Colors.Neutrals.LightDark};
-    }
   }
 `;
 
@@ -60,6 +74,8 @@ const AppHeader = (props) => {
       direction="row"
       align='center'
       justify='between'
+      isAuthenticated={isAuthenticated}
+      pad={{ horizontal: "large", vertical: "none" }}
     >
       <Link to={Paths.HOME}>
         <StyledHeading  level={4}>AWS Rekognition</StyledHeading>

@@ -11,10 +11,7 @@ import * as Paths from '../../paths';
 
 const ListView = (props) => {
   return (
-    <View
-      topBar={<ListTopBar listImages={props.listImages} />}
-      pad="none"
-    >
+    <View pad="none">
       <ImageList
         images={props.images}
         onImageClick={image => props.history.push(Paths.GET_IMAGES_DETAIL(image.id))}
