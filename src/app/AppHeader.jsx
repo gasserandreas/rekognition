@@ -34,6 +34,7 @@ const StyledHeader = styled(Box)`
   ${(props) => props.isAuthenticated ? `
       color: ${Colors.ColorsPalette.Text};
       background-color: ${Colors.ColorsPalette.White};
+      border-bottom: 1px solid #c9c9c9;
 
       a {
         color: ${Colors.ColorsPalette.Text};
@@ -55,7 +56,6 @@ const StyledHeader = styled(Box)`
   }
   height: ${Sizes.Header.height};
   z-index: 100;
-  border-bottom: 1px solid #c9c9c9;
   position: fixed;
   top: 0;
   left: 0;

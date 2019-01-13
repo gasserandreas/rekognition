@@ -23,3 +23,13 @@ export const imagesByIdSelector = createSelector(
   imagesStateSelector,
   ({ byId }) => byId,
 );
+
+export const getImageRequestSelector = createSelector(
+  imagesStateSelector,
+  ({ getImageRequest }) => getImageRequest,
+);
+
+export const getImageIsLoading = createSelector(
+  getImageRequestSelector,
+  ({ loading }) => loading,
+);

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import { getImage } from '../../redux/images';
-import { imagesByIdSelector } from '../../redux/images/selectors';
+import { imagesByIdSelector, getImageRequestSelector } from '../../redux/images/selectors';
 
 import { labelsByImageId } from '../../redux/labels/selectors';
 import { facesByImageId } from '../../redux/faces/selectors';
@@ -19,6 +19,7 @@ const select = (state, props) => {
     image,
     labels: labelsByImageId(state, id),
     faces: facesByImageId(state, id),
+    getImageRequest: getImageRequestSelector(state),
   };
 };
 

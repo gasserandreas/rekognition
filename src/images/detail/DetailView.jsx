@@ -12,6 +12,9 @@ import { getUrl } from '../../util/services/networkUtils';
 
 import View from '../../ui/View';
 import AsyncImage from '../../ui/AsyncImage';
+import LoadingIndicator from '../../ui/LoadingIndicator';
+
+import { HOCRequestPropTypes } from '../../util/PropTypes';
 
 const getImageSrc = path => `${getUrl('thumb')}/${path}`;
 
@@ -92,7 +95,8 @@ class DetailView extends Component {
   }
 
   render() {
-    const { labels, faces, image } = this.props;
+    const { labels, faces, image, getImageRequest } = this.props;
+    const { loading } = getImageRequest;
     console.log(this.props);
     return (
       <View>
@@ -102,15 +106,23 @@ class DetailView extends Component {
         <StyledDataBox pad="small">
           <StyledScrollableData>
             <StyledHeading style={{ marginTop: 0 }}level="4">Labels ({labels.length})</StyledHeading>
-            <Labels
-              labels={labels}
-              onLabelClick={(label) => console.log(label)}
-            />
+            { loading ? (
+              <LoadingIndicator />
+            ) : (
+              <Labels
+                labels={labels}
+                onLabelClick={(label) => console.log(label)}
+              />
+            )}
             <StyledHeading level="4">Faces ({faces.length})</StyledHeading>
-            <Faces
-              faces={faces}
-              onFaceClick={(face) => console.log(face)}
-            />
+            { loading ? (
+              <LoadingIndicator />
+            ) : (
+              <Faces
+                faces={faces}
+                onFaceClick={(face) => console.log(face)}
+              />
+            )}
           </StyledScrollableData>
         </StyledDataBox>
       </View>
@@ -127,6 +139,7 @@ DetailView.propTypes = {
   }).isRequired,
   labels: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   faces: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  getImageRequest: HOCRequestPropTypes.isRequired,
   getImage: PropTypes.func.isRequired,
 }
 
