@@ -92,10 +92,14 @@ export const addImage = hocAsyncAction(
             }) {
               image {
                 id
-                type
                 name
                 path
                 created
+                meta {
+                  type
+                  size
+                  orientation
+                }
                 labels {
                   id
                   name
@@ -169,7 +173,6 @@ export const listImages = hocAsyncAction(
           items {
             id
             created
-            type
             name
             path
           }
@@ -200,10 +203,14 @@ export const getImage = hocAsyncAction(
       query getImage($imageId: ID!) {
         getImage(image_id: $imageId) {
           id
-          type
           name
           path
           created
+          meta {
+            type
+            size
+            orientation
+          }
           labels {
             id
             name
