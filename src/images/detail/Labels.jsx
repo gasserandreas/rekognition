@@ -6,10 +6,8 @@ import { Box } from 'grommet';
 
 import Label from './Label';
 
-
 // labels
-const StyledLabels = styled(Box)`
-`;
+const StyledLabels = styled(Box)``;
 
 class Labels extends Component {
   onLabelClick = this.onLabelClick.bind(this);

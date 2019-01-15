@@ -14,8 +14,7 @@ const handleLabelHover = (props) => props.isClickable
       background-color: ${Colors.Blue.Default};
       color: ${Colors.ColorsPalette.White};
     }
-  `
-  : '';
+  ` : '';
 
 const StyledLabel = styled.div`
   border: 1.5px solid ${Colors.Neutrals.Mid};

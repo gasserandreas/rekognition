@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Dropzone from 'react-dropzone'
 import { Add } from 'grommet-icons';
 
-import Button from '../ui/Button';
+import Button from '../ui/form/Button';
 
 import { addImage } from '../redux/images';
 

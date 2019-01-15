@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Button from '../ui/Button';
+import Button from '../ui/form/Button';
 import View from '../ui/View';
 
 import * as Paths from '../paths';

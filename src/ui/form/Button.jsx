@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import * as Grommet from 'grommet';
 
-import { Colors } from '../styles';
+import { Colors } from '../../styles';
 
 const BUTTON_TYPES = {
   DEFAULT: 'default',

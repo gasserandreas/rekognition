@@ -1,28 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import moment from 'moment';
 
 import { Box, Heading } from 'grommet';
 
 import Labels from './Labels';
 import Faces from './Faces';
-
-import { Colors, MediaSize, Sizes } from '../../styles';
-import { getUrl } from '../../util/services/networkUtils';
-
 import { Attribute } from './Attribute';
-import View from '../../ui/View';
-import AsyncImage from '../../ui/AsyncImage';
-import LoadingIndicator from '../../ui/LoadingIndicator';
 
+import View from '../../ui/View';
+import AsyncImage from '../../ui/async/AsyncImage';
+import AsyncContainer from '../../ui/async/AsyncContainer';
+
+import { getImageCreationDateTime, getImageSrc } from '../util';
 import { HOCRequestPropTypes } from '../../util/PropTypes';
 
-const getImageSrc = path => `${getUrl('thumb')}/${path}`;
-const getImageCreatedDate = dateStr => {
-  const format = 'D MMM YYYY - HH:MM:SS';
-  return moment(dateStr).format(format);
-}
+import { Colors, MediaSize, Sizes } from '../../styles';
 
 const StyledHeading = styled(Heading)`
   margin-bottom: 0.5rem;
@@ -53,7 +46,6 @@ const StyledImageBox = styled(Box)`
 
 const StyledDataBox = styled(Box)`
   width: 100%;
-  // background-color: ${Colors.Neutrals.Light};
   background-color: ${Colors.ColorsPalette.White};
 
   @media (min-width: ${MediaSize.Tablet}) {
@@ -61,7 +53,6 @@ const StyledDataBox = styled(Box)`
     top: ${Sizes.Header.height};
     left: 0;
     bottom: 0;
-    // background-color: ${Colors.Neutrals.Light};
     box-shadow: 0px 2px 4px rgba(0,0,0,0.20);
     z-index: 51;
 
@@ -82,7 +73,6 @@ const StyledDataBox = styled(Box)`
 `;
 
 const StyledScrollableData = styled.div`
-
   @media (min-width: ${MediaSize.Tablet}) {
     position: relative;
     height: 100%;
@@ -129,7 +119,6 @@ class DetailView extends Component {
       },
     ].filter(({ value }) => value !== null);
 
-    console.log(this.props);
     return (
       <View>
         <StyledImageBox fill>
@@ -141,29 +130,25 @@ class DetailView extends Component {
           <StyledScrollableData>
           <StyledHeading level="4">Image Information</StyledHeading>
             <Box>
-              <Attribute attribute={{ name: 'Uploaded', value: getImageCreatedDate(created) }} />
+              <Attribute attribute={{ name: 'Uploaded', value: getImageCreationDateTime(created) }} />
               {metaValues.map(({ name, value }) => (
                 <Attribute key={`meta_attribute_${name}`} attribute={{ name, value }} />
               ))}
             </Box>
             <StyledHeading level="4">Labels ({labels.length})</StyledHeading>
-            { loading ? (
-              <LoadingIndicator />
-            ) : (
+            <AsyncContainer loading={loading}>
               <Labels
                 labels={labels}
                 onLabelClick={(label) => console.log(label)}
               />
-            )}
+            </AsyncContainer>
             <StyledHeading level="4">Faces ({faces.length})</StyledHeading>
-            { loading ? (
-              <LoadingIndicator />
-            ) : (
+            <AsyncContainer loading={loading}>
               <Faces
                 faces={faces}
                 onFaceClick={(face) => console.log(face)}
               />
-            )}
+            </AsyncContainer>
           </StyledScrollableData>
         </StyledDataBox>
       </View>

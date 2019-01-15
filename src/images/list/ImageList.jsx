@@ -1,28 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import moment from 'moment';
 
 import { Box } from 'grommet';
 import { Clock, Group, Tag } from 'grommet-icons';
 
-import AsyncImage from '../../ui/AsyncImage';
+import AsyncImage from '../../ui/async/AsyncImage';
+import { getImageSrc, getImageCreationDate } from '../util';
+import { ImagePropType } from '../../util/PropTypes';
 import { Colors, MediaSize } from '../../styles';
-import { getUrl } from '../../util/services/networkUtils';
-
-const ImagePropType = PropTypes.shape({
-  id: PropTypes.string.isRequired,
-  path: PropTypes.string.isRequired,
-  created: PropTypes.string,
-  name: PropTypes.string,
-  type: PropTypes.string,
-});
-
-const getImageSrc = path => `${getUrl('thumb')}/${path}`;
-const getFormatedDateString = dateStr => {
-  const format = 'D MMM YYYY';
-  return moment(dateStr).format(format);
-}
 
 // image attribute
 const StyledImageAttr = styled(Box)`
@@ -68,7 +54,7 @@ const ImageAttr = ({ created, numberOfFaces, numberOfLabels, ...props}) => (
     {...props} 
   >
     <Box align="center">
-      <label><Clock />{getFormatedDateString(created)}</label>
+      <label><Clock />{getImageCreationDate(created)}</label>
     </Box>
     <Box align="center" alignContent="between" direction="row">
       <label style={{ marginRight: '0.5rem' }}><Group />{numberOfFaces}</label>
@@ -160,20 +146,6 @@ const StyledListItem = styled(Box)`
       margin-right: 2.5vw;
     }
   }
-
-  // @media (min-width: ${MediaSize.Fullscreen}) {
-  //   width: 12vw;
-  //   height: 12vw;
-  //   margin: 2vw 2vw;
-
-  //   &:nth-child(6n + 1) {
-  //     margin-left: 4vw;
-  //   }
-  
-  //   &:nth-child(6n + 0) {
-  //     margin-right: 4vw;
-  //   }
-  // }
 `;
 
 const ListItem = ({ image, ...props }) => {
@@ -219,6 +191,7 @@ const ImageList = (props) => {
             key={key}
             image={image}
             onClick={() => props.onImageClick(image)}
+            elevation="xsmall"
           />
         );
       })}

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import * as Grommet from 'grommet';
 
-import { Colors } from '../styles';
+import { Colors } from '../../styles';
 
 // input components
 const StyledTextInput = styled(Grommet.TextInput)`
