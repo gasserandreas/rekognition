@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import moment from 'moment';
 
 import { Box } from 'grommet';
 import { Clock, Group, Tag } from 'grommet-icons';
@@ -18,6 +19,10 @@ const ImagePropType = PropTypes.shape({
 });
 
 const getImageSrc = path => `${getUrl('thumb')}/${path}`;
+const getFormatedDateString = dateStr => {
+  const format = 'D MMM YYYY';
+  return moment(dateStr).format(format);
+}
 
 // image attribute
 const StyledImageAttr = styled(Box)`
@@ -57,17 +62,17 @@ const StyledImageAttr = styled(Box)`
   }
 `;
 
-const ImageAttr = (props) => (
+const ImageAttr = ({ created, numberOfFaces, numberOfLabels, ...props}) => (
   <StyledImageAttr
     direction="row"
     {...props} 
   >
     <Box align="center">
-      <label><Clock /> 1. Jan. 2018</label>
+      <label><Clock />{getFormatedDateString(created)}</label>
     </Box>
     <Box align="center" alignContent="between" direction="row">
-      <label style={{ marginRight: '0.5rem' }}><Group />2</label>
-      <label><Tag />3</label>
+      <label style={{ marginRight: '0.5rem' }}><Group />{numberOfFaces}</label>
+      <label><Tag />{numberOfLabels}</label>
     </Box>
   </StyledImageAttr>
 )
@@ -172,10 +177,15 @@ const StyledListItem = styled(Box)`
 `;
 
 const ListItem = ({ image, ...props }) => {
-  const { path } = image;
+  const { path, created, meta } = image;
+  const { numberOfFaces, numberOfLabels } = meta;
   return (
     <StyledListItem {...props}>
-      <ImageAttr />
+      <ImageAttr
+        created={created}
+        numberOfFaces={numberOfFaces}
+        numberOfLabels={numberOfLabels}
+      />
       <StyledImage src={getImageSrc(path)} fit="cover" />
     </StyledListItem>
   );

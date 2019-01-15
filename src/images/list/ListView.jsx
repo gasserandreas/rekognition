@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import { View } from '../../ui/View';
 
-import ListTopBar from './ListTopBar';
 import ImageList from './ImageList';
 import AddImageButton from '../AddImageButton';
 

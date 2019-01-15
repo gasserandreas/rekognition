@@ -99,39 +99,48 @@ export const addImage = hocAsyncAction(
                   type
                   size
                   orientation
+                  width
+                  height
+                  density
+                  numberOfLabels
+                  numberOfFaces
                 }
                 labels {
-                  id
-                  name
-                  confidence
-                  parents
-                  instances {
-                    height
-                    width
-                    left
-                    top
+                  items {
+                    id
+                    name
+                    confidence
+                    parents
+                    instances {
+                      height
+                      width
+                      left
+                      top
+                    }
                   }
                 }
                 faces {
-                  id
-                  age {
-                    low
-                    high
-                  }
-                  position {
-                    height
-                    width
-                    left
-                    top
-                  }
-                  emotions {
-                    name
-                    confidence
-                  }
-                  attributes {
-                    name
-                    confidence
-                    value
+                  items {
+                    id
+                    age {
+                      low
+                      high
+                    }
+                    position {
+                      height
+                      width
+                      left
+                      top
+                    }
+                    emotions {
+                      name
+                      confidence
+                    }
+                    attributes {
+                      name
+                      confidence
+                      value
+                    }
                   }
                 }
               }
@@ -155,8 +164,8 @@ export const addImage = hocAsyncAction(
 
             // save to redux
             dispatch(imagesAddNewImage(imageData));
-            dispatch(labelsAddLabels(id, labels));
-            dispatch(facesAddLabels(id, faces));
+            dispatch(labelsAddLabels(id, labels.items));
+            dispatch(facesAddLabels(id, faces.items));
 
             return data;
           });
@@ -175,6 +184,16 @@ export const listImages = hocAsyncAction(
             created
             name
             path
+            meta {
+              type
+              size
+              orientation
+              width
+              height
+              density
+              numberOfFaces
+              numberOfLabels
+            }
           }
         }
       }
@@ -210,39 +229,48 @@ export const getImage = hocAsyncAction(
             type
             size
             orientation
+            width
+            height
+            density
+            numberOfLabels
+            numberOfFaces
           }
           labels {
-            id
-            name
-            confidence
-            parents
-            instances {
-              height
-              width
-              left
-              top
+            items {
+              id
+              name
+              confidence
+              parents
+              instances {
+                height
+                width
+                left
+                top
+              }
             }
           }
           faces {
-            id
-            age {
-              low
-              high
-            }
-            position {
-              height
-              width
-              left
-              top
-            }
-            emotions {
-              name
-              confidence
-            }
-            attributes {
-              name
-              confidence
-              value
+            items {
+              id
+              age {
+                low
+                high
+              }
+              position {
+                height
+                width
+                left
+                top
+              }
+              emotions {
+                name
+                confidence
+              }
+              attributes {
+                name
+                confidence
+                value
+              }
             }
           }
         }
@@ -261,8 +289,8 @@ export const getImage = hocAsyncAction(
         const { id } = image;
         
         dispatch(imagesAddImage(image));
-        dispatch(labelsAddLabels(id, labels));
-        dispatch(facesAddLabels(id, faces));
+        dispatch(labelsAddLabels(id, labels.items));
+        dispatch(facesAddLabels(id, faces.items));
 
         return data;
       })

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import moment from 'moment';
 
 import { Box, Heading } from 'grommet';
 
@@ -10,6 +11,7 @@ import Faces from './Faces';
 import { Colors, MediaSize, Sizes } from '../../styles';
 import { getUrl } from '../../util/services/networkUtils';
 
+import { Attribute } from './Attribute';
 import View from '../../ui/View';
 import AsyncImage from '../../ui/AsyncImage';
 import LoadingIndicator from '../../ui/LoadingIndicator';
@@ -17,6 +19,10 @@ import LoadingIndicator from '../../ui/LoadingIndicator';
 import { HOCRequestPropTypes } from '../../util/PropTypes';
 
 const getImageSrc = path => `${getUrl('thumb')}/${path}`;
+const getImageCreatedDate = dateStr => {
+  const format = 'D MMM YYYY - HH:MM:SS';
+  return moment(dateStr).format(format);
+}
 
 const StyledHeading = styled(Heading)`
   margin-bottom: 0.5rem;
@@ -47,14 +53,15 @@ const StyledImageBox = styled(Box)`
 
 const StyledDataBox = styled(Box)`
   width: 100%;
-  background-color: ${Colors.Neutrals.Light};
+  // background-color: ${Colors.Neutrals.Light};
+  background-color: ${Colors.ColorsPalette.White};
 
   @media (min-width: ${MediaSize.Tablet}) {
     position: fixed;
     top: ${Sizes.Header.height};
     left: 0;
     bottom: 0;
-    background-color: ${Colors.Neutrals.Light};
+    // background-color: ${Colors.Neutrals.Light};
     box-shadow: 0px 2px 4px rgba(0,0,0,0.20);
     z-index: 51;
 
@@ -98,19 +105,48 @@ class DetailView extends Component {
 
   render() {
     const { labels, faces, image, getImageRequest } = this.props;
+    const { path, created, meta } = image;
     const { loading } = getImageRequest;
+
+    // generate meta render array
+    const { density, height, width, type, size } = meta;
+    const metaValues = [
+      {
+        name: 'Type',
+        value: type,
+      },
+      {
+        name: 'Size',
+        value: size > 0 ? size : null,
+      },
+      {
+        name: 'Dimension',
+        value: height > 0 ? `${width}px x ${height}` : null,
+      },
+      {
+        name: 'Density',
+        value: density > 0 ? density : null,
+      },
+    ].filter(({ value }) => value !== null);
+
     console.log(this.props);
     return (
       <View>
         <StyledImageBox fill>
           <Box pad="small" fill style={{ justifyContent: 'center' }}>
-            <AsyncImage src={getImageSrc(image.path)} fit="contain" />
+            <AsyncImage src={getImageSrc(path)} fit="contain" />
           </Box>
         </StyledImageBox>
-        <StyledDataBox pad="small">
-          {/* <Box> */}
+        <StyledDataBox pad={{ vertical: 'none', horizontal: 'small' }}>
           <StyledScrollableData>
-            <StyledHeading style={{ marginTop: 0 }}level="4">Labels ({labels.length})</StyledHeading>
+          <StyledHeading level="4">Image Information</StyledHeading>
+            <Box>
+              <Attribute attribute={{ name: 'Uploaded', value: getImageCreatedDate(created) }} />
+              {metaValues.map(({ name, value }) => (
+                <Attribute key={`meta_attribute_${name}`} attribute={{ name, value }} />
+              ))}
+            </Box>
+            <StyledHeading level="4">Labels ({labels.length})</StyledHeading>
             { loading ? (
               <LoadingIndicator />
             ) : (
@@ -129,7 +165,6 @@ class DetailView extends Component {
               />
             )}
           </StyledScrollableData>
-          {/* </Box> */}
         </StyledDataBox>
       </View>
     );
