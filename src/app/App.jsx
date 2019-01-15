@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { Grommet, Box } from 'grommet';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -29,7 +30,7 @@ import NotFound from './NotFound';
 
 import * as Paths from '../paths';
 
-import { Colors } from '../styles';
+import { Colors, MediaSize } from '../styles';
 
 const theme = {
   global: {
@@ -62,6 +63,15 @@ const theme = {
   },
 };
 
+const StyledAppContent = styled(Box)`
+  min-height: 100%;
+  height: auto;
+
+  @media (min-width: ${MediaSize.Tablet}) {
+    height: 100%;
+  }
+`;
+
 /**
  * Attention: Do NOT convert this comp to state-less component due major issues
  * with react-router-dom and state-less root components
@@ -81,7 +91,7 @@ class App extends Component {
     return (
       <Grommet theme={theme} full={true}>
         <AppHeader isAuthenticated={isAuthenticated} username={username} />
-        <Box fill justify='between' direction='column'>
+        <StyledAppContent fill justify='between' direction='column'>
           <Box flex fill pad="none">
             <Switch>
               <PrivateRoute
@@ -118,7 +128,7 @@ class App extends Component {
               <AppFooter />
             </Box>
           )}
-        </Box>
+        </StyledAppContent>
       </Grommet>
     );
   }

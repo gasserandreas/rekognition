@@ -23,7 +23,7 @@ const StyledLabel = styled.div`
   border-radius: 3px;
   display: inline-block
   font-size: 0.8rem;
-  margin-left: 0.25rem;
+  margin-right: 0.25rem;
   margin-bottom: 0.5rem;
 
   span {

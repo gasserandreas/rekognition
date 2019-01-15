@@ -65,7 +65,11 @@ Attribute.defaultProps = {
 };
 
 // emotions
-const StyledEmotions = styled.div``;
+const StyledEmotions = styled.div`
+  label {
+    margin-bottom: 0.25rem;
+  }
+`;
 
 const Emotions = ({ faceId, emotions, ...props }) => (
   <StyledEmotions {...props}>

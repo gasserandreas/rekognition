@@ -24,6 +24,8 @@ const StyledHeading = styled(Heading)`
 
 const StyledImageBox = styled(Box)`
   width: 100%;
+  min-height: 30vh;
+  justify-content: center;
   position: relative;
 
   @media (min-width: ${MediaSize.Tablet}) {
@@ -100,10 +102,13 @@ class DetailView extends Component {
     console.log(this.props);
     return (
       <View>
-        <StyledImageBox>
-          <AsyncImage src={getImageSrc(image.path)} fit="contain" />
+        <StyledImageBox fill>
+          <Box pad="small" fill style={{ justifyContent: 'center' }}>
+            <AsyncImage src={getImageSrc(image.path)} fit="contain" />
+          </Box>
         </StyledImageBox>
         <StyledDataBox pad="small">
+          {/* <Box> */}
           <StyledScrollableData>
             <StyledHeading style={{ marginTop: 0 }}level="4">Labels ({labels.length})</StyledHeading>
             { loading ? (
@@ -124,6 +129,7 @@ class DetailView extends Component {
               />
             )}
           </StyledScrollableData>
+          {/* </Box> */}
         </StyledDataBox>
       </View>
     );

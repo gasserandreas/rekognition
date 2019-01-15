@@ -7,8 +7,11 @@ import { Box, Image } from 'grommet';
 import LoadingIndicator from './LoadingIndicator';
 
 const StyledAsyncImage = styled(Box)`
+  justify-content: center;
+  transition: all 0.5s ease;
   img {
-    opacity ${props => props.loaded ? '0' : '1'};
+    opacity ${props => props.loaded ? '1' : '0'};
+    display: ${props => props.loaded ? 'flex' : 'none'};
   }
 `;
 
@@ -25,7 +28,6 @@ class AsyncImage extends Component {
       onLoad(image);
     }
 
-    // disable loading indicator
     this.setState({ loaded: true });
   }
 
@@ -33,14 +35,13 @@ class AsyncImage extends Component {
     const { loaded } = this.state;
     const { ...props } = this.props;
     return (
-      <StyledAsyncImage>
+      <StyledAsyncImage loaded={loaded} {...props}>
         { !loaded && <LoadingIndicator /> }
-        <Image
+        {/* <Image
           onLoad={() => this.onImageLoad(this.imgRef)}
           ref={(tag) => this.imgRef = tag ? tag : null }
-          loaded={loaded}
           {...props}
-        />
+        /> */}
       </StyledAsyncImage>
     );
   }

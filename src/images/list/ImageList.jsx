@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { Box } from 'grommet';
-// import {  } from 'grommet-icons';
+import { Clock, Group, Tag } from 'grommet-icons';
 
 import AsyncImage from '../../ui/AsyncImage';
 import { Colors, MediaSize } from '../../styles';
@@ -22,26 +22,71 @@ const getImageSrc = path => `${getUrl('thumb')}/${path}`;
 // image attribute
 const StyledImageAttr = styled(Box)`
   background-color: ${Colors.ColorsPalette.White};
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 0.5rem;
+  flex-shrink: 0;
+  flex-grow: 0;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  align-items: flex-end;
+  cursor: pointer;
+
+  &:hover {
+    cursor: pointer;
+    label {
+      color: ${Colors.ColorsPalette.TextFaded};
+    }
+
+    svg {
+      fill: ${Colors.ColorsPalette.TextFaded};
+      stroke: ${Colors.ColorsPalette.TextFaded};
+    }
+  }
+
+  svg {
+    width: 0.9rem;
+    height: 0.9rem;
+    margin-right: 0.2rem;
+    cursor: pointer;
+  }
+
+  label {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: 0;
+    align-items: stretch;
+  }
 `;
 
 const ImageAttr = (props) => (
-  <StyledImageAttr {...props} alignContent="between">
-    <label>Created: </label>
-    <span>
-      Faces: 2
-    </span>
+  <StyledImageAttr
+    direction="row"
+    {...props} 
+  >
+    <Box align="center">
+      <label><Clock /> 1. Jan. 2018</label>
+    </Box>
+    <Box align="center" alignContent="between" direction="row">
+      <label style={{ marginRight: '0.5rem' }}><Group />2</label>
+      <label><Tag />3</label>
+    </Box>
   </StyledImageAttr>
 )
 
 // image
-const StyledImage = styled(AsyncImage)``;
+const StyledImage = styled(AsyncImage)`
+  flex-shrink: 1;
+  flex-grow: 1;
+`;
 
 // list item
 const StyledListItem = styled(Box)`
   margin: 0.5rem auto;
   background-color: #fff;
   color: ${Colors.ColorsPalette.Text};
+  flex-direction: column-reverse;
+
+  width: 90vw;
+  height: 45vw;
 
   @media (min-width: ${MediaSize.Phone}) {
     &:hover {
@@ -54,7 +99,7 @@ const StyledListItem = styled(Box)`
     }
   }
 
-  @media (min-width: ${MediaSize.Phone}) and (max-width: ${MediaSize.Tablet}) {
+  @media (min-width: ${MediaSize.Tablet}) and (max-width: ${MediaSize.Notebook}) {
     width: 38vw;
     height: 38vw;
     margin: 4vw 8vw;
@@ -68,7 +113,7 @@ const StyledListItem = styled(Box)`
     }
   }
 
-  @media (min-width: ${MediaSize.Tablet}) and (max-width: ${MediaSize.Notebook}) {
+  @media (min-width: ${MediaSize.Notebook}) and (max-width: ${MediaSize.Desktop}) {
     width: 28vw;
     height: 28vw;
     margin: 2vw 2vw;
@@ -82,7 +127,7 @@ const StyledListItem = styled(Box)`
     }
   }
 
-  @media (min-width: ${MediaSize.Notebook}) and (max-width: ${MediaSize.Desktop}) {
+  @media (min-width: ${MediaSize.Desktop}) and (max-width: ${MediaSize.Fullscreen}) {
     width: 20vw;
     height: 20vw;
     margin: 2vw 2vw;
@@ -96,7 +141,8 @@ const StyledListItem = styled(Box)`
     }
   }
 
-  @media (min-width: ${MediaSize.Desktop}) and (max-width: ${MediaSize.Fullscreen}) {
+  // @media (min-width: ${MediaSize.Desktop}) and (max-width: ${MediaSize.Fullscreen}) {
+  @media (min-width: ${MediaSize.Fullscreen}) {
     width: 17vw;
     height: 17vw;
     margin: 1.25vw 1.25vw;
@@ -110,27 +156,27 @@ const StyledListItem = styled(Box)`
     }
   }
 
-  @media (min-width: ${MediaSize.Fullscreen}) {
-    width: 12vw;
-    height: 12vw;
-    margin: 2vw 2vw;
+  // @media (min-width: ${MediaSize.Fullscreen}) {
+  //   width: 12vw;
+  //   height: 12vw;
+  //   margin: 2vw 2vw;
 
-    &:nth-child(6n + 1) {
-      margin-left: 4vw;
-    }
+  //   &:nth-child(6n + 1) {
+  //     margin-left: 4vw;
+  //   }
   
-    &:nth-child(6n + 0) {
-      margin-right: 4vw;
-    }
-  }
+  //   &:nth-child(6n + 0) {
+  //     margin-right: 4vw;
+  //   }
+  // }
 `;
 
 const ListItem = ({ image, ...props }) => {
   const { path } = image;
   return (
     <StyledListItem {...props}>
-      <StyledImage src={getImageSrc(path)} fit="cover" />
       <ImageAttr />
+      <StyledImage src={getImageSrc(path)} fit="cover" />
     </StyledListItem>
   );
 }
@@ -144,9 +190,10 @@ ListItem.propTypes = {
 const StyledImageList = styled(Box)`
   padding: 0 0.5rem;
 
-  @media (min-width: ${MediaSize.Phone}) {
+  @media (min-width: ${MediaSize.Tablet}) {
     flex-direction: row;
     flex-wrap: wrap;
+    align-content: flex-start;
     padding: 0;
   }
 `;
