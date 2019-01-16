@@ -37,11 +37,11 @@ class AsyncImage extends Component {
     return (
       <StyledAsyncImage loaded={loaded} {...props}>
         { !loaded && <LoadingIndicator /> }
-        {/* <Image
+        <Image
           onLoad={() => this.onImageLoad(this.imgRef)}
           ref={(tag) => this.imgRef = tag ? tag : null }
           {...props}
-        /> */}
+        />
       </StyledAsyncImage>
     );
   }

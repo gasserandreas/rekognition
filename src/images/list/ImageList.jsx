@@ -6,8 +6,10 @@ import { Box } from 'grommet';
 import { Clock, Group, Tag } from 'grommet-icons';
 
 import AsyncImage from '../../ui/async/AsyncImage';
+import LoadingIndicator from '../../ui/async/LoadingIndicator';
+
 import { getImageSrc, getImageCreationDate } from '../util';
-import { ImagePropType } from '../../util/PropTypes';
+import { HOCRequestPropTypes, ImagePropType } from '../../util/PropTypes';
 import { Colors, MediaSize } from '../../styles';
 
 // image attribute
@@ -163,6 +165,13 @@ const ListItem = ({ image, ...props }) => {
   );
 }
 
+const ListItemAdd = (props) => (
+  <StyledListItem {...props} style={{ justifyContent: 'center' }}>
+    <StyledImageAttr />
+    <LoadingIndicator />
+  </StyledListItem>
+);
+
 ListItem.propTypes = {
   image: ImagePropType.isRequired,
   onClick: PropTypes.func.isRequired,
@@ -181,16 +190,21 @@ const StyledImageList = styled(Box)`
 `;
 
 const ImageList = (props) => {
+  console.log(props);
+  const { images, addImageRequest, onImageClick } = props;
   return (
     <StyledImageList fill>
-      {props.images.map((image) => {
+      {addImageRequest.loading && (
+        <ListItemAdd />
+      )}
+      {images.map((image) => {
         const { id } = image;
         const key = `image_list_item_${id}`;
         return (
           <ListItem
             key={key}
             image={image}
-            onClick={() => props.onImageClick(image)}
+            onClick={() => onImageClick(image)}
             elevation="xsmall"
           />
         );
@@ -201,6 +215,7 @@ const ImageList = (props) => {
 
 ImageList.propTypes = {
   images: PropTypes.arrayOf(ImagePropType).isRequired,
+  addImageRequest: HOCRequestPropTypes.isRequired,
   onImageClick: PropTypes.func.isRequired,
 }
 

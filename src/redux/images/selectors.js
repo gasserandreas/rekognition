@@ -2,11 +2,6 @@ import { createSelector } from 'reselect';
 
 const imagesStateSelector = state => state.images;
 
-export const imagesListRequestSelector = createSelector(
-  imagesStateSelector,
-  ({ listImageRequest }) => listImageRequest,
-);
-
 export const imagesListSelector = createSelector(
   imagesStateSelector,
   ({ ids, byId }) => {
@@ -24,6 +19,24 @@ export const imagesByIdSelector = createSelector(
   ({ byId }) => byId,
 );
 
+// list
+export const imagesListRequestSelector = createSelector(
+  imagesStateSelector,
+  ({ listImageRequest }) => listImageRequest,
+);
+
+// add image 
+export const addImageRequestSelector = createSelector(
+  imagesStateSelector,
+  ({ addImageRequest }) => addImageRequest,
+);
+
+export const addImageIsLoading = createSelector(
+  addImageRequestSelector,
+  ({ loading }) => loading,
+);
+
+// get image
 export const getImageRequestSelector = createSelector(
   imagesStateSelector,
   ({ getImageRequest }) => getImageRequest,
