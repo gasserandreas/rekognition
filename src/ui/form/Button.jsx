@@ -80,12 +80,9 @@ const StyledButton = styled(Grommet.Button)`
   }
 `;
 
-const Button = (props) => {
-
-  return (
-    <StyledButton {...props} />
-  )
-}
+const Button = (props) => (
+  <StyledButton {...props} />
+);
 
 Button.propTypes = {
   buttonStyle: PropTypes.oneOf([

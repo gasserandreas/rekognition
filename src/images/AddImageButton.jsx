@@ -19,6 +19,7 @@ const StyledAddImageButton = styled(Button)`
   position: fixed;
   right: 2.5rem;
   bottom: 2.5rem;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.20);
 `;
 
 class AddImageButton extends Component {
@@ -53,6 +54,7 @@ class AddImageButton extends Component {
               icon={<Add color={Colors.ColorsPalette.White}/>}
               size="xlarge"
               buttonStyle="primary"
+              elevation="medium"
             />
           </span>
         )}
