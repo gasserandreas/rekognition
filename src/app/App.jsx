@@ -21,7 +21,7 @@ import PlaygroundContainer from '../playground/PlaygroundContainer';
 
 import ImagesContainer from '../images/list/Container';
 import ImagesDetailContainer from '../images/detail/Container';
-import UserContainer from '../user/UserContainer';
+import UserContainer from '../user/Container';
 
 import LoginContainer from '../auth/login/Container';
 import RegisterContainer from '../auth/register/Container';

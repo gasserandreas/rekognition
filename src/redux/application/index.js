@@ -1,7 +1,5 @@
 import { combineReducers } from 'redux';
 
-import { sideBarVisibilitySelector } from './selectors';
-
 import { refreshToken } from '../auth';
 import {
   tokenSelector,
@@ -22,14 +20,9 @@ export const AppStatus = {
 // action types
 export const APP_IDLE = 'APP_IDLE';
 
-const APPLICATION_SIDE_BAR_VISIBILITY_SET = 'APPLICATION_SIDE_BAR_VISIBILITY_SET';
 const APPLICATION_STATUS_SET = 'APPLICATION_STATUS_SET';
 
 // simple actions
-const applicationSideBarVisibilitySet = (status) => ({
-  type: APPLICATION_SIDE_BAR_VISIBILITY_SET,
-  payload: status,
-});
 
 const applicationWillLoad = () => ({
   type: APPLICATION_STATUS_SET,
@@ -42,19 +35,6 @@ const applicationDidLoad = () => ({
 });
 
 // complex actions
-export const showSideBar = () => (dispatch) => {
-  dispatch(applicationSideBarVisibilitySet(true));
-};
-
-export const hideSideBar = () => (dispatch) => {
-  dispatch(applicationSideBarVisibilitySet(false));
-};
-
-export const toggleSideBar = () => (dispatch, getState) => {
-  const showSideBar = sideBarVisibilitySelector(getState());
-  dispatch(applicationSideBarVisibilitySet(!showSideBar));
-}
-
 export const loadApplication = () => (async (dispatch, getState) => {
   dispatch(applicationWillLoad());
 
@@ -99,15 +79,6 @@ export const loadApplicationAuthenticated = () => (dispatch) => {
 }
 
 // reducers
-const sideBarVisibility = (state = true, action) => {
-  switch (action.type) {
-    case APPLICATION_SIDE_BAR_VISIBILITY_SET:
-      return action.payload;
-    default:
-      return state;
-  }
-};
-
 const status = (state = AppStatus.INITIAL, action) => {
   switch (action.type) {
     case APPLICATION_STATUS_SET:
@@ -119,5 +90,4 @@ const status = (state = AppStatus.INITIAL, action) => {
 
 export default combineReducers({
   status,
-  sideBarVisibility,
 });
