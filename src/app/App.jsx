@@ -67,9 +67,9 @@ const StyledAppContent = styled(Box)`
   min-height: 100%;
   height: auto;
 
-  @media (min-width: ${MediaSize.Tablet}) {
-    height: 100%;
-  }
+  // @media (min-width: ${MediaSize.Tablet}) {
+  //   height: 100%;
+  // }
 `;
 
 /**
@@ -100,7 +100,6 @@ class App extends Component {
           )} />
         </Switch>
         <StyledAppContent fill justify='between' direction='column'>
-          
           <Box flex fill pad="none">
             <Switch>
               <PrivateRoute

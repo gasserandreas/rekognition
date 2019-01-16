@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -164,13 +164,17 @@ class DetailView extends Component {
                 onLabelClick={(label) => console.log(label)}
               />
             </AsyncContainer>
-            <StyledHeading level="4">Faces ({faces.length})</StyledHeading>
-            <AsyncContainer loading={loading}>
-              <Faces
-                faces={faces}
-                onFaceClick={(face) => console.log(face)}
-              />
-            </AsyncContainer>
+            { faces.lenght > 0 && (
+              <Fragment>
+                <StyledHeading level="4">Faces ({faces.length})</StyledHeading>
+                <AsyncContainer loading={loading}>
+                  <Faces
+                    faces={faces}
+                    onFaceClick={(face) => console.log(face)}
+                  />
+                </AsyncContainer>
+              </Fragment>
+            )}
           </StyledScrollableData>
         </StyledDataBox>
       </StyledView>

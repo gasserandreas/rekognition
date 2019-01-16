@@ -20,6 +20,7 @@ const StyledAddImageButton = styled(Button)`
   right: 2.5rem;
   bottom: 2.5rem;
   box-shadow: 0px 8px 16px rgba(0,0,0,0.20);
+  z-index: 100;
 `;
 
 class AddImageButton extends Component {
