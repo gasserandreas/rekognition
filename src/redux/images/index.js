@@ -55,9 +55,7 @@ const imagesAddImages = (images) => {
 // complex actions
 export const addImage = hocAsyncAction(
   IMAGES_ADD_REQUEST_TYPES,
-  (file, shouldAnalyse = true) => (dispatch, getState, { GraphApi }) => {
-    // base attributes
-    const imageId = uuid.v4();
+  ({ file, shouldAnalyse = true, imageId = uuid.v4() }) => (dispatch, getState, { GraphApi }) => {
 
     // get file ending
     let filetype = undefined;
@@ -83,9 +81,10 @@ export const addImage = hocAsyncAction(
         const imageBuffer = Buffer.from(imageString, 'base64');
 
         const ADD_IMAGE = gql`
-          mutation addImage($file: Upload!, $type: String!, $name: String!, $analyse: Boolean) {
+          mutation addImage($file: Upload!, $id: ID, $type: String!, $name: String!, $analyse: Boolean) {
             addImage(input: {
               file: $file,
+              id: $id,
               name: $name,
               type: $type,
               analyse: $analyse
@@ -150,6 +149,7 @@ export const addImage = hocAsyncAction(
 
         const variables = {
           file: imageBuffer,
+          id: imageId,
           name: imageName,
           type,
           analyse: shouldAnalyse,

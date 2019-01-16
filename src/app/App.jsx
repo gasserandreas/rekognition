@@ -90,7 +90,15 @@ class App extends Component {
 
     return (
       <Grommet theme={theme} full={true}>
-        <AppHeader isAuthenticated={isAuthenticated} username={username} />
+        <Switch>
+          <Route path="*" component={(props) => (
+            <AppHeader
+              isAuthenticated={isAuthenticated}
+              username={username}
+              {...props}
+            />
+          )} />
+        </Switch>
         <StyledAppContent fill justify='between' direction='column'>
           
           <Box flex fill pad="none">

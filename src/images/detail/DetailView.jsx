@@ -7,7 +7,9 @@ import { Box, Heading } from 'grommet';
 import Labels from './Labels';
 import Faces from './Faces';
 import { Attribute } from './Attribute';
+import AddImageButton from '../AddImageButton';
 
+import PreviousButton from '../../ui/PreviousButton';
 import View from '../../ui/View';
 import AsyncImage from '../../ui/async/AsyncImage';
 import AsyncContainer from '../../ui/async/AsyncContainer';
@@ -15,7 +17,18 @@ import AsyncContainer from '../../ui/async/AsyncContainer';
 import { getImageCreationDateTime, getImageSrc } from '../util';
 import { HOCRequestPropTypes } from '../../util/PropTypes';
 
+import * as Paths from '../../paths';
 import { Colors, MediaSize, Sizes } from '../../styles';
+
+const StyledBackButton = styled(PreviousButton)`
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+
+  @media (max-width: ${MediaSize.Tablet}) {
+    display: none;
+    visibility: none;
+  }
+`;
 
 const StyledHeading = styled(Heading)`
   margin-bottom: 0.5rem;
@@ -83,6 +96,13 @@ const StyledScrollableData = styled.div`
   }
 `;
 
+const StyledView = styled(View)`
+  @media (max-width: ${MediaSize.Tablet}) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+`;
+
 class DetailView extends Component {
   componentWillMount() {
     const { labels, faces, getImage, image: { id } } = this.props;
@@ -94,7 +114,7 @@ class DetailView extends Component {
   }
 
   render() {
-    const { labels, faces, image, getImageRequest } = this.props;
+    const { history, labels, faces, image, getImageRequest } = this.props;
     const { path, created, meta } = image;
     const { loading } = getImageRequest;
 
@@ -120,15 +140,17 @@ class DetailView extends Component {
     ].filter(({ value }) => value !== null);
 
     return (
-      <View>
+      <StyledView>
+        <AddImageButton afterOnClick={() => history.push(Paths.HOME)} />
         <StyledImageBox fill>
           <Box pad="small" fill style={{ justifyContent: 'center' }}>
             <AsyncImage src={getImageSrc(path)} fit="contain" />
           </Box>
         </StyledImageBox>
         <StyledDataBox pad={{ vertical: 'none', horizontal: 'small' }}>
+          <StyledBackButton onClick={history.goBack} />
           <StyledScrollableData>
-          <StyledHeading level="4">Image Information</StyledHeading>
+          <StyledHeading level="4" style={{ marginTop: '0rem'}}>Image Information</StyledHeading>
             <Box>
               <Attribute attribute={{ name: 'Uploaded', value: getImageCreationDateTime(created) }} />
               {metaValues.map(({ name, value }) => (
@@ -151,7 +173,7 @@ class DetailView extends Component {
             </AsyncContainer>
           </StyledScrollableData>
         </StyledDataBox>
-      </View>
+      </StyledView>
     );
   }
 }

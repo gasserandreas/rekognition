@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import uuid from 'uuid';
 import styled from 'styled-components';
 import Dropzone from 'react-dropzone'
 import { Add } from 'grommet-icons';
@@ -25,8 +27,14 @@ class AddImageButton extends Component {
   uploadImage(files) {
     // only supports single files
     if (files.length > 0) {
+      const { addImage, afterOnClick } = this.props;
       files.forEach((file) => {
-        this.props.addImage(file);
+        const id = uuid.v4();
+        addImage({ file, id });
+
+        if (afterOnClick) {
+          afterOnClick();
+        }
       });
     }
   }
@@ -51,6 +59,15 @@ class AddImageButton extends Component {
       </Dropzone>
     );
   }
+}
+
+AddImageButton.propTypes = {
+  addImage: PropTypes.func.isRequired,
+  afterOnClick: PropTypes.func,
+}
+
+AddImageButton.defaultProps = {
+  afterOnClick: null,
 }
 
 // redux
