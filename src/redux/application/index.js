@@ -93,9 +93,6 @@ export const loadApplication = () => (async (dispatch, getState) => {
 
 export const loadApplicationAuthenticated = () => (dispatch) => {
   // do more stuff in here
-
-  console.log('auth init stuff');
-
   dispatch(listImages());
 
   dispatch(applicationDidLoad());

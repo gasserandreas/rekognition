@@ -190,7 +190,6 @@ const StyledImageList = styled(Box)`
 `;
 
 const ImageList = (props) => {
-  console.log(props);
   const { images, addImageRequest, onImageClick } = props;
   return (
     <StyledImageList fill>
