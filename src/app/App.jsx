@@ -21,7 +21,7 @@ import PlaygroundContainer from '../playground/PlaygroundContainer';
 
 import ImagesContainer from '../images/list/Container';
 import ImagesDetailContainer from '../images/detail/Container';
-import UserContainer from '../user/UserContainer';
+import UserContainer from '../user/Container';
 
 import LoginContainer from '../auth/login/Container';
 import RegisterContainer from '../auth/register/Container';
@@ -67,9 +67,9 @@ const StyledAppContent = styled(Box)`
   min-height: 100%;
   height: auto;
 
-  @media (min-width: ${MediaSize.Tablet}) {
-    height: 100%;
-  }
+  // @media (min-width: ${MediaSize.Tablet}) {
+  //   height: 100%;
+  // }
 `;
 
 /**
@@ -90,7 +90,15 @@ class App extends Component {
 
     return (
       <Grommet theme={theme} full={true}>
-        <AppHeader isAuthenticated={isAuthenticated} username={username} />
+        <Switch>
+          <Route path="*" component={(props) => (
+            <AppHeader
+              isAuthenticated={isAuthenticated}
+              username={username}
+              {...props}
+            />
+          )} />
+        </Switch>
         <StyledAppContent fill justify='between' direction='column'>
           <Box flex fill pad="none">
             <Switch>
@@ -124,9 +132,10 @@ class App extends Component {
             </Switch>
           </Box>
           { isAuthenticated && (
-            <Box tag='footer' direction='column' align='center' pad={{ vertical: 'xsmall' }} >
-              <AppFooter />
-            </Box>
+              <Switch>
+                <Route exact path={Paths.GET_IMAGES_DETAIL(Paths.ID)} component={() => <AppFooter withSidebar/>} />
+                <Route path="*" component={() => <AppFooter />} />
+              </Switch>
           )}
         </StyledAppContent>
       </Grommet>

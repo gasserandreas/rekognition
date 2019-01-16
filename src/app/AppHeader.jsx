@@ -8,8 +8,17 @@ import {
   Heading,
 } from 'grommet';
 
-import { Colors, Sizes } from '../styles';
+import PreviousButton from '../ui/PreviousButton';
+import { Colors, MediaSize, Sizes } from '../styles';
 import * as Paths from '../paths';
+
+const StyledPreviousButton = styled(PreviousButton)`
+  opacity: ${props => props.opacity};
+  @media (min-width: ${MediaSize.Tablet}) {
+    display: none;
+    visibility: none;
+  }
+`;
 
 const StyledHeading = styled(Heading)`
   font-weight: 500;
@@ -67,7 +76,9 @@ const StyledHeader = styled(Box)`
 `;
 
 const AppHeader = (props) => {
-  const { isAuthenticated, username } = props;
+  const { isAuthenticated, username, match, history } = props;
+  const previousButtonOpacity = match.url === '/' ? 0 : 1;
+
   return (
     <StyledHeader
       tag="header"
@@ -77,6 +88,10 @@ const AppHeader = (props) => {
       isAuthenticated={isAuthenticated}
       pad={{ horizontal: "large", vertical: "none" }}
     >
+      <StyledPreviousButton
+        onClick={history.goBack}
+        opacity={previousButtonOpacity}
+      />
       <Link to={Paths.HOME}>
         <StyledHeading  level={4}>AWS Rekognition</StyledHeading>
       </Link>
@@ -84,5 +99,14 @@ const AppHeader = (props) => {
     </StyledHeader>
   )
 };
+
+AppHeader.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  username: PropTypes.string,
+}
+
+AppHeader.defaultProps = {
+  username: '',
+}
 
 export default AppHeader;

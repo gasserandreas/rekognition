@@ -50,8 +50,6 @@ export const hocAsyncAction = (ACTION_TYPE, createThunk, rejectable = false) => 
           payload,
         });
 
-        console.log('success');
-
         return Promise.resolve(payload);
       })
       // proceed with error

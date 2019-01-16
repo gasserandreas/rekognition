@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import uuid from 'uuid';
 import styled from 'styled-components';
 import Dropzone from 'react-dropzone'
 import { Add } from 'grommet-icons';
@@ -17,6 +19,8 @@ const StyledAddImageButton = styled(Button)`
   position: fixed;
   right: 2.5rem;
   bottom: 2.5rem;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.20);
+  z-index: 100;
 `;
 
 class AddImageButton extends Component {
@@ -25,8 +29,14 @@ class AddImageButton extends Component {
   uploadImage(files) {
     // only supports single files
     if (files.length > 0) {
+      const { addImage, afterOnClick } = this.props;
       files.forEach((file) => {
-        this.props.addImage(file);
+        const id = uuid.v4();
+        addImage({ file, id });
+
+        if (afterOnClick) {
+          afterOnClick();
+        }
       });
     }
   }
@@ -45,12 +55,22 @@ class AddImageButton extends Component {
               icon={<Add color={Colors.ColorsPalette.White}/>}
               size="xlarge"
               buttonStyle="primary"
+              elevation="medium"
             />
           </span>
         )}
       </Dropzone>
     );
   }
+}
+
+AddImageButton.propTypes = {
+  addImage: PropTypes.func.isRequired,
+  afterOnClick: PropTypes.func,
+}
+
+AddImageButton.defaultProps = {
+  afterOnClick: null,
 }
 
 // redux

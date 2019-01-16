@@ -14,6 +14,22 @@ export const imagesListSelector = createSelector(
   }
 );
 
+export const sortedImageListSelector = createSelector(
+  imagesListSelector,
+  (images) => {
+    // sort function
+    const sortBy = ({ created: createdA }, { created: createdB }) => {
+      if (!createdA || !createdB) {
+        return createdA ? 1 : -1;
+      }
+
+      return new Date(createdB) - new Date(createdA);
+    }
+
+    return images.sort(sortBy);
+  }
+);
+
 export const imagesByIdSelector = createSelector(
   imagesStateSelector,
   ({ byId }) => byId,
