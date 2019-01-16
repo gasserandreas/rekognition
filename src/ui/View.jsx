@@ -12,16 +12,11 @@ const StyledView = styled(Box)`
   padding-top: ${Sizes.Header.height};
 `;
 
-export const View = ({ children, ...props }) => {
-  const { topBar } = props;
-
-  return (
-    <StyledView flex fill pad="small" {...props}>
-      {topBar}
-      {children}
-    </StyledView>
-  );
-}
+export const View = ({ children, ...props }) => (
+  <StyledView flex fill pad="small" {...props}>
+    {children}
+  </StyledView>
+);
 
 View.propTypes = {
   children: PropTypes.node.isRequired,

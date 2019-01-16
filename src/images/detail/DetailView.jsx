@@ -107,15 +107,15 @@ class DetailView extends Component {
       },
       {
         name: 'Size',
-        value: size > 0 ? size : null,
+        value: size > 0 ? `${(size / 1000000).toFixed(2)} MB` : null,
       },
       {
         name: 'Dimension',
-        value: height > 0 ? `${width}px x ${height}` : null,
+        value: height > 0 ? `${width}px x ${height}px` : null,
       },
       {
         name: 'Density',
-        value: density > 0 ? density : null,
+        value: density > 0 ? `${density} DPI` : null,
       },
     ].filter(({ value }) => value !== null);
 

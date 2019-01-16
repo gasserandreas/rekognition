@@ -36,13 +36,11 @@ const Label = (props) => {
   const { label, ...rest } = props;
   const { name, confidence } = label;
 
-  const confidenceStr = String(confidence).substring(0,5);
-
   return (
     <StyledLabel
       {...rest}
     >
-      {name} { confidenceStr && <span>({confidenceStr})</span>}
+      {name} { confidence && <span>({confidence.toFixed(2)})</span>}
     </StyledLabel>
   );
 };

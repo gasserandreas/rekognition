@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Colors } from '../../styles';
 
 
 const StyledLoadingIndicator = styled.div`
@@ -10,7 +11,6 @@ const StyledLoadingIndicator = styled.div`
   &:before {
     content: '';
     display: block;
-    // padding-top: 100%;
   }
 
   circular {
@@ -43,17 +43,21 @@ const StyledLoadingIndicator = styled.div`
   @keyframes color {
     100%,
     0% {
-      stroke: #d62d20;
+      // stroke: #d62d20;
+      stroke: ${Colors.Blue.Default}
     }
     40% {
-      stroke: #0057e7;
+      // stroke: #0057e7;
+      stroke: ${Colors.Blue.Light}
     }
     66% {
-      stroke: #008744;
+      // stroke: #008744;
+      stroke: ${Colors.Blue.Default}
     }
     80%,
     90% {
-      stroke: #ffa700;
+      // stroke: #ffa700;
+      stroke: ${Colors.Blue.Dark}
     }
   }
   
