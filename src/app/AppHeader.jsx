@@ -8,12 +8,11 @@ import {
   Heading,
 } from 'grommet';
 
-import { Colors } from '../styles';
+import { Colors, Sizes } from '../styles';
 import * as Paths from '../paths';
 
 const StyledHeading = styled(Heading)`
   font-weight: 500;
-  color: ${Colors.ColorsPalette.White};
   margin-top: 0.85rem;
   margin-bottom: 0.85rem;
 `;
@@ -31,36 +30,57 @@ const UserProfile = (props) => (
   </StyledUserProfile>
 );
 
-const StyledHeader = styled.div`
-  background-color: ${Colors.ColorsPalette.Background};
-  color: ${Colors.ColorsPalette.White};
+const StyledHeader = styled(Box)`
+  ${(props) => props.isAuthenticated ? `
+      color: ${Colors.ColorsPalette.Text};
+      background-color: ${Colors.ColorsPalette.White};
+      border-bottom: 1px solid #c9c9c9;
+
+      a {
+        color: ${Colors.ColorsPalette.Text};
+        &:hover {
+          color: ${Colors.ColorsPalette.TextFaded};
+        }
+      }
+    ` : `
+      background-color: ${Colors.ColorsPalette.Background};
+      color: ${Colors.ColorsPalette.White};
+
+      a {
+        color: ${Colors.ColorsPalette.White};
+        &:hover {
+          color: ${Colors.Neutrals.LightDark};
+        }
+      }
+    `
+  }
+  height: ${Sizes.Header.height};
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
 
   a {
-    color: ${Colors.ColorsPalette.White};
     text-decoration: none;
-
-    &:hover {
-      color: ${Colors.Neutrals.LightDark};
-    }
   }
 `;
 
 const AppHeader = (props) => {
   const { isAuthenticated, username } = props;
   return (
-    <StyledHeader>
-      <Box
-        tag="header"
-        direction="row"
-        align='center'
-        justify='between'
-        pad={{ left: 'small', right: 'small', vertical: 'none' }}
-      >
-        <Link to={Paths.HOME}>
-          <StyledHeading  level={4}>AWS Rekognition</StyledHeading>
-        </Link>
-        {isAuthenticated && <UserProfile username={username} />}
-      </Box>
+    <StyledHeader
+      tag="header"
+      direction="row"
+      align='center'
+      justify='between'
+      isAuthenticated={isAuthenticated}
+      pad={{ horizontal: "large", vertical: "none" }}
+    >
+      <Link to={Paths.HOME}>
+        <StyledHeading  level={4}>AWS Rekognition</StyledHeading>
+      </Link>
+      {isAuthenticated && <UserProfile username={username} />}
     </StyledHeader>
   )
 };

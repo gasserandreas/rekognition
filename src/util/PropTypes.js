@@ -7,3 +7,12 @@ export const HOCRequestPropTypes = PropTypes.shape({
   lastFetch: PropTypes.number,
   loading: PropTypes.bool.isRequired,
 });
+
+export const ImagePropType = PropTypes.shape({
+  id: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
+  created: PropTypes.string,
+  name: PropTypes.string,
+  type: PropTypes.string,
+});
+

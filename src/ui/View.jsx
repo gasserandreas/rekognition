@@ -4,11 +4,18 @@ import styled from 'styled-components';
 
 import { Box, Heading } from 'grommet';
 
-// view
-const StyledView = styled(Box)``;
+import { Sizes } from '../styles';
 
-export const View = (props) => (
-  <StyledView flex fill pad="small" {...props} />
+// view
+const StyledView = styled(Box)`
+  position: relative;
+  padding-top: ${Sizes.Header.height};
+`;
+
+export const View = ({ children, ...props }) => (
+  <StyledView flex fill pad="small" {...props}>
+    {children}
+  </StyledView>
 );
 
 View.propTypes = {

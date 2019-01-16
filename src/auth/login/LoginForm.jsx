@@ -9,9 +9,9 @@ import {
   Field,
   TextInput,
   CheckBox,
-} from '../../ui/Form';
-import Button from '../../ui/Button';
-import Message from '../../ui/Message';
+} from '../../ui/form/Form';
+import Button from '../../ui/form/Button';
+import Message from '../../ui/form/Message';
 
 import { ButtonGroup } from '../AuthComponents';
 

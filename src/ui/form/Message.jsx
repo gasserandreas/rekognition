@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Colors } from '../styles';
+import { Colors } from '../../styles';
 
 export const MESSAGE_TYPES = {
   INFO: 'info',

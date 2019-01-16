@@ -69,8 +69,28 @@ export const Colors = {
 
 // media sizes
 export const MediaSize = {
-  Mobile: '360px',
-  Tablet: '600px',
-  Desktop: '980px',
-  Fullscreen: '1400px',
+  Phone: '380px',
+  Tablet: '540px',
+  Notebook: '860px',
+  Desktop: '1180px',
+  Fullscreen: '1500px',
 };
+
+export const Sizes = {
+  Header: {
+    height: '56px',
+    number: 56,
+  },
+  TopBar: {
+    height: '44px',
+    number: 44,
+  },
+  LeftBar: {
+    width: {
+      Tablet: '45vw',
+      Notebook: '35vw',
+      Desktop: '30vw',
+      Fullscreen: '20vw',
+    },
+  },
+}

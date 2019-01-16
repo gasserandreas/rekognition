@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Grommet,
-  Box,
-  Anchor,
-} from 'grommet';
+import styled from 'styled-components';
+import { Grommet, Box } from 'grommet';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -22,7 +19,8 @@ import AppFooter from './AppFooter';
 // route imports
 import PlaygroundContainer from '../playground/PlaygroundContainer';
 
-import ImagesContainer from '../images/ImagesContainer';
+import ImagesContainer from '../images/list/Container';
+import ImagesDetailContainer from '../images/detail/Container';
 import UserContainer from '../user/UserContainer';
 
 import LoginContainer from '../auth/login/Container';
@@ -32,13 +30,15 @@ import NotFound from './NotFound';
 
 import * as Paths from '../paths';
 
-import { Colors } from '../styles';
+import { Colors, MediaSize } from '../styles';
 
 const theme = {
   global: {
     colors: {
       brand: Colors.ColorsPalette.Brand,
-      background: Colors.ColorsPalette.White,
+      background: '#F7F8F9',
+      // background: Colors.ColorsPalette.White,
+      // background: 'rgba(0, 82, 204, .05)',
       focus: 'rgba(0, 0, 0, 0.33)',
       'neutral-1': Colors.Neutrals.DarkNeutrals,
       'neutral-2': Colors.Neutrals.MidDark,
@@ -63,6 +63,15 @@ const theme = {
   },
 };
 
+const StyledAppContent = styled(Box)`
+  min-height: 100%;
+  height: auto;
+
+  @media (min-width: ${MediaSize.Tablet}) {
+    height: 100%;
+  }
+`;
+
 /**
  * Attention: Do NOT convert this comp to state-less component due major issues
  * with react-router-dom and state-less root components
@@ -81,27 +90,45 @@ class App extends Component {
 
     return (
       <Grommet theme={theme} full={true}>
-        <Box fill justify='between' direction='column'>
-          <Box>
-            <AppHeader isAuthenticated={isAuthenticated} username={username} />
-            <Box flex fill pad="none">
-              <Switch>
-                <PrivateRoute exact path={Paths.HOME} component={ImagesContainer} isAuthenticated={isAuthenticated} />
-                <PrivateRoute exact path={Paths.IMAGES} component={ImagesContainer} isAuthenticated={isAuthenticated} />
-                <PrivateRoute exact path={Paths.USER} component={UserContainer} isAuthenticated={isAuthenticated} />
-                <Route exact path={Paths.PLAYGROUND} component={PlaygroundContainer} />
-                <Route exact path={Paths.LOGIN} component={LoginContainer} />
-                <Route exact path={Paths.REGISTER} component={RegisterContainer} />
-                <Route path="*" component={NotFound} />
-              </Switch>
-            </Box>
+        <AppHeader isAuthenticated={isAuthenticated} username={username} />
+        <StyledAppContent fill justify='between' direction='column'>
+          <Box flex fill pad="none">
+            <Switch>
+              <PrivateRoute
+                exact
+                path={Paths.HOME}
+                component={ImagesContainer}
+                isAuthenticated={isAuthenticated}
+              />
+              <PrivateRoute
+                exact
+                path={Paths.IMAGES}
+                component={ImagesContainer}
+                isAuthenticated={isAuthenticated}
+              />
+              <PrivateRoute
+                exact
+                path={Paths.GET_IMAGES_DETAIL(Paths.ID)}
+                component={ImagesDetailContainer}
+                isAuthenticated={isAuthenticated}
+              />
+              <PrivateRoute
+                exact path={Paths.USER}
+                component={UserContainer}
+                isAuthenticated={isAuthenticated}
+              />
+              <Route exact path={Paths.PLAYGROUND} component={PlaygroundContainer} />
+              <Route exact path={Paths.LOGIN} component={LoginContainer} />
+              <Route exact path={Paths.REGISTER} component={RegisterContainer} />
+              <Route path="*" component={NotFound} />
+            </Switch>
           </Box>
           { isAuthenticated && (
             <Box tag='footer' direction='column' align='center' pad={{ vertical: 'xsmall' }} >
               <AppFooter />
             </Box>
           )}
-        </Box>
+        </StyledAppContent>
       </Grommet>
     );
   }

@@ -15,7 +15,6 @@ import { APP_IDLE } from './application';
 import { logOutUser } from './auth';
 
 import GraphApi from '../util/GraphApi';
-import AwsApi from '../util/AwsApi';
 import { getUrl } from '../util/services/networkUtils';
 
 // configure persist store
@@ -31,9 +30,6 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 const configureStore = (initialState = {}) => {
   const {
     NODE_ENV,
-    REACT_APP_AWS_DEFAULT_ACCESS_KEY_ID,
-    REACT_APP_AWS_DEFAULT_SECRET_ACCESS_KEY,
-    REACT_APP_AWS_DEFAULT_REGION,
   } = process.env;
 
   const errorMiddleware = createMiddleware();
@@ -45,14 +41,6 @@ const configureStore = (initialState = {}) => {
       GraphApi: new GraphApi({
         endpoint: getUrl('graphql'),
         onAuthError: (message) => store.dispatch(logOutUser(message)), //AUTH_LOG_OUT
-      }),
-      // init aws api
-      AwsApi: new AwsApi({
-        awsConfig: {
-          accessKeyId: REACT_APP_AWS_DEFAULT_ACCESS_KEY_ID,
-          secretAccessKey: REACT_APP_AWS_DEFAULT_SECRET_ACCESS_KEY,
-          region: REACT_APP_AWS_DEFAULT_REGION,
-        },
       }),
     }),
     errorMiddleware,
