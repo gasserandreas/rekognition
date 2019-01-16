@@ -92,6 +92,7 @@ class App extends Component {
       <Grommet theme={theme} full={true}>
         <AppHeader isAuthenticated={isAuthenticated} username={username} />
         <StyledAppContent fill justify='between' direction='column'>
+          
           <Box flex fill pad="none">
             <Switch>
               <PrivateRoute
@@ -124,9 +125,10 @@ class App extends Component {
             </Switch>
           </Box>
           { isAuthenticated && (
-            <Box tag='footer' direction='column' align='center' pad={{ vertical: 'xsmall' }} >
-              <AppFooter />
-            </Box>
+              <Switch>
+                <Route exact path={Paths.GET_IMAGES_DETAIL(Paths.ID)} component={() => <AppFooter withSidebar/>} />
+                <Route path="*" component={() => <AppFooter />} />
+              </Switch>
           )}
         </StyledAppContent>
       </Grommet>
