@@ -98,7 +98,7 @@ class View extends Component {
       <StyledView>
         <AuthHeader>Sinup for Rekognition</AuthHeader>
         <div className="content">
-          <Card>
+          <Card pad="large">
             { !validEmail ? (
               <CheckEmailForm
                 user={{ email: 'andreas.safe@gmail.com' }}
