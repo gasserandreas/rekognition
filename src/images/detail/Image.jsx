@@ -91,8 +91,7 @@ class ImageContainer extends Component {
           bottom: wrapperBounding.bottom,
         };
 
-        let top, width, height, ratio;
-        const left = 0;
+        let width, height, ratio;
 
 
         if (orientation === 'LANDSCAPE') {
@@ -102,6 +101,13 @@ class ImageContainer extends Component {
           // get height by sticking with the ratio
           ratio = imageWidth / width;
           height = imageHeight / ratio;
+
+          // check if image height fits into viewport by using max width
+          if (height > imageContainerPosition.height) {
+            height = imageContainerPosition.height;
+            ratio = imageHeight / height;
+            width = imageWidth / ratio;
+          }
         } else {
           // portrait mode full height
           height = imageContainerPosition.height;
@@ -117,8 +123,9 @@ class ImageContainer extends Component {
           }
         }
 
-        // calculate top position (center of con)
-        top = imageContainerPosition.height / 2 - height / 2;
+        // calculate top position (center of container)
+        const top = imageContainerPosition.height / 2 - (height / 2);
+        const left = imageContainerPosition.width / 2 -(width / 2);
 
         // define image position
         const imageWrapperPosition = {

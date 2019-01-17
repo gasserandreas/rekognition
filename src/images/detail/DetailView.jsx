@@ -43,12 +43,15 @@ const StyledImageBoxContainer = styled.div`
 
 const StyledImageBox = styled(Box)`
   width: 100%;
-  min-height: 30vh;
   justify-content: center;
-  position: relative;
+  position: fixed;
+
+  @media (max-width: ${MediaSize.Tablet}) {
+    height: 320px;
+    left: 0;
+  }
 
   @media (min-width: ${MediaSize.Tablet}) {
-    position: fixed;
     top: ${Sizes.Header.height};
     right: 0;
     bottom: 0;
@@ -73,11 +76,15 @@ const StyledImageBox = styled(Box)`
 const StyledDataBox = styled(Box)`
   width: 100%;
   background-color: ${Colors.ColorsPalette.White};
+  position: fixed;
+  left: 0;
+
+  @media (max-width: ${MediaSize.Tablet}) {
+    top: ${Sizes.Header.number + 320}px;
+  }
 
   @media (min-width: ${MediaSize.Tablet}) {
-    position: fixed;
     top: ${Sizes.Header.height};
-    left: 0;
     bottom: 0;
     box-shadow: 0px 2px 4px rgba(0,0,0,0.20);
     z-index: 51;
