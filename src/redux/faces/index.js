@@ -7,7 +7,7 @@ import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 const FACES_ADD_FACES = 'FACES_ADD_FACES';
 
 // simple actions
-export const facesAddLabels = (imageId, faces) => {
+export const facesAddFaces = (imageId, faces) => {
   
   const ids = [];
   const byId = {};

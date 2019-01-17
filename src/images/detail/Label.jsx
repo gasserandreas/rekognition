@@ -4,15 +4,19 @@ import styled from 'styled-components';
 
 import { Colors } from '../../styles';
 
+const hoverSelectedStyles = `
+  cursor: pointer;
+  background-color: ${Colors.Blue.Default};
+  color: ${Colors.ColorsPalette.White};
+`;
+
 const handleLabelHover = (props) => props.isClickable
   ? `
     color: ${Colors.Blue.Default};
     border-color: ${Colors.Blue.Default};
 
     &:hover {
-      cursor: pointer;
-      background-color: ${Colors.Blue.Default};
-      color: ${Colors.ColorsPalette.White};
+      ${hoverSelectedStyles}
     }
   ` : '';
 
@@ -30,6 +34,7 @@ const StyledLabel = styled.div`
   }
 
   ${(props) => handleLabelHover(props)}
+  ${props => props.selected ? hoverSelectedStyles : ''}
 `;
 
 const Label = (props) => {
@@ -60,11 +65,13 @@ Label.propTypes = {
   }).isRequired,
   onClick: PropTypes.func,
   isClickable: PropTypes.bool,
+  selected: PropTypes.bool,
 };
 
 Label.defaultProps = {
   onClick: null,
   isClickable: false,
+  selected: false,
 };
 
 export default Label;

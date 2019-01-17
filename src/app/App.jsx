@@ -131,12 +131,12 @@ class App extends Component {
               <Route path="*" component={NotFound} />
             </Switch>
           </Box>
-          { isAuthenticated && (
+          {/* { isAuthenticated && (
               <Switch>
                 <Route exact path={Paths.GET_IMAGES_DETAIL(Paths.ID)} component={() => <AppFooter withSidebar/>} />
                 <Route path="*" component={() => <AppFooter />} />
               </Switch>
-          )}
+          )} */}
         </StyledAppContent>
       </Grommet>
     );
