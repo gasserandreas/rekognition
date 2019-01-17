@@ -23,6 +23,7 @@ class Labels extends Component {
   }
 
   render() {
+    const { selectedLabel } = this.props;
     return (
       <StyledLabels
         wrap
@@ -34,6 +35,7 @@ class Labels extends Component {
             label,
             onClick: () => this.onLabelClick(label),
             isClickable: this.onClickEnabled(label),
+            selected: selectedLabel && selectedLabel.id === label.id,
           };
 
           return <Label {...labelProps} />;
@@ -45,7 +47,14 @@ class Labels extends Component {
 
 Labels.propTypes = {
   labels: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  selectedLabel: PropTypes.shape({}),
   onLabelClick: PropTypes.func.isRequired,
+};
+
+Labels.defaultProps = {
+  selectedLabel: {
+    id: '',
+  },
 };
 
 export default Labels;

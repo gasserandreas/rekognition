@@ -11,7 +11,7 @@ import hocReducer, { hocAsyncAction, hocCreateTypes } from '../HOC';
 import { readAsDataURL } from './util';
 
 import { labelsAddLabels } from '../labels';
-import { facesAddLabels } from '../faces';
+import { facesAddFaces } from '../faces';
 
 // action types
 const IMAGES_ADD_NEW_IMAGE = 'IMAGES_ADD_NEW_IMAGE';
@@ -165,7 +165,7 @@ export const addImage = hocAsyncAction(
             // save to redux
             dispatch(imagesAddNewImage(imageData));
             dispatch(labelsAddLabels(id, labels.items));
-            dispatch(facesAddLabels(id, faces.items));
+            dispatch(facesAddFaces(id, faces.items));
 
             return data;
           });
@@ -290,7 +290,7 @@ export const getImage = hocAsyncAction(
         
         dispatch(imagesAddImage(image));
         dispatch(labelsAddLabels(id, labels.items));
-        dispatch(facesAddLabels(id, faces.items));
+        dispatch(facesAddFaces(id, faces.items));
 
         return data;
       })

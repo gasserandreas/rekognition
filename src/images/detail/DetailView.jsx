@@ -78,6 +78,7 @@ const StyledDataBox = styled(Box)`
   background-color: ${Colors.ColorsPalette.White};
   position: fixed;
   left: 0;
+  bottom: 0;
 
   @media (max-width: ${MediaSize.Tablet}) {
     top: ${Sizes.Header.number + 320}px;
@@ -85,7 +86,6 @@ const StyledDataBox = styled(Box)`
 
   @media (min-width: ${MediaSize.Tablet}) {
     top: ${Sizes.Header.height};
-    bottom: 0;
     box-shadow: 0px 2px 4px rgba(0,0,0,0.20);
     z-index: 51;
 
@@ -106,14 +106,12 @@ const StyledDataBox = styled(Box)`
 `;
 
 const StyledScrollableData = styled.div`
-  @media (min-width: ${MediaSize.Tablet}) {
-    position: relative;
-    height: 100%;
-    width: 100%;
-    overflow-y: scroll;
-    padding: .25rem 6px .25rem 0;
-    margin: 0;
-  }
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+  padding: .25rem 6px .25rem 0;
+  margin: 0;
 `;
 
 const StyledView = styled(View)`
@@ -124,6 +122,9 @@ const StyledView = styled(View)`
 `;
 
 class DetailView extends Component {
+  handleFaceClick = this.handleFaceClick.bind(this);
+  handleLabelClick = this.handleLabelClick.bind(this);
+
   componentWillMount() {
     const { labels, faces, getImage, image: { id } } = this.props;
 
@@ -133,8 +134,36 @@ class DetailView extends Component {
     }
   }
 
+  handleFaceClick(face) {
+    const { id } = face;
+    this.setBrowserParams({ key: 'face', value: id });
+  } 
+
+  handleLabelClick(label) {
+    const { id } = label;
+    this.setBrowserParams({ key: 'label', value: id });
+  }
+
+  setBrowserParams(params) {
+    const { image, history } = this.props;
+    const { id } = image;
+    const { key, value } = params;
+
+    const path = `${Paths.GET_IMAGES_DETAIL(id)}?${key}=${value}`;
+    history.push(path);
+  }
+
   render() {
-    const { history, labels, faces, image, getImageRequest } = this.props;
+    const {
+      history,
+      labels,
+      selectedLabel,
+      faces,
+      selectedFace,
+      image,
+      getImageRequest,
+    } = this.props;
+
     const { path, created, meta } = image;
     const { loading } = getImageRequest;
 
@@ -164,11 +193,15 @@ class DetailView extends Component {
         <AddImageButton afterOnClick={() => history.push(Paths.HOME)} />
         <StyledImageBox fill>
           <StyledImageBoxContainer>
-            <Image image={image} />
+            <Image
+              image={image}
+              selectedLabel={selectedLabel}
+              selectedFace={selectedFace}
+            />
           </StyledImageBoxContainer>
         </StyledImageBox>
         <StyledDataBox pad={{ vertical: 'none', horizontal: 'small' }}>
-          <StyledBackButton onClick={history.goBack} />
+          <StyledBackButton onClick={() => history.push(Paths.HOME)} />
           <StyledScrollableData>
           <StyledHeading level="4" style={{ marginTop: '0rem'}}>Image Information</StyledHeading>
             <Box>
@@ -181,16 +214,18 @@ class DetailView extends Component {
             <AsyncContainer loading={loading}>
               <Labels
                 labels={labels}
-                onLabelClick={(label) => console.log(label)}
+                selectedLabel={selectedLabel}
+                onLabelClick={(label) => this.handleLabelClick(label)}
               />
             </AsyncContainer>
-            { faces.lenght > 0 && (
+            { faces.length > 0 && (
               <Fragment>
                 <StyledHeading level="4">Faces ({faces.length})</StyledHeading>
                 <AsyncContainer loading={loading}>
                   <Faces
                     faces={faces}
-                    onFaceClick={(face) => console.log(face)}
+                    selectedFace={selectedFace}
+                    onFaceClick={(face) => this.handleFaceClick(face)}
                   />
                 </AsyncContainer>
               </Fragment>
@@ -210,13 +245,16 @@ DetailView.propTypes = {
     type: PropTypes.string,
   }).isRequired,
   labels: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  selectedLabel: PropTypes.shape({}),
   faces: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  selectedFace: PropTypes.shape({}),
   getImageRequest: HOCRequestPropTypes.isRequired,
   getImage: PropTypes.func.isRequired,
 }
 
 DetailView.defaultProps = {
-
+  selectedFace: null,
+  selectedLabel: null,
 }
 
 export default DetailView;

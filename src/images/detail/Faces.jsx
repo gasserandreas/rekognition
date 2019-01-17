@@ -2,10 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Box } from 'grommet';
+import { Box, Text, Paragraph } from 'grommet';
 
 import Label from './Label';
 import { Attribute, StyledAttrLabel, AttributePropType } from './Attribute';
+
+import { Colors } from '../../styles';
 
 // emotions
 const StyledEmotions = styled.div`
@@ -39,8 +41,21 @@ Emotions.propTypes = {
 
 // face component
 const StyledFace = styled(Box)`
-  margin-bottom: 0.5rem
+  margin-bottom: 0.5rem;
+
+  &:hover {
+    background-color: ${Colors.Neutrals.LightMid};
+    cursor: pointer;
+  }
 `;
+
+StyledFace.propTypes = {
+  selected: PropTypes.bool,
+}
+
+StyledFace.defaultProps = {
+  selected: false,
+}
 
 const Face = ({ face, number, ...props }) => {
   const { id, age, attributes, emotions } = face;
@@ -60,7 +75,10 @@ const Face = ({ face, number, ...props }) => {
 
   return (
     <StyledFace {...props} >
-      <h3 level="1">Face {number}</h3>
+      <h3 level="1">
+        Face {number}
+        {props.selected && <Text color="brand" size="small">{' '}(selected)</Text>}
+      </h3>
       <Box>
         <Attribute attribute={ageAttribute} />
         {filteredAttributes.map(attr => (
@@ -101,14 +119,16 @@ Face.propTypes = {
 // faces wrapper component
 const StyledFaces = styled(Box)``;
 
-const Faces = (props) => (
-  <StyledFaces>
-    {props.faces.map((face, i) => (
+const Faces = ({ faces, onFaceClick, selectedFace, ...props }) => (
+  <StyledFaces {...props}>
+    <Paragraph size="small" margin="none">Hint: Click on faces to visualize selected face.</Paragraph>
+    {faces.map((face, i) => (
       <Face
         number={i + 1}
         key={`face_item_${face.id}`}
         face={face}
-        onClick={() => props.onFaceClick(face)}
+        onClick={() => onFaceClick(face)}
+        selected={selectedFace && selectedFace.id === face.id}
       />
     ))}
   </StyledFaces>
@@ -116,7 +136,14 @@ const Faces = (props) => (
 
 Faces.propTypes = {
   faces: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  selectedFace: PropTypes.shape({}),
   onFaceClick: PropTypes.func.isRequired,
 };
+
+Faces.defaultProps = {
+  selectedFace: {
+    id: null,
+  },
+}
 
 export default Faces;

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -6,6 +6,7 @@ import { Box } from 'grommet';
 import AsyncImage from '../../ui/async/AsyncImage';
 
 import { getImageSrc } from '../util';
+import { Colors } from '../../styles';
 
 // util
 const generateInitPos = () => ({
@@ -14,6 +15,19 @@ const generateInitPos = () => ({
   width: 0,
   height: 0,
 });
+
+// label / face selector
+const StyledSelector = styled.div`
+  border: 2px solid ${Colors.ColorsPalette.Brand};
+  border-radius: 3px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: ${props => props.pos.top * 100}%;
+  left: ${props => props.pos.left * 100}%;
+  height: ${props => props.pos.height * 100}%;
+  width: ${props => props.pos.width * 100}%;
+`;
 
 // image
 const StyledAsyncImage = styled(AsyncImage)`
@@ -30,9 +44,6 @@ const StyledImageWrapper = styled.div`
   left: ${props => props.pos.left}px;
   width: ${props => props.pos.width}px;
   height: ${props => props.pos.height}px;
-
-  // dummy
-  border: 1px solid #333;
 `;
 
 StyledImageWrapper.defaultProps = {
@@ -144,6 +155,9 @@ class ImageContainer extends Component {
 
   render() {
     const { imageWrapperPosition } = this.state;
+    const { selectedFace, selectedLabel, image } = this.props;
+    const { path } = image;
+
     return (
       <StyledImageContainer
         ref={(el) => {
@@ -154,10 +168,21 @@ class ImageContainer extends Component {
         fill
       >
         <StyledImageWrapper pos={imageWrapperPosition}>
-          {/* <StyledAsyncImage
+          {selectedFace && <StyledSelector pos={selectedFace.position} />}
+          {selectedLabel && (
+            <Fragment>
+              {selectedLabel.instances.map((pos, i) => (
+                <StyledSelector
+                  key={`label_selector_${i}`}
+                  pos={pos}
+                />
+              ))}
+            </Fragment>
+          )}
+          <StyledAsyncImage
             src={getImageSrc(path)}
             fit="contain"
-          /> */}
+          />
         </StyledImageWrapper>
       </StyledImageContainer>
     )
