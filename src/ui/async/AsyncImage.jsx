@@ -11,7 +11,7 @@ const StyledAsyncImage = styled(Box)`
   transition: all 0.5s ease;
   img {
     opacity ${props => props.loaded ? '1' : '0'};
-    display: ${props => props.loaded ? 'flex' : 'none'};
+    display: ${props => props.loaded || props.neverHideImg ? 'flex' : 'none'};
   }
 `;
 
@@ -24,11 +24,12 @@ class AsyncImage extends Component {
 
   onImageLoad(image) {
     const { onLoad } = this.props;
+
+    this.setState({ loaded: true });
+
     if(onLoad ) {
       onLoad(image);
     }
-
-    this.setState({ loaded: true });
   }
 
   render() {
@@ -38,9 +39,9 @@ class AsyncImage extends Component {
       <StyledAsyncImage loaded={loaded} {...props}>
         { !loaded && <LoadingIndicator /> }
         <Image
+          {...props}
           onLoad={() => this.onImageLoad(this.imgRef)}
           ref={(tag) => this.imgRef = tag ? tag : null }
-          {...props}
         />
       </StyledAsyncImage>
     );
@@ -49,6 +50,13 @@ class AsyncImage extends Component {
 
 AsyncImage.propTypes = {
   src: PropTypes.string.isRequired,
+  neverHideImg: PropTypes.bool,
+  onLoad: PropTypes.func,
+};
+
+AsyncImage.defaultProps = {
+  neverHideImg: false,
+  onLoad: null,
 };
 
 export default AsyncImage;

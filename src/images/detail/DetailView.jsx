@@ -7,14 +7,14 @@ import { Box, Heading } from 'grommet';
 import Labels from './Labels';
 import Faces from './Faces';
 import { Attribute } from './Attribute';
+import Image from './Image';
 import AddImageButton from '../AddImageButton';
 
 import PreviousButton from '../../ui/PreviousButton';
 import View from '../../ui/View';
-import AsyncImage from '../../ui/async/AsyncImage';
 import AsyncContainer from '../../ui/async/AsyncContainer';
 
-import { getImageCreationDateTime, getImageSrc } from '../util';
+import { getImageCreationDateTime } from '../util';
 import { HOCRequestPropTypes } from '../../util/PropTypes';
 
 import * as Paths from '../../paths';
@@ -34,6 +34,13 @@ const StyledHeading = styled(Heading)`
   margin-bottom: 0.5rem;
 `;
 
+const StyledImageBoxContainer = styled.div`
+  width: 96%;
+  height: 96%;
+  margin: 2%;
+  position: relative;
+`;
+
 const StyledImageBox = styled(Box)`
   width: 100%;
   min-height: 30vh;
@@ -41,19 +48,25 @@ const StyledImageBox = styled(Box)`
   position: relative;
 
   @media (min-width: ${MediaSize.Tablet}) {
-    padding-left: ${Sizes.LeftBar.width.Tablet};
+    position: fixed;
+    top: ${Sizes.Header.height};
+    right: 0;
+    bottom: 0;
+    left: ${Sizes.LeftBar.width.Tablet};
+    width: auto;
+    height: auto;
   }
 
   @media (min-width: ${MediaSize.Notebook}) {
-    padding-left: ${Sizes.LeftBar.width.Notebook};
+    left: ${Sizes.LeftBar.width.Notebook};
   }
 
   @media (min-width: ${MediaSize.Desktop}) {
-    padding-left: ${Sizes.LeftBar.width.Desktop};
+    left: ${Sizes.LeftBar.width.Desktop};
   }
 
   @media (min-width: ${MediaSize.Fullscreen}) {
-    padding-left: ${Sizes.LeftBar.width.Fullscreen};
+    left: ${Sizes.LeftBar.width.Fullscreen};
   }
 `;
 
@@ -143,9 +156,9 @@ class DetailView extends Component {
       <StyledView>
         <AddImageButton afterOnClick={() => history.push(Paths.HOME)} />
         <StyledImageBox fill>
-          <Box pad="small" fill style={{ justifyContent: 'center' }}>
-            <AsyncImage src={getImageSrc(path)} fit="contain" />
-          </Box>
+          <StyledImageBoxContainer>
+            <Image image={image} />
+          </StyledImageBoxContainer>
         </StyledImageBox>
         <StyledDataBox pad={{ vertical: 'none', horizontal: 'small' }}>
           <StyledBackButton onClick={history.goBack} />
