@@ -30,6 +30,7 @@ class UserView extends Component {
       user,
       authMeta,
       getUserInfoRequest,
+      updateUserRequest,
       updateUser,
     } = this.props;
 
@@ -53,10 +54,10 @@ class UserView extends Component {
               <UpdateUserForm
                 user={{ firstname, lastname }}
                 onSubmit={updateUser}
-                // submitting={signupRequest.loading}
-                submitting={false}
-                // error={signupRequest.error ? signupRequest.error.message : null}
-                error={null}
+                submitting={updateUserRequest.loading}
+                // submitting={false}
+                error={updateUserRequest.error ? updateUserRequest.error.message : null}
+                // error={null}
               />
             </AsyncContainer>
           </Card>
@@ -106,9 +107,10 @@ UserView.propTypes = {
     remember: PropTypes.bool,
   }).isRequired,
   getUserInfoRequest: HOCRequestPropTypes.isRequired,
+  updateUserRequest: HOCRequestPropTypes.isRequired,
   getUserInfo: PropTypes.func.isRequired,
-  logOutUser: PropTypes.func.isRequired,
   updateUser: PropTypes.func.isRequired,
+  logOutUser: PropTypes.func.isRequired,
 };
 
 UserView.defaultProps = {};

@@ -11,3 +11,8 @@ export const getUserInfoRequestSelector = createSelector(
   userStateSelector,
   ({ userInfoRequest }) => userInfoRequest,
 );
+
+export const updateUserRequestSelector = createSelector(
+  userStateSelector,
+  ({ updateUserRequest }) => updateUserRequest,
+);

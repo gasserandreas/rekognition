@@ -9,6 +9,7 @@ import hocReducer, { hocAsyncAction, hocCreateTypes } from '../HOC';
 import { authUserIdSelector } from '../auth/selectors';
 
 // action types
+const USER_UPDATE_USER_REQUEST = hocCreateTypes('USER_UPDATE_USER_REQUEST');
 const USER_GET_USER_INFO_REQUEST = hocCreateTypes('USER_GET_USER_INFO_REQUEST');
 const USER_SET_USER = 'USER_SET_USER';
 
@@ -19,6 +20,38 @@ const userSetUser = (user) => ({
 });
 
 // complex actions
+export const updateUser = hocAsyncAction(
+  USER_UPDATE_USER_REQUEST,
+  (user) => (dispatch, __, { GraphApi }) => {
+    const UPDATE_USER = gql`
+      mutation updateUser($firstname: String!, $lastname: String!) {
+        updateUser(input: {
+          firstname: $firstname, lastname: $lastname
+        }) {
+          user {
+            email
+            firstname
+            lastname
+          }
+        }
+      }
+    `;
+    const variables = {
+      firstname: user.firstname,
+      lastname: user.lastname,
+    };
+
+    return GraphApi.mutation(UPDATE_USER, variables)
+      .then((data) => {
+        const { updateUser: { user } } = data;
+        
+        dispatch(userSetUser(user));
+
+        return data;
+      })
+  }
+)
+
 export const getUserInfo = hocAsyncAction(
   USER_GET_USER_INFO_REQUEST,
   () => (dispatch, getState, { GraphApi }) => {
@@ -70,6 +103,11 @@ const userInfoRequest = hocReducer({
   noData: false,
 });
 
+const updateUserRequest = hocReducer({
+  ACTION_TYPE: USER_UPDATE_USER_REQUEST,
+  noData: false,
+});
+
 // define sub persist config
 const persistConfig = {
   key: 'rekognition-user',
@@ -83,6 +121,7 @@ export default persistReducer(
   combineReducers({
     user,
     // hoc reducers
-    userInfoRequest
+    userInfoRequest,
+    updateUserRequest,
   })
 );

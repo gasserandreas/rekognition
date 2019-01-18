@@ -213,7 +213,7 @@ export const checkEmail = hocAsyncAction(
   AUTH_CHECK_EMAIL_REQUEST,
   (email) => (dispatch, _, { GraphApi }) => {
     const CHECK_EMAIL = gql`
-      mutation EmailInUseMutation($email: String!) {
+      query EmailInUseMutation($email: String!) {
         emailInUse(input: {
           email: $email,
         })
@@ -224,7 +224,7 @@ export const checkEmail = hocAsyncAction(
       email,
     };
 
-    return GraphApi.mutation(CHECK_EMAIL, variables)
+    return GraphApi.query(CHECK_EMAIL, variables)
       .then((data) => {
         const { emailInUse } = data;
 
