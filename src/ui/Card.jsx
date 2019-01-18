@@ -10,6 +10,7 @@ const StyledCard = styled(Box)`
   background-color: ${Colors.ColorsPalette.White};
   border-radius: 3px;
   box-sizing: border-box;
+  margin: 1rem 0;
 `;
 
 const Card = ({ children, ...props }) => (

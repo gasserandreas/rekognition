@@ -2,55 +2,115 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Heading, Paragraph } from 'grommet';
+import { Box, Heading, Paragraph, ResponsiveContext } from 'grommet';
 
 import UpdateUserForm from './UpdateUserForm';
 
-import { View } from '../ui/View';
+import View from '../ui/View';
 import Card from '../ui/Card';
+import Button from '../ui/form/Button';
 
-// const UserView = (props) => {
+import AsyncContainer from '../ui/async/AsyncContainer';
+import { HOCRequestPropTypes } from '../util/PropTypes';
+
+import { getDefaultFormatedDate } from '../util/util';
+
 class UserView extends Component {
   componentWillMount() {
-    console.log(this.props);
+    const { getUserInfoRequest, getUserInfo } = this.props;
+    const { loading } = getUserInfoRequest;
+
+    if (!loading) {
+      getUserInfo();
+    }
   }
 
   render() {
     const {
       user,
+      authMeta,
+      getUserInfoRequest,
       updateUser,
     } = this.props;
 
+    const { 
+      firstname,
+      lastname,
+      email,
+    } = user;
+
+    const {
+      loggedInSince,
+      remember,
+    } = authMeta;
+
     return (
       <View>
-          <Heading level="4" margin={{ bottom: 'small' }}>Profile information</Heading>
           <Card>
+            <Heading level="4" margin={{ top: 'small', bottom: 'none' }}>Profile information</Heading>
             <Paragraph size="small" margin={{ bottom: 'none' }}>Update your basic profile information.</Paragraph>
-            <UpdateUserForm
-              user={{ firstname: '', lastname: '' }}
-              onSubmit={updateUser}
-              // onCancel={this.onCancelSignUp}
-              // submitting={signupRequest.loading}
-              submitting={false}
-              // error={signupRequest.error ? signupRequest.error.message : null}
-              error={null}
-            />
+            <AsyncContainer loading={getUserInfoRequest.loading}>
+              <UpdateUserForm
+                user={{ firstname, lastname }}
+                onSubmit={updateUser}
+                // submitting={signupRequest.loading}
+                submitting={false}
+                // error={signupRequest.error ? signupRequest.error.message : null}
+                error={null}
+              />
+            </AsyncContainer>
           </Card>
-          <p>
-            Profile
-          </p>
+          <Card>
+          <Heading level="4" margin={{ top: 'small', bottom: 'none' }}>Current session</Heading>
+          <ResponsiveContext.Consumer>
+            {size => (
+              <Box direction={size === 'small' ? 'column' : 'row'}>
+                <Box basis={size === 'small' ? '1' : '1/2'}>
+                  <Paragraph size="small" margin={{ bottom: 'none' }}>
+                    <strong>Logged in since:</strong>
+                    {' '}
+                    {loggedInSince ? getDefaultFormatedDate(loggedInSince) : 'unknown'}
+                  </Paragraph>
+                  <Paragraph size="small" margin={{ bottom: 'none' }}>
+                    <strong>Auto login:</strong> {remember ? 'enabled' : 'disabled'}
+                  </Paragraph>
+                </Box>
+                <Box
+                  direction="row"
+                  basis={size === 'small' ? '1' : '1/2'}
+                  align="baseline"
+                >
+                  <Box basis="2/3">
+                    <Paragraph size="small" margin={{ bottom: 'none' }}><strong>Note:</strong> Logout will clear all information from your device.</Paragraph>
+                  </Box>
+                  <Box basis="1/3" align="end">
+                    <Button
+                      buttonStyle="error"
+                      onClick={() => this.props.logOutUser()}
+                    >Logout</Button>
+                  </Box>
+                </Box>
+              </Box>
+            )}
+          </ResponsiveContext.Consumer>
+          </Card>
       </View>
     );
   }
 }
 
 UserView.propTypes = {
-  user: PropTypes.shape({}),
+  user: PropTypes.shape({}).isRequired,
+  authMeta: PropTypes.shape({
+    loggedInSince: PropTypes.string,
+    remember: PropTypes.bool,
+  }).isRequired,
+  getUserInfoRequest: HOCRequestPropTypes.isRequired,
+  getUserInfo: PropTypes.func.isRequired,
+  logOutUser: PropTypes.func.isRequired,
   updateUser: PropTypes.func.isRequired,
 };
 
-UserView.defaultProps = {
-  user: null,
-};
+UserView.defaultProps = {};
 
 export default UserView;

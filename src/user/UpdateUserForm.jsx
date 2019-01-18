@@ -47,13 +47,10 @@ class UpdateUserForm extends Component {
   onReset = this.onReset.bind(this);
 
   onReset() {
-    const { onCancel, handleReset } = this.props;
+    const { handleReset } = this.props;
 
     // reset form
     handleReset();
-
-    // cancel form
-    onCancel();
   }
 
   render() {
@@ -65,22 +62,11 @@ class UpdateUserForm extends Component {
       handleBlur,
       handleSubmit,
       submitting,
+      dirty,
       error,
     } = this.props;
     return (
       <StyledUpdateUserForm onSubmit={handleSubmit}>
-        {/* <Field
-          id="email"
-          label="Email"
-        >
-          <TextInput
-            id="email"
-            type="email"
-            placeholder="Enter your email"
-            value={values.email}
-            disabled
-          />
-        </Field> */}
         <FieldRow>
           <Field
             id="firstname"
@@ -122,14 +108,14 @@ class UpdateUserForm extends Component {
             type="button"
             buttonStyle="link"
             onClick={this.onReset}
-            disabled={submitting}
+            disabled={!dirty || submitting}
           >Reset</Button>
           <Button
             type="submit"
             disabled={submitting}
             buttonStyle="primary"
             style={{ marginLeft: '1rem' }}
-          >Update</Button>
+          >Update profile</Button>
         </ButtonGroup>
       </StyledUpdateUserForm>
     );
