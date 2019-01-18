@@ -101,7 +101,7 @@ class View extends Component {
           <Card pad="large">
             { !validEmail ? (
               <CheckEmailForm
-                user={{ email: 'andreas.safe@gmail.com' }}
+                user={{ email: '' }}
                 onSubmit={this.onCheckEmail}
                 submitting={checkEmailRequest.loading}
                 error={checkEmailRequest.error ? checkEmailRequest.error.message : null}
