@@ -12,7 +12,7 @@ import {
 import Button from '../../ui/form/Button';
 import Message from '../../ui/form/Message';
 
-import { ButtonGroup } from '../AuthComponents';
+import ButtonGroup from '../../ui/form/ButtonGroup';
 
 // formik setups
 const formikEnhancer = withFormik({
