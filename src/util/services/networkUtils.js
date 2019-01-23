@@ -30,7 +30,10 @@ const getEnv = () => {
   // return process.env.NODE_ENV;
 };
 
-export const getUrl = key => networkEndpoints[key][getEnv()];
+export const getUrl = key => {
+  const url = networkEndpoints[key][getEnv()];
+  return url;
+};
 
 // generic call definitions
 export const genericFetch = (url, config = {}) => {
