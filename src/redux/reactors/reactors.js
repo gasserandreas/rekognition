@@ -1,29 +1,19 @@
 import { createSelector } from 'reselect';
 
-import { appMetaSet } from '../app';
-import { fetchImages } from '../images';
+import { listImages } from '../images';
 
-import { selectAppMeta, selectIsAuthenticated } from '../selectors/app';
-import { selectFetchImagesRequest } from '../selectors/images';
+import { isAuthenticatedSelector } from '../auth/selectors';
+import { imagesListRequestSelector } from '../images/selectors';
 
 const selectAppTimeState = state => state.appTime;
 
-const firstVisitReactor = createSelector(
-  selectAppMeta,
-  (meta) => {
-    const { firstVisit } = meta;
-    if (!firstVisit) {
-      return appMetaSet('firstVisit', Date.now());
-    }
-  }
-);
-
 const refreshTime = 180000;
+// const refreshTime = 30000;
 
 const checkStaleImageData = createSelector(
-  selectIsAuthenticated,
+  isAuthenticatedSelector,
   selectAppTimeState,
-  selectFetchImagesRequest,
+  imagesListRequestSelector,
   (isAuthenticated, appTime, { lastFetch, loading }) => {
     if (!isAuthenticated) {
       return null;
@@ -41,14 +31,10 @@ const checkStaleImageData = createSelector(
       return null;
     }
 
-    return fetchImages();
-    // if (lastFetch && !loading && (appTime - lastFetch > refreshTime)) {
-    //   return fetchImages();
-    // }
+    return listImages();
   }
 )
 
 export default [
-  firstVisitReactor,
   checkStaleImageData,
 ];
