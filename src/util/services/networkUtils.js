@@ -32,6 +32,7 @@ const getEnv = () => {
 
 export const getUrl = key => {
   const url = networkEndpoints[key][getEnv()];
+  console.log(url);
   return url;
 };
 
