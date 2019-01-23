@@ -76,12 +76,8 @@ export const addImage = hocAsyncAction(
 
     return readAsDataURL(file)
       .then((rawImageString) => {
-        // prepare file upload
-        const imageString = rawImageString.replace(/^data:image\/\w+;base64,/, '');
-        const imageBuffer = Buffer.from(imageString, 'base64');
-
         const ADD_IMAGE = gql`
-          mutation addImage($file: Upload!, $id: ID, $type: String!, $name: String!, $analyse: Boolean) {
+          mutation addImage($file: String!, $id: ID, $type: String!, $name: String!, $analyse: Boolean) {
             addImage(input: {
               file: $file,
               id: $id,
@@ -148,7 +144,7 @@ export const addImage = hocAsyncAction(
         `;
 
         const variables = {
-          file: imageBuffer,
+          file: rawImageString,
           id: imageId,
           name: imageName,
           type,

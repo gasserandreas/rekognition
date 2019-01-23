@@ -14,7 +14,7 @@ import PreviousButton from '../../ui/PreviousButton';
 import View from '../../ui/View';
 import AsyncContainer from '../../ui/async/AsyncContainer';
 
-import { getImageCreationDateTime } from '../util';
+import { getImageCreationDateTime } from '../../util/util';
 import { HOCRequestPropTypes } from '../../util/PropTypes';
 
 import * as Paths from '../../paths';

@@ -56,19 +56,3 @@ AuthFooter.propTypes = {
   href: PropTypes.string.isRequired,
 };
 
-// button groups
-const StyledButtonGroup = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  padding-top: 1rem;
-`;
-
-export const ButtonGroup = (props) => (
-  <StyledButtonGroup>
-    {props.children}
-  </StyledButtonGroup>
-);
-
-ButtonGroup.propTypes = {
-  children: PropTypes.node.isRequired,
-};

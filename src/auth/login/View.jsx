@@ -66,7 +66,7 @@ class View extends Component {
       <StyledView>
         <AuthHeader>Login to Rekognition</AuthHeader>
         <div className="content">
-          <Card>
+          <Card pad="large">
             <LoginForm
               user={{ email: '', password: '', remember: false, }}
               onSubmit={logInUser}

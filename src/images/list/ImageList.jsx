@@ -8,7 +8,7 @@ import { Clock, Group, Tag } from 'grommet-icons';
 import AsyncImage from '../../ui/async/AsyncImage';
 import LoadingIndicator from '../../ui/async/LoadingIndicator';
 
-import { getImageSrc, getImageCreationDate } from '../util';
+import { getImageSrc, getDefaultFormatedDate } from '../../util/util';
 import { HOCRequestPropTypes, ImagePropType } from '../../util/PropTypes';
 import { Colors, MediaSize } from '../../styles';
 
@@ -56,7 +56,7 @@ const ImageAttr = ({ created, numberOfFaces, numberOfLabels, ...props}) => (
     {...props} 
   >
     <Box align="center">
-      <label><Clock />{getImageCreationDate(created)}</label>
+      <label><Clock />{getDefaultFormatedDate(created)}</label>
     </Box>
     <Box align="center" alignContent="between" direction="row">
       <label style={{ marginRight: '0.5rem' }}><Group />{numberOfFaces}</label>

@@ -2,19 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import { Box } from 'grommet';
+
 import { Colors } from '../styles';
 
-const StyledCard = styled.div`
+const StyledCard = styled(Box)`
   background-color: ${Colors.ColorsPalette.White};
-  padding: 3rem 2rem;
   border-radius: 3px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 10px;
   box-sizing: border-box;
+  margin: 1rem 0;
 `;
 
-const Card = (props) => {
-  return <StyledCard>{props.children}</StyledCard>;
-};
+const Card = ({ children, ...props }) => (
+  <StyledCard
+    elevation="small"
+    pad="medium"
+    {...props}
+  >{children}</StyledCard>
+);
 
 Card.propTypes = {
   children: PropTypes.node.isRequired,
