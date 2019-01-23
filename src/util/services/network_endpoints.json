@@ -1,8 +1,8 @@
 {
   "graphql": {
-    "prod": "https://api.rekognition.gasserandreas.com/1.0/graph",
-    "test": "https://api-dev.rekognition.gasserandreas.com/1.1/graph",
-    "development": "https://api-test.rekognition.gasserandreas.com/1.0/graph",
+    "prod": "https://qway38ablf.execute-api.us-east-1.amazonaws.com/prod/graph",
+    "test": "https://5a75oep3c1.execute-api.us-east-1.amazonaws.com/test/graph",
+    "development": "https://vtcjydwvdl.execute-api.us-east-1.amazonaws.com/dev/graph",
     "local": "http://localhost:4000/"
   },
   "thumb": {

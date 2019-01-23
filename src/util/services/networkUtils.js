@@ -12,6 +12,10 @@ const defaultConfig = {
 
 const getEnv = () => {
   const url = window.location.href.toLowerCase();
+  
+  console.log(url);
+  console.log(url.indexOf('localhost'));
+
   // check for localhost / 127.0.0.1
   if (url.indexOf('localhost') || url.indexOf('127.0.0.1')) {
     return 'local';
