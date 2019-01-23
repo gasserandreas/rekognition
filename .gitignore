@@ -24,5 +24,4 @@ yarn-error.log*
 # storybook
 storybook-static/
 
-# NX stuff
-/build-components
+package-lock.json

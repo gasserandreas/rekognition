@@ -1,0 +1,20 @@
+{
+  "graphql": {
+    "prod": "https://api.rekognition.gasserandreas.com",
+    "test": "https://api-test.rekognition.gasserandreas.com",
+    "development": "https://api-dev.rekognition.gasserandreas.com/1.1/graph",
+    "local": "http://localhost:4000/"
+  },
+  "thumb": {
+    "prod": "https://s3.amazonaws.com/529821714029-rekognition-backend-prod-thumb-bucket",
+    "test": "https://s3.amazonaws.com/529821714029-rekognition-backend-test-thumb-bucket",
+    "development": "https://s3.amazonaws.com/529821714029-rekognition-backend-dev-thumb-bucket",
+    "local": "https://s3.amazonaws.com/529821714029-rekognition-backend-dev-thumb-bucket"
+  },
+  "image": {
+    "prod": "https://s3.amazonaws.com/529821714029-rekognition-backend-prod-image-bucket",
+    "test": "https://s3.amazonaws.com/529821714029-rekognition-backend-test-image-bucket",
+    "development": "https://s3.amazonaws.com/529821714029-rekognition-backend-dev-image-bucket",
+    "local": "https://s3.amazonaws.com/529821714029-rekognition-backend-dev-image-bucket"
+  }
+}

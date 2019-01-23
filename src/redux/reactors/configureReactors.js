@@ -1,6 +1,6 @@
 // global store
-import reactors from './reactors';
 import ric from 'ric-shim';
+import reactors from './reactors';
 
 export default store => () => {
   const state = store.getState();
@@ -24,7 +24,7 @@ export default store => () => {
     // I'm using here will fallback to
     // setTimeout(() => {}, 0) if needed.
     ric(() => {
-      store.dispatch(nextReaction)
-    })
+      store.dispatch(nextReaction);
+    });
   }
 };

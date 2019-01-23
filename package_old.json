@@ -1,0 +1,37 @@
+{
+    "name": "Image-Rekognition",
+    "version": "1.1.0",
+    "private": true,
+    "dependencies": {
+        "aws-sdk": "^2.285.1",
+        "copy-to-clipboard": "^3.0.8",
+        "lodash": "^4.17.10",
+        "moment": "^2.22.2",
+        "prop-types": "^15.6.1",
+        "react": "^16.3.2",
+        "react-dom": "^16.3.2",
+        "react-dropzone": "^5.0.1",
+        "react-ga": "^2.5.3",
+        "react-redux": "^5.0.7",
+        "react-router-dom": "^4.3.1",
+        "react-scripts": "1.1.4",
+        "redux": "^4.0.0",
+        "redux-devtools-extension": "^2.13.2",
+        "redux-persist": "^5.10.0",
+        "redux-reset": "^0.3.0",
+        "redux-thunk": "^2.2.0",
+        "reselect": "^3.0.1",
+        "ric-shim": "^1.0.0",
+        "uuid": "^3.3.2"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test --env=jsdom",
+        "eject": "react-scripts eject",
+        "release": "aws s3 sync --delete ./build s3://529821714029-rekognition.gasserandreas.com/",
+        "env-push-prod": "aws s3 cp .env.production.local s3://529821714029-rekognition.gasserandreas.com-utils/",
+        "env-push-test": "aws s3 cp .env.development.local s3://529821714029-rekognition.gasserandreas.com-utils/"
+    },
+    "description": "Imgae Rekognition"
+}
