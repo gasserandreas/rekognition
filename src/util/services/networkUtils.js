@@ -17,8 +17,13 @@ const getEnv = () => {
     return 'local';
     // return 'development';
   }
+  
+  if (url.indexOf('rekognition-test.gasserandreas.com')) {
+    return 'test';
+  }
 
-  return process.env.NODE_ENV;
+  return 'prod';
+  // return process.env.NODE_ENV;
 };
 
 export const getUrl = key => networkEndpoints[key][getEnv()];
