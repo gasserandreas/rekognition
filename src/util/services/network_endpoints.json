@@ -7,14 +7,14 @@
   },
   "thumb": {
     "prod": "https://s3.amazonaws.com/529821714029-rekognition-backend-prod-thumb-bucket",
-    "test": "https://s3.amazonaws.com/529821714029-rekognition-backend-dev-thumb-bucket",
-    "development": "https://s3.amazonaws.com/529821714029-rekognition-backend-test-thumb-bucket",
+    "test": "https://s3.amazonaws.com/529821714029-rekognition-backend-test-thumb-bucket",
+    "development": "https://s3.amazonaws.com/529821714029-rekognition-backend-dev-thumb-bucket",
     "local": "https://s3.amazonaws.com/529821714029-rekognition-backend-dev-thumb-bucket"
   },
   "image": {
     "prod": "https://s3.amazonaws.com/529821714029-rekognition-backend-prod-image-bucket",
-    "test": "https://s3.amazonaws.com/529821714029-rekognition-backend-dev-image-bucket",
-    "development": "https://s3.amazonaws.com/529821714029-rekognition-backend-test-image-bucket",
+    "test": "https://s3.amazonaws.com/529821714029-rekognition-backend-test-image-bucket",
+    "development": "https://s3.amazonaws.com/529821714029-rekognition-backend-dev-image-bucket",
     "local": "https://s3.amazonaws.com/529821714029-rekognition-backend-dev-image-bucket"
   }
 }

@@ -12,9 +12,6 @@ const defaultConfig = {
 
 const getEnv = () => {
   const url = window.location.href.toLowerCase();
-  
-  console.log(url);
-  console.log(url.indexOf('localhost'));
 
   // check for localhost / 127.0.0.1
   if (url.indexOf('localhost') >= 0) {
@@ -34,11 +31,7 @@ const getEnv = () => {
   // return process.env.NODE_ENV;
 };
 
-export const getUrl = key => {
-  const url = networkEndpoints[key][getEnv()];
-  console.log(url);
-  return url;
-};
+export const getUrl = key => networkEndpoints[key][getEnv()];
 
 // generic call definitions
 export const genericFetch = (url, config = {}) => {
