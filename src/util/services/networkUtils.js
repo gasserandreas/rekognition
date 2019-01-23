@@ -17,12 +17,16 @@ const getEnv = () => {
   console.log(url.indexOf('localhost'));
 
   // check for localhost / 127.0.0.1
-  if (url.indexOf('localhost') || url.indexOf('127.0.0.1')) {
+  if (url.indexOf('localhost') >= 0) {
     return 'local';
     // return 'development';
   }
+
+  if (url.indexOf('127.0.0.1') >= 0)  {
+    return 'local';
+  }
   
-  if (url.indexOf('rekognition-test.gasserandreas.com')) {
+  if (url.indexOf('rekognition-test.gasserandreas.com') >= 0) {
     return 'test';
   }
 
