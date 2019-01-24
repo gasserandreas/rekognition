@@ -88,10 +88,12 @@ const AppHeader = (props) => {
       isAuthenticated={isAuthenticated}
       pad={{ horizontal: "large", vertical: "none" }}
     >
-      <StyledPreviousButton
-        onClick={history.goBack}
-        opacity={previousButtonOpacity}
-      />
+      {isAuthenticated && (
+        <StyledPreviousButton
+          onClick={history.goBack}
+          opacity={previousButtonOpacity}
+        />
+      )}
       <Link to={Paths.HOME}>
         <StyledHeading  level={4}>AWS Rekognition</StyledHeading>
       </Link>
