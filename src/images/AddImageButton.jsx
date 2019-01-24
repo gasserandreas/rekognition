@@ -9,18 +9,24 @@ import { Add } from 'grommet-icons';
 import Button from '../ui/form/Button';
 
 import { addImage } from '../redux/images';
+import { addImageIsLoading } from '../redux/images/selectors';
 
-import { Colors } from '../styles';
+import { Colors, MediaSize } from '../styles';
 
 const StyledAddImageButton = styled(Button)`
   border-radius: 50%;
-  width: 46px;
+  width: 44px;
   height: 46px;
   position: fixed;
-  right: 2.5rem;
-  bottom: 2.5rem;
+  right: 3rem;
+  bottom: 2rem;
   box-shadow: 0px 8px 16px rgba(0,0,0,0.20);
   z-index: 100;
+
+  @media (min-width: ${MediaSize.Notebook}) {
+    right: 2.5rem;
+    bottom: 2.5rem;
+  }
 `;
 
 class AddImageButton extends Component {
@@ -42,6 +48,7 @@ class AddImageButton extends Component {
   }
 
   render() {
+    const { loading, ...props } = this.props;
     return (
       <Dropzone
         onDrop={this.uploadImage}
@@ -50,12 +57,13 @@ class AddImageButton extends Component {
           <span {...getRootProps()}>
             <input {...getInputProps()} />
             <StyledAddImageButton
-              {...this.props}
+              {...props}
               type="button"
               icon={<Add color={Colors.ColorsPalette.White}/>}
               size="xlarge"
               buttonStyle="primary"
               elevation="medium"
+              disabled={loading}
             />
           </span>
         )}
@@ -65,6 +73,7 @@ class AddImageButton extends Component {
 }
 
 AddImageButton.propTypes = {
+  loading: PropTypes.bool.isRequired,
   addImage: PropTypes.func.isRequired,
   afterOnClick: PropTypes.func,
 }
@@ -74,7 +83,9 @@ AddImageButton.defaultProps = {
 }
 
 // redux
-const select = () => ({});
+const select = (state) => ({
+  loading: addImageIsLoading(state),
+});
 
 const mapDispatchToProps = ({
   addImage,
