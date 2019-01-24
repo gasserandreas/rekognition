@@ -15,8 +15,8 @@ const getEnv = () => {
 
   // check for localhost / 127.0.0.1
   if (url.indexOf('localhost') >= 0) {
-    return 'local';
-    // return 'development';
+    // return 'local';
+    return 'development';
   }
 
   if (url.indexOf('127.0.0.1') >= 0)  {

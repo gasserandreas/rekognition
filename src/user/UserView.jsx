@@ -103,7 +103,7 @@ class UserView extends Component {
 UserView.propTypes = {
   user: PropTypes.shape({}).isRequired,
   authMeta: PropTypes.shape({
-    loggedInSince: PropTypes.string,
+    loggedInSince: PropTypes.number,
     remember: PropTypes.bool,
   }).isRequired,
   getUserInfoRequest: HOCRequestPropTypes.isRequired,
