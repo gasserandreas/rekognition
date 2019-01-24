@@ -90,7 +90,7 @@ const AppHeader = (props) => {
     >
       {isAuthenticated && (
         <StyledPreviousButton
-          onClick={history.goBack}
+          onClick={() => history.push(Paths.HOME)}
           opacity={previousButtonOpacity}
         />
       )}
