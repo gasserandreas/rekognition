@@ -39,6 +39,7 @@ const StyledImageAttr = styled(Box)`
     width: 0.9rem;
     height: 0.9rem;
     margin-right: 0.2rem;
+    margin-top: 0.1rem;
     cursor: pointer;
   }
 
@@ -79,7 +80,7 @@ const StyledListItem = styled(Box)`
   flex-direction: column-reverse;
 
   width: 90vw;
-  height: 45vw;
+  height: 80vw;
 
   @media (min-width: ${MediaSize.Phone}) {
     &:hover {

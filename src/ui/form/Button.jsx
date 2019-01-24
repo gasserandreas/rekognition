@@ -4,6 +4,8 @@ import styled from 'styled-components';
 
 import * as Grommet from 'grommet';
 
+import LoadingIndicator from '../async/LoadingIndicator';
+
 import { Colors } from '../../styles';
 
 const BUTTON_TYPES = {
@@ -58,7 +60,14 @@ const getColor = props => {
   }
 }
 
+const StyledLoading = styled(LoadingIndicator)`
+  width: 1.2rem;
+  margin-left: 0.5rem;
+`;
+
 const StyledButton = styled(Grommet.Button)`
+  display: flex;
+  align-items: center;
   border-radius: 3px;
   font-weight: 400;
   height: 34px;
@@ -80,8 +89,22 @@ const StyledButton = styled(Grommet.Button)`
   }
 `;
 
-const Button = (props) => (
-  <StyledButton {...props} />
+const Button = ({ loading, children, ...props }) => (
+  <StyledButton {...props}>
+    {children}
+    {loading && (
+      <StyledLoading
+        color={{
+          light: Colors.ColorsPalette.White,
+          default: Colors.ColorsPalette.White,
+          dark: Colors.ColorsPalette.White,
+        }}
+        circleProps={{
+          strokeWidth: 4,
+        }}
+      />
+    )}
+  </StyledButton>
 );
 
 Button.propTypes = {
@@ -93,11 +116,13 @@ Button.propTypes = {
     BUTTON_TYPES.LINK,
   ]),
   children: PropTypes.node,
+  loading: PropTypes.bool,
 };
 
 Button.defaultProps = {
   buttonStyle: BUTTON_TYPES.DEFAULT,
   children: null,
+  loading: false,
 };
 
 export default Button;

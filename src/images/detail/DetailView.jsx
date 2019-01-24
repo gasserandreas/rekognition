@@ -47,7 +47,7 @@ const StyledImageBox = styled(Box)`
   position: fixed;
 
   @media (max-width: ${MediaSize.Tablet}) {
-    height: 320px;
+    height: 260px;
     left: 0;
   }
 
@@ -81,7 +81,7 @@ const StyledDataBox = styled(Box)`
   bottom: 0;
 
   @media (max-width: ${MediaSize.Tablet}) {
-    top: ${Sizes.Header.number + 320}px;
+    top: ${Sizes.Header.number + 260}px;
   }
 
   @media (min-width: ${MediaSize.Tablet}) {
