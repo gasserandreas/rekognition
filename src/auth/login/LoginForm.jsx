@@ -111,6 +111,7 @@ const LoginForm = (props) => {
           disabled={submitting}
           buttonStyle="primary"
           style={{ marginLeft: '1rem' }}
+          loading={submitting}
         >Submit</Button>
       </ButtonGroup>
     </StyledLoginForm>

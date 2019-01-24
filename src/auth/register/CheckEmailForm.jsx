@@ -81,6 +81,7 @@ const CheckEmailForm = (props) => {
           disabled={submitting}
           buttonStyle="primary"
           style={{ marginLeft: '1rem' }}
+          loading={submitting}
         >Check email</Button>
       </ButtonGroup>
     </StyledCheckEmailForm>
