@@ -15,6 +15,7 @@ const StyledAuthHeader = styled(Heading)`
   text-align: center;
   margin: 5rem 0 0;
   display: block;
+  max-width: inherit;
 `;
 
 export const AuthHeader = (props) => (
