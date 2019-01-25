@@ -6,15 +6,16 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 // redux
+import { logOutUser } from '../redux/auth';
 import { isAuthenticatedSelector, authUsernameSelector } from '../redux/auth/selectors';
 
-import { logOutUser } from '../redux/auth';
 import { loadApplication } from '../redux/application';
+import { showMessageSelector, messageTextSelector } from '../redux/application/message/selectors';
 
 // base style components
 import PrivateRoute from './PrivateRoute';
 import AppHeader from './AppHeader';
-import AppFooter from './AppFooter';
+import AppMessage from './AppMessage';
 
 // route imports
 import PlaygroundContainer from '../playground/PlaygroundContainer';
@@ -30,7 +31,7 @@ import NotFound from './NotFound';
 
 import * as Paths from '../paths';
 
-import { Colors, MediaSize } from '../styles';
+import { Colors } from '../styles';
 
 const theme = {
   global: {
@@ -66,10 +67,6 @@ const theme = {
 const StyledAppContent = styled(Box)`
   min-height: 100%;
   height: auto;
-
-  // @media (min-width: ${MediaSize.Tablet}) {
-  //   height: 100%;
-  // }
 `;
 
 /**
@@ -86,10 +83,14 @@ class App extends Component {
   }
 
   render() {
-    const { isAuthenticated, username } = this.props;
+    const { isAuthenticated, username, message } = this.props;
 
     return (
       <Grommet theme={theme} full={true}>
+        <AppMessage
+          message={message.text}
+          show={message.show}
+        />
         <Switch>
           <Route path="*" component={(props) => (
             <AppHeader
@@ -131,12 +132,6 @@ class App extends Component {
               <Route path="*" component={NotFound} />
             </Switch>
           </Box>
-          {/* { isAuthenticated && (
-              <Switch>
-                <Route exact path={Paths.GET_IMAGES_DETAIL(Paths.ID)} component={() => <AppFooter withSidebar/>} />
-                <Route path="*" component={() => <AppFooter />} />
-              </Switch>
-          )} */}
         </StyledAppContent>
       </Grommet>
     );
@@ -146,6 +141,10 @@ class App extends Component {
 const mapStateToProps = (state) => ({
   isAuthenticated: isAuthenticatedSelector(state),
   username: authUsernameSelector(state),
+  message: {
+    show: showMessageSelector(state),
+    text: messageTextSelector(state)
+  },
 });
 
 const mapDispatchToProps = ({
