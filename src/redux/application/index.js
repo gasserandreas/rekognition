@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux';
 
+import messageReducer from './message';
+
 import { refreshToken } from '../auth';
 import {
   tokenSelector,
@@ -23,7 +25,6 @@ export const APP_IDLE = 'APP_IDLE';
 const APPLICATION_STATUS_SET = 'APPLICATION_STATUS_SET';
 
 // simple actions
-
 const applicationWillLoad = () => ({
   type: APPLICATION_STATUS_SET,
   payload: AppStatus.APPLICATION_WILL_LOAD,
@@ -88,6 +89,8 @@ const status = (state = AppStatus.INITIAL, action) => {
   }
 };
 
+
 export default combineReducers({
   status,
+  message: messageReducer,
 });
