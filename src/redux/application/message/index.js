@@ -35,7 +35,7 @@ export const hideMessage = () => ({
 });
 
 // reducers
-const text = (state = '', action) => {
+const text = (state = 'Hello', action) => {
   switch (action.type) {
     case APPLICATION_MESSAGE_SHOW:
       return action.payload;
@@ -44,7 +44,7 @@ const text = (state = '', action) => {
   }
 }
 
-const show = (state = false, action) => {
+const show = (state = true, action) => {
   switch (action.type) {
     case APPLICATION_MESSAGE_SHOW:
       return true;

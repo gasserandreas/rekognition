@@ -17,9 +17,6 @@ import PrivateRoute from './PrivateRoute';
 import AppHeader from './AppHeader';
 import AppMessage from './AppMessage';
 
-// route imports
-import PlaygroundContainer from '../playground/PlaygroundContainer';
-
 import ImagesContainer from '../images/list/Container';
 import ImagesDetailContainer from '../images/detail/Container';
 import UserContainer from '../user/Container';
@@ -126,7 +123,6 @@ class App extends Component {
                 component={UserContainer}
                 isAuthenticated={isAuthenticated}
               />
-              <Route exact path={Paths.PLAYGROUND} component={PlaygroundContainer} />
               <Route exact path={Paths.LOGIN} component={LoginContainer} />
               <Route exact path={Paths.REGISTER} component={RegisterContainer} />
               <Route path="*" component={NotFound} />
