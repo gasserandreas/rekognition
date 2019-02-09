@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Grommet, Box } from 'grommet';
@@ -10,12 +10,17 @@ import { logOutUser } from '../redux/auth';
 import { isAuthenticatedSelector, authUsernameSelector } from '../redux/auth/selectors';
 
 import { loadApplication } from '../redux/application';
-import { showMessageSelector, messageTextSelector } from '../redux/application/message/selectors';
+import {
+  messageShowSelector,
+  messageTextSelector,
+  messageTitleSelector,
+  messageShowRefreshSelector,
+} from '../redux/application/message/selectors';
 
 // base style components
 import PrivateRoute from './PrivateRoute';
 import AppHeader from './AppHeader';
-// import AppMessage from '../ui/AppMessage';
+import AppMessage from '../ui/AppMessage';
 
 import ImagesContainer from '../images/list/Container';
 import ImagesDetailContainer from '../images/detail/Container';
@@ -29,6 +34,8 @@ import NotFound from './NotFound';
 import * as Paths from '../paths';
 
 import { Colors } from '../styles';
+import Button from '../ui/form/Button';
+import ButtonGroup from '../ui/form/ButtonGroup';
 
 const theme = {
   global: {
@@ -81,13 +88,29 @@ class App extends Component {
 
   render() {
     const { isAuthenticated, username, message } = this.props;
+    console.log(message);
 
     return (
       <Grommet theme={theme} full={true}>
-        {/* <AppMessage
+        <AppMessage
           message={message.text}
           show={message.show}
-        /> */}
+        >
+          <h1>{message.title}</h1>
+          <p>{message.text}</p>
+          {message.showRefresh && (
+            <Fragment>
+              <p>Please refresh page and try again. If error persists please try later.</p>
+              <ButtonGroup>
+                <Button
+                  type="button"
+                  buttonStyle="primary"
+                  onClick={() => window.location.reload()}
+                >Refresh page</Button>
+              </ButtonGroup>
+            </Fragment>
+          )}
+        </AppMessage>
         <Switch>
           <Route path="*" component={(props) => (
             <AppHeader
@@ -138,8 +161,10 @@ const mapStateToProps = (state) => ({
   isAuthenticated: isAuthenticatedSelector(state),
   username: authUsernameSelector(state),
   message: {
-    show: showMessageSelector(state),
-    text: messageTextSelector(state)
+    show: messageShowSelector(state),
+    text: messageTextSelector(state),
+    title: messageTitleSelector(state),
+    showRefresh: messageShowRefreshSelector(state),
   },
 });
 

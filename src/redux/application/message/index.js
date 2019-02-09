@@ -7,10 +7,16 @@ let hideTimer = null;
 const APPLICATION_MESSAGE_SHOW = 'APPLICATION_MESSAGE_SHOW';
 const APPLICATION_MESSAGE_HIDE = 'APPLICATION_MESSAGE_HIDE';
 
+const APPLICATION_MESSAGE_ADD = 'APPLICATION_MESSAGE_ADD';
+
 // simple actions
-export const applicationMessageShow = (message) => ({
-  type: APPLICATION_MESSAGE_SHOW,
+export const applicationMessageAdd = (message) => ({
+  type: APPLICATION_MESSAGE_ADD,
   payload: message,
+});
+
+export const applicationMessageShow = () => ({
+  type: APPLICATION_MESSAGE_SHOW,
 });
 
 export const applicationMessageHide = () => ({
@@ -18,8 +24,10 @@ export const applicationMessageHide = () => ({
 });
 
 // complex action
-export const showMessage = (message, hideTimeout = 10000) => (dispatch) => {
-  dispatch(applicationMessageShow(message,))
+export const addMessage = (message, hideTimeout = 10000) => (dispatch) => {
+  dispatch(applicationMessageAdd(message));
+
+  dispatch(applicationMessageShow());
 
   // clear timeout first
   clearTimeout(hideTimer);
@@ -30,21 +38,43 @@ export const showMessage = (message, hideTimeout = 10000) => (dispatch) => {
   }, hideTimeout);
 };
 
-export const hideMessage = () => ({
-  type: APPLICATION_MESSAGE_HIDE,
-});
+export const showMessage = () => (dispatch) => {
+  dispatch(applicationMessageShow()); 
+}
+
+export const hideMessage = () => (dispatch)  => {
+  dispatch(applicationMessageHide());
+};
 
 // reducers
-const text = (state = 'Hello', action) => {
+const text = (state = '', action) => {
   switch (action.type) {
-    case APPLICATION_MESSAGE_SHOW:
-      return action.payload;
+    case APPLICATION_MESSAGE_ADD:
+      return action.payload.text;
     default:
       return state;
   }
-}
+};
 
-const show = (state = true, action) => {
+const title = (state = '', action) => {
+  switch (action.type) {
+    case APPLICATION_MESSAGE_ADD:
+      return action.payload.title;
+    default:
+      return state;
+  }
+};
+
+const showRefresh = (state = false, action) => {
+  switch (action.type) {
+    case APPLICATION_MESSAGE_ADD:
+      return action.payload.showRefresh || false;
+    default:
+      return state;
+  }
+};
+
+const show = (state = false, action) => {
   switch (action.type) {
     case APPLICATION_MESSAGE_SHOW:
       return true;
@@ -53,9 +83,11 @@ const show = (state = true, action) => {
     default:
       return state;
   }
-}
+};
 
 export default combineReducers({
   text,
+  title,
   show,
+  showRefresh,
 });
