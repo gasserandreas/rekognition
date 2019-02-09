@@ -135,7 +135,6 @@ const StyledListItem = styled(Box)`
     }
   }
 
-  // @media (min-width: ${MediaSize.Desktop}) and (max-width: ${MediaSize.Fullscreen}) {
   @media (min-width: ${MediaSize.Fullscreen}) {
     width: 17vw;
     height: 17vw;
