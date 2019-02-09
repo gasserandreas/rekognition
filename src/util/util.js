@@ -12,3 +12,5 @@ export const getImageCreationDateTime = dateStr => {
 }
 
 export const getDefaultFormatedDate = dateStr => moment(dateStr).format(defaultDateFormat);
+
+export const getFormattedFileSize = size => (size / 1000000).toFixed(2);

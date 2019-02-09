@@ -107,13 +107,13 @@ export const createMiddleware = (userOptions) => {
     shouldLogToUI: ({ logLevel }) => logLevel >= LogLevel.Log,
     shouldLogToConsole: ({ logLevel }) => process.env.NODE_ENV !== 'production' || logLevel >= LogLevel.Error,
     shouldLogToServer: ({ logLevel }) => logLevel >= LogLevel.Log && process.env.NODE_ENV === 'production',
-    logToUI: (error) => { // eslint-disable-line no-unused-vars
+    logToUI: (error, dispatch, getState) => { // eslint-disable-line no-unused-vars
       // TODO: log to UI...
     },
-    logToServer: (error) => { // eslint-disable-line no-unused-vars
+    logToServer: (error, dispatch, getState) => { // eslint-disable-line no-unused-vars
       // TODO: let's fire User analytics
     },
-    logToConsole: (error) => {
+    logToConsole: (error, dispatch, getState) => {
       const { logLevel } = error;
       switch (logLevel) {
         case LogLevel.Error:
@@ -176,16 +176,18 @@ export const createMiddleware = (userOptions) => {
       logToServer,
     } = options;
 
-    if (shouldLogToConsole(payload)) {
-      logToConsole(payload);
+    console.log(action);
+
+    if (shouldLogToConsole(payload, store.dispatch, () => store)) {
+      logToConsole(payload, store.dispatch, () => store);
     }
 
-    if (shouldLogToUI(payload)) {
-      logToUI(payload);
+    if (shouldLogToUI(payload, store.dispatch, () => store)) {
+      logToUI(payload, store.dispatch, () => store);
     }
 
-    if (shouldLogToServer(payload)) {
-      logToServer(payload);
+    if (shouldLogToServer(payload, store.dispatch, () => store)) {
+      logToServer(payload, store.dispatch, () => store);
     }
 
     return next(action);

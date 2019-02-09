@@ -14,7 +14,7 @@ import PreviousButton from '../../ui/PreviousButton';
 import View from '../../ui/View';
 import AsyncContainer from '../../ui/async/AsyncContainer';
 
-import { getImageCreationDateTime } from '../../util/util';
+import { getImageCreationDateTime, getFormattedFileSize } from '../../util/util';
 import { HOCRequestPropTypes } from '../../util/PropTypes';
 
 import * as Paths from '../../paths';
@@ -176,7 +176,7 @@ class DetailView extends Component {
       },
       {
         name: 'Size',
-        value: size > 0 ? `${(size / 1000000).toFixed(2)} MB` : null,
+        value: size > 0 ? `${getFormattedFileSize(size)} MB` : null,
       },
       {
         name: 'Dimension',
