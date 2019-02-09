@@ -15,7 +15,7 @@ import { showMessageSelector, messageTextSelector } from '../redux/application/m
 // base style components
 import PrivateRoute from './PrivateRoute';
 import AppHeader from './AppHeader';
-import AppMessage from './AppMessage';
+// import AppMessage from '../ui/AppMessage';
 
 import ImagesContainer from '../images/list/Container';
 import ImagesDetailContainer from '../images/detail/Container';
@@ -84,10 +84,10 @@ class App extends Component {
 
     return (
       <Grommet theme={theme} full={true}>
-        <AppMessage
+        {/* <AppMessage
           message={message.text}
           show={message.show}
-        />
+        /> */}
         <Switch>
           <Route path="*" component={(props) => (
             <AppHeader
