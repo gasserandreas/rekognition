@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Grommet, Box } from 'grommet';
@@ -6,18 +6,22 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 // redux
+import { logOutUser } from '../redux/auth';
 import { isAuthenticatedSelector, authUsernameSelector } from '../redux/auth/selectors';
 
-import { logOutUser } from '../redux/auth';
 import { loadApplication } from '../redux/application';
+import {
+  messageShowSelector,
+  messageTextSelector,
+  messageTitleSelector,
+  messageShowRefreshSelector,
+} from '../redux/application/message/selectors';
 
 // base style components
 import PrivateRoute from './PrivateRoute';
+import AppMessage from '../ui/AppMessage';
 import AppHeader from './AppHeader';
 import AppFooter from './AppFooter';
-
-// route imports
-import PlaygroundContainer from '../playground/PlaygroundContainer';
 
 import ImagesContainer from '../images/list/Container';
 import ImagesDetailContainer from '../images/detail/Container';
@@ -26,11 +30,14 @@ import UserContainer from '../user/Container';
 import LoginContainer from '../auth/login/Container';
 import RegisterContainer from '../auth/register/Container';
 
+import Privacy from './Privacy';
 import NotFound from './NotFound';
 
 import * as Paths from '../paths';
 
-import { Colors, MediaSize } from '../styles';
+import { Colors } from '../styles';
+import Button from '../ui/form/Button';
+import ButtonGroup from '../ui/form/ButtonGroup';
 
 const theme = {
   global: {
@@ -66,10 +73,6 @@ const theme = {
 const StyledAppContent = styled(Box)`
   min-height: 100%;
   height: auto;
-
-  // @media (min-width: ${MediaSize.Tablet}) {
-  //   height: 100%;
-  // }
 `;
 
 /**
@@ -86,10 +89,29 @@ class App extends Component {
   }
 
   render() {
-    const { isAuthenticated, username } = this.props;
+    const { isAuthenticated, username, message } = this.props;
 
     return (
       <Grommet theme={theme} full={true}>
+        <AppMessage
+          message={message.text}
+          show={message.show}
+        >
+          <h1>{message.title}</h1>
+          <p>{message.text}</p>
+          {message.showRefresh && (
+            <Fragment>
+              <p>Please refresh page and try again. If error persists please try later.</p>
+              <ButtonGroup>
+                <Button
+                  type="button"
+                  buttonStyle="primary"
+                  onClick={() => window.location.reload()}
+                >Refresh page</Button>
+              </ButtonGroup>
+            </Fragment>
+          )}
+        </AppMessage>
         <Switch>
           <Route path="*" component={(props) => (
             <AppHeader
@@ -125,18 +147,26 @@ class App extends Component {
                 component={UserContainer}
                 isAuthenticated={isAuthenticated}
               />
-              <Route exact path={Paths.PLAYGROUND} component={PlaygroundContainer} />
               <Route exact path={Paths.LOGIN} component={LoginContainer} />
               <Route exact path={Paths.REGISTER} component={RegisterContainer} />
+              <Route exact path={Paths.PRIVACY} component={Privacy} />
               <Route path="*" component={NotFound} />
             </Switch>
+            <Switch>
+              <Route exact path={Paths.GET_IMAGES_DETAIL(Paths.ID)} component={(props) => (
+                <AppFooter withSidebar {...props} />
+              )} />
+              <Route exact path={Paths.LOGIN} component={(props) => (
+                <AppFooter alternativeColor {...props} />
+              )} />
+              <Route exact path={Paths.REGISTER} component={(props) => (
+                <AppFooter alternativeColor {...props} />
+              )} />
+              <Route path="*" component={(props) => (
+                <AppFooter {...props} />
+              )} />
+            </Switch>
           </Box>
-          {/* { isAuthenticated && (
-              <Switch>
-                <Route exact path={Paths.GET_IMAGES_DETAIL(Paths.ID)} component={() => <AppFooter withSidebar/>} />
-                <Route path="*" component={() => <AppFooter />} />
-              </Switch>
-          )} */}
         </StyledAppContent>
       </Grommet>
     );
@@ -146,6 +176,12 @@ class App extends Component {
 const mapStateToProps = (state) => ({
   isAuthenticated: isAuthenticatedSelector(state),
   username: authUsernameSelector(state),
+  message: {
+    show: messageShowSelector(state),
+    text: messageTextSelector(state),
+    title: messageTitleSelector(state),
+    showRefresh: messageShowRefreshSelector(state),
+  },
 });
 
 const mapDispatchToProps = ({

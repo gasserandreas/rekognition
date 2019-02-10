@@ -155,6 +155,7 @@ class RegisterForm extends Component {
             disabled={submitting}
             buttonStyle="primary"
             style={{ marginLeft: '1rem' }}
+            loading={submitting}
           >Signup</Button>
         </ButtonGroup>
       </StyledRegisterForm>

@@ -15,6 +15,7 @@ const StyledAuthHeader = styled(Heading)`
   text-align: center;
   margin: 5rem 0 0;
   display: block;
+  max-width: inherit;
 `;
 
 export const AuthHeader = (props) => (
@@ -35,6 +36,7 @@ const StyledAuthFooter = styled.span`
     text-align: center;
     display: block;
     font-weight: 400;
+    margin: 0.5rem 0;
 
     &:hover {
       text-decoration: underline;

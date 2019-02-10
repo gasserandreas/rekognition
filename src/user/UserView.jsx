@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import { Box, Heading, Paragraph, ResponsiveContext } from 'grommet';
 
@@ -14,6 +14,7 @@ import AsyncContainer from '../ui/async/AsyncContainer';
 import { HOCRequestPropTypes } from '../util/PropTypes';
 
 import { getDefaultFormatedDate } from '../util/util';
+import * as Paths from '../paths';
 
 class UserView extends Component {
   componentWillMount() {
@@ -37,7 +38,6 @@ class UserView extends Component {
     const { 
       firstname,
       lastname,
-      email,
     } = user;
 
     const {
@@ -55,9 +55,7 @@ class UserView extends Component {
                 user={{ firstname, lastname }}
                 onSubmit={updateUser}
                 submitting={updateUserRequest.loading}
-                // submitting={false}
                 error={updateUserRequest.error ? updateUserRequest.error.message : null}
-                // error={null}
               />
             </AsyncContainer>
           </Card>
@@ -74,6 +72,10 @@ class UserView extends Component {
                   </Paragraph>
                   <Paragraph size="small" margin={{ bottom: 'none' }}>
                     <strong>Auto login:</strong> {remember ? 'enabled' : 'disabled'}
+                  </Paragraph>
+                  <Paragraph size="small" margin={{ bottom: 'none' }}>
+                    <strong>Privacy information: </strong>
+                    Click <Link to={Paths.PRIVACY}>here</Link> to view our privacy policy
                   </Paragraph>
                 </Box>
                 <Box
@@ -103,7 +105,7 @@ class UserView extends Component {
 UserView.propTypes = {
   user: PropTypes.shape({}).isRequired,
   authMeta: PropTypes.shape({
-    loggedInSince: PropTypes.string,
+    loggedInSince: PropTypes.number,
     remember: PropTypes.bool,
   }).isRequired,
   getUserInfoRequest: HOCRequestPropTypes.isRequired,

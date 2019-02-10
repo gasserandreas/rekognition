@@ -1,3 +1,5 @@
+import { createNetworkError } from '../util/ErrorHandler';
+
 // utils
 export const hocCreateTypes = (baseType) => ({
   START: `${baseType}_START`,
@@ -56,11 +58,9 @@ export const hocAsyncAction = (ACTION_TYPE, createThunk, rejectable = false) => 
       .catch((error) => {
         dispatch({
           type: ACTION_TYPE.ERROR,
-          payload: error,
+          payload: createNetworkError(error),
           error: true,
         });
-
-        console.log('error');
 
         // only reject error if asked by user
         if (rejectable) return Promise.reject(error);

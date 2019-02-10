@@ -8,8 +8,6 @@ import labelsReducer from './labels';
 import facesReducer from './faces';
 import userReducer from './user';
 
-import playgroundReducer from './playground';
-
 const reducers = combineReducers({
   appTime: Date.now,
   application: applicationReducer,
@@ -18,7 +16,6 @@ const reducers = combineReducers({
   labels: labelsReducer,
   faces: facesReducer,
   user: userReducer,
-  playground: playgroundReducer,
 });
 
 export default reducers;

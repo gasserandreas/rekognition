@@ -1,70 +1,215 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import uuid from 'uuid';
 import styled from 'styled-components';
 import Dropzone from 'react-dropzone'
+
+import { Box, Heading, Image } from 'grommet';
 import { Add } from 'grommet-icons';
 
 import Button from '../ui/form/Button';
+import ButtonGroup from '../ui/form/ButtonGroup';
+import AppMessage from '../ui/AppMessage';
+import {
+  getImageCreationDateTime,
+  getFormattedFileSize,
+} from '../util/util';
 
 import { addImage } from '../redux/images';
+import { addImageIsLoading } from '../redux/images/selectors';
 
-import { Colors } from '../styles';
+import { Colors, MediaSize } from '../styles';
 
 const StyledAddImageButton = styled(Button)`
   border-radius: 50%;
-  width: 46px;
+  width: 44px;
   height: 46px;
   position: fixed;
-  right: 2.5rem;
-  bottom: 2.5rem;
+  right: 3rem;
+  bottom: 2rem;
   box-shadow: 0px 8px 16px rgba(0,0,0,0.20);
   z-index: 100;
+
+  @media (min-width: ${MediaSize.Notebook}) {
+    right: 2.5rem;
+    bottom: 2.5rem;
+  }
+`;
+
+const StyledImageWrapper = styled(Box)`
+  flex-grow: 1;
+  flex-shrink: 1;
+  margin: 1rem 0;
+
+  @media (min-width: ${MediaSize.Tablet}) {
+    flex-direction: row;
+  }
+`;
+
+const StyledImage = styled(Image)`
+  width: 100%;
+  height: auto;
+  max-height: 40vw;
+  flex-shrink: 0;
+  flex-grow: 0;
+  overflow: inherit;
+  margin-bottom: 1rem;
+
+  @media (min-width: ${MediaSize.Tablet}) {
+    width: 60%;
+    height: auto;
+    margin-right: 2rem;
+    margin-bottom: 0 0 1rem;
+  }
+`;
+
+const StyledImageAttributes = styled(Box)`
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-content: start;
+
+  @media (min-width: ${MediaSize.Tablet}) {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  div {
+    box-sizing: border-box;
+    flex-shrink: 1;
+    flex-grow: 1;
+    padding: 0.25rem;
+    width: 49%;
+
+    @media (min-width: ${MediaSize.Tablet}) {
+      width: auto;
+      flex-shrink: 0;
+      flex-grow: 0;
+    }
+  }
+
+  strong {
+    margin-right: 0.25rem;
+  }
 `;
 
 class AddImageButton extends Component {
+  state = {
+    showMessage: false,
+    image: null,
+  }
+
   uploadImage = this.uploadImage.bind(this);
+  openImageDialog = this.openImageDialog.bind(this);
+  resetForm = this.resetForm.bind(this);
+
+  resetForm() {
+    this.setState({
+      showMessage: false,
+      image: null,
+    });
+  }
+
+  openImageDialog() {
+    this.uploadRef.open();
+  }
 
   uploadImage(files) {
     // only supports single files
     if (files.length > 0) {
       const { addImage, afterOnClick } = this.props;
       files.forEach((file) => {
-        const id = uuid.v4();
-        addImage({ file, id });
+        const { size } = file;
+        if (size > 6000000) {
+          // image is to big
+          this.setState({
+            showMessage: true,
+            image: file,
+          });
+        } else {
+          // upload
+          const id = uuid.v4();
+          addImage({ file, id });
 
-        if (afterOnClick) {
-          afterOnClick();
+          // reset form
+          this.resetForm();
+
+          if (afterOnClick) {
+            afterOnClick();
+          }
         }
       });
     }
   }
 
   render() {
+    const { showMessage, image } = this.state;
+    const { loading, ...props } = this.props;
     return (
-      <Dropzone
-        onDrop={this.uploadImage}
-        ref={(el) => { if (el) { this.uploadRef = el; }}}
-      >{({getRootProps, getInputProps}) => (
-          <span {...getRootProps()}>
-            <input {...getInputProps()} />
-            <StyledAddImageButton
-              {...this.props}
-              type="button"
-              icon={<Add color={Colors.ColorsPalette.White}/>}
-              size="xlarge"
-              buttonStyle="primary"
-              elevation="medium"
-            />
-          </span>
-        )}
-      </Dropzone>
+      <Fragment>
+        <AppMessage show={showMessage}>
+          <Heading level="2">Image is too big</Heading>
+          <Box>
+          <p>Hey it seems your image to big for being uploaded. We only allow uploading images up to <strong>6 MB</strong>, please choose a different image.</p>
+            {image  && (
+              <StyledImageWrapper>
+                <StyledImage
+                  src={URL.createObjectURL(image)}
+                  fit="cover"
+                />
+                <StyledImageAttributes>
+                  <div>
+                    <strong>Size: </strong>
+                    <span style={{ color: Colors.Red.Default }}>{getFormattedFileSize(image.size)} MB</span>
+                  </div>
+                  <div><strong>Name: </strong>{image.name}</div>
+                  <div><strong>Created: </strong>{getImageCreationDateTime(image.lastModified)}</div>
+                  <div><strong>Type: </strong>{image.type}</div>
+                </StyledImageAttributes>
+              </StyledImageWrapper>
+            )}
+            <ButtonGroup>
+              <Button
+                type="button"
+                buttonStyle="link"
+                onClick={this.resetForm}
+              >Cancel</Button>
+              <Button
+                type="button"
+                buttonStyle="primary"
+                style={{ marginLeft: '1rem' }}
+                onClick={this.openImageDialog}
+              >Change image</Button>
+            </ButtonGroup>
+          </Box>
+        </AppMessage>
+        <Dropzone
+          onDrop={this.uploadImage}
+          ref={(el) => { if (el) { this.uploadRef = el; }}}
+        >{({getRootProps, getInputProps}) => (
+            <span {...getRootProps()}>
+              <input {...getInputProps()} />
+              <StyledAddImageButton
+                {...props}
+                type="button"
+                icon={<Add color={Colors.ColorsPalette.White}/>}
+                size="xlarge"
+                buttonStyle="primary"
+                elevation="medium"
+                disabled={loading}
+              />
+            </span>
+          )}
+        </Dropzone>
+      </Fragment>
     );
   }
 }
 
 AddImageButton.propTypes = {
+  loading: PropTypes.bool.isRequired,
   addImage: PropTypes.func.isRequired,
   afterOnClick: PropTypes.func,
 }
@@ -74,7 +219,9 @@ AddImageButton.defaultProps = {
 }
 
 // redux
-const select = () => ({});
+const select = (state) => ({
+  loading: addImageIsLoading(state),
+});
 
 const mapDispatchToProps = ({
   addImage,

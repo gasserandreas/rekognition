@@ -14,7 +14,7 @@ import PreviousButton from '../../ui/PreviousButton';
 import View from '../../ui/View';
 import AsyncContainer from '../../ui/async/AsyncContainer';
 
-import { getImageCreationDateTime } from '../../util/util';
+import { getImageCreationDateTime, getFormattedFileSize } from '../../util/util';
 import { HOCRequestPropTypes } from '../../util/PropTypes';
 
 import * as Paths from '../../paths';
@@ -47,7 +47,7 @@ const StyledImageBox = styled(Box)`
   position: fixed;
 
   @media (max-width: ${MediaSize.Tablet}) {
-    height: 320px;
+    height: 260px;
     left: 0;
   }
 
@@ -81,7 +81,7 @@ const StyledDataBox = styled(Box)`
   bottom: 0;
 
   @media (max-width: ${MediaSize.Tablet}) {
-    top: ${Sizes.Header.number + 320}px;
+    top: ${Sizes.Header.number + 260}px;
   }
 
   @media (min-width: ${MediaSize.Tablet}) {
@@ -164,7 +164,7 @@ class DetailView extends Component {
       getImageRequest,
     } = this.props;
 
-    const { path, created, meta } = image;
+    const { created, meta } = image;
     const { loading } = getImageRequest;
 
     // generate meta render array
@@ -176,7 +176,7 @@ class DetailView extends Component {
       },
       {
         name: 'Size',
-        value: size > 0 ? `${(size / 1000000).toFixed(2)} MB` : null,
+        value: size > 0 ? `${getFormattedFileSize(size)} MB` : null,
       },
       {
         name: 'Dimension',

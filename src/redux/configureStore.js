@@ -17,6 +17,8 @@ import { logOutUser } from './auth';
 import GraphApi from '../util/GraphApi';
 import { getUrl } from '../util/services/networkUtils';
 
+import { addMessage } from '../redux/application/message';
+
 // configure persist store
 const persistConfig = {
   key: 'rekognition',
@@ -32,7 +34,18 @@ const configureStore = (initialState = {}) => {
     NODE_ENV,
   } = process.env;
 
-  const errorMiddleware = createMiddleware();
+  // configure error middleware
+  const errorOptions = {
+    logToUI: (error, dispatch) => {
+      const message = {
+        title: error.title,
+        text: error.detail ? JSON.stringify(error.detail) : null,
+        showRefresh: true,
+      };
+      addMessage(message)(dispatch);
+    }
+  };
+  const errorMiddleware = createMiddleware(errorOptions);
 
   const enhancers = [];
   const middleware = [

@@ -43,21 +43,21 @@ const StyledLoadingIndicator = styled.div`
   @keyframes color {
     100%,
     0% {
-      // stroke: #d62d20;
-      stroke: ${Colors.Blue.Default}
+      stroke: ${props => props.color.default};
+      /* stroke: ${Colors.Blue.Default} */
     }
     40% {
-      // stroke: #0057e7;
-      stroke: ${Colors.Blue.Light}
+      stroke: ${props => props.color.light};
+      /* stroke: ${Colors.Blue.Light} */
     }
     66% {
-      // stroke: #008744;
-      stroke: ${Colors.Blue.Default}
+      stroke: ${props => props.color.default};
+      /* stroke: ${Colors.Blue.Default} */
     }
     80%,
     90% {
-      // stroke: #ffa700;
-      stroke: ${Colors.Blue.Dark}
+      stroke: ${props => props.color.dark};
+      /* stroke: ${Colors.Blue.Dark} */
     }
   }
   
@@ -77,7 +77,7 @@ const StyledLoadingIndicator = styled.div`
   }
 `;
 
-const LoadingIndicator = (props) => (
+const LoadingIndicator = ({ circleProps, ...props }) => (
   <StyledLoadingIndicator {...props}>
     <svg
       className="circular"
@@ -91,6 +91,7 @@ const LoadingIndicator = (props) => (
         fill="none"
         strokeWidth="2"
         strokeMiterlimit="10"
+        {...circleProps}
       />
     </svg>
   </StyledLoadingIndicator>
@@ -98,10 +99,22 @@ const LoadingIndicator = (props) => (
 
 LoadingIndicator.propTypes = {
   size: PropTypes.number,
+  color: PropTypes.shape({
+    light: PropTypes.string.isRequired,
+    default: PropTypes.string.isRequired,
+    dark: PropTypes.string.isRequired,
+  }),
+  circleProps: PropTypes.shape({}),
 };
 
 LoadingIndicator.defaultProps = {
   size: 100,
+  color: {
+    light: Colors.Blue.Light,
+    default: Colors.Blue.Default,
+    dark: Colors.Blue.Dark,
+  },
+  circleProps: {},
 };
 
 export default LoadingIndicator;
