@@ -9,6 +9,7 @@ import {
 
 import LoginForm from './LoginForm';
 
+import View from '../../ui/View';
 import Card from '../../ui/Card';
 
 import * as Paths from '../../paths';
@@ -16,9 +17,8 @@ import { HOCRequestPropTypes } from '../../util/PropTypes';
 import { Colors } from '../../styles';
 
 
-const StyledView = styled.div`
+const StyledView = styled(View)`
   background-color: ${Colors.ColorsPalette.Background};
-  min-height: 100vh;
 
   .content {
     width: 90%;
@@ -28,7 +28,7 @@ const StyledView = styled.div`
   }
 `;
 
-class View extends Component {
+class LoginView extends Component {
   static propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
     loginRequest: HOCRequestPropTypes.isRequired,
@@ -82,4 +82,4 @@ class View extends Component {
   }
 }
 
-export default View;
+export default LoginView;

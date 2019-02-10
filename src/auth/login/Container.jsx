@@ -6,7 +6,7 @@ import {
   loginRequestSelector,
 } from '../../redux/auth/selectors';
 
-import View from './View';
+import LoginView from './LoginView';
 
 const select = state => ({
   isAuthenticated: isAuthenticatedSelector(state),
@@ -17,4 +17,4 @@ const mapDispatchToProps = ({
   logInUser,
 });
 
-export default connect(select, mapDispatchToProps)(View);
+export default connect(select, mapDispatchToProps)(LoginView);

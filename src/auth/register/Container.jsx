@@ -8,7 +8,7 @@ import {
   checkEmailRequestSelector,
 } from '../../redux/auth/selectors';
 
-import View from './View';
+import RegisterView from './RegisterView';
 
 const select = state => ({
   isAuthenticated: isAuthenticatedSelector(state),
@@ -23,4 +23,4 @@ const mapDispatchToProps = ({
   invalidateEmail,
 });
 
-export default connect(select, mapDispatchToProps)(View);
+export default connect(select, mapDispatchToProps)(RegisterView);
