@@ -164,7 +164,7 @@ class DetailView extends Component {
       getImageRequest,
     } = this.props;
 
-    const { path, created, meta } = image;
+    const { created, meta } = image;
     const { loading } = getImageRequest;
 
     // generate meta render array

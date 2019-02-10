@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 
 import { Box, Heading, Paragraph, ResponsiveContext } from 'grommet';
 
@@ -39,7 +38,6 @@ class UserView extends Component {
     const { 
       firstname,
       lastname,
-      email,
     } = user;
 
     const {
