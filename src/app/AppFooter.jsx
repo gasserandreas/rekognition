@@ -6,7 +6,8 @@ import { Box, Anchor } from 'grommet';
 import { Colors, MediaSize, Sizes } from '../styles';
 
 const StyledAppFooter = styled(Box)`
-  color: ${Colors.ColorsPalette.TextFaded};
+  color: ${(props) => props.alternativeColor ? Colors.ColorsPalette.White : Colors.ColorsPalette.TextFaded};
+  background-color: ${(props) => props.alternativeColor ? Colors.ColorsPalette.Background : 'inherit'};
 
   ${props => props.withSidebar ? `
     @media (min-width: ${MediaSize.Tablet}) {
@@ -27,20 +28,26 @@ const StyledAppFooter = styled(Box)`
   ` : ''}
 
   a {
-    color: ${Colors.Neutrals.MidDark};
+    color: ${(props) => props.alternativeColor ? Colors.ColorsPalette.White : Colors.Neutrals.MidDark};
     font-weight: 600;
   }
 `;
 
-const AppFooter = ({ withSidebar }) => (
+const AppFooter = ({ withSidebar, alternativeColor }) => (
   <StyledAppFooter
     tag='footer'
     direction='column'
     align='center'
     pad={{ vertical: 'xsmall' }}
     withSidebar={withSidebar}
+    alternativeColor={alternativeColor}
   >
-   <span>Created by: <Anchor target="_blank" href="https://andreasgasser.com">Andreas Gasser</Anchor></span>
+    <Box
+      direction="row"
+    >
+      <span>Created by: <Anchor target="_blank" href="https://andreasgasser.com">Andreas Gasser</Anchor></span>
+      <span style={{ marginLeft: '0.5rem' }}>Build: {process.env.REACT_APP_VERSION}</span>
+    </Box>
   </StyledAppFooter>
 );
 

@@ -19,8 +19,9 @@ import {
 
 // base style components
 import PrivateRoute from './PrivateRoute';
-import AppHeader from './AppHeader';
 import AppMessage from '../ui/AppMessage';
+import AppHeader from './AppHeader';
+import AppFooter from './AppFooter';
 
 import ImagesContainer from '../images/list/Container';
 import ImagesDetailContainer from '../images/detail/Container';
@@ -89,7 +90,6 @@ class App extends Component {
 
   render() {
     const { isAuthenticated, username, message } = this.props;
-    console.log(message);
 
     return (
       <Grommet theme={theme} full={true}>
@@ -151,6 +151,20 @@ class App extends Component {
               <Route exact path={Paths.REGISTER} component={RegisterContainer} />
               <Route exact path={Paths.PRIVACY} component={Privacy} />
               <Route path="*" component={NotFound} />
+            </Switch>
+            <Switch>
+              <Route exact path={Paths.GET_IMAGES_DETAIL(Paths.ID)} component={(props) => (
+                <AppFooter withSidebar {...props} />
+              )} />
+              <Route exact path={Paths.LOGIN} component={(props) => (
+                <AppFooter alternativeColor {...props} />
+              )} />
+              <Route exact path={Paths.REGISTER} component={(props) => (
+                <AppFooter alternativeColor {...props} />
+              )} />
+              <Route path="*" component={(props) => (
+                <AppFooter {...props} />
+              )} />
             </Switch>
           </Box>
         </StyledAppContent>

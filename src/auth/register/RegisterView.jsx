@@ -11,15 +11,15 @@ import CheckEmailForm from './CheckEmailForm';
 import RegisterForm from './RegisterForm';
 
 import Card from '../../ui/Card';
+import View from '../../ui/View';
 
 import * as Paths from '../../paths';
 import { HOCRequestPropTypes } from '../../util/PropTypes';
 import { Colors } from '../../styles';
 
 
-const StyledView = styled.div`
+const StyledView = styled(View)`
   background-color: ${Colors.ColorsPalette.Background};
-  min-height: 100vh;
 
   .content {
     width: 90%;
@@ -29,7 +29,7 @@ const StyledView = styled.div`
   }
 `;
 
-class View extends Component {
+class RegisterView extends Component {
   static propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
     signupRequest: HOCRequestPropTypes.isRequired,
@@ -125,4 +125,4 @@ class View extends Component {
   }
 }
 
-export default View;
+export default RegisterView;
