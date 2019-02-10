@@ -76,6 +76,7 @@ class View extends Component {
           </Card>
         </div>
         <AuthFooter href={Paths.REGISTER}>Sign up for an account</AuthFooter>
+        <AuthFooter href={Paths.PRIVACY}>Privacy note</AuthFooter>
       </StyledView>
     );
   }
