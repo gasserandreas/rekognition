@@ -40,7 +40,12 @@ const AppFooter = ({ withSidebar }) => (
     pad={{ vertical: 'xsmall' }}
     withSidebar={withSidebar}
   >
-   <span>Created by: <Anchor target="_blank" href="https://andreasgasser.com">Andreas Gasser</Anchor></span>
+    <Box
+      direction="row"
+    >
+      <span>Created by: <Anchor target="_blank" href="https://andreasgasser.com">Andreas Gasser</Anchor></span>
+      <span style={{ marginLeft: '0.5rem' }}>Build: {process.env.REACT_APP_VERSION}</span>
+    </Box>
   </StyledAppFooter>
 );
 
