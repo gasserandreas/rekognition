@@ -29,6 +29,7 @@ import UserContainer from '../user/Container';
 import LoginContainer from '../auth/login/Container';
 import RegisterContainer from '../auth/register/Container';
 
+import Privacy from './Privacy';
 import NotFound from './NotFound';
 
 import * as Paths from '../paths';
@@ -148,6 +149,7 @@ class App extends Component {
               />
               <Route exact path={Paths.LOGIN} component={LoginContainer} />
               <Route exact path={Paths.REGISTER} component={RegisterContainer} />
+              <Route exact path={Paths.PRIVACY} component={Privacy} />
               <Route path="*" component={NotFound} />
             </Switch>
           </Box>

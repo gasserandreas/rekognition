@@ -119,6 +119,7 @@ class View extends Component {
           </Card>
         </div>
         <AuthFooter href={Paths.LOGIN}>Use login credentials instead</AuthFooter>
+        <AuthFooter href={Paths.PRIVACY}>Privacy note</AuthFooter>
       </StyledView>
     );
   }

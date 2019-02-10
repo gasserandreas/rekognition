@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Box, Heading, Paragraph, ResponsiveContext } from 'grommet';
@@ -14,6 +15,7 @@ import AsyncContainer from '../ui/async/AsyncContainer';
 import { HOCRequestPropTypes } from '../util/PropTypes';
 
 import { getDefaultFormatedDate } from '../util/util';
+import * as Paths from '../paths';
 
 class UserView extends Component {
   componentWillMount() {
@@ -55,9 +57,7 @@ class UserView extends Component {
                 user={{ firstname, lastname }}
                 onSubmit={updateUser}
                 submitting={updateUserRequest.loading}
-                // submitting={false}
                 error={updateUserRequest.error ? updateUserRequest.error.message : null}
-                // error={null}
               />
             </AsyncContainer>
           </Card>
@@ -74,6 +74,10 @@ class UserView extends Component {
                   </Paragraph>
                   <Paragraph size="small" margin={{ bottom: 'none' }}>
                     <strong>Auto login:</strong> {remember ? 'enabled' : 'disabled'}
+                  </Paragraph>
+                  <Paragraph size="small" margin={{ bottom: 'none' }}>
+                    <strong>Privacy information: </strong>
+                    Click <Link to={Paths.PRIVACY}>here</Link> to view our privacy policy
                   </Paragraph>
                 </Box>
                 <Box
