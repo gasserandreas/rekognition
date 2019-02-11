@@ -11,7 +11,6 @@ export const MESSAGE_TYPES = {
 };
 
 const getColor = (props) => {
-  console.log(props);
   switch (props.appearance) {
     case MESSAGE_TYPES.ERROR:
       return Colors.ColorsPalette.TextInvers;
@@ -43,7 +42,7 @@ const getBorderColor = (props) => {
 }
 
 const StyledMessage = styled.div`
-  color: ${props => getColor(props)}
+  color: ${props => getColor(props)};
   background-color: ${props => getBackgroundColor(props)};
   border-color: ${props => getBorderColor(props)};
   border-width: ${props => props.border ? '1px' : '0'};
@@ -53,18 +52,13 @@ const StyledMessage = styled.div`
   text-align: center;
   vertical-align: middle;
   padding: 0.5rem 0.75rem;
-}
 `;
 
-const Message = (props) => {
-  const { children } = props;
-  console.log(props);
-  return (
-    <StyledMessage {...props}>
-      {children}
-    </StyledMessage>
-  );
-}
+const Message = ({ children, ...props}) => (
+  <StyledMessage {...props}>
+    {children}
+  </StyledMessage>
+);
 
 Message.propTypes = {
   appearance: PropTypes.oneOf([
