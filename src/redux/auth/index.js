@@ -151,7 +151,11 @@ export const logInUser = hocAsyncAction(
         dispatch(loadApplicationAuthenticated());
 
         return data;
-      });
+      })
+  },
+  {
+    rejectable: false,
+    handled: false,
   }
 );
 
@@ -206,6 +210,10 @@ export const signupUser = hocAsyncAction(
 
         return data;
       });
+  },
+  {
+    rejectable: false,
+    handled: false,
   }
 );
 
@@ -234,6 +242,10 @@ export const checkEmail = hocAsyncAction(
           dispatch(authSetValidEmail());
         }
       });
+  },
+  {
+    rejectable: false,
+    handled: false,
   }
 );
 
@@ -276,7 +288,7 @@ export const refreshToken = (token, userId) => (dispatch, getState, { GraphApi }
     .catch((error) => {
       dispatch(logOutUser('Could not refresh token', true));
     })
-}
+};
 
 // reducers
 const username = (state = null, action) => {

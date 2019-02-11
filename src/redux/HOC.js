@@ -29,7 +29,15 @@ export const parsePayloadById = payload => {
 };
 
 // actions
-export const hocAsyncAction = (ACTION_TYPE, createThunk, rejectable = false) => (...args) => {
+// export const hocAsyncAction = (ACTION_TYPE, createThunk, rejectable = false) => (...args) => {
+// export const hocAsyncAction = (userOptions = {}) => (...args) => {
+export const hocAsyncAction = (ACTION_TYPE, createThunk, userOptions) => (...args) => {
+  const { rejectable, handled } = {
+    rejectable: false,
+    handled: true,
+    ...userOptions,
+  };
+
   // create function for passed properties / args
   const thunk = createThunk(...args);
 
@@ -59,7 +67,7 @@ export const hocAsyncAction = (ACTION_TYPE, createThunk, rejectable = false) => 
         dispatch({
           type: ACTION_TYPE.ERROR,
           payload: createNetworkError(error),
-          error: true,
+          error: handled, // only flag as error if not rejectable
         });
 
         // only reject error if asked by user
