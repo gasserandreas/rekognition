@@ -60,12 +60,12 @@ const getColor = props => {
   }
 }
 
-const StyledLoading = styled(LoadingIndicator)`
+export const StyledLoading = styled(LoadingIndicator)`
   width: 1.2rem;
   margin-left: 0.5rem;
 `;
 
-const StyledButton = styled(Grommet.Button)`
+export const StyledButton = styled(Grommet.Button)`
   display: flex;
   align-items: center;
   border-radius: 3px;

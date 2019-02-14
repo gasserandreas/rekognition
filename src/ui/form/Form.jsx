@@ -6,7 +6,7 @@ import * as Grommet from 'grommet';
 import { Colors, MediaSize } from '../../styles';
 
 // input components
-const StyledTextInput = styled(Grommet.TextInput)`
+export const StyledTextInput = styled(Grommet.TextInput)`
   ${props => props.error ? `
     border-color: ${Colors.Red.Default};
   ` : ''}
@@ -18,7 +18,7 @@ const StyledTextInput = styled(Grommet.TextInput)`
 export const TextInput = (props) => <StyledTextInput {...props} />;
 
 
-const StyledCheckBox = styled(Grommet.CheckBox)`
+export const StyledCheckBox = styled(Grommet.CheckBox)`
   ${props => props.error ? `
     border-color: ${Colors.Red.Default};
     color: ${Colors.Red.Default};
@@ -28,16 +28,13 @@ const StyledCheckBox = styled(Grommet.CheckBox)`
 export const CheckBox = props => <StyledCheckBox {...props} />;
 
 // general components
-const StyledFieldFeedback = styled.div`
+export const StyledFieldFeedback = styled.div`
   color: ${Colors.Red.Default};
   margin: .2rem 0.1rem;
   font-weight: 500;
 `;
 
-export const FieldFeedback = ({ error }) =>
-  error ? <StyledFieldFeedback>{error}</StyledFieldFeedback> : null;
-
-const StyledFieldLabel = styled.label`
+export const StyledFieldLabel = styled.label`
   color: ${Colors.ColorsPalette.TextFaded};
   font-weight: 500;
   font-size: .925rem;
@@ -46,13 +43,7 @@ const StyledFieldLabel = styled.label`
   display: inline-block;
 `;
 
-export const FieldLabel = ({ children, ...props }) => (
-  <StyledFieldLabel {...props}>
-    {children}
-  </StyledFieldLabel>
-);
-
-const StyledField = styled.div`
+export const StyledField = styled.div`
   margin: .75rem 0;
 
   ${props => props.inline ? `
@@ -63,9 +54,9 @@ const StyledField = styled.div`
 
 export const Field = ({ id, label, error, children, ...props }) => (
   <StyledField {...props}>
-    {label && <FieldLabel htmlFor={id} error={error}>{label}</FieldLabel>}
+    {label && <StyledFieldLabel htmlFor={id}>{label}</StyledFieldLabel>}
     {children}
-    <FieldFeedback error={error} />
+    {error && <StyledFieldFeedback>{error}</StyledFieldFeedback>}
   </StyledField>
 );
 
@@ -77,7 +68,7 @@ Field.defaultProps = {
   inline: false,
 }
 
-const StyledFieldRow = styled(Grommet.Box)`
+export const StyledFieldRow = styled(Grommet.Box)`
   @media (min-width: ${MediaSize.Tablet}) {
     flex-direction: row;
 

@@ -1,0 +1,126 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox Input should render correctly 1`] = `
+<label
+  className="StyledCheckBox__StyledCheckBoxContainer-sc-1dbk5ju-1 bVmNDQ"
+  onClick={[Function]}
+>
+  <div
+    className="StyledCheckBox-sc-1dbk5ju-6 eRXCj StyledBox-sc-13pk1d4-0 emCRMK"
+  >
+    <input
+      className="sc-bwzfXH bmqJpw StyledCheckBox__StyledCheckBoxInput-sc-1dbk5ju-2 eGHaUo"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      type="checkbox"
+    />
+    <div
+      className="StyledCheckBox__StyledCheckBoxBox-sc-1dbk5ju-3 fxKnpz StyledBox-sc-13pk1d4-0 jFlQDV"
+    />
+  </div>
+</label>
+`;
+
+exports[`Checkbox styles should be consistent 1`] = `
+<label
+  className="StyledCheckBox__StyledCheckBoxContainer-sc-1dbk5ju-1 bVmNDQ"
+  onClick={[Function]}
+>
+  <div
+    className="StyledCheckBox-sc-1dbk5ju-6 eRXCj StyledBox-sc-13pk1d4-0 emCRMK"
+  >
+    <input
+      className="sc-bwzfXH bGgvvP StyledCheckBox__StyledCheckBoxInput-sc-1dbk5ju-2 eGHaUo"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      type="checkbox"
+    />
+    <div
+      className="StyledCheckBox__StyledCheckBoxBox-sc-1dbk5ju-3 fxKnpz StyledBox-sc-13pk1d4-0 jFlQDV"
+    />
+  </div>
+</label>
+`;
+
+exports[`Disabled input should render correctly 1`] = `
+<div
+  className="StyledTextInput__StyledTextInputContainer-sc-1x30a0s-1 yIdXy"
+>
+  <input
+    autoComplete="off"
+    className="sc-bdVaJa bjqEvM StyledTextInput-sc-1x30a0s-0 iQGivQ"
+    disabled={true}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+  />
+</div>
+`;
+
+exports[`Error Input should render correctly 1`] = `
+<div
+  className="StyledTextInput__StyledTextInputContainer-sc-1x30a0s-1 yIdXy"
+>
+  <input
+    autoComplete="off"
+    className="sc-bdVaJa fDbrzy StyledTextInput-sc-1x30a0s-0 iQGivQ"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+  />
+</div>
+`;
+
+exports[`Extended Field should render correctly 1`] = `
+<div
+  className="sc-ifAKCX fXmiTd"
+>
+  <label
+    className="sc-bxivhb kgFgTv"
+  >
+    Custom label
+  </label>
+  <div
+    className="StyledTextInput__StyledTextInputContainer-sc-1x30a0s-1 yIdXy"
+  >
+    <input
+      autoComplete="off"
+      className="sc-bdVaJa bjqEvM StyledTextInput-sc-1x30a0s-0 iQGivQ"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      value=""
+    />
+  </div>
+</div>
+`;
+
+exports[`Field should render correctly 1`] = `
+<div
+  className="sc-ifAKCX fXmiTd"
+/>
+`;
+
+exports[`FieldRow styles should be consistent 1`] = `
+<div
+  className="sc-EHOje jzFSNI StyledBox-sc-13pk1d4-0 IRSNj"
+/>
+`;
+
+exports[`Input styles should be consistent 1`] = `
+<div
+  className="StyledTextInput__StyledTextInputContainer-sc-1x30a0s-1 yIdXy"
+>
+  <input
+    autoComplete="off"
+    className="sc-bdVaJa bjqEvM StyledTextInput-sc-1x30a0s-0 iQGivQ"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+  />
+</div>
+`;

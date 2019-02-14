@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button should render correctly 1`] = `
+<button
+  className="sc-htpNat cOCZln StyledButton-sc-323bzc-0 fRAxrl"
+  onBlur={[Function]}
+  onFocus={[Function]}
+  type="button"
+>
+  Click me
+</button>
+`;
+
+exports[`Button should render error styles 1`] = `
+<button
+  className="sc-htpNat jQQDxG StyledButton-sc-323bzc-0 fRAxrl"
+  onBlur={[Function]}
+  onFocus={[Function]}
+  type="button"
+>
+  Click me
+</button>
+`;
+
+exports[`Button should render link styles 1`] = `
+<button
+  className="sc-htpNat eKBEcI StyledButton-sc-323bzc-0 fRAxrl"
+  onBlur={[Function]}
+  onFocus={[Function]}
+  type="button"
+>
+  Click me
+</button>
+`;
+
+exports[`Button should render primary styles 1`] = `
+<button
+  className="sc-htpNat kZVqgB StyledButton-sc-323bzc-0 fRAxrl"
+  onBlur={[Function]}
+  onFocus={[Function]}
+  type="button"
+>
+  Click me
+</button>
+`;
+
+exports[`Button should render warning styles 1`] = `
+<button
+  className="sc-htpNat dZfOOy StyledButton-sc-323bzc-0 fRAxrl"
+  onBlur={[Function]}
+  onFocus={[Function]}
+  type="button"
+>
+  Click me
+</button>
+`;
+
+exports[`Button styles should be consistent 1`] = `
+<button
+  className="sc-htpNat cOCZln StyledButton-sc-323bzc-0 lhIxjU"
+  onBlur={[Function]}
+  onFocus={[Function]}
+  type="button"
+/>
+`;
+
+exports[`StyledLoading should render correctly 1`] = `
+<div
+  className="sc-bwzfXH hyhvHp sc-bdVaJa jixwoQ"
+  color={
+    Object {
+      "dark": "#172B4D",
+      "default": "#0052CC",
+      "light": "#0065FF",
+    }
+  }
+  size={100}
+>
+  <svg
+    className="circular"
+    viewBox="25 25 50 50"
+  >
+    <circle
+      className="path"
+      cx="50"
+      cy="50"
+      fill="none"
+      r="20"
+      strokeMiterlimit="10"
+      strokeWidth="2"
+    />
+  </svg>
+</div>
+`;

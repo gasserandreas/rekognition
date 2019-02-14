@@ -41,7 +41,7 @@ const getBorderColor = (props) => {
   }
 }
 
-const StyledMessage = styled.div`
+export const StyledMessage = styled.div`
   color: ${props => getColor(props)};
   background-color: ${props => getBackgroundColor(props)};
   border-color: ${props => getBorderColor(props)};

@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Message should render correctly 1`] = `
+<div
+  className="sc-bdVaJa eemERo"
+>
+  <p>
+    Hello
+  </p>
+</div>
+`;
+
+exports[`Message should render error styles 1`] = `
+<div
+  className="sc-bdVaJa gQuyMB"
+>
+  <p>
+    Hello
+  </p>
+</div>
+`;
+
+exports[`Message should render info styles 1`] = `
+<div
+  className="sc-bdVaJa eemERo"
+>
+  <p>
+    Hello
+  </p>
+</div>
+`;
+
+exports[`Message should render warning styles 1`] = `
+<div
+  className="sc-bdVaJa fQxPiK"
+>
+  <p>
+    Hello
+  </p>
+</div>
+`;
+
+exports[`Message should render without border 1`] = `
+<div
+  className="sc-bdVaJa jwkoFj"
+>
+  <p>
+    Hello
+  </p>
+</div>
+`;
+
+exports[`Message should render without round corners 1`] = `
+<div
+  className="sc-bdVaJa jBXRes"
+>
+  <p>
+    Hello
+  </p>
+</div>
+`;
