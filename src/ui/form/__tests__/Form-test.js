@@ -6,7 +6,9 @@ import {
   StyledFieldFeedback,
   TextInput,
   StyledTextInput,
+  CheckBox,
   StyledCheckBox,
+  FieldRow,
   StyledFieldRow,
 } from '../Form';
 
@@ -81,6 +83,10 @@ it('Field should render Feedback with error', () => {
 });
 
 // Input tests
+it('TextInput should work correctly', () => {
+  expect(shallow(<TextInput />));
+});
+
 it('Input styles should be consistent', () => {
   testSnapshot(<StyledTextInput />);
 });
@@ -94,6 +100,10 @@ it('Error Input should render correctly', () => {
 });
 
 // Checkbox tests
+it('CheckBox should work correctly', () => {
+  expect(shallow(<CheckBox />));
+});
+
 it('Checkbox styles should be consistent', () => {
   testSnapshot(<StyledCheckBox />);
 });
@@ -103,6 +113,10 @@ it('Checkbox Input should render correctly', () => {
 });
 
 // Test StyledFieldRow
+it('FieldRow should work correctly', () => {
+  expect(shallow(<FieldRow />));
+});
+
 it('FieldRow styles should be consistent', () => {
   testSnapshot(<StyledFieldRow />);
 });
