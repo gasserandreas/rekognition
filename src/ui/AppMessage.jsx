@@ -6,7 +6,7 @@ import { Box } from 'grommet';
 
 import { Colors, MediaSize } from '../styles';
 
-const StyledAppMessage = styled(Box)`
+export const StyledAppMessage = styled(Box)`
   visibility: ${props => props.show ? 'visible' : 'none'};
   display: ${props => props.show ? 'block' : 'none' };
   position: fixed;
@@ -24,7 +24,7 @@ const StyledAppMessage = styled(Box)`
   }
 `;
 
-const StyledAppMessageContent = styled(Box)`
+export const StyledAppMessageContent = styled(Box)`
   background-color: ${Colors.ColorsPalette.White};
   transition: top ease-in-out 500ms;
   padding: 2rem;

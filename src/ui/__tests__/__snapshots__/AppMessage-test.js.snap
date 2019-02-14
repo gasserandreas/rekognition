@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppMessage content should be styled consistently 1`] = `
+<div
+  className="sc-bwzfXH fswprr StyledBox-sc-13pk1d4-0 IRSNj"
+/>
+`;
+
+exports[`AppMessage content should be visible 1`] = `
+<div
+  className="sc-bdVaJa knjkYo StyledBox-sc-13pk1d4-0 IRSNj"
+>
+  <div
+    className="sc-bwzfXH jCUgKl StyledBox-sc-13pk1d4-0 hEFsDQ"
+  >
+    <p>
+      Hello
+    </p>
+  </div>
+</div>
+`;
+
+exports[`AppMessage should be styled consistently 1`] = `
+<div
+  className="sc-bdVaJa jVkiAG StyledBox-sc-13pk1d4-0 IRSNj"
+/>
+`;
+
+exports[`AppMessage should render correctly 1`] = `
+<div
+  className="sc-bdVaJa jVkiAG StyledBox-sc-13pk1d4-0 IRSNj"
+>
+  <div
+    className="sc-bwzfXH fswprr StyledBox-sc-13pk1d4-0 hEFsDQ"
+  >
+    <p>
+      Hello
+    </p>
+  </div>
+</div>
+`;

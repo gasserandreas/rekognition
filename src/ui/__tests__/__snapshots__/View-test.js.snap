@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`View should render correctly 1`] = `
+<div
+  className="sc-bdVaJa dmtOWd StyledBox-sc-13pk1d4-0 cOQfYo"
+>
+  View Content
+</div>
+`;
+
+exports[`View should render with content 1`] = `
+<div
+  className="sc-bdVaJa dmtOWd StyledBox-sc-13pk1d4-0 cOQfYo"
+>
+  <h1>
+    Hello
+  </h1>
+  <p>
+    Some more content, yeaah.
+  </p>
+</div>
+`;
+
+exports[`ViewHeading should render correctly 1`] = `
+<h4
+  className="sc-bwzfXH cWIyyV StyledHeading-sc-1rdh4aw-0 hlZfma"
+/>
+`;
+
+exports[`ViewHeading should render with content 1`] = `
+<h4
+  className="sc-bwzfXH cWIyyV StyledHeading-sc-1rdh4aw-0 hlZfma"
+>
+  Heading
+</h4>
+`;
