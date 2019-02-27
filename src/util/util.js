@@ -1,10 +1,11 @@
 import moment from 'moment';
 
-import { getUrl } from '../util/services/networkUtils';
+import { getUrl } from './services/networkUtils';
 
 const defaultDateFormat = 'D MMM YYYY';
 
-export const getImageSrc = path => `${getUrl('thumb')}/${path}`;
+export const getImageSrc = path => `${getUrl('image')}/${path}`;
+export const getThumbImageSrc = path => `${getUrl('thumb')}/${path}`;
 
 export const getImageCreationDateTime = dateStr => {
   const format = `${defaultDateFormat} - HH:MM:SS`;
