@@ -6,11 +6,11 @@ import { Box, Image } from 'grommet';
 
 import LoadingIndicator from './LoadingIndicator';
 
-const StyledAsyncImage = styled(Box)`
+export const StyledAsyncImage = styled(Box)`
   justify-content: center;
   transition: all 0.5s ease;
   img {
-    opacity ${props => props.loaded ? '1' : '0'};
+    opacity: ${props => props.loaded ? '1' : '0'};
     display: ${props => props.loaded || props.neverHideImg ? 'flex' : 'none'};
   }
 `;
