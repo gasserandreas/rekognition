@@ -27,7 +27,7 @@ class AsyncImage extends Component {
 
     this.setState({ loaded: true });
 
-    if(onLoad ) {
+    if(onLoad) {
       onLoad(image);
     }
   }

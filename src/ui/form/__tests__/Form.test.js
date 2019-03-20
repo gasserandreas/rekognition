@@ -4,15 +4,19 @@ import toJson from 'enzyme-to-json';
 
 import {
   Field,
+  TextInput,
+  CheckBox,
+  FieldRow,
+  __testables__,
+} from '../Form';
+
+const {
   StyledFieldLabel,
   StyledFieldFeedback,
-  TextInput,
   StyledTextInput,
-  CheckBox,
   StyledCheckBox,
-  FieldRow,
   StyledFieldRow,
-} from '../Form';
+} = __testables__;
 
 const getShallowField = (props = {}) => shallow(<Field {...props} />);
 const getMountField = (props = {}) => mount(<Field {...props} />);

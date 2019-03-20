@@ -8,7 +8,7 @@ import LoadingIndicator from '../async/LoadingIndicator';
 
 import { Colors } from '../../styles';
 
-const BUTTON_TYPES = {
+export const BUTTON_TYPES = {
   DEFAULT: 'default',
   PRIMARY: 'primary',
   WARNING: 'warning',
@@ -43,7 +43,7 @@ const getBackgroundHoverColor = props => {
     case BUTTON_TYPES.LINK:
       return 'inherit';
     default:
-      return 'rgba(9, 30, 66, 0.08);';
+      return 'rgba(9, 30, 66, 0.08)';
   }
 }
 
@@ -65,6 +65,7 @@ export const StyledLoading = styled(LoadingIndicator)`
   margin-left: 0.5rem;
 `;
 
+/* istanbul ignore next */
 export const StyledButton = styled(Grommet.Button)`
   display: flex;
   align-items: center;
@@ -85,6 +86,7 @@ export const StyledButton = styled(Grommet.Button)`
   &:hover {
     background-color: ${props => getBackgroundHoverColor(props)};
     pointer: cursor;
+    /* istanbul ignore next */
     text-decoration: ${props => props.buttonStyle === 'link' ? 'underline' : ''};
   }
 `;
@@ -124,5 +126,11 @@ Button.defaultProps = {
   children: null,
   loading: false,
 };
+
+export const __testables__ = {
+  getBackgroundColor,
+  getBackgroundHoverColor,
+  getColor,
+}
 
 export default Button;

@@ -5,8 +5,8 @@ import * as Grommet from 'grommet';
 
 import { Colors, MediaSize } from '../../styles';
 
-// input components
-export const StyledTextInput = styled(Grommet.TextInput)`
+/* istanbul ignore next */
+const StyledTextInput = styled(Grommet.TextInput)`
   ${props => props.error ? `
     border-color: ${Colors.Red.Default};
   ` : ''}
@@ -18,7 +18,8 @@ export const StyledTextInput = styled(Grommet.TextInput)`
 export const TextInput = (props) => <StyledTextInput {...props} />;
 
 
-export const StyledCheckBox = styled(Grommet.CheckBox)`
+/* istanbul ignore next */
+const StyledCheckBox = styled(Grommet.CheckBox)`
   ${props => props.error ? `
     border-color: ${Colors.Red.Default};
     color: ${Colors.Red.Default};
@@ -28,13 +29,13 @@ export const StyledCheckBox = styled(Grommet.CheckBox)`
 export const CheckBox = props => <StyledCheckBox {...props} />;
 
 // general components
-export const StyledFieldFeedback = styled.div`
+const StyledFieldFeedback = styled.div`
   color: ${Colors.Red.Default};
   margin: .2rem 0.1rem;
   font-weight: 500;
 `;
 
-export const StyledFieldLabel = styled.label`
+const StyledFieldLabel = styled.label`
   color: ${Colors.ColorsPalette.TextFaded};
   font-weight: 500;
   font-size: .925rem;
@@ -43,7 +44,8 @@ export const StyledFieldLabel = styled.label`
   display: inline-block;
 `;
 
-export const StyledField = styled.div`
+/* istanbul ignore next */
+const StyledField = styled.div`
   margin: .75rem 0;
 
   ${props => props.inline ? `
@@ -68,7 +70,7 @@ Field.defaultProps = {
   inline: false,
 }
 
-export const StyledFieldRow = styled(Grommet.Box)`
+const StyledFieldRow = styled(Grommet.Box)`
   @media (min-width: ${MediaSize.Tablet}) {
     flex-direction: row;
 
@@ -87,3 +89,12 @@ export const FieldRow = ({ children, ...props }) => (
     {children}
   </StyledFieldRow>
 )
+
+export const __testables__ = {
+  StyledTextInput,
+  StyledCheckBox,
+  StyledFieldFeedback,
+  StyledFieldLabel,
+  StyledField,
+  StyledFieldRow,
+};

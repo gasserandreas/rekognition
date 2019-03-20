@@ -2,7 +2,8 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 
-import Button, { StyledButton, StyledLoading } from '../Button';
+import Button, { StyledButton, StyledLoading, BUTTON_TYPES, __testables__ } from '../Button';
+import { Colors } from '../../../styles';
 
 it('Button should render correctly', () => {
   const wrapper = shallow(<Button>Click me</Button>);
@@ -57,4 +58,31 @@ it('Button should render loading component if loading is true', () => {
   output.setProps({ loading: false });
   expect(output.props().loading).toEqual(false);
   expect(output.find(StyledLoading).length).toEqual(0);
+});
+
+describe('color helper methods test suite', () => {
+  const { getColor, getBackgroundColor, getBackgroundHoverColor } = __testables__;
+
+  it('should handle getColor', () =>  {
+    expect(getColor({ buttonStyle: BUTTON_TYPES.PRIMARY })).toEqual(Colors.ColorsPalette.White);
+    expect(getColor({ buttonStyle: BUTTON_TYPES.ERROR })).toEqual(Colors.ColorsPalette.White);
+    expect(getColor({ buttonStyle: BUTTON_TYPES.LINK })).toEqual(Colors.Blue.Default);
+    expect(getColor({ buttonStyle: 'default' })).toEqual('#494949');
+  });
+
+  it('should handle getBackgroundColor', () => {
+    expect(getBackgroundColor({ buttonStyle: BUTTON_TYPES.PRIMARY })).toEqual(Colors.Blue.Default);
+    expect(getBackgroundColor({ buttonStyle: BUTTON_TYPES.WARNING })).toEqual(Colors.Orange.Default);
+    expect(getBackgroundColor({ buttonStyle: BUTTON_TYPES.ERROR })).toEqual(Colors.Red.Default);
+    expect(getBackgroundColor({ buttonStyle: BUTTON_TYPES.LINK })).toEqual('inherit');
+    expect(getBackgroundColor({ buttonStyle: 'default' })).toEqual('rgba(9, 30, 66, 0.04)');
+  });
+
+  it('should handle getBackgroundHoverColor', () => {
+    expect(getBackgroundHoverColor({ buttonStyle: BUTTON_TYPES.PRIMARY })).toEqual(Colors.Blue.Light);
+    expect(getBackgroundHoverColor({ buttonStyle: BUTTON_TYPES.WARNING })).toEqual(Colors.Orange.Light);
+    expect(getBackgroundHoverColor({ buttonStyle: BUTTON_TYPES.ERROR })).toEqual(Colors.Red.Light);
+    expect(getBackgroundHoverColor({ buttonStyle: BUTTON_TYPES.LINK })).toEqual('inherit');
+    expect(getBackgroundHoverColor({ buttonStyle: 'default' })).toEqual('rgba(9, 30, 66, 0.08)');
+  });
 });

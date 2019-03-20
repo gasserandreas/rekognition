@@ -37,7 +37,7 @@
         "build": "react-scripts build",
         "test": "react-scripts test --env=jsdom",
         "test:debug": "react-scripts --inspect-brk test --runInBand",
-        "test:coverage": "npm test -- --coverage --collectCoverageFrom=src/**/{*.js,*.jsx,*.ts} --collectCoverageFrom=!src/serviceWorker.js --collectCoverageFrom=!src/index.js",
+        "test:coverage": "npm test -- --coverage --collectCoverageFrom=src/**/{*.js,*.jsx,*.ts} --collectCoverageFrom=!src/serviceWorker.js --collectCoverageFrom=!src/index.js --collectCoverageFrom=!src/util/sessionUtil.js",
         "test:update": "npm test -- --updateSnapshot",
         "lint": "eslint -c ./.eslintrc './src/**/{*.js,*.jsx}'",
         "lint-fix": "eslint -c ./.eslintrc './src/**/{*.js,*.jsx}' --fix",
