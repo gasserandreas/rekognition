@@ -82,7 +82,6 @@ export const createUnknownError = (error, data = null) => Object.assign(
 export const addUnhandledPromiseCatcher = (store) => {
   // chrome only
   window.addEventListener('unhandledrejection', (event) => {
-    // const error = createUncaughtPromiseError(event.reason);
     const error = {
       ...new Error(event.reason ? event.reason : 'Internal application error: Uncaught promise in code detected'),
       title: 'Uncaught promise in code detected',
@@ -105,15 +104,15 @@ export const addUnhandledPromiseCatcher = (store) => {
 export const createMiddleware = (userOptions) => {
   const options = {
     shouldLogToUI: ({ logLevel }) => logLevel >= LogLevel.Log,
-    shouldLogToConsole: ({ logLevel }) => process.env.NODE_ENV !== 'production' || logLevel >= LogLevel.Error,
     shouldLogToServer: ({ logLevel }) => logLevel >= LogLevel.Log && process.env.NODE_ENV === 'production',
-    logToUI: (error, dispatch, getState) => { // eslint-disable-line no-unused-vars
+    shouldLogToConsole: ({ logLevel }) => process.env.NODE_ENV !== 'production' || logLevel >= LogLevel.Error,
+    logToUI: (error, dispatch, store) => { // eslint-disable-line no-unused-vars
       // TODO: log to UI...
     },
-    logToServer: (error, dispatch, getState) => { // eslint-disable-line no-unused-vars
+    logToServer: (error, dispatch, store) => { // eslint-disable-line no-unused-vars
       // TODO: let's fire User analytics
     },
-    logToConsole: (error, dispatch, getState) => {
+    logToConsole: (error, dispatch, store) => { // eslint-disable-line no-unused-vars
       const { logLevel } = error;
       switch (logLevel) {
         case LogLevel.Error:
@@ -139,7 +138,9 @@ export const createMiddleware = (userOptions) => {
       try {
         return next(action);
       } catch (dispatchError) {
+        console.log(dispatchError);
         // Prevent infinite loop, if for some reason error reporting threw.
+        /* istanbul ignore next */
         if (action.type === ErrorTypes.ReduxError) {
           console.error('Exception thrown while attempting to report error.\nHalting to prevent potential infinite loop.');
           console.groupCollapsed('Error details');
@@ -149,6 +150,7 @@ export const createMiddleware = (userOptions) => {
           return; // eslint-disable-line consistent-return
         }
         // inject error back into redux
+        /* istanbul ignore next */
         store.dispatch(reportInternalReduxError(Object.assign(
           new Error(dispatchError.message ? dispatchError.message : `Redux error caught for ${action.type}`),
           {
@@ -166,6 +168,7 @@ export const createMiddleware = (userOptions) => {
     }
 
     const { payload } = action;
+    const { dispatch } = store;
 
     const {
       shouldLogToConsole,
@@ -176,18 +179,16 @@ export const createMiddleware = (userOptions) => {
       logToServer,
     } = options;
 
-    console.log(action);
-
-    if (shouldLogToConsole(payload, store.dispatch, () => store)) {
-      logToConsole(payload, store.dispatch, () => store);
+    if (shouldLogToConsole(payload)) {
+      logToConsole(payload, dispatch, store);
     }
 
-    if (shouldLogToUI(payload, store.dispatch, () => store)) {
-      logToUI(payload, store.dispatch, () => store);
+    if (shouldLogToUI(payload)) {
+      logToUI(payload, dispatch, store);
     }
 
-    if (shouldLogToServer(payload, store.dispatch, () => store)) {
-      logToServer(payload, store.dispatch, () => store);
+    if (shouldLogToServer(payload)) {
+      logToServer(payload, dispatch, store);
     }
 
     return next(action);
