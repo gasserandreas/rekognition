@@ -7,9 +7,12 @@ import renderer from 'react-test-renderer';
 
 import toJson from 'enzyme-to-json';
 
+import jestFetchMock from "jest-fetch-mock";
+
 // setup enzyme
 configure({ adapter: new Adapter() });
 
+// add global functions
 const testSnapshot = (component, props = {}) => {
   const tree = renderer
     .create(component)
@@ -30,5 +33,8 @@ global.mount = mount;
 global.toJson = toJson;
 global.createComponentJson = createComponentJson;
 global.React = React;
+
+// setup fetch-mock
+global.fetch = jestFetchMock;
 
 global.testSnapshot = testSnapshot;

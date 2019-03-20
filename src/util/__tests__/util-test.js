@@ -1,5 +1,3 @@
-/* global React, shallow, */
-
 import * as util from '../util';
 import { getUrl } from '../services/networkUtils';
 
