@@ -41,6 +41,7 @@ const getBorderColor = (props) => {
   }
 }
 
+/* istanbul ignore next */
 const StyledMessage = styled.div`
   color: ${props => getColor(props)};
   background-color: ${props => getBackgroundColor(props)};
@@ -75,6 +76,13 @@ Message.defaultProps = {
   appearance: MESSAGE_TYPES.INFO,
   border: false,
   rounded: true,
+};
+
+export const __testables__ = {
+  getColor,
+  getBorderColor,
+  getBackgroundColor,
+  StyledMessage,
 };
 
 export default Message;

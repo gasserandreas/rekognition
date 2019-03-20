@@ -5,7 +5,7 @@ import * as Grommet from 'grommet';
 
 import { Colors, MediaSize } from '../../styles';
 
-// input components
+/* istanbul ignore next */
 const StyledTextInput = styled(Grommet.TextInput)`
   ${props => props.error ? `
     border-color: ${Colors.Red.Default};
@@ -18,6 +18,7 @@ const StyledTextInput = styled(Grommet.TextInput)`
 export const TextInput = (props) => <StyledTextInput {...props} />;
 
 
+/* istanbul ignore next */
 const StyledCheckBox = styled(Grommet.CheckBox)`
   ${props => props.error ? `
     border-color: ${Colors.Red.Default};
@@ -34,9 +35,6 @@ const StyledFieldFeedback = styled.div`
   font-weight: 500;
 `;
 
-export const FieldFeedback = ({ error }) =>
-  error ? <StyledFieldFeedback>{error}</StyledFieldFeedback> : null;
-
 const StyledFieldLabel = styled.label`
   color: ${Colors.ColorsPalette.TextFaded};
   font-weight: 500;
@@ -46,12 +44,7 @@ const StyledFieldLabel = styled.label`
   display: inline-block;
 `;
 
-export const FieldLabel = ({ children, ...props }) => (
-  <StyledFieldLabel {...props}>
-    {children}
-  </StyledFieldLabel>
-);
-
+/* istanbul ignore next */
 const StyledField = styled.div`
   margin: .75rem 0;
 
@@ -63,9 +56,9 @@ const StyledField = styled.div`
 
 export const Field = ({ id, label, error, children, ...props }) => (
   <StyledField {...props}>
-    {label && <FieldLabel htmlFor={id} error={error}>{label}</FieldLabel>}
+    {label && <StyledFieldLabel htmlFor={id}>{label}</StyledFieldLabel>}
     {children}
-    <FieldFeedback error={error} />
+    {error && <StyledFieldFeedback>{error}</StyledFieldFeedback>}
   </StyledField>
 );
 
@@ -96,3 +89,12 @@ export const FieldRow = ({ children, ...props }) => (
     {children}
   </StyledFieldRow>
 )
+
+export const __testables__ = {
+  StyledTextInput,
+  StyledCheckBox,
+  StyledFieldFeedback,
+  StyledFieldLabel,
+  StyledField,
+  StyledFieldRow,
+};

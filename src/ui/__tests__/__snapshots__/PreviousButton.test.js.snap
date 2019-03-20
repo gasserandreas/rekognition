@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PreviousButton should render correctly 1`] = `
+<StyledComponent
+  forwardedComponent={
+    Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "sc-bdVaJa",
+        "isStatic": true,
+        "rules": Array [
+          "
+  display: block;
+  visibility: visible;
+
+  &:hover {
+    stroke: ",
+          "#42526E",
+          ";
+    cursor: pointer;
+  }
+",
+        ],
+      },
+      "displayName": "Styled(Previous)",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "sc-bdVaJa",
+      "target": [Function],
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+      Symbol(Symbol.hasInstance): [Function],
+    }
+  }
+  forwardedRef={null}
+/>
+`;
+
+exports[`PreviousButton styles should be consistent 1`] = `
+<StyledComponent
+  forwardedComponent={
+    Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "sc-bdVaJa",
+        "isStatic": true,
+        "rules": Array [
+          "
+  display: block;
+  visibility: visible;
+
+  &:hover {
+    stroke: ",
+          "#42526E",
+          ";
+    cursor: pointer;
+  }
+",
+        ],
+      },
+      "displayName": "Styled(Previous)",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "sc-bdVaJa",
+      "target": [Function],
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+      Symbol(Symbol.hasInstance): [Function],
+    }
+  }
+  forwardedRef={null}
+/>
+`;

@@ -1,8 +1,7 @@
 // global store
 import ric from 'ric-shim';
-import reactors from './reactors';
 
-export default store => () => {
+export default (store, reactors) => () => {
   const state = store.getState();
 
   let nextReaction;

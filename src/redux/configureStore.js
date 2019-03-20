@@ -11,6 +11,8 @@ import { createMiddleware, addUnhandledPromiseCatcher } from '../util/ErrorHandl
 import rootReducer from './rootReducer';
 
 import configureReactors from './reactors/configureReactors';
+import reactors from './reactors/reactors';
+
 import { APP_IDLE } from './application';
 import { logOutUser } from './auth';
 
@@ -19,21 +21,36 @@ import { getUrl } from '../util/services/networkUtils';
 
 import { addMessage } from '../redux/application/message';
 
-// configure persist store
-const persistConfig = {
-  key: 'rekognition',
-  storage,
-  whitelist: [],
-  stateReconciler: autoMergeLevel2,
+const getPersistedReducer = () => {
+  // configure persist store
+  const persistConfig = {
+    key: 'rekognition',
+    storage,
+    whitelist: [],
+    stateReconciler: autoMergeLevel2,
+  };
+
+  return persistReducer(persistConfig, rootReducer);
+}
+
+const getComposeEnhancers = () => {
+  // enable dev tools in development mode only
+  if (process.env.NODE_ENV !== 'development') {
+    return compose;
+  }
+
+  const devToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__; // eslint-disable-line no-underscore-dangle, max-len
+  // fallback to use default compose
+  if (typeof devToolsExtension !== 'function') {
+    return compose;
+  }
+
+  return devToolsExtension;
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const getEnhancers = () => [];
 
 const configureStore = (initialState = {}) => {
-  const {
-    NODE_ENV,
-  } = process.env;
-
   // configure error middleware
   const errorOptions = {
     logToUI: (error, dispatch) => {
@@ -47,26 +64,25 @@ const configureStore = (initialState = {}) => {
   };
   const errorMiddleware = createMiddleware(errorOptions);
 
-  const enhancers = [];
   const middleware = [
     thunkMiddleware.withExtraArgument({
       // init graphql api
       GraphApi: new GraphApi({
         endpoint: getUrl('graphql'),
+        /**
+         * Attention: MONKEY PATCH store into GraphApi
+         * Not the best design but works for now, redo later on
+         * or in next project find different solution for that...
+         */
         onAuthError: (message) => store.dispatch(logOutUser(message)), //AUTH_LOG_OUT
       }),
     }),
     errorMiddleware,
   ];
 
-  let composeEnhancers = compose;
-  if (NODE_ENV === 'development') {
-    const devToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__; // eslint-disable-line no-underscore-dangle, max-len
-
-    if (typeof devToolsExtension === 'function') {
-      composeEnhancers = devToolsExtension;
-    }
-  }
+  const enhancers = getEnhancers();
+  const composeEnhancers = getComposeEnhancers();
+  const persistedReducer = getPersistedReducer();
 
   const store = createStore(
     persistedReducer,
@@ -80,7 +96,7 @@ const configureStore = (initialState = {}) => {
   const persistor = persistStore(store);
 
   // add reactors
-  store.subscribe(configureReactors(store));
+  store.subscribe(configureReactors(store, reactors));
 
   // idle configuration
   const idleDispatcher = () => {
@@ -109,6 +125,12 @@ const configureStore = (initialState = {}) => {
     store,
     persistor,
   };
+};
+
+export const __testables__ = { // eslint-disable-line no-underscore-dangle
+  getEnhancers,
+  getComposeEnhancers,
+  getPersistedReducer,
 };
 
 export default configureStore;

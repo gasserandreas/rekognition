@@ -6,7 +6,7 @@ import { Box } from 'grommet';
 
 import { Colors } from '../styles';
 
-const StyledCard = styled(Box)`
+export const StyledCard = styled(Box)`
   background-color: ${Colors.ColorsPalette.White};
   border-radius: 3px;
   box-sizing: border-box;

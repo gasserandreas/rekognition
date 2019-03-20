@@ -1,0 +1,599 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Message error styles test suite Message should render error styles 1`] = `
+<StyledComponent
+  appearance="error"
+  border={false}
+  forwardedComponent={
+    Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "sc-bdVaJa",
+        "isStatic": false,
+        "rules": Array [
+          "
+  color: ",
+          [Function],
+          ";
+  background-color: ",
+          [Function],
+          ";
+  border-color: ",
+          [Function],
+          ";
+  border-width: ",
+          [Function],
+          ";
+  border-style: solid;
+  border-radius: ",
+          [Function],
+          ";
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0.5rem 0.75rem;
+",
+        ],
+      },
+      "displayName": "styled.div",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "sc-bdVaJa",
+      "target": "div",
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    }
+  }
+  forwardedRef={null}
+  rounded={true}
+>
+  <p>
+    Hello
+  </p>
+</StyledComponent>
+`;
+
+exports[`Message error styles test suite Message should render without border 1`] = `
+<StyledComponent
+  appearance="error"
+  border={false}
+  forwardedComponent={
+    Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "sc-bdVaJa",
+        "isStatic": false,
+        "rules": Array [
+          "
+  color: ",
+          [Function],
+          ";
+  background-color: ",
+          [Function],
+          ";
+  border-color: ",
+          [Function],
+          ";
+  border-width: ",
+          [Function],
+          ";
+  border-style: solid;
+  border-radius: ",
+          [Function],
+          ";
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0.5rem 0.75rem;
+",
+        ],
+      },
+      "displayName": "styled.div",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "sc-bdVaJa",
+      "target": "div",
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    }
+  }
+  forwardedRef={null}
+  rounded={true}
+>
+  <p>
+    Hello
+  </p>
+</StyledComponent>
+`;
+
+exports[`Message error styles test suite Message should render without round corners 1`] = `
+<StyledComponent
+  appearance="info"
+  border={false}
+  forwardedComponent={
+    Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "sc-bdVaJa",
+        "isStatic": false,
+        "rules": Array [
+          "
+  color: ",
+          [Function],
+          ";
+  background-color: ",
+          [Function],
+          ";
+  border-color: ",
+          [Function],
+          ";
+  border-width: ",
+          [Function],
+          ";
+  border-style: solid;
+  border-radius: ",
+          [Function],
+          ";
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0.5rem 0.75rem;
+",
+        ],
+      },
+      "displayName": "styled.div",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "sc-bdVaJa",
+      "target": "div",
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    }
+  }
+  forwardedRef={null}
+  rounded={false}
+>
+  <p>
+    Hello
+  </p>
+</StyledComponent>
+`;
+
+exports[`Message info styles test suite Message should render info styles 1`] = `
+<StyledComponent
+  appearance="info"
+  border={false}
+  forwardedComponent={
+    Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "sc-bdVaJa",
+        "isStatic": false,
+        "rules": Array [
+          "
+  color: ",
+          [Function],
+          ";
+  background-color: ",
+          [Function],
+          ";
+  border-color: ",
+          [Function],
+          ";
+  border-width: ",
+          [Function],
+          ";
+  border-style: solid;
+  border-radius: ",
+          [Function],
+          ";
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0.5rem 0.75rem;
+",
+        ],
+      },
+      "displayName": "styled.div",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "sc-bdVaJa",
+      "target": "div",
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    }
+  }
+  forwardedRef={null}
+  rounded={true}
+>
+  <p>
+    Hello
+  </p>
+</StyledComponent>
+`;
+
+exports[`Message info styles test suite Message should render without border 1`] = `
+<StyledComponent
+  appearance="info"
+  border={false}
+  forwardedComponent={
+    Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "sc-bdVaJa",
+        "isStatic": false,
+        "rules": Array [
+          "
+  color: ",
+          [Function],
+          ";
+  background-color: ",
+          [Function],
+          ";
+  border-color: ",
+          [Function],
+          ";
+  border-width: ",
+          [Function],
+          ";
+  border-style: solid;
+  border-radius: ",
+          [Function],
+          ";
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0.5rem 0.75rem;
+",
+        ],
+      },
+      "displayName": "styled.div",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "sc-bdVaJa",
+      "target": "div",
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    }
+  }
+  forwardedRef={null}
+  rounded={true}
+>
+  <p>
+    Hello
+  </p>
+</StyledComponent>
+`;
+
+exports[`Message info styles test suite Message should render without round corners 1`] = `
+<StyledComponent
+  appearance="info"
+  border={false}
+  forwardedComponent={
+    Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "sc-bdVaJa",
+        "isStatic": false,
+        "rules": Array [
+          "
+  color: ",
+          [Function],
+          ";
+  background-color: ",
+          [Function],
+          ";
+  border-color: ",
+          [Function],
+          ";
+  border-width: ",
+          [Function],
+          ";
+  border-style: solid;
+  border-radius: ",
+          [Function],
+          ";
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0.5rem 0.75rem;
+",
+        ],
+      },
+      "displayName": "styled.div",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "sc-bdVaJa",
+      "target": "div",
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    }
+  }
+  forwardedRef={null}
+  rounded={false}
+>
+  <p>
+    Hello
+  </p>
+</StyledComponent>
+`;
+
+exports[`Message should render correctly 1`] = `
+<StyledComponent
+  appearance="info"
+  border={false}
+  forwardedComponent={
+    Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "sc-bdVaJa",
+        "isStatic": false,
+        "rules": Array [
+          "
+  color: ",
+          [Function],
+          ";
+  background-color: ",
+          [Function],
+          ";
+  border-color: ",
+          [Function],
+          ";
+  border-width: ",
+          [Function],
+          ";
+  border-style: solid;
+  border-radius: ",
+          [Function],
+          ";
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0.5rem 0.75rem;
+",
+        ],
+      },
+      "displayName": "styled.div",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "sc-bdVaJa",
+      "target": "div",
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    }
+  }
+  forwardedRef={null}
+  rounded={true}
+>
+  <p>
+    Hello
+  </p>
+</StyledComponent>
+`;
+
+exports[`Message warning styles test suite Message should render warning styles 1`] = `
+<StyledComponent
+  appearance="warning"
+  border={false}
+  forwardedComponent={
+    Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "sc-bdVaJa",
+        "isStatic": false,
+        "rules": Array [
+          "
+  color: ",
+          [Function],
+          ";
+  background-color: ",
+          [Function],
+          ";
+  border-color: ",
+          [Function],
+          ";
+  border-width: ",
+          [Function],
+          ";
+  border-style: solid;
+  border-radius: ",
+          [Function],
+          ";
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0.5rem 0.75rem;
+",
+        ],
+      },
+      "displayName": "styled.div",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "sc-bdVaJa",
+      "target": "div",
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    }
+  }
+  forwardedRef={null}
+  rounded={true}
+>
+  <p>
+    Hello
+  </p>
+</StyledComponent>
+`;
+
+exports[`Message warning styles test suite Message should render without border 1`] = `
+<StyledComponent
+  appearance="warning"
+  border={false}
+  forwardedComponent={
+    Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "sc-bdVaJa",
+        "isStatic": false,
+        "rules": Array [
+          "
+  color: ",
+          [Function],
+          ";
+  background-color: ",
+          [Function],
+          ";
+  border-color: ",
+          [Function],
+          ";
+  border-width: ",
+          [Function],
+          ";
+  border-style: solid;
+  border-radius: ",
+          [Function],
+          ";
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0.5rem 0.75rem;
+",
+        ],
+      },
+      "displayName": "styled.div",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "sc-bdVaJa",
+      "target": "div",
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    }
+  }
+  forwardedRef={null}
+  rounded={true}
+>
+  <p>
+    Hello
+  </p>
+</StyledComponent>
+`;
+
+exports[`Message warning styles test suite Message should render without round corners 1`] = `
+<StyledComponent
+  appearance="info"
+  border={false}
+  forwardedComponent={
+    Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "sc-bdVaJa",
+        "isStatic": false,
+        "rules": Array [
+          "
+  color: ",
+          [Function],
+          ";
+  background-color: ",
+          [Function],
+          ";
+  border-color: ",
+          [Function],
+          ";
+  border-width: ",
+          [Function],
+          ";
+  border-style: solid;
+  border-radius: ",
+          [Function],
+          ";
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0.5rem 0.75rem;
+",
+        ],
+      },
+      "displayName": "styled.div",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "sc-bdVaJa",
+      "target": "div",
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    }
+  }
+  forwardedRef={null}
+  rounded={false}
+>
+  <p>
+    Hello
+  </p>
+</StyledComponent>
+`;
+
+exports[`should render Message consistently 1`] = `
+<StyledComponent
+  forwardedComponent={
+    Object {
+      "$$typeof": Symbol(react.forward_ref),
+      "attrs": Array [],
+      "componentStyle": ComponentStyle {
+        "componentId": "sc-bdVaJa",
+        "isStatic": false,
+        "rules": Array [
+          "
+  color: ",
+          [Function],
+          ";
+  background-color: ",
+          [Function],
+          ";
+  border-color: ",
+          [Function],
+          ";
+  border-width: ",
+          [Function],
+          ";
+  border-style: solid;
+  border-radius: ",
+          [Function],
+          ";
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0.5rem 0.75rem;
+",
+        ],
+      },
+      "displayName": "styled.div",
+      "foldedComponentIds": Array [],
+      "render": [Function],
+      "styledComponentId": "sc-bdVaJa",
+      "target": "div",
+      "toString": [Function],
+      "warnTooManyClasses": [Function],
+      "withComponent": [Function],
+    }
+  }
+  forwardedRef={null}
+/>
+`;
