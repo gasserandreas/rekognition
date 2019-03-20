@@ -1,4 +1,6 @@
-/* global React, shallow, toJson */
+import React from 'react';
+import { shallow } from 'enzyme';
+import toJson from 'enzyme-to-json';
 
 import LoadingIndicator from '../LoadingIndicator';
 

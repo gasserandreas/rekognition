@@ -1,4 +1,6 @@
-/* global React, shallow, mount, render, renderer, testSnapshot */
+import React from 'react';
+import { shallow, mount } from 'enzyme';
+import toJson from 'enzyme-to-json';
 
 import {
   Field,
@@ -17,16 +19,18 @@ const getMountField = (props = {}) => mount(<Field {...props} />);
 
 // Field component tests
 it('Field should render correctly', () => {
-  testSnapshot(<Field />);
+  const wrapper = shallow(<Field />);
+  expect(toJson(wrapper.dive())).toMatchSnapshot();
 });
 
 it('Extended Field should render correctly', () => {
   const Input = <TextInput value="" onChange={() => {}} />;
   const label = 'Custom label';
-  testSnapshot(
-    <Field
-      label={label}
-    >{Input}</Field>);
+
+  const wrapper = shallow(<Field
+    label={label}
+  >{Input}</Field>);
+  expect(toJson(wrapper.dive())).toMatchSnapshot();
 });
 
 it('Field should render content', () => {
@@ -55,7 +59,7 @@ it('Field should render label with custom props', () => {
 
   // check for label component
   const label = output.find(StyledFieldLabel);
-  expect(label);
+  expect(label).toBeTruthy();
 
   // check for label props
   const labelProps = label.props();
@@ -76,7 +80,7 @@ it('Field should render Feedback with error', () => {
   const output = getShallowField(props);
   
   const feedback = output.find(StyledFieldFeedback);
-  expect(feedback);
+  expect(feedback).toBeTruthy();
 
   const feedbackProps = feedback.props();
   expect(feedbackProps.children).toEqual(props.error);
@@ -88,15 +92,18 @@ it('TextInput should work correctly', () => {
 });
 
 it('Input styles should be consistent', () => {
-  testSnapshot(<StyledTextInput />);
+  const wrapper = shallow(<StyledTextInput />);
+  expect(toJson(wrapper)).toMatchSnapshot();
 });
 
 it('Disabled input should render correctly', () => {
-  testSnapshot(<StyledTextInput disabled/>);
+  const wrapper = shallow(<StyledTextInput disabled/>);
+  expect(toJson(wrapper)).toMatchSnapshot();
 });
 
 it('Error Input should render correctly', () => {
-  testSnapshot(<StyledTextInput error="error" />);
+  const wrapper = shallow(<StyledTextInput error="error" />);
+  expect(toJson(wrapper)).toMatchSnapshot();
 });
 
 // Checkbox tests
@@ -105,11 +112,13 @@ it('CheckBox should work correctly', () => {
 });
 
 it('Checkbox styles should be consistent', () => {
-  testSnapshot(<StyledCheckBox />);
+  const wrapper = shallow(<StyledCheckBox />);
+  expect(toJson(wrapper)).toMatchSnapshot();
 });
 
 it('Checkbox Input should render correctly', () => {
-  testSnapshot(<StyledCheckBox error="error" />);
+  const wrapper = shallow(<StyledCheckBox error="error" />);
+  expect(toJson(wrapper)).toMatchSnapshot();
 });
 
 // Test StyledFieldRow
@@ -118,5 +127,6 @@ it('FieldRow should work correctly', () => {
 });
 
 it('FieldRow styles should be consistent', () => {
-  testSnapshot(<StyledFieldRow />);
+  const wrapper = shallow(<StyledFieldRow />);
+  expect(toJson(wrapper)).toMatchSnapshot();
 });

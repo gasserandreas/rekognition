@@ -1,6 +1,6 @@
-/* global React, shallow, toJson */
-
-import { mount } from 'enzyme';
+import React from 'react';
+import { shallow, mount } from 'enzyme';
+import toJson from 'enzyme-to-json';
 
 import { Image } from 'grommet';
 

@@ -1,18 +1,20 @@
-/* global React, shallow, mount, render, renderer, testSnapshot */
+import React from 'react';
+import { shallow } from 'enzyme';
+import toJson from 'enzyme-to-json';
 
 import { View, ViewHeading } from '../View';
 
-const getShallowView = (props = { children: 'content' }) => shallow(<View {...props} />);
-
 it('View should render correctly', () => {
-  testSnapshot(<View>View Content</View>);
+  const wrapper = shallow(<View>View Content</View>);
+  expect(toJson(wrapper.dive())).toMatchSnapshot();
 });
 
 it('View should render with content', () => {
-  testSnapshot(<View>
+  const wrapper = shallow(<View>
     <h1>Hello</h1>
     <p>Some more content, yeaah.</p>
   </View>);
+  expect(toJson(wrapper.dive())).toMatchSnapshot();
 });
 
 it('view should pass additional props to component', () => {
@@ -21,7 +23,7 @@ it('view should pass additional props to component', () => {
     'data-attr-2': 2,
     children: 'hello',
   };
-  const output = getShallowView(props);
+  const output = shallow(<View {...props} />);
 
   const compProps = output.props();
 
@@ -34,9 +36,11 @@ it('view should pass additional props to component', () => {
 });
 
 it('ViewHeading should render correctly', () => {
-  testSnapshot(<ViewHeading />);
+  const wrapper = shallow(<ViewHeading />);
+  expect(toJson(wrapper.dive())).toMatchSnapshot();
 });
 
 it('ViewHeading should render with content', () => {
-  testSnapshot(<ViewHeading>Heading</ViewHeading>);
+  const wrapper = shallow(<ViewHeading>Heading</ViewHeading>);
+  expect(toJson(wrapper.dive())).toMatchSnapshot();
 });

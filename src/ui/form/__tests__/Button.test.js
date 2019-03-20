@@ -1,34 +1,43 @@
-/* global React, shallow, mount, render, renderer, testSnapshot */
+import React from 'react';
+import { shallow, mount } from 'enzyme';
+import toJson from 'enzyme-to-json';
 
 import Button, { StyledButton, StyledLoading } from '../Button';
 
 it('Button should render correctly', () => {
-  testSnapshot(<Button>Click me</Button>);
+  const wrapper = shallow(<Button>Click me</Button>);
+  expect(toJson(wrapper.dive())).toMatchSnapshot();
 });
 
 it('Button styles should be consistent', () => {
-  testSnapshot(<StyledButton />);
+  const wrapper = shallow(<StyledButton />);
+  expect(toJson(wrapper)).toMatchSnapshot();
 })
 
 it('Button should render primary styles', () => {
-  testSnapshot(<Button buttonStyle="primary">Click me</Button>);
+  const wrapper = shallow(<Button buttonStyle="primary">Click me</Button>);
+  expect(toJson(wrapper.dive())).toMatchSnapshot();
 });
 
 it('Button should render warning styles', () => {
-  testSnapshot(<Button buttonStyle="warning">Click me</Button>);
+  const wrapper = shallow(<Button buttonStyle="warning">Click me</Button>);
+  expect(toJson(wrapper.dive())).toMatchSnapshot();
 });
 
 it('Button should render error styles', () => {
-  testSnapshot(<Button buttonStyle="error">Click me</Button>);
+  const wrapper = shallow(<Button buttonStyle="error">Click me</Button>);
+  expect(toJson(wrapper.dive())).toMatchSnapshot();
 });
 
 it('Button should render link styles', () => {
-  testSnapshot(<Button buttonStyle="link">Click me</Button>);
+  const wrapper = shallow(<Button buttonStyle="link">Click me</Button>);
+  expect(toJson(wrapper.dive())).toMatchSnapshot();
 });
 
 // Button loading styles
 it('StyledLoading should render correctly', () => {
-  testSnapshot(<StyledLoading />);
+  const wrapper = shallow(<StyledLoading />);
+  expect(toJson(wrapper)).toMatchSnapshot();
 });
 
 // basic tests
