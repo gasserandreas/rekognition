@@ -4,7 +4,9 @@ phases:
   install:
     commands:
       - echo Entered the install phase...
-      ls -a
+      - ls -a
+      - echo Close git repo to get .git folder
+      
       # - apt-get update -y
       # - apt-get install apt-transport-https
       # # Setup for Yarn
