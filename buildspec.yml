@@ -7,6 +7,10 @@ phases:
       - ls -a
       - echo Close git repo to get .git folder
       - git clone https://github.com/gasserandreas/rekognition.git
+      - echo Hard code develop branch checkout
+      - cd ./rekognition
+      - git checkout develop
+      - cd ../
       - rm -rf .git
       - mv ./rekognition/.git ./
       - ls -a
