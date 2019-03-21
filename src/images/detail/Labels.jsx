@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -9,41 +9,39 @@ import Label from './Label';
 // labels
 const StyledLabels = styled(Box)``;
 
-class Labels extends Component {
-  onLabelClick = this.onLabelClick.bind(this);
+const Labels = ({
+  selectedLabel,
+  labels,
+  onLabelClick,
+}) => {
 
-  onClickEnabled(label) {
-    return label.instances.length > 0;
-  }
-
-  onLabelClick(label) {
-    if (this.onClickEnabled(label)) {
-      this.props.onLabelClick(label);
+  const handleOnLabelClick = (label) => {
+    if (isClickEnabled(label)) {
+      onLabelClick(label)
     }
-  }
+  };
 
-  render() {
-    const { selectedLabel } = this.props;
-    return (
-      <StyledLabels
-        wrap
-        direction="row"
-      >
-        {this.props.labels.map((label) => {
-          const labelProps = {
-            key: `image_label_${label.id}`,
-            label,
-            onClick: () => this.onLabelClick(label),
-            isClickable: this.onClickEnabled(label),
-            selected: selectedLabel && selectedLabel.id === label.id,
-          };
+  const isClickEnabled = label => label.instances.length > 0;
 
-          return <Label {...labelProps} />;
-        })}
-      </StyledLabels>  
-    );
-  }
-}
+  return (
+    <StyledLabels
+      wrap
+      direction="row"
+    >
+      {labels.map((label) => {
+        const labelProps = {
+          key: `image_label_${label.id}`,
+          label,
+          onClick: () => handleOnLabelClick(label),
+          isClickable: isClickEnabled(label),
+          selected: selectedLabel && selectedLabel.id === label.id,
+        };
+
+        return <Label {...labelProps} />;
+      })}
+    </StyledLabels>
+  );
+};
 
 Labels.propTypes = {
   labels: PropTypes.arrayOf(PropTypes.shape({})).isRequired,

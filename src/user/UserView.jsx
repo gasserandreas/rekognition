@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
@@ -16,91 +16,87 @@ import { HOCRequestPropTypes } from '../util/PropTypes';
 import { getDefaultFormatedDate } from '../util/util';
 import * as Paths from '../paths';
 
-class UserView extends Component {
-  componentWillMount() {
-    const { getUserInfoRequest, getUserInfo } = this.props;
-    const { loading } = getUserInfoRequest;
+const UserView = ({
+  user,
+  authMeta,
+  getUserInfoRequest,
+  updateUserRequest,
+  updateUser,
+  getUserInfo,
+  logOutUser,
+}) => {
+  const { 
+    firstname,
+    lastname,
+  } = user;
 
-    if (!loading) {
+  const {
+    loggedInSince,
+    remember,
+  } = authMeta;
+
+  useEffect(() => {
+    const { loading, lastError, lastFetch } = getUserInfoRequest;
+    if (!loading && lastError === null && lastFetch === null) {
       getUserInfo();
     }
-  }
+  });
 
-  render() {
-    const {
-      user,
-      authMeta,
-      getUserInfoRequest,
-      updateUserRequest,
-      updateUser,
-    } = this.props;
-
-    const { 
-      firstname,
-      lastname,
-    } = user;
-
-    const {
-      loggedInSince,
-      remember,
-    } = authMeta;
-
-    return (
-      <View>
-          <Card>
-            <Heading level="4" margin={{ top: 'small', bottom: 'none' }}>Profile information</Heading>
-            <Paragraph size="small" margin={{ bottom: 'none' }}>Update your basic profile information.</Paragraph>
-            <AsyncContainer loading={getUserInfoRequest.loading}>
-              <UpdateUserForm
-                user={{ firstname, lastname }}
-                onSubmit={updateUser}
-                submitting={updateUserRequest.loading}
-                error={updateUserRequest.error ? updateUserRequest.error.message : null}
-              />
-            </AsyncContainer>
-          </Card>
-          <Card>
-          <Heading level="4" margin={{ top: 'small', bottom: 'none' }}>Current session</Heading>
-          <ResponsiveContext.Consumer>
-            {size => (
-              <Box direction={size === 'small' ? 'column' : 'row'}>
-                <Box basis={size === 'small' ? '1' : '1/2'}>
-                  <Paragraph size="small" margin={{ bottom: 'none' }}>
-                    <strong>Logged in since:</strong>
-                    {' '}
-                    {loggedInSince ? getDefaultFormatedDate(loggedInSince) : 'unknown'}
-                  </Paragraph>
-                  <Paragraph size="small" margin={{ bottom: 'none' }}>
-                    <strong>Auto login:</strong> {remember ? 'enabled' : 'disabled'}
-                  </Paragraph>
-                  <Paragraph size="small" margin={{ bottom: 'none' }}>
-                    <strong>Privacy information: </strong>
-                    Click <Link to={Paths.PRIVACY}>here</Link> to view our privacy policy
-                  </Paragraph>
-                </Box>
-                <Box
-                  direction="row"
-                  basis={size === 'small' ? '1' : '1/2'}
-                  align="baseline"
-                >
-                  <Box basis="2/3">
-                    <Paragraph size="small" margin={{ bottom: 'none' }}><strong>Note:</strong> Logout will clear all information from your device.</Paragraph>
-                  </Box>
-                  <Box basis="1/3" align="end">
-                    <Button
-                      buttonStyle="error"
-                      onClick={() => this.props.logOutUser()}
-                    >Logout</Button>
-                  </Box>
-                </Box>
+  return (
+    <View>
+      <Card>
+        <Heading level="4" margin={{ top: 'small', bottom: 'none' }}>Profile information</Heading>
+        <Paragraph size="small" margin={{ bottom: 'none' }}>Update your basic profile information.</Paragraph>
+        <AsyncContainer loading={getUserInfoRequest.loading}>
+          <UpdateUserForm
+            user={{ firstname, lastname }}
+            onSubmit={updateUser}
+            submitting={updateUserRequest.loading}
+            error={updateUserRequest.error ? updateUserRequest.error.message : null}
+          />
+        </AsyncContainer>
+      </Card>
+      <Card>
+      <Heading level="4" margin={{ top: 'small', bottom: 'none' }}>Current session</Heading>
+      <ResponsiveContext.Consumer>
+        {size => (
+          <Box direction={size === 'small' ? 'column' : 'row'}>
+            <Box basis={size === 'small' ? '1' : '1/2'}>
+              <Paragraph size="small" margin={{ bottom: 'none' }}>
+                <strong>Logged in since:</strong>
+                {' '}
+                {loggedInSince ? getDefaultFormatedDate(loggedInSince) : 'unknown'}
+              </Paragraph>
+              <Paragraph size="small" margin={{ bottom: 'none' }}>
+                <strong>Auto login:</strong> {remember ? 'enabled' : 'disabled'}
+              </Paragraph>
+              <Paragraph size="small" margin={{ bottom: 'none' }}>
+                <strong>Privacy information: </strong>
+                Click <Link to={Paths.PRIVACY}>here</Link> to view our privacy policy
+              </Paragraph>
+            </Box>
+            <Box
+              direction="row"
+              basis={size === 'small' ? '1' : '1/2'}
+              align="baseline"
+            >
+              <Box basis="2/3">
+                <Paragraph size="small" margin={{ bottom: 'none' }}><strong>Note:</strong> Logout will clear all information from your device.</Paragraph>
               </Box>
-            )}
-          </ResponsiveContext.Consumer>
-          </Card>
-      </View>
-    );
-  }
-}
+              <Box basis="1/3" align="end">
+                <Button
+                  buttonStyle="error"
+                  onClick={logOutUser}
+                >Logout</Button>
+              </Box>
+            </Box>
+          </Box>
+        )}
+      </ResponsiveContext.Consumer>
+      </Card>
+  </View>
+  );
+};
 
 UserView.propTypes = {
   user: PropTypes.shape({}).isRequired,

@@ -532,11 +532,8 @@ string",
   forwardedRef={null}
   loaded={false}
   margin="none"
-  neverHideImg={true}
-  onLoad={null}
   pad="none"
   responsive={true}
-  src=""
   theme={
     Object {
       "accordion": Object {
@@ -2827,11 +2824,8 @@ string",
   forwardedRef={null}
   loaded={false}
   margin="none"
-  neverHideImg={false}
-  onLoad={null}
   pad="none"
   responsive={true}
-  src=""
   theme={
     Object {
       "accordion": Object {
