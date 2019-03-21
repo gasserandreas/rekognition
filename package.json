@@ -1,7 +1,14 @@
 {
     "name": "rekognition",
-    "version": "2.2.0",
+    "version": "0.0.0-semantically-released",
     "private": true,
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/gasserandreas/rekognition.git"
+    },
+    "engines": {
+        "node": ">=8.0"
+    },
     "dependencies": {
         "apollo-cache-inmemory": "^1.3.12",
         "apollo-client": "^2.4.8",
@@ -47,6 +54,11 @@
         "env-push-test": "aws s3 cp .env.development.local s3://529821714029-rekognition.gasserandreas.com-utils/"
     },
     "devDependencies": {
+        "@semantic-release/changelog": "^3.0.2",
+        "@semantic-release/commit-analyzer": "^6.1.0",
+        "@semantic-release/git": "^7.0.8",
+        "@semantic-release/npm": "^5.1.4",
+        "@semantic-release/release-notes-generator": "^7.1.4",
         "babel-eslint": "^9.0.0",
         "cross-env": "^5.2.0",
         "enzyme": "^3.9.0",
@@ -56,7 +68,8 @@
         "jest-fetch-mock": "^2.1.1",
         "react-app-polyfill": "^0.2.0",
         "react-scripts": "^2.1.3",
-        "redux-mock-store": "^1.5.3"
+        "redux-mock-store": "^1.5.3",
+        "semantic-release": "^15.13.3"
     },
     "browserslist": [
         ">0.2%",
