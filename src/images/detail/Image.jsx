@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -58,39 +58,31 @@ StyledImageWrapper.defaultProps = {
 // image wrapper comp
 const StyledImageContainer = styled(Box)``;
 
-class ImageContainer extends Component {
-  wrapperRef = null;
-
-  handleWrapperPosition = this.handleWrapperPosition.bind(this);
-
-  state = {
+const ImageContainer = ({
+  image: {
+    meta,
+    path,
+  },
+  selectedFace,
+  selectedLabel,
+}) => {
+  const wrapperRef = useRef();
+  const [state, setState] = useState({
     imageWrapperPosition: generateInitPos(),
     imageContainerPosition: generateInitPos(),
-  }
+  });
 
-  componentDidMount() {
-    // add event listener
-    window.addEventListener('resize', this.handleWrapperPosition);
-
-    this.handleWrapperPosition()
-  }
-
-  componentWillUnmount() {
-    // remove event listener
-    window.removeEventListener('resize', this.handleWrapperPosition);
-  }
-
-  handleWrapperPosition() {
-    const { image: { meta } } = this.props;
+  const handleWrapperPosition = () => {
     const {
       height: imageHeight,
       width: imageWidth,
-      orientation } = meta;
+      orientation,
+    } = meta;
 
-    const wrapperBounding = this.wrapperRef.getBoundingClientRect();
+    const wrapperBounding = wrapperRef.current.getBoundingClientRect();
 
     // (deep) equals check based on string
-    if (JSON.stringify(this.state.wrapperBounding)
+    if (JSON.stringify(state.wrapperBounding)
       !== JSON.stringify(wrapperBounding)) {
         // get wrapper positions
         const imageContainerPosition = {
@@ -146,24 +138,31 @@ class ImageContainer extends Component {
           height,
         };
 
-        this.setState({
+        setState({
           imageContainerPosition,
           imageWrapperPosition,
         });
     }
   }
 
-  render() {
-    const { imageWrapperPosition } = this.state;
-    const { selectedFace, selectedLabel, image } = this.props;
-    const { path } = image;
+  useEffect(() => {
+    // add event listener
+    window.addEventListener('resize', handleWrapperPosition);
 
-    return (
-      <StyledImageContainer
-        ref={(el) => {
-          if (!el) { return; }
-          this.wrapperRef = el;
-        }}
+    // calculate wrapper position
+    handleWrapperPosition();
+
+    return () => {
+      window.removeEventListener('resize', handleWrapperPosition);
+    }
+  }, [path]);
+
+
+  const { imageWrapperPosition } = state;
+
+  return (
+    <StyledImageContainer
+        ref={wrapperRef}
         style={{ justifyContent: 'center' }}
         fill
       >
@@ -185,8 +184,7 @@ class ImageContainer extends Component {
           />
         </StyledImageWrapper>
       </StyledImageContainer>
-    )
-  }
-}
+  );
+};
 
 export default ImageContainer;

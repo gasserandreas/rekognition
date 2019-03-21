@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -11,11 +11,14 @@ import LoginForm from './LoginForm';
 
 import View from '../../ui/View';
 import Card from '../../ui/Card';
+import { createUseIsAuthenticatedHistoryPush } from '../../ui/hooks/auth';
 
 import * as Paths from '../../paths';
 import { HOCRequestPropTypes } from '../../util/PropTypes';
 import { Colors } from '../../styles';
 
+// creat hook
+const useIsAuthenticatedHistoryPush = createUseIsAuthenticatedHistoryPush(Paths.HOME);
 
 const StyledView = styled(View)`
   background-color: ${Colors.ColorsPalette.Background};
@@ -28,58 +31,41 @@ const StyledView = styled(View)`
   }
 `;
 
-class LoginView extends Component {
-  static propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired,
-    loginRequest: HOCRequestPropTypes.isRequired,
-  }
+const LoginView = ({
+  loginRequest: {
+    error,
+    loading
+  },
+  logInUser,
+  isAuthenticated,
+  history,
+}) => {
 
-  state = {
-    loading: false,
-  }
+  // handle auth check
+  useIsAuthenticatedHistoryPush(isAuthenticated, history);
 
-  componentWillMount() {
-    const { isAuthenticated } = this.props;
-    this.checkAuth(isAuthenticated);
-  }
+  return (
+    <StyledView>
+      <AuthHeader>Login to Rekognition</AuthHeader>
+      <div className="content">
+        <Card pad="large">
+          <LoginForm
+            user={{ email: '', password: '', remember: false, }}
+            onSubmit={logInUser}
+            submitting={loading}
+            error={error ? error.message : null}
+          />
+        </Card>
+      </div>
+      <AuthFooter href={Paths.REGISTER}>Sign up for an account</AuthFooter>
+      <AuthFooter href={Paths.PRIVACY}>Privacy note</AuthFooter>
+    </StyledView>
+  );
+};
 
-  componentWillReceiveProps(newProps) {
-    const { isAuthenticated } = newProps;
-
-    if (this.props.isAuthenticated !== isAuthenticated) {
-      this.checkAuth(isAuthenticated);
-    }
-  }
-
-  checkAuth(isAuthenticated) {
-    if (isAuthenticated) {
-      //
-      setTimeout(() => {
-        this.props.history.push(Paths.HOME);
-      }, 300);
-    }
-  }
-
-  render() {
-    const { loginRequest: { error, loading }, logInUser } = this.props;
-    return (
-      <StyledView>
-        <AuthHeader>Login to Rekognition</AuthHeader>
-        <div className="content">
-          <Card pad="large">
-            <LoginForm
-              user={{ email: '', password: '', remember: false, }}
-              onSubmit={logInUser}
-              submitting={loading}
-              error={error ? error.message : null}
-            />
-          </Card>
-        </div>
-        <AuthFooter href={Paths.REGISTER}>Sign up for an account</AuthFooter>
-        <AuthFooter href={Paths.PRIVACY}>Privacy note</AuthFooter>
-      </StyledView>
-    );
-  }
-}
+LoginView.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  loginRequest: HOCRequestPropTypes.isRequired,
+};
 
 export default LoginView;

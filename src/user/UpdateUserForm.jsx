@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import * as Yup from 'yup';
 import { withFormik } from 'formik';
-// import { Grid, Box } from 'grommet';
 
 import {
   Field,
@@ -43,84 +42,78 @@ const formikEnhancer = withFormik({
 // styled
 const StyledUpdateUserForm = styled.form``;
 
-class UpdateUserForm extends Component {
-  onReset = this.onReset.bind(this);
-
-  onReset() {
-    const { handleReset } = this.props;
-
+const UpdateUserForm = ({
+  values,
+  touched,
+  errors,
+  handleChange,
+  handleBlur,
+  handleSubmit,
+  handleReset,
+  submitting,
+  dirty,
+  error,
+}) => {
+  const handleOnReset = () => {
     // reset form
     handleReset();
-  }
+  };
 
-  render() {
-    const {
-      values,
-      touched,
-      errors,
-      handleChange,
-      handleBlur,
-      handleSubmit,
-      submitting,
-      dirty,
-      error,
-    } = this.props;
-    return (
-      <StyledUpdateUserForm onSubmit={handleSubmit}>
-        <FieldRow>
-          <Field
+  return (
+    <StyledUpdateUserForm onSubmit={handleSubmit}>
+      <FieldRow>
+        <Field
+          id="firstname"
+          label="Firstname"
+          error={touched.firstname && errors.firstname}
+          style={{ marginRight: '0.5rem' }}
+          inline
+        >
+          <TextInput
             id="firstname"
-            label="Firstname"
+            type="text"
+            placeholder="Enter your Firstname"
             error={touched.firstname && errors.firstname}
-            style={{ marginRight: '0.5rem' }}
-            inline
-          >
-            <TextInput
-              id="firstname"
-              type="text"
-              placeholder="Enter your Firstname"
-              error={touched.firstname && errors.firstname}
-              value={values.firstname}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-          </Field>
-          <Field
+            value={values.firstname}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+        </Field>
+        <Field
+          id="lastname"
+          label="Lastname"
+          error={touched.lastname && errors.lastname}
+          inline
+        >
+          <TextInput
             id="lastname"
-            label="Lastname"
+            type="text"
+            placeholder="Enter your Lastname"
             error={touched.lastname && errors.lastname}
-            inline
-          >
-            <TextInput
-              id="lastname"
-              type="text"
-              placeholder="Enter your Lastname"
-              error={touched.lastname && errors.lastname}
-              value={values.lastname}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-          </Field>
-        </FieldRow>
-        {error && <Message appearance="error">{error}</Message>}
-        <ButtonGroup>
-          <Button
-            type="button"
-            buttonStyle="link"
-            onClick={this.onReset}
-            disabled={!dirty || submitting}
-          >Reset</Button>
-          <Button
-            type="submit"
-            disabled={submitting}
-            buttonStyle="primary"
-            style={{ marginLeft: '1rem' }}
-          >Update profile</Button>
-        </ButtonGroup>
-      </StyledUpdateUserForm>
-    );
-  }
-}
+            value={values.lastname}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+        </Field>
+      </FieldRow>
+      {error && <Message appearance="error">{error}</Message>}
+      <ButtonGroup>
+        <Button
+          type="button"
+          buttonStyle="link"
+          onClick={handleOnReset}
+          disabled={!dirty || submitting}
+        >Reset</Button>
+        <Button
+          type="submit"
+          disabled={submitting}
+          buttonStyle="primary"
+          style={{ marginLeft: '1rem' }}
+        >Update profile</Button>
+      </ButtonGroup>
+    </StyledUpdateUserForm>
+  );
+};
 
 const EnhancedUpdateUserForm = formikEnhancer(UpdateUserForm);
 

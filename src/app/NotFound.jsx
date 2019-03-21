@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Heading} from 'grommet';
+import { Heading } from 'grommet';
 
 import View from '../ui/View';
 
@@ -25,34 +25,49 @@ const StyledNotFound = styled(View)`
   }
 `;
 
-class NotFound extends Component {
-  timer = null;
+const NotFound = (props) => {
+  const [counter, setCounter] = useState(0);
 
-  componentWillMount() {
-    setTimeout(() => {
-      const { history } = this.props;
-      history.push(Paths.HOME);
-    }, timer * 1000);
+  // handle timeout
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setCounter(counter + 1);
+    }, 1000);
+
+    if (counter >= timer) {
+      // move away
+      props.history.push(Paths.HOME);
+    }
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  });
+
+  // move to index after 5 seconds
+  const showCounter = (timer, counter) => {
+    const diff = timer - counter;
+    
+    if (diff <= 0) {
+      return 'now';
+    }
+
+    return `${diff} seconds`;
   }
 
-  componentWillUnmount() {
-    clearTimeout(this.timer);
-  }
-
-  render() {
-    return (
-      <StyledNotFound>
+  return (
+    <StyledNotFound>
         <Heading level={1}>
           <p>
-          <strong>Whhooppss</strong>
-          {' '}
-    it seems there is no page for route:
-          <code>{this.props.location.pathname}</code></p>
-          <p>Forward to home page in: {timer} seconds.</p>
+            <strong>Whhooppss</strong>
+            {' '}
+            it seems there is no page for route:
+            <code>{props.location.pathname}</code>
+          </p>
+          <p>Forward to home page in: {showCounter(timer, counter)}.</p>
         </Heading>
       </StyledNotFound>
-    );
-  }
+  );
 }
 
 NotFound.propTypes = {

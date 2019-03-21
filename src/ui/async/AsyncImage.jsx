@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -15,38 +15,29 @@ export const StyledAsyncImage = styled(Box)`
   }
 `;
 
-class AsyncImage extends Component {
-  state = {
-    loaded: false,
-  }
-
-  onImageLoad = this.onImageLoad.bind(this);
-
-  onImageLoad(image) {
-    const { onLoad } = this.props;
-
-    this.setState({ loaded: true });
+const AsyncImage = ({ onLoad, ...props }) => {
+  const [loaded, setLoaded] = useState(false);
+  const imgRef = useRef(null);
+  
+  const handleOnImageLoad = (image) => {
+    setLoaded(true);
 
     if(onLoad) {
       onLoad(image);
     }
-  }
+  };
 
-  render() {
-    const { loaded } = this.state;
-    const { ...props } = this.props;
-    return (
-      <StyledAsyncImage loaded={loaded} {...props}>
-        { !loaded && <LoadingIndicator /> }
-        <Image
-          {...props}
-          onLoad={() => this.onImageLoad(this.imgRef)}
-          ref={(tag) => this.imgRef = tag ? tag : null }
-        />
-      </StyledAsyncImage>
-    );
-  }
-};
+  return (
+    <StyledAsyncImage loaded={loaded}>
+      { !loaded && <LoadingIndicator /> }
+      <Image
+        {...props}
+        onLoad={() => handleOnImageLoad(imgRef.current)}
+        ref={imgRef}
+      />
+    </StyledAsyncImage>
+  )
+}
 
 AsyncImage.propTypes = {
   src: PropTypes.string.isRequired,
