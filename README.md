@@ -1,16 +1,18 @@
 # AWS Rekognition
 
-https://codebuild.us-east-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiVi9hUU9aMjdhVEltbDB0a3RvMjV2ME01bFQ5S29RTVpaRHNpZjRhK3JrNXMvQ1N0VTZyVzBLU25CS0E2UVNpLzRhK25wazlkV0pnN3hvVTMxTVNQaUVJPSIsIml2UGFyYW1ldGVyU3BlYyI6Im80ejZZZENnaU9KVldiWFgiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master
+![Build Status Master](https://codebuild.us-east-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiVi9hUU9aMjdhVEltbDB0a3RvMjV2ME01bFQ5S29RTVpaRHNpZjRhK3JrNXMvQ1N0VTZyVzBLU25CS0E2UVNpLzRhK25wazlkV0pnN3hvVTMxTVNQaUVJPSIsIml2UGFyYW1ldGVyU3BlYyI6Im80ejZZZENnaU9KVldiWFgiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master)
 
 The AWS Rekognition projects allows users to simple use Facial regkontion feature powered by AWS Rekognition on their own pictures. Any uploaded picture will be processed by AWS to detect labels and faces including emotion and facial attributes.
 
 **Used frameworks / libraries:**
 - ReactJS
-- Redux / Reselect
+- Redux / reselect
+- Jest
 - GraphQL by Apollo
 - styled-comonents
 - Grommet
-- Formit
+- Formik
+- Semantic-Release
 
 ## Getting started
 
@@ -19,6 +21,7 @@ Following packages are used in development environment:
 - node8 & npm 6
 - git
 - VisualStudio Code
+- Jest
 
 ### Start development
 1. Install package dependencies: `npm install`

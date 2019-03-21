@@ -5,7 +5,7 @@ phases:
     commands:
       - echo Entered the install phase...
       - ls -a
-      - echo Close git repo to get .git folder (NOTE master branch only)
+      - echo Close git repo to get .git folder
       - git clone https://github.com/gasserandreas/rekognition.git
       - rm -rf .git
       - mv ./rekognition/.git ./
