@@ -6,7 +6,13 @@ phases:
       - echo Entered the install phase...
       - ls -a
       - echo Close git repo to get .git folder
-      
+      - git clone https://github.com/gasserandreas/rekognition.git
+      - rm -rf .git
+      - mv ./rekognition/.git ./
+      - ls -a
+      - echo Delete rekognition
+      - rm -rf rekognition
+      - ls -a
       # - apt-get update -y
       # - apt-get install apt-transport-https
       # # Setup for Yarn
