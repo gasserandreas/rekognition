@@ -23,5 +23,6 @@ module.exports = {
   // publish: '@semantic-release/npm',
   fail: false,
   success: false,
-  branch: 'master',
+  // branch: 'master',
+  branch: 'feat/#81/semantic-versioning',
 };
