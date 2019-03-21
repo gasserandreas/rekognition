@@ -72,17 +72,21 @@ const handleAuth = (token, user, remember) => (dispatch) => {
 
   const username = firstname;
 
-  // save token
+  // save token to session
   setToken(token);
   setUserId(id);
 
   // persist if needed
   if (remember) {
     dispatch(authSetToken(token));
-    dispatch(authSetUserId(id));
   }
 
+  // save user id
+  dispatch(authSetUserId(id));
+
   dispatch(authLogin(remember, username));
+
+  return Promise.resolve();
 }
 
 // complex actions
@@ -388,3 +392,17 @@ export default persistReducer(
     signupRequest,
     checkEmailRequest,
   }));
+
+export const __testables__ = {
+  AUTH_LOGIN_REQUEST,
+  AUTH_SIGNUP_REQUEST,
+  AUTH_CHECK_EMAIL_REQUEST,
+  authLogin,
+  authLogOut,
+  authSetToken,
+  authSetUserId,
+  authSetValidEmail,
+  authSetInvalidEmail,
+  authResetValidEmail,
+  handleAuth,
+};
