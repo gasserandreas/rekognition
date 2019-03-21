@@ -24,5 +24,5 @@ module.exports = {
   fail: false,
   success: false,
   // branch: 'master',
-  branch: 'feat/#81/semantic-versioning',
+  branch: 'develop',
 };
