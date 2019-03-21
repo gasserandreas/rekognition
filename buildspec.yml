@@ -50,7 +50,7 @@ phases:
       - echo "Start test"
 #       - CI=true npm test 
       - echo "Run Semantic Release"
-      - GH_TOKEN="GH_ACCESS_TOKEN" npx semantic-release
+      - GH_TOKEN="$GH_ACCESS_TOKEN" npx semantic-release
       - echo "Build started on $CODEBUILD_START_TIME"
       # - yarn run build
       - npm run build
