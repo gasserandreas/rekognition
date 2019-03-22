@@ -5,6 +5,9 @@ import jestFetchMock from "jest-fetch-mock";
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
+import { createNetworkError } from './util/ErrorHandler';
+import { hocCreateTypes } from './redux/HOC';
+
 // setup enzyme
 configure({ adapter: new Adapter() });
 
@@ -17,7 +20,39 @@ const createMockStore = (middleware = [
   thunk,
 ]) => configureMockStore(middleware);
 
+const createMockStoreWithApi = (api) => {
+  const middleware = [
+    thunk.withExtraArgument({
+      GraphApi: api,
+    }),
+  ];
+  return createMockStore(middleware);
+}
+
+const createHocActions = (attr = {
+  baseType: '',
+  payload: null,
+  error: null,
+  errorIsHandled: false,
+}) => {
+  const ACTION_TYPES = hocCreateTypes(attr.baseType);
+  return {
+    START: { type: ACTION_TYPES.START },
+    SUCCESS: {
+      type: ACTION_TYPES.SUCCESS,
+      payload: attr.payload,
+    },
+    ERROR: {
+      type: ACTION_TYPES.ERROR,
+      payload: createNetworkError(attr.error),
+      error: attr.errorIsHandled,
+    }
+  }
+};
+
 // create and export testUtils
 global.testUtils = {
   createMockStore,
+  createMockStoreWithApi,
+  createHocActions,
 };
