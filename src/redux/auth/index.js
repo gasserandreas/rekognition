@@ -103,13 +103,13 @@ export const logOutUser = (message, broadcast = true) => (dispatch) => {
 
   // clean up state
   try {
-    if (broadcast) {
-      window.localStorage.logout = true;
-    }
-
     console.log('clear local & session storage');
     window.localStorage.clear();
     window.sessionStorage.clear();
+
+    if (broadcast) {
+      window.localStorage.logout = true;
+    }
   }
   catch (error) {
     console.log('could not clear local and session storage');
@@ -245,6 +245,8 @@ export const checkEmail = hocAsyncAction(
         } else {
           dispatch(authSetValidEmail());
         }
+
+        return data;
       });
   },
   {

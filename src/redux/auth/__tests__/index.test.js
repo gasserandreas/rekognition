@@ -92,16 +92,21 @@ describe('auth: complex action test suite', () => {
     let dateMock;
     let setTokenMock = jest.fn(() => true);
     let setUserIdMock = jest.fn(() => true);;
+
+    let consoleLogMock;
     
     beforeAll(() => {
       dateMock = jest.spyOn(Date, 'now').mockImplementation(() => 1553237036202);
+      consoleLogMock = jest.spyOn(console, 'log').mockImplementation(() => ({}));
     });
 
     afterAll(() => {
       dateMock.mockClear();
+      consoleLogMock.mockClear();
     });
 
     beforeEach(() => {
+      // session util mocks
       setTokenMock = jest.spyOn(sessionUtil, 'setToken');
       setUserIdMock = jest.spyOn(sessionUtil, 'setUserId');
     });
@@ -153,6 +158,42 @@ describe('auth: complex action test suite', () => {
 
       done();
     });
+
+    it('should handle logOutUser', async (done) => {
+      const message = 'logout';
+      const broadcast = true;
+  
+      const store = mockstore();
+      const { dispatch } = store;
+  
+      const expectedActions = [
+        __testables__.authLogOut(message),
+      ];
+
+      // set localStorage and sessionStorage
+      const testValue = 'test';
+      window.localStorage.setItem('test', testValue);
+      window.sessionStorage.setItem('test', testValue);
+
+      // check before dispatch
+      expect(window.localStorage.test).toEqual(testValue);
+      expect(window.sessionStorage.test).toEqual(testValue);
+      expect(window.localStorage.logout).toBeFalsy();
+
+      await reduxAuth.logOutUser(message, broadcast)(dispatch);
+
+      // check after dispatch
+      expect(window.localStorage.test).toEqual(undefined);
+      expect(window.sessionStorage.test).toEqual(undefined);
+      expect(window.localStorage.logout).toBeTruthy();
+      
+      expect(setTokenMock).toHaveBeenCalledWith(null);
+      expect(consoleLogMock).toHaveBeenCalled();
+
+      expect(store.getActions()).toEqual(expectedActions);
+  
+      done();
+    });
   });
 
   it('should handle invalidateEmail', () => {
@@ -189,7 +230,7 @@ describe('auth: complex action test suite', () => {
       API.resetMocks();
     });
 
-    it('should handle loginUser', async (done) => {
+    it('should handle logInUser', async (done) => {
       // create data objects
       const remember = false;
       const { id, firstname, lastname, token } = mockedData;
@@ -272,5 +313,109 @@ describe('auth: complex action test suite', () => {
 
       done();
     });
+
+    it('should handle checkEmail for registered email', async (done) => {
+      const { email } = mockedData;
+
+      // mock api response
+      API.mockQueryResponseOnce({ emailInUse: true });
+
+      // prepare expected actions
+      const HOC_ACTIONS = testUtils.createHocActions({
+        baseType: 'AUTH_CHECK_EMAIL_REQUEST',
+        payload: {
+          emailInUse: true,
+        },
+      });
+    
+      const store = mockstore();
+      const { dispatch } = store;
+
+      const expectedActions = [
+        HOC_ACTIONS.START,
+        __testables__.authSetInvalidEmail(),
+        HOC_ACTIONS.SUCCESS,
+      ];
+
+      await reduxAuth.checkEmail(email)(dispatch);
+
+      expect(store.getActions()).toEqual(expectedActions);
+
+      done();
+    });
+
+    it('should handle checkEmail for new email', async (done) => {
+      const { email } = mockedData;
+
+      // mock api response
+      API.mockQueryResponseOnce({ emailInUse: false });
+
+      // prepare expected actions
+      const HOC_ACTIONS = testUtils.createHocActions({
+        baseType: 'AUTH_CHECK_EMAIL_REQUEST',
+        payload: {
+          emailInUse: false,
+        },
+      });
+    
+      const store = mockstore();
+      const { dispatch } = store;
+
+      const expectedActions = [
+        HOC_ACTIONS.START,
+        __testables__.authSetValidEmail(),
+        HOC_ACTIONS.SUCCESS,
+      ];
+
+      await reduxAuth.checkEmail(email)(dispatch);
+
+      expect(store.getActions()).toEqual(expectedActions);
+
+      done();
+    });
+
+    it('should handle refreshToken', async (done) => {
+      const { id, firstname, lastname, token } = mockedData;
+      const username = firstname;
+      const remember = true;
+
+      const user = {
+        id,
+        firstname,
+        lastname,
+      };
+
+      const refreshToken = {
+        user,
+        token,
+      };
+
+      // mock api response
+      API.mockMutationResponseOnce({ refreshToken });
+
+      const store = mockstore(() => ({
+        auth: {
+          meta: {
+            remember,
+          },
+          username,
+        }
+      }));
+      const { dispatch } = store;
+
+      const expectedActions = [
+        __testables__.authSetToken(token),
+        __testables__.authSetUserId(id),
+        __testables__.authLogin(remember, username),
+      ];
+
+      await dispatch(reduxAuth.refreshToken(token, id));
+
+      expect(store.getActions()).toEqual(expectedActions);
+
+      done();
+    });
+
   });
+
 });
