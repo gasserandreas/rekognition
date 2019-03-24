@@ -50,9 +50,19 @@ const createHocActions = (attr = {
   }
 };
 
+const createHocReducerState = (state) => ({
+  data: null,
+  lastError: null,
+  error: null,
+  lastFetch: null,
+  loading: false,
+  ...state,
+});
+
 // create and export testUtils
 global.testUtils = {
   createMockStore,
   createMockStoreWithApi,
   createHocActions,
+  createHocReducerState,
 };

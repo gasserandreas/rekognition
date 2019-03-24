@@ -102,7 +102,7 @@ describe('auth: complex action test suite', () => {
 
     afterAll(() => {
       dateMock.mockClear();
-      consoleLogMock.mockClear();
+      consoleLogMock.mockRestore();
     });
 
     beforeEach(() => {
@@ -418,4 +418,64 @@ describe('auth: complex action test suite', () => {
 
   });
 
+});
+
+describe('auth: reducer test suite', () => {
+  const initialState = {
+    userId: null,
+    username: '',
+    token: null,
+    meta: {},
+    validEmail: null,
+    loginRequest: testUtils.createHocReducerState(),
+    signupRequest: testUtils.createHocReducerState(),
+    checkEmailRequest: testUtils.createHocReducerState(),
+  }
+
+  it('should handle AUTH_LOG_IN', () => {
+    const username = '';
+    const remember = true;
+
+    const expectedState = {
+      ...initialState,
+      username,
+      meta: {
+        ...initialState.meta,
+        loggedIn: true,
+        loggedInSince: Date.now(),
+        remember,
+      },
+    };
+
+    expect(reducer(initialState, __testables__.authLogin(remember, username)))
+      .toEqual(expectedState);
+  });
+
+  it('should handle AUTH_LOG_IN', () => {
+    const remember = true;
+
+    const newInitialState = {
+      ...initialState,
+      username: 'test username',
+      userId: 'user id',
+      token: 'token',
+      meta: {
+        ...initialState.meta,
+        loggedIn: true,
+        loggedInSince: Date.now(),
+        remember,
+      }
+    }
+
+    const expectedState = {
+      ...newInitialState,
+      username: null,
+      userId: null,
+      token: null,
+      meta: {},
+    };
+
+    expect(reducer(newInitialState, __testables__.authLogOut('logout message')))
+      .toEqual(expectedState);
+  });
 });
