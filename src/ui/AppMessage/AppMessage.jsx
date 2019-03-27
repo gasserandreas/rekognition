@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { Box } from 'grommet';
 
-import { Colors, MediaSize } from '../styles';
+import { Colors, MediaSize } from '../../styles';
 
 export const StyledAppMessage = styled(Box)`
   visibility: ${props => props.show ? 'visible' : 'none'};
@@ -58,6 +58,7 @@ export const StyledAppMessageContent = styled(Box)`
   }
 `;
 
+/** This componen supports... */
 const AppMessage = ({ children, show, ...props }) => (<StyledAppMessage show={show} {...props}>
     <StyledAppMessageContent elevation="xlarge" show={show}>
       {children}
@@ -66,7 +67,9 @@ const AppMessage = ({ children, show, ...props }) => (<StyledAppMessage show={sh
 );
 
 AppMessage.propTypes = {
+  /** Required children node to be rendered within component */
   children: PropTypes.node.isRequired,
+  /** Boolean indicating whether message is shown or not */
   show: PropTypes.bool,
 }
 
