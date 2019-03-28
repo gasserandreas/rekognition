@@ -15,6 +15,7 @@ export const StyledPrevious = styled(Previous)`
   }
 `;
 
+/** Render go previous button as left arrow icon */
 const PreviousButton = (props) => <StyledPrevious {...props} />;
 
 export default PreviousButton;

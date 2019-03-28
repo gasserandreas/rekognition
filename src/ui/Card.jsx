@@ -13,6 +13,8 @@ export const StyledCard = styled(Box)`
   margin: 1rem 0;
 `;
 
+/** Simple card layout container. Add your children
+ * and use default Grommet props to style this component */
 const Card = ({ children, ...props }) => (
   <StyledCard
     elevation="small"
@@ -22,6 +24,7 @@ const Card = ({ children, ...props }) => (
 );
 
 Card.propTypes = {
+  /** Specify child to be rendered */
   children: PropTypes.node.isRequired,
 };
 

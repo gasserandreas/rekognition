@@ -10,7 +10,7 @@ import { Add } from 'grommet-icons';
 
 import Button from '../ui/form/Button';
 import ButtonGroup from '../ui/form/ButtonGroup';
-import AppMessage from '../ui/AppMessage/AppMessage';
+import AppMessage from '../ui/AppMessage';
 import {
   getImageCreationDateTime,
   getFormattedFileSize,

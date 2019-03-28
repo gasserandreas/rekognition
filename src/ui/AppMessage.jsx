@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { Box } from 'grommet';
 
-import { Colors, MediaSize } from '../../styles';
+import { Colors, MediaSize } from '../styles';
 
 export const StyledAppMessage = styled(Box)`
   visibility: ${props => props.show ? 'visible' : 'none'};
@@ -58,7 +58,7 @@ export const StyledAppMessageContent = styled(Box)`
   }
 `;
 
-/** This componen supports... */
+/** Show App message as application modal and use fullsize on mobile devices */
 const AppMessage = ({ children, show, ...props }) => (<StyledAppMessage show={show} {...props}>
     <StyledAppMessageContent elevation="xlarge" show={show}>
       {children}

@@ -19,7 +19,7 @@ import {
 
 // base style components
 import PrivateRoute from './PrivateRoute';
-import AppMessage from '../ui/AppMessage/AppMessage';
+import AppMessage from '../ui/AppMessage';
 import AppHeader from './AppHeader';
 import AppFooter from './AppFooter';
 

@@ -12,6 +12,7 @@ const StyledView = styled(Box)`
   padding-top: ${Sizes.Header.height};
 `;
 
+/** Default wrapper for application usafge */
 export const View = ({ children, ...props }) => (
   <StyledView flex fill pad="small" {...props}>
     {children}
@@ -19,6 +20,7 @@ export const View = ({ children, ...props }) => (
 );
 
 View.propTypes = {
+  /** Add view content here */
   children: PropTypes.node.isRequired,
 };
 
@@ -28,11 +30,13 @@ const StyledHeading = styled(Heading)`
   max-width: 100%;
 `;
 
+/** Default heading for view */
 export const ViewHeading = (props) => (
   <StyledHeading level="4" {...props} />
 );
 
 View.propTypes = {
+  /** Add view header here */
   children: PropTypes.node.isRequired,
 };
 
