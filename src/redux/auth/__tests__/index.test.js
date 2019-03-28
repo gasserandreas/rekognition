@@ -451,7 +451,7 @@ describe('auth: reducer test suite', () => {
       .toEqual(expectedState);
   });
 
-  it('should handle AUTH_LOG_IN', () => {
+  it('should handle AUTH_LOG_OUT', () => {
     const remember = true;
 
     const newInitialState = {
@@ -477,5 +477,65 @@ describe('auth: reducer test suite', () => {
 
     expect(reducer(newInitialState, __testables__.authLogOut('logout message')))
       .toEqual(expectedState);
+  });
+
+  it('should handle AUTH_SET_USER_ID', () => {
+    const userId = mockedData.id;
+
+    const expectedState = {
+      ...initialState,
+      userId,
+    };
+
+    expect(reducer(initialState, __testables__.authSetUserId(userId)))
+      .toEqual(expectedState);
+  });
+
+  it('should handle AUTH_SET_TOKEN', () => {
+    const { token } = mockedData;
+
+    const expectedState = {
+      ...initialState,
+      token,
+    };
+
+    expect(reducer(initialState, __testables__.authSetToken(token)))
+      .toEqual(expectedState);
+  });
+
+  it('should handle AUTH_SET_VALID_EMAIL', () => {
+    expect(reducer(initialState, __testables__.authSetValidEmail()))
+      .toEqual({
+        ...initialState,
+        validEmail: true,
+      });
+  });
+
+  it('should handle AUTH_SET_INVALID_EMAIL', () => {
+    expect(reducer(initialState, __testables__.authSetInvalidEmail()))
+      .toEqual({
+        ...initialState,
+        validEmail: false,
+      });
+  });
+
+  it('should handle AUTH_SET_INVALID_EMAIL', () => {
+    const newInitialState = {
+      ...initialState,
+      validEmail: true,
+    }
+
+    expect(reducer(newInitialState, __testables__.authResetValidEmail()))
+      .toEqual(initialState);
+  });
+
+  it('should create HOC request initial state', () => {
+    expect(reducer(initialState, { type: reduxApplication.APP_IDLE }))
+      .toEqual({
+        ...initialState,
+        loginRequest: testUtils.createHocReducerState(),
+        signupRequest: testUtils.createHocReducerState(),
+        checkEmailRequest: testUtils.createHocReducerState(),
+      });
   });
 });

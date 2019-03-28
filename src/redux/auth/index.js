@@ -107,15 +107,18 @@ export const logOutUser = (message, broadcast = true) => (dispatch) => {
     window.localStorage.clear();
     window.sessionStorage.clear();
 
+    /* istanbul ignore next */
     if (broadcast) {
       window.localStorage.logout = true;
     }
   }
   catch (error) {
+    /* istanbul ignore next */
     console.log('could not clear local and session storage');
   }
 
   // force reload to clear cache
+  /* istanbul ignore next */
   if (process.env.NODE_ENV !== 'development') {
     window.location = '/';
   }
@@ -292,6 +295,7 @@ export const refreshToken = (token, userId) => (dispatch, getState, { GraphApi }
       dispatch(handleAuth(token, user, remember));
     })
     .catch((error) => {
+      /* istanbul ignore next */
       dispatch(logOutUser('Could not refresh token', true));
     })
 };
