@@ -91,6 +91,7 @@ export const StyledButton = styled(Grommet.Button)`
   }
 `;
 
+/** Standarized button component */
 const Button = ({ loading, children, ...props }) => (
   <StyledButton {...props}>
     {children}
@@ -110,6 +111,7 @@ const Button = ({ loading, children, ...props }) => (
 );
 
 Button.propTypes = {
+  /** Specify Button styling */
   buttonStyle: PropTypes.oneOf([
     BUTTON_TYPES.DEFAULT,
     BUTTON_TYPES.PRIMARY,
@@ -117,7 +119,9 @@ Button.propTypes = {
     BUTTON_TYPES.ERROR,
     BUTTON_TYPES.LINK,
   ]),
+  /** Add Button children */
   children: PropTypes.node,
+  /** Display loading indicator for async Button */
   loading: PropTypes.bool,
 };
 

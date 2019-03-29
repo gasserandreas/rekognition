@@ -11,7 +11,7 @@ export const StyledAsyncImage = styled(Box)`
   transition: all 0.5s ease;
   img {
     opacity: ${props => props.loaded ? '1' : '0'};
-    display: ${props => props.loaded || props.neverHideImg ? 'flex' : 'none'};
+    display: ${props => (props.loaded || props.neverHideImg) ? 'flex' : 'none'};
   }
 `;
 

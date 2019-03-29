@@ -58,6 +58,7 @@ export const StyledAppMessageContent = styled(Box)`
   }
 `;
 
+/** Show App message as application modal and use fullsize on mobile devices */
 const AppMessage = ({ children, show, ...props }) => (<StyledAppMessage show={show} {...props}>
     <StyledAppMessageContent elevation="xlarge" show={show}>
       {children}
@@ -66,7 +67,9 @@ const AppMessage = ({ children, show, ...props }) => (<StyledAppMessage show={sh
 );
 
 AppMessage.propTypes = {
+  /** Required children node to be rendered within component */
   children: PropTypes.node.isRequired,
+  /** Boolean indicating whether message is shown or not */
   show: PropTypes.bool,
 }
 

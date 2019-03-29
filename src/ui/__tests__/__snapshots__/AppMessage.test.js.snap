@@ -17,10 +17,7 @@ exports[`AppMessage content should be styled consistently 1`] = `
           "url": "https://codesandbox.io/s/github/grommet/grommet-sandbox?initialpath=box&module=%2Fsrc%2FBox.js",
         },
       ],
-      "description": "A container that lays out its contents in one direction. Box
-      provides CSS flexbox capabilities for layout, as well as general
-      styling of things like background color, border, and animation.",
-      "intrinsicElement": "div",
+      "description": "A flexible box that lays out its contents along a single direction.",
       "name": "Box",
       "properties": Array [
         Object {
@@ -216,14 +213,6 @@ zoomOut
     medium
     strong
     boolean,
-  repeat: 
-    no-repeat
-    repeat
-    string,
-  size: 
-    cover
-    contain
-    string,
   light: string
 }",
           "name": "background",
@@ -236,7 +225,6 @@ small
 medium
 large
 xlarge
-xxlarge
 full
 1/2
 1/3
@@ -279,17 +267,7 @@ all
     medium
     large
     xlarge
-    string,
-  style: 
-    solid
-    dashed
-    dotted
-    double
-    groove
-    ridge
-    inset
-    outset
-    hidden
+    string
 }",
           "name": "border",
         },
@@ -315,14 +293,10 @@ string",
           "name": "elevation",
         },
         Object {
-          "description": "Whether flex-grow and/or flex-shrink is true and at a desired factor.",
+          "description": "Whether flex-grow and/or flex-shrink is true.",
           "format": "grow
 shrink
-boolean
-{
-  grow: number,
-  shrink: number
-}",
+boolean",
           "name": "flex",
         },
         Object {
@@ -336,8 +310,7 @@ boolean",
           "description": "The amount of spacing between child elements. This
         should not be used in conjunction with 'wrap' as the gap elements
         will not wrap gracefully.",
-          "format": "xxsmall
-xsmall
+          "format": "xsmall
 small
 medium
 large
@@ -347,26 +320,20 @@ string",
         },
         Object {
           "description": "A fixed height.",
-          "format": "xxsmall
-xsmall
+          "format": "xsmall
 small
 medium
 large
 xlarge
-xxlarge
 string",
           "name": "height",
         },
         Object {
-          "defaultValue": "stretch",
           "description": "How to align the contents along the main axis.",
-          "format": "around
-between
+          "format": "start
 center
-end
-evenly
-start
-stretch",
+between
+end",
           "name": "justify",
         },
         Object {
@@ -507,13 +474,11 @@ of indicating the DOM tag via the 'as' property.",
         },
         Object {
           "description": "A fixed width.",
-          "format": "xxsmall
-xsmall
+          "format": "xsmall
 small
 medium
 large
 xlarge
-xxlarge
 string",
           "name": "width",
         },
@@ -606,7 +571,6 @@ string",
           "previous": [Function],
         },
       },
-      "chart": Object {},
       "checkBox": Object {
         "border": Object {
           "color": Object {
@@ -743,11 +707,6 @@ string",
           },
         },
       },
-      "diagram": Object {
-        "line": Object {
-          "color": "accent-1",
-        },
-      },
       "formField": Object {
         "border": Object {
           "color": "border",
@@ -760,20 +719,10 @@ string",
           "position": "inner",
           "side": "bottom",
         },
-        "content": Object {
-          "pad": Object {
-            "bottom": "small",
-            "horizontal": "small",
-          },
-        },
         "error": Object {
           "color": Object {
             "dark": "status-critical",
             "light": "status-critical",
-          },
-          "margin": Object {
-            "horizontal": "small",
-            "vertical": "xsmall",
           },
         },
         "help": Object {
@@ -781,19 +730,8 @@ string",
             "dark": "dark-3",
             "light": "dark-3",
           },
-          "margin": Object {
-            "left": "small",
-          },
         },
-        "label": Object {
-          "margin": Object {
-            "horizontal": "small",
-            "vertical": "xsmall",
-          },
-        },
-        "margin": Object {
-          "bottom": "small",
-        },
+        "label": Object {},
       },
       "global": Object {
         "animation": Object {
@@ -1062,9 +1000,9 @@ string",
               "size": "34px",
             },
             "medium": Object {
-              "height": "32px",
-              "maxWidth": "624px",
-              "size": "26px",
+              "height": "28px",
+              "maxWidth": "528px",
+              "size": "22px",
             },
             "small": Object {
               "height": "28px",
@@ -1100,52 +1038,6 @@ string",
               "size": "18px",
             },
           },
-          "5": Object {
-            "font": Object {},
-            "large": Object {
-              "height": "22px",
-              "maxWidth": "384px",
-              "size": "16px",
-            },
-            "medium": Object {
-              "height": "22px",
-              "maxWidth": "384px",
-              "size": "16px",
-            },
-            "small": Object {
-              "height": "22px",
-              "maxWidth": "384px",
-              "size": "16px",
-            },
-            "xlarge": Object {
-              "height": "22px",
-              "maxWidth": "384px",
-              "size": "16px",
-            },
-          },
-          "6": Object {
-            "font": Object {},
-            "large": Object {
-              "height": "20px",
-              "maxWidth": "336px",
-              "size": "14px",
-            },
-            "medium": Object {
-              "height": "20px",
-              "maxWidth": "336px",
-              "size": "14px",
-            },
-            "small": Object {
-              "height": "20px",
-              "maxWidth": "336px",
-              "size": "14px",
-            },
-            "xlarge": Object {
-              "height": "20px",
-              "maxWidth": "336px",
-              "size": "14px",
-            },
-          },
         },
         "responsiveBreakpoint": "small",
         "weight": 600,
@@ -1176,9 +1068,6 @@ string",
         "icons": Object {
           "down": [Function],
         },
-      },
-      "meter": Object {
-        "color": "accent-1",
       },
       "paragraph": Object {
         "large": Object {
@@ -1241,27 +1130,11 @@ string",
           "height": "4px",
         },
       },
-      "rangeSelector": Object {
-        "background": Object {
-          "invert": Object {
-            "color": "light-4",
-          },
-        },
-      },
       "select": Object {
         "container": Object {},
         "control": Object {},
         "icons": Object {
           "down": [Function],
-        },
-        "options": Object {
-          "box": Object {
-            "align": "start",
-            "pad": "small",
-          },
-          "text": Object {
-            "margin": "none",
-          },
         },
         "step": 20,
       },
@@ -1382,9 +1255,6 @@ string",
           "reduceVolume": [Function],
           "volume": [Function],
         },
-        "scrubber": Object {
-          "color": "light-4",
-        },
       },
       "worldMap": Object {
         "color": "light-3",
@@ -1422,10 +1292,7 @@ exports[`AppMessage content should be visible 1`] = `
           "url": "https://codesandbox.io/s/github/grommet/grommet-sandbox?initialpath=box&module=%2Fsrc%2FBox.js",
         },
       ],
-      "description": "A container that lays out its contents in one direction. Box
-      provides CSS flexbox capabilities for layout, as well as general
-      styling of things like background color, border, and animation.",
-      "intrinsicElement": "div",
+      "description": "A flexible box that lays out its contents along a single direction.",
       "name": "Box",
       "properties": Array [
         Object {
@@ -1621,14 +1488,6 @@ zoomOut
     medium
     strong
     boolean,
-  repeat: 
-    no-repeat
-    repeat
-    string,
-  size: 
-    cover
-    contain
-    string,
   light: string
 }",
           "name": "background",
@@ -1641,7 +1500,6 @@ small
 medium
 large
 xlarge
-xxlarge
 full
 1/2
 1/3
@@ -1684,17 +1542,7 @@ all
     medium
     large
     xlarge
-    string,
-  style: 
-    solid
-    dashed
-    dotted
-    double
-    groove
-    ridge
-    inset
-    outset
-    hidden
+    string
 }",
           "name": "border",
         },
@@ -1720,14 +1568,10 @@ string",
           "name": "elevation",
         },
         Object {
-          "description": "Whether flex-grow and/or flex-shrink is true and at a desired factor.",
+          "description": "Whether flex-grow and/or flex-shrink is true.",
           "format": "grow
 shrink
-boolean
-{
-  grow: number,
-  shrink: number
-}",
+boolean",
           "name": "flex",
         },
         Object {
@@ -1741,8 +1585,7 @@ boolean",
           "description": "The amount of spacing between child elements. This
         should not be used in conjunction with 'wrap' as the gap elements
         will not wrap gracefully.",
-          "format": "xxsmall
-xsmall
+          "format": "xsmall
 small
 medium
 large
@@ -1752,26 +1595,20 @@ string",
         },
         Object {
           "description": "A fixed height.",
-          "format": "xxsmall
-xsmall
+          "format": "xsmall
 small
 medium
 large
 xlarge
-xxlarge
 string",
           "name": "height",
         },
         Object {
-          "defaultValue": "stretch",
           "description": "How to align the contents along the main axis.",
-          "format": "around
-between
+          "format": "start
 center
-end
-evenly
-start
-stretch",
+between
+end",
           "name": "justify",
         },
         Object {
@@ -1912,13 +1749,11 @@ of indicating the DOM tag via the 'as' property.",
         },
         Object {
           "description": "A fixed width.",
-          "format": "xxsmall
-xsmall
+          "format": "xsmall
 small
 medium
 large
 xlarge
-xxlarge
 string",
           "name": "width",
         },
@@ -2012,7 +1847,6 @@ string",
           "previous": [Function],
         },
       },
-      "chart": Object {},
       "checkBox": Object {
         "border": Object {
           "color": Object {
@@ -2149,11 +1983,6 @@ string",
           },
         },
       },
-      "diagram": Object {
-        "line": Object {
-          "color": "accent-1",
-        },
-      },
       "formField": Object {
         "border": Object {
           "color": "border",
@@ -2166,20 +1995,10 @@ string",
           "position": "inner",
           "side": "bottom",
         },
-        "content": Object {
-          "pad": Object {
-            "bottom": "small",
-            "horizontal": "small",
-          },
-        },
         "error": Object {
           "color": Object {
             "dark": "status-critical",
             "light": "status-critical",
-          },
-          "margin": Object {
-            "horizontal": "small",
-            "vertical": "xsmall",
           },
         },
         "help": Object {
@@ -2187,19 +2006,8 @@ string",
             "dark": "dark-3",
             "light": "dark-3",
           },
-          "margin": Object {
-            "left": "small",
-          },
         },
-        "label": Object {
-          "margin": Object {
-            "horizontal": "small",
-            "vertical": "xsmall",
-          },
-        },
-        "margin": Object {
-          "bottom": "small",
-        },
+        "label": Object {},
       },
       "global": Object {
         "animation": Object {
@@ -2468,9 +2276,9 @@ string",
               "size": "34px",
             },
             "medium": Object {
-              "height": "32px",
-              "maxWidth": "624px",
-              "size": "26px",
+              "height": "28px",
+              "maxWidth": "528px",
+              "size": "22px",
             },
             "small": Object {
               "height": "28px",
@@ -2506,52 +2314,6 @@ string",
               "size": "18px",
             },
           },
-          "5": Object {
-            "font": Object {},
-            "large": Object {
-              "height": "22px",
-              "maxWidth": "384px",
-              "size": "16px",
-            },
-            "medium": Object {
-              "height": "22px",
-              "maxWidth": "384px",
-              "size": "16px",
-            },
-            "small": Object {
-              "height": "22px",
-              "maxWidth": "384px",
-              "size": "16px",
-            },
-            "xlarge": Object {
-              "height": "22px",
-              "maxWidth": "384px",
-              "size": "16px",
-            },
-          },
-          "6": Object {
-            "font": Object {},
-            "large": Object {
-              "height": "20px",
-              "maxWidth": "336px",
-              "size": "14px",
-            },
-            "medium": Object {
-              "height": "20px",
-              "maxWidth": "336px",
-              "size": "14px",
-            },
-            "small": Object {
-              "height": "20px",
-              "maxWidth": "336px",
-              "size": "14px",
-            },
-            "xlarge": Object {
-              "height": "20px",
-              "maxWidth": "336px",
-              "size": "14px",
-            },
-          },
         },
         "responsiveBreakpoint": "small",
         "weight": 600,
@@ -2582,9 +2344,6 @@ string",
         "icons": Object {
           "down": [Function],
         },
-      },
-      "meter": Object {
-        "color": "accent-1",
       },
       "paragraph": Object {
         "large": Object {
@@ -2647,27 +2406,11 @@ string",
           "height": "4px",
         },
       },
-      "rangeSelector": Object {
-        "background": Object {
-          "invert": Object {
-            "color": "light-4",
-          },
-        },
-      },
       "select": Object {
         "container": Object {},
         "control": Object {},
         "icons": Object {
           "down": [Function],
-        },
-        "options": Object {
-          "box": Object {
-            "align": "start",
-            "pad": "small",
-          },
-          "text": Object {
-            "margin": "none",
-          },
         },
         "step": 20,
       },
@@ -2787,9 +2530,6 @@ string",
           "play": [Function],
           "reduceVolume": [Function],
           "volume": [Function],
-        },
-        "scrubber": Object {
-          "color": "light-4",
         },
       },
       "worldMap": Object {
@@ -2889,7 +2629,6 @@ string",
             "previous": [Function],
           },
         },
-        "chart": Object {},
         "checkBox": Object {
           "border": Object {
             "color": Object {
@@ -3026,11 +2765,6 @@ string",
             },
           },
         },
-        "diagram": Object {
-          "line": Object {
-            "color": "accent-1",
-          },
-        },
         "formField": Object {
           "border": Object {
             "color": "border",
@@ -3043,20 +2777,10 @@ string",
             "position": "inner",
             "side": "bottom",
           },
-          "content": Object {
-            "pad": Object {
-              "bottom": "small",
-              "horizontal": "small",
-            },
-          },
           "error": Object {
             "color": Object {
               "dark": "status-critical",
               "light": "status-critical",
-            },
-            "margin": Object {
-              "horizontal": "small",
-              "vertical": "xsmall",
             },
           },
           "help": Object {
@@ -3064,19 +2788,8 @@ string",
               "dark": "dark-3",
               "light": "dark-3",
             },
-            "margin": Object {
-              "left": "small",
-            },
           },
-          "label": Object {
-            "margin": Object {
-              "horizontal": "small",
-              "vertical": "xsmall",
-            },
-          },
-          "margin": Object {
-            "bottom": "small",
-          },
+          "label": Object {},
         },
         "global": Object {
           "animation": Object {
@@ -3345,9 +3058,9 @@ string",
                 "size": "34px",
               },
               "medium": Object {
-                "height": "32px",
-                "maxWidth": "624px",
-                "size": "26px",
+                "height": "28px",
+                "maxWidth": "528px",
+                "size": "22px",
               },
               "small": Object {
                 "height": "28px",
@@ -3383,52 +3096,6 @@ string",
                 "size": "18px",
               },
             },
-            "5": Object {
-              "font": Object {},
-              "large": Object {
-                "height": "22px",
-                "maxWidth": "384px",
-                "size": "16px",
-              },
-              "medium": Object {
-                "height": "22px",
-                "maxWidth": "384px",
-                "size": "16px",
-              },
-              "small": Object {
-                "height": "22px",
-                "maxWidth": "384px",
-                "size": "16px",
-              },
-              "xlarge": Object {
-                "height": "22px",
-                "maxWidth": "384px",
-                "size": "16px",
-              },
-            },
-            "6": Object {
-              "font": Object {},
-              "large": Object {
-                "height": "20px",
-                "maxWidth": "336px",
-                "size": "14px",
-              },
-              "medium": Object {
-                "height": "20px",
-                "maxWidth": "336px",
-                "size": "14px",
-              },
-              "small": Object {
-                "height": "20px",
-                "maxWidth": "336px",
-                "size": "14px",
-              },
-              "xlarge": Object {
-                "height": "20px",
-                "maxWidth": "336px",
-                "size": "14px",
-              },
-            },
           },
           "responsiveBreakpoint": "small",
           "weight": 600,
@@ -3459,9 +3126,6 @@ string",
           "icons": Object {
             "down": [Function],
           },
-        },
-        "meter": Object {
-          "color": "accent-1",
         },
         "paragraph": Object {
           "large": Object {
@@ -3524,27 +3188,11 @@ string",
             "height": "4px",
           },
         },
-        "rangeSelector": Object {
-          "background": Object {
-            "invert": Object {
-              "color": "light-4",
-            },
-          },
-        },
         "select": Object {
           "container": Object {},
           "control": Object {},
           "icons": Object {
             "down": [Function],
-          },
-          "options": Object {
-            "box": Object {
-              "align": "start",
-              "pad": "small",
-            },
-            "text": Object {
-              "margin": "none",
-            },
           },
           "step": 20,
         },
@@ -3665,9 +3313,6 @@ string",
             "reduceVolume": [Function],
             "volume": [Function],
           },
-          "scrubber": Object {
-            "color": "light-4",
-          },
         },
         "worldMap": Object {
           "color": "light-3",
@@ -3710,10 +3355,7 @@ exports[`AppMessage should be styled consistently 1`] = `
           "url": "https://codesandbox.io/s/github/grommet/grommet-sandbox?initialpath=box&module=%2Fsrc%2FBox.js",
         },
       ],
-      "description": "A container that lays out its contents in one direction. Box
-      provides CSS flexbox capabilities for layout, as well as general
-      styling of things like background color, border, and animation.",
-      "intrinsicElement": "div",
+      "description": "A flexible box that lays out its contents along a single direction.",
       "name": "Box",
       "properties": Array [
         Object {
@@ -3909,14 +3551,6 @@ zoomOut
     medium
     strong
     boolean,
-  repeat: 
-    no-repeat
-    repeat
-    string,
-  size: 
-    cover
-    contain
-    string,
   light: string
 }",
           "name": "background",
@@ -3929,7 +3563,6 @@ small
 medium
 large
 xlarge
-xxlarge
 full
 1/2
 1/3
@@ -3972,17 +3605,7 @@ all
     medium
     large
     xlarge
-    string,
-  style: 
-    solid
-    dashed
-    dotted
-    double
-    groove
-    ridge
-    inset
-    outset
-    hidden
+    string
 }",
           "name": "border",
         },
@@ -4008,14 +3631,10 @@ string",
           "name": "elevation",
         },
         Object {
-          "description": "Whether flex-grow and/or flex-shrink is true and at a desired factor.",
+          "description": "Whether flex-grow and/or flex-shrink is true.",
           "format": "grow
 shrink
-boolean
-{
-  grow: number,
-  shrink: number
-}",
+boolean",
           "name": "flex",
         },
         Object {
@@ -4029,8 +3648,7 @@ boolean",
           "description": "The amount of spacing between child elements. This
         should not be used in conjunction with 'wrap' as the gap elements
         will not wrap gracefully.",
-          "format": "xxsmall
-xsmall
+          "format": "xsmall
 small
 medium
 large
@@ -4040,26 +3658,20 @@ string",
         },
         Object {
           "description": "A fixed height.",
-          "format": "xxsmall
-xsmall
+          "format": "xsmall
 small
 medium
 large
 xlarge
-xxlarge
 string",
           "name": "height",
         },
         Object {
-          "defaultValue": "stretch",
           "description": "How to align the contents along the main axis.",
-          "format": "around
-between
+          "format": "start
 center
-end
-evenly
-start
-stretch",
+between
+end",
           "name": "justify",
         },
         Object {
@@ -4200,13 +3812,11 @@ of indicating the DOM tag via the 'as' property.",
         },
         Object {
           "description": "A fixed width.",
-          "format": "xxsmall
-xsmall
+          "format": "xsmall
 small
 medium
 large
 xlarge
-xxlarge
 string",
           "name": "width",
         },
@@ -4299,7 +3909,6 @@ string",
           "previous": [Function],
         },
       },
-      "chart": Object {},
       "checkBox": Object {
         "border": Object {
           "color": Object {
@@ -4436,11 +4045,6 @@ string",
           },
         },
       },
-      "diagram": Object {
-        "line": Object {
-          "color": "accent-1",
-        },
-      },
       "formField": Object {
         "border": Object {
           "color": "border",
@@ -4453,20 +4057,10 @@ string",
           "position": "inner",
           "side": "bottom",
         },
-        "content": Object {
-          "pad": Object {
-            "bottom": "small",
-            "horizontal": "small",
-          },
-        },
         "error": Object {
           "color": Object {
             "dark": "status-critical",
             "light": "status-critical",
-          },
-          "margin": Object {
-            "horizontal": "small",
-            "vertical": "xsmall",
           },
         },
         "help": Object {
@@ -4474,19 +4068,8 @@ string",
             "dark": "dark-3",
             "light": "dark-3",
           },
-          "margin": Object {
-            "left": "small",
-          },
         },
-        "label": Object {
-          "margin": Object {
-            "horizontal": "small",
-            "vertical": "xsmall",
-          },
-        },
-        "margin": Object {
-          "bottom": "small",
-        },
+        "label": Object {},
       },
       "global": Object {
         "animation": Object {
@@ -4755,9 +4338,9 @@ string",
               "size": "34px",
             },
             "medium": Object {
-              "height": "32px",
-              "maxWidth": "624px",
-              "size": "26px",
+              "height": "28px",
+              "maxWidth": "528px",
+              "size": "22px",
             },
             "small": Object {
               "height": "28px",
@@ -4793,52 +4376,6 @@ string",
               "size": "18px",
             },
           },
-          "5": Object {
-            "font": Object {},
-            "large": Object {
-              "height": "22px",
-              "maxWidth": "384px",
-              "size": "16px",
-            },
-            "medium": Object {
-              "height": "22px",
-              "maxWidth": "384px",
-              "size": "16px",
-            },
-            "small": Object {
-              "height": "22px",
-              "maxWidth": "384px",
-              "size": "16px",
-            },
-            "xlarge": Object {
-              "height": "22px",
-              "maxWidth": "384px",
-              "size": "16px",
-            },
-          },
-          "6": Object {
-            "font": Object {},
-            "large": Object {
-              "height": "20px",
-              "maxWidth": "336px",
-              "size": "14px",
-            },
-            "medium": Object {
-              "height": "20px",
-              "maxWidth": "336px",
-              "size": "14px",
-            },
-            "small": Object {
-              "height": "20px",
-              "maxWidth": "336px",
-              "size": "14px",
-            },
-            "xlarge": Object {
-              "height": "20px",
-              "maxWidth": "336px",
-              "size": "14px",
-            },
-          },
         },
         "responsiveBreakpoint": "small",
         "weight": 600,
@@ -4869,9 +4406,6 @@ string",
         "icons": Object {
           "down": [Function],
         },
-      },
-      "meter": Object {
-        "color": "accent-1",
       },
       "paragraph": Object {
         "large": Object {
@@ -4934,27 +4468,11 @@ string",
           "height": "4px",
         },
       },
-      "rangeSelector": Object {
-        "background": Object {
-          "invert": Object {
-            "color": "light-4",
-          },
-        },
-      },
       "select": Object {
         "container": Object {},
         "control": Object {},
         "icons": Object {
           "down": [Function],
-        },
-        "options": Object {
-          "box": Object {
-            "align": "start",
-            "pad": "small",
-          },
-          "text": Object {
-            "margin": "none",
-          },
         },
         "step": 20,
       },
@@ -5075,9 +4593,6 @@ string",
           "reduceVolume": [Function],
           "volume": [Function],
         },
-        "scrubber": Object {
-          "color": "light-4",
-        },
       },
       "worldMap": Object {
         "color": "light-3",
@@ -5115,10 +4630,7 @@ exports[`AppMessage should render correctly 1`] = `
           "url": "https://codesandbox.io/s/github/grommet/grommet-sandbox?initialpath=box&module=%2Fsrc%2FBox.js",
         },
       ],
-      "description": "A container that lays out its contents in one direction. Box
-      provides CSS flexbox capabilities for layout, as well as general
-      styling of things like background color, border, and animation.",
-      "intrinsicElement": "div",
+      "description": "A flexible box that lays out its contents along a single direction.",
       "name": "Box",
       "properties": Array [
         Object {
@@ -5314,14 +4826,6 @@ zoomOut
     medium
     strong
     boolean,
-  repeat: 
-    no-repeat
-    repeat
-    string,
-  size: 
-    cover
-    contain
-    string,
   light: string
 }",
           "name": "background",
@@ -5334,7 +4838,6 @@ small
 medium
 large
 xlarge
-xxlarge
 full
 1/2
 1/3
@@ -5377,17 +4880,7 @@ all
     medium
     large
     xlarge
-    string,
-  style: 
-    solid
-    dashed
-    dotted
-    double
-    groove
-    ridge
-    inset
-    outset
-    hidden
+    string
 }",
           "name": "border",
         },
@@ -5413,14 +4906,10 @@ string",
           "name": "elevation",
         },
         Object {
-          "description": "Whether flex-grow and/or flex-shrink is true and at a desired factor.",
+          "description": "Whether flex-grow and/or flex-shrink is true.",
           "format": "grow
 shrink
-boolean
-{
-  grow: number,
-  shrink: number
-}",
+boolean",
           "name": "flex",
         },
         Object {
@@ -5434,8 +4923,7 @@ boolean",
           "description": "The amount of spacing between child elements. This
         should not be used in conjunction with 'wrap' as the gap elements
         will not wrap gracefully.",
-          "format": "xxsmall
-xsmall
+          "format": "xsmall
 small
 medium
 large
@@ -5445,26 +4933,20 @@ string",
         },
         Object {
           "description": "A fixed height.",
-          "format": "xxsmall
-xsmall
+          "format": "xsmall
 small
 medium
 large
 xlarge
-xxlarge
 string",
           "name": "height",
         },
         Object {
-          "defaultValue": "stretch",
           "description": "How to align the contents along the main axis.",
-          "format": "around
-between
+          "format": "start
 center
-end
-evenly
-start
-stretch",
+between
+end",
           "name": "justify",
         },
         Object {
@@ -5605,13 +5087,11 @@ of indicating the DOM tag via the 'as' property.",
         },
         Object {
           "description": "A fixed width.",
-          "format": "xxsmall
-xsmall
+          "format": "xsmall
 small
 medium
 large
 xlarge
-xxlarge
 string",
           "name": "width",
         },
@@ -5705,7 +5185,6 @@ string",
           "previous": [Function],
         },
       },
-      "chart": Object {},
       "checkBox": Object {
         "border": Object {
           "color": Object {
@@ -5842,11 +5321,6 @@ string",
           },
         },
       },
-      "diagram": Object {
-        "line": Object {
-          "color": "accent-1",
-        },
-      },
       "formField": Object {
         "border": Object {
           "color": "border",
@@ -5859,20 +5333,10 @@ string",
           "position": "inner",
           "side": "bottom",
         },
-        "content": Object {
-          "pad": Object {
-            "bottom": "small",
-            "horizontal": "small",
-          },
-        },
         "error": Object {
           "color": Object {
             "dark": "status-critical",
             "light": "status-critical",
-          },
-          "margin": Object {
-            "horizontal": "small",
-            "vertical": "xsmall",
           },
         },
         "help": Object {
@@ -5880,19 +5344,8 @@ string",
             "dark": "dark-3",
             "light": "dark-3",
           },
-          "margin": Object {
-            "left": "small",
-          },
         },
-        "label": Object {
-          "margin": Object {
-            "horizontal": "small",
-            "vertical": "xsmall",
-          },
-        },
-        "margin": Object {
-          "bottom": "small",
-        },
+        "label": Object {},
       },
       "global": Object {
         "animation": Object {
@@ -6161,9 +5614,9 @@ string",
               "size": "34px",
             },
             "medium": Object {
-              "height": "32px",
-              "maxWidth": "624px",
-              "size": "26px",
+              "height": "28px",
+              "maxWidth": "528px",
+              "size": "22px",
             },
             "small": Object {
               "height": "28px",
@@ -6199,52 +5652,6 @@ string",
               "size": "18px",
             },
           },
-          "5": Object {
-            "font": Object {},
-            "large": Object {
-              "height": "22px",
-              "maxWidth": "384px",
-              "size": "16px",
-            },
-            "medium": Object {
-              "height": "22px",
-              "maxWidth": "384px",
-              "size": "16px",
-            },
-            "small": Object {
-              "height": "22px",
-              "maxWidth": "384px",
-              "size": "16px",
-            },
-            "xlarge": Object {
-              "height": "22px",
-              "maxWidth": "384px",
-              "size": "16px",
-            },
-          },
-          "6": Object {
-            "font": Object {},
-            "large": Object {
-              "height": "20px",
-              "maxWidth": "336px",
-              "size": "14px",
-            },
-            "medium": Object {
-              "height": "20px",
-              "maxWidth": "336px",
-              "size": "14px",
-            },
-            "small": Object {
-              "height": "20px",
-              "maxWidth": "336px",
-              "size": "14px",
-            },
-            "xlarge": Object {
-              "height": "20px",
-              "maxWidth": "336px",
-              "size": "14px",
-            },
-          },
         },
         "responsiveBreakpoint": "small",
         "weight": 600,
@@ -6275,9 +5682,6 @@ string",
         "icons": Object {
           "down": [Function],
         },
-      },
-      "meter": Object {
-        "color": "accent-1",
       },
       "paragraph": Object {
         "large": Object {
@@ -6340,27 +5744,11 @@ string",
           "height": "4px",
         },
       },
-      "rangeSelector": Object {
-        "background": Object {
-          "invert": Object {
-            "color": "light-4",
-          },
-        },
-      },
       "select": Object {
         "container": Object {},
         "control": Object {},
         "icons": Object {
           "down": [Function],
-        },
-        "options": Object {
-          "box": Object {
-            "align": "start",
-            "pad": "small",
-          },
-          "text": Object {
-            "margin": "none",
-          },
         },
         "step": 20,
       },
@@ -6480,9 +5868,6 @@ string",
           "play": [Function],
           "reduceVolume": [Function],
           "volume": [Function],
-        },
-        "scrubber": Object {
-          "color": "light-4",
         },
       },
       "worldMap": Object {
@@ -6582,7 +5967,6 @@ string",
             "previous": [Function],
           },
         },
-        "chart": Object {},
         "checkBox": Object {
           "border": Object {
             "color": Object {
@@ -6719,11 +6103,6 @@ string",
             },
           },
         },
-        "diagram": Object {
-          "line": Object {
-            "color": "accent-1",
-          },
-        },
         "formField": Object {
           "border": Object {
             "color": "border",
@@ -6736,20 +6115,10 @@ string",
             "position": "inner",
             "side": "bottom",
           },
-          "content": Object {
-            "pad": Object {
-              "bottom": "small",
-              "horizontal": "small",
-            },
-          },
           "error": Object {
             "color": Object {
               "dark": "status-critical",
               "light": "status-critical",
-            },
-            "margin": Object {
-              "horizontal": "small",
-              "vertical": "xsmall",
             },
           },
           "help": Object {
@@ -6757,19 +6126,8 @@ string",
               "dark": "dark-3",
               "light": "dark-3",
             },
-            "margin": Object {
-              "left": "small",
-            },
           },
-          "label": Object {
-            "margin": Object {
-              "horizontal": "small",
-              "vertical": "xsmall",
-            },
-          },
-          "margin": Object {
-            "bottom": "small",
-          },
+          "label": Object {},
         },
         "global": Object {
           "animation": Object {
@@ -7038,9 +6396,9 @@ string",
                 "size": "34px",
               },
               "medium": Object {
-                "height": "32px",
-                "maxWidth": "624px",
-                "size": "26px",
+                "height": "28px",
+                "maxWidth": "528px",
+                "size": "22px",
               },
               "small": Object {
                 "height": "28px",
@@ -7076,52 +6434,6 @@ string",
                 "size": "18px",
               },
             },
-            "5": Object {
-              "font": Object {},
-              "large": Object {
-                "height": "22px",
-                "maxWidth": "384px",
-                "size": "16px",
-              },
-              "medium": Object {
-                "height": "22px",
-                "maxWidth": "384px",
-                "size": "16px",
-              },
-              "small": Object {
-                "height": "22px",
-                "maxWidth": "384px",
-                "size": "16px",
-              },
-              "xlarge": Object {
-                "height": "22px",
-                "maxWidth": "384px",
-                "size": "16px",
-              },
-            },
-            "6": Object {
-              "font": Object {},
-              "large": Object {
-                "height": "20px",
-                "maxWidth": "336px",
-                "size": "14px",
-              },
-              "medium": Object {
-                "height": "20px",
-                "maxWidth": "336px",
-                "size": "14px",
-              },
-              "small": Object {
-                "height": "20px",
-                "maxWidth": "336px",
-                "size": "14px",
-              },
-              "xlarge": Object {
-                "height": "20px",
-                "maxWidth": "336px",
-                "size": "14px",
-              },
-            },
           },
           "responsiveBreakpoint": "small",
           "weight": 600,
@@ -7152,9 +6464,6 @@ string",
           "icons": Object {
             "down": [Function],
           },
-        },
-        "meter": Object {
-          "color": "accent-1",
         },
         "paragraph": Object {
           "large": Object {
@@ -7217,27 +6526,11 @@ string",
             "height": "4px",
           },
         },
-        "rangeSelector": Object {
-          "background": Object {
-            "invert": Object {
-              "color": "light-4",
-            },
-          },
-        },
         "select": Object {
           "container": Object {},
           "control": Object {},
           "icons": Object {
             "down": [Function],
-          },
-          "options": Object {
-            "box": Object {
-              "align": "start",
-              "pad": "small",
-            },
-            "text": Object {
-              "margin": "none",
-            },
           },
           "step": 20,
         },
@@ -7357,9 +6650,6 @@ string",
             "play": [Function],
             "reduceVolume": [Function],
             "volume": [Function],
-          },
-          "scrubber": Object {
-            "color": "light-4",
           },
         },
         "worldMap": Object {

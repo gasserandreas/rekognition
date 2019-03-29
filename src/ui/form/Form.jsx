@@ -81,6 +81,7 @@ const StyledFieldRow = styled(Grommet.Box)`
   }
 `;
 
+/** Render multiple fields on the same */
 export const FieldRow = ({ children, ...props }) => (
   <StyledFieldRow
     direction="column"
