@@ -7,12 +7,14 @@ import { configure, addDecorator, addParameters } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import { withKnobs } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
+import centered from '@storybook/addon-centered';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 
 addDecorator(withInfo({
   inline: false,
   header: true,
 }));
+addDecorator(centered)
 addDecorator(withKnobs);
 addDecorator(withA11y);
 

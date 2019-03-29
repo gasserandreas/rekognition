@@ -10,3 +10,11 @@ export const withRouter = makeDecorator({
     return <MemoryRouter>{getStory()}</MemoryRouter>
   },
 });
+
+export const withDefaultMargin = makeDecorator({
+  name: 'withCustomMargin',
+  skipIfNoParametersOrOptions: false,
+  wrapper: (getStory, _, __) => {
+    return <div style={{ marginTop: '2rem' }}>{getStory()}</div>
+  },
+});

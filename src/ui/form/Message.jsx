@@ -55,6 +55,7 @@ const StyledMessage = styled.div`
   padding: 0.5rem 0.75rem;
 `;
 
+/** Create a Message component to be used in forms */
 const Message = ({ children, ...props}) => (
   <StyledMessage {...props}>
     {children}
@@ -62,13 +63,17 @@ const Message = ({ children, ...props}) => (
 );
 
 Message.propTypes = {
+  /** Specify message appearance */
   appearance: PropTypes.oneOf([
     MESSAGE_TYPES.INFO,
     MESSAGE_TYPES.ERROR,
     MESSAGE_TYPES.WARNING,
   ]),
+  /** Add children to be rendered */
   children: PropTypes.node.isRequired,
+  /** Should be displayed with border */
   border: PropTypes.bool,
+  /** Should be displayed with round corners */
   rounded: PropTypes.bool,
 };
 

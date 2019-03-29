@@ -8,7 +8,7 @@ import AsyncImage from './AsyncImage';
 
 import { baseName, sharedKnobs } from './async.stories';
 
-storiesOf(`${baseName}/AsyncImage`)
+storiesOf(`${baseName}/AsyncImage`, module)
   .add('default', () => (
     <AsyncImage
       src={sharedKnobs.getImage()[0]}

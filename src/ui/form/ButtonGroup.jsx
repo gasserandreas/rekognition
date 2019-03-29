@@ -9,6 +9,9 @@ const StyledButtonGroup = styled.div`
   padding-top: 1rem;
 `;
 
+/** Simple component to render button consistently in every form.
+ * Every children (Button) gets moved to right.
+ */
 const ButtonGroup = (props) => (
   <StyledButtonGroup>
     {props.children}
@@ -16,6 +19,7 @@ const ButtonGroup = (props) => (
 );
 
 ButtonGroup.propTypes = {
+  /** Specify children (Button comp) */
   children: PropTypes.node.isRequired,
 };
 
