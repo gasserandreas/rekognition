@@ -72,17 +72,21 @@ const handleAuth = (token, user, remember) => (dispatch) => {
 
   const username = firstname;
 
-  // save token
+  // save token to session
   setToken(token);
   setUserId(id);
 
   // persist if needed
   if (remember) {
     dispatch(authSetToken(token));
-    dispatch(authSetUserId(id));
   }
 
+  // save user id
+  dispatch(authSetUserId(id));
+
   dispatch(authLogin(remember, username));
+
+  return Promise.resolve();
 }
 
 // complex actions
@@ -99,19 +103,22 @@ export const logOutUser = (message, broadcast = true) => (dispatch) => {
 
   // clean up state
   try {
-    if (broadcast) {
-      window.localStorage.logout = true;
-    }
-
     console.log('clear local & session storage');
     window.localStorage.clear();
     window.sessionStorage.clear();
+
+    /* istanbul ignore next */
+    if (broadcast) {
+      window.localStorage.logout = true;
+    }
   }
   catch (error) {
+    /* istanbul ignore next */
     console.log('could not clear local and session storage');
   }
 
   // force reload to clear cache
+  /* istanbul ignore next */
   if (process.env.NODE_ENV !== 'development') {
     window.location = '/';
   }
@@ -241,6 +248,8 @@ export const checkEmail = hocAsyncAction(
         } else {
           dispatch(authSetValidEmail());
         }
+
+        return data;
       });
   },
   {
@@ -286,6 +295,7 @@ export const refreshToken = (token, userId) => (dispatch, getState, { GraphApi }
       dispatch(handleAuth(token, user, remember));
     })
     .catch((error) => {
+      /* istanbul ignore next */
       dispatch(logOutUser('Could not refresh token', true));
     })
 };
@@ -388,3 +398,17 @@ export default persistReducer(
     signupRequest,
     checkEmailRequest,
   }));
+
+export const __testables__ = {
+  AUTH_LOGIN_REQUEST,
+  AUTH_SIGNUP_REQUEST,
+  AUTH_CHECK_EMAIL_REQUEST,
+  authLogin,
+  authLogOut,
+  authSetToken,
+  authSetUserId,
+  authSetValidEmail,
+  authSetInvalidEmail,
+  authResetValidEmail,
+  handleAuth,
+};
