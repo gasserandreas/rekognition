@@ -25,6 +25,10 @@ export const APP_IDLE = 'APP_IDLE';
 const APPLICATION_STATUS_SET = 'APPLICATION_STATUS_SET';
 
 // simple actions
+export const appIdle = () => ({
+  type: APP_IDLE,
+});
+
 const applicationWillLoad = () => ({
   type: APPLICATION_STATUS_SET,
   payload: AppStatus.APPLICATION_WILL_LOAD,

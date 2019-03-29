@@ -41,7 +41,7 @@
         "yup": "^0.26.6"
     },
     "scripts": {
-        "start": "cross-env HOST=localhost.novartis.net HTTPS=true react-scripts start",
+        "start": "cross-env HTTPS=true react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test --env=jsdom",
         "test:debug": "react-scripts --inspect-brk test --runInBand",
