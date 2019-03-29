@@ -9,28 +9,27 @@ export const hocCreateTypes = (baseType) => ({
 
 const checkHocTypes = types => {
   const { START, SUCCESS, ERROR } = types;
-  return START && SUCCESS && ERROR;
-};
+  
+  if (!START || !SUCCESS || !ERROR) {
+    return false;
+  }
 
-export const parsePayloadById = payload => {
-  const byId = {};
-  const ids = [];
+  if (START === '') {
+    return false;
+  }
 
-  payload.forEach((item) => {
-    const { id } = item;
-    byId[id] = item;
-    ids.push(id);
-  });
+  if (SUCCESS === '') {
+    return false;
+  }
 
-  return Promise.resolve({
-    byId,
-    ids: [...new Set(ids)],
-  });
+  if (ERROR === '') {
+    return false;
+  }
+
+  return true;
 };
 
 // actions
-// export const hocAsyncAction = (ACTION_TYPE, createThunk, rejectable = false) => (...args) => {
-// export const hocAsyncAction = (userOptions = {}) => (...args) => {
 export const hocAsyncAction = (ACTION_TYPE, createThunk, userOptions) => (...args) => {
   const { rejectable, handled } = {
     rejectable: false,
@@ -98,7 +97,7 @@ export default ({
     lastFetch: null,
     // a flat to check whether currently loading
     loading: false,
-  };
+  };  
 
   // hoc reducer stuff
   return (state = initialState || defaultInitialState, action) => {
@@ -122,7 +121,12 @@ export default ({
           loading: false,
         };
       default:
+        // console.log(state);
         return state;
     }
   };
+};
+
+export const __testables__ = {
+  checkHocTypes,
 };
