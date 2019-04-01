@@ -18,7 +18,7 @@ The AWS Rekognition projects allows users to simple use Facial regkontion featur
 
 ### Installation
 Following packages are used in development environment:
-- node8 & npm 6
+- node >= 8 & npm >= 6
 - git
 - VisualStudio Code
 - Jest
@@ -26,7 +26,9 @@ Following packages are used in development environment:
 ### Start development
 1. Install package dependencies: `npm install`
 2. Start project: `npm start`
+3. Run test cases: `npm run test`
+4. See coverage: `npm run test:coverage`
 
 ## Deployment
 
-Deployment is only supported by automated `Codebuild` deployment by AWS Codebuild. After merge on `develop` branch, Codebuild will automatically build and deploy to test environment. On merge on `master` production build will be deployed to prod environment.
+Deployment is only supported by automated `Codebuild` deployment by AWS Codebuild. After merge on `develop` branch, Codebuild will automatically build and deploy to test environment. On merge on `master` production build will be deployed to prod environment. Version history is fully covered by `Semantic-Release`.

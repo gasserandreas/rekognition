@@ -14,21 +14,7 @@ phases:
   pre_build:
     commands:
       - echo Installing npm dependencies
-      # - yarn install
       - npm install
-      # - echo Check version number
-      # - "OLD_PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F= \"{ print $2 }\" | sed 's/[version:,\\\",]//g' | tr -d '[[:space:]]')"
-      # - |
-      #   if [ -n "$CODEBUILD_SOURCE_VERSION" ]; then
-      #     NEW_VERSION="$OLD_PACKAGE_VERSION-$CODEBUILD_SOURCE_VERSION"
-      #   else
-      #     NEW_VERSION="$OLD_PACKAGE_VERSION-$CODEBUILD_START_TIME"
-      #   fi
-      # - |
-      #   if [ "${BUILD_ENVIRONMENT}" != "production" ]; then
-      #     echo "Set new version ${NEW_VERSION}"
-      #     npm --no-git-tag-version version $NEW_VERSION
-      #   fi
       - echo Copy .env.* files into project
       - aws s3 cp $S3_UTILS_BUCKET$ENV_VAR ./
   build:
