@@ -8,7 +8,7 @@ import LoadingIndicator from '../async/LoadingIndicator';
 
 import { Colors } from '../../styles';
 
-const BUTTON_TYPES = {
+export const BUTTON_TYPES = {
   DEFAULT: 'default',
   PRIMARY: 'primary',
   WARNING: 'warning',
@@ -43,7 +43,7 @@ const getBackgroundHoverColor = props => {
     case BUTTON_TYPES.LINK:
       return 'inherit';
     default:
-      return 'rgba(9, 30, 66, 0.08);';
+      return 'rgba(9, 30, 66, 0.08)';
   }
 }
 
@@ -60,12 +60,13 @@ const getColor = props => {
   }
 }
 
-const StyledLoading = styled(LoadingIndicator)`
+export const StyledLoading = styled(LoadingIndicator)`
   width: 1.2rem;
   margin-left: 0.5rem;
 `;
 
-const StyledButton = styled(Grommet.Button)`
+/* istanbul ignore next */
+export const StyledButton = styled(Grommet.Button)`
   display: flex;
   align-items: center;
   border-radius: 3px;
@@ -85,10 +86,12 @@ const StyledButton = styled(Grommet.Button)`
   &:hover {
     background-color: ${props => getBackgroundHoverColor(props)};
     pointer: cursor;
+    /* istanbul ignore next */
     text-decoration: ${props => props.buttonStyle === 'link' ? 'underline' : ''};
   }
 `;
 
+/** Standarized button component */
 const Button = ({ loading, children, ...props }) => (
   <StyledButton {...props}>
     {children}
@@ -108,6 +111,7 @@ const Button = ({ loading, children, ...props }) => (
 );
 
 Button.propTypes = {
+  /** Specify Button styling */
   buttonStyle: PropTypes.oneOf([
     BUTTON_TYPES.DEFAULT,
     BUTTON_TYPES.PRIMARY,
@@ -115,7 +119,9 @@ Button.propTypes = {
     BUTTON_TYPES.ERROR,
     BUTTON_TYPES.LINK,
   ]),
+  /** Add Button children */
   children: PropTypes.node,
+  /** Display loading indicator for async Button */
   loading: PropTypes.bool,
 };
 
@@ -124,5 +130,11 @@ Button.defaultProps = {
   children: null,
   loading: false,
 };
+
+export const __testables__ = {
+  getBackgroundColor,
+  getBackgroundHoverColor,
+  getColor,
+}
 
 export default Button;

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -121,55 +121,30 @@ const StyledView = styled(View)`
   }
 `;
 
-class DetailView extends Component {
-  handleFaceClick = this.handleFaceClick.bind(this);
-  handleLabelClick = this.handleLabelClick.bind(this);
+const DetailView = ({
+  history,
+  labels,
+  selectedLabel,
+  faces,
+  selectedFace,
+  getImage,
+  image,
+  getImageRequest,
+}) => {
+  const { id: imageId, created, meta } = image;
+  const { loading } = getImageRequest;
 
-  componentWillMount() {
-    const { labels, faces, getImage, image: { id } } = this.props;
-
-    // request labels and faces from backend
+  useEffect(() => {
+    // request labels and faces from backend if not yet in store
     if (labels.length === 0 && faces.length === 0) {
-      getImage(id);
+      getImage(imageId);
     }
-  }
+  }, [imageId, faces.length, labels.length, getImage]);
 
-  handleFaceClick(face) {
-    const { id } = face;
-    this.setBrowserParams({ key: 'face', value: id });
-  } 
-
-  handleLabelClick(label) {
-    const { id } = label;
-    this.setBrowserParams({ key: 'label', value: id });
-  }
-
-  setBrowserParams(params) {
-    const { image, history } = this.props;
-    const { id } = image;
-    const { key, value } = params;
-
-    const path = `${Paths.GET_IMAGES_DETAIL(id)}?${key}=${value}`;
-    history.push(path);
-  }
-
-  render() {
-    const {
-      history,
-      labels,
-      selectedLabel,
-      faces,
-      selectedFace,
-      image,
-      getImageRequest,
-    } = this.props;
-
-    const { created, meta } = image;
-    const { loading } = getImageRequest;
-
-    // generate meta render array
+  // generate meta render array
+  const metaValues = useMemo(() => {
     const { density, height, width, type, size } = meta;
-    const metaValues = [
+    return [
       {
         name: 'Type',
         value: type,
@@ -187,55 +162,73 @@ class DetailView extends Component {
         value: density > 0 ? `${density} DPI` : null,
       },
     ].filter(({ value }) => value !== null);
+  }, [meta]);
 
-    return (
-      <StyledView>
-        <AddImageButton afterOnClick={() => history.push(Paths.HOME)} />
-        <StyledImageBox fill>
-          <StyledImageBoxContainer>
-            <Image
-              image={image}
+  // url handlers
+  const handleFaceClick = (face) => {
+    const { id } = face;
+    setBrowserParams({ key: 'face', value: id });
+  };
+
+  const handleLabelClick = (label) => {
+    const { id } = label;
+    setBrowserParams({ key: 'label', value: id });
+  };
+
+  const setBrowserParams = (params) => {
+    const { key, value } = params;
+
+    const path = `${Paths.GET_IMAGES_DETAIL(imageId)}?${key}=${value}`;
+    history.push(path);
+  };
+
+  return (
+    <StyledView>
+      <AddImageButton afterOnClick={() => history.push(Paths.HOME)} />
+      <StyledImageBox fill>
+        <StyledImageBoxContainer>
+          <Image
+            image={image}
+            selectedLabel={selectedLabel}
+            selectedFace={selectedFace}
+          />
+        </StyledImageBoxContainer>
+      </StyledImageBox>
+      <StyledDataBox pad={{ vertical: 'none', horizontal: 'small' }}>
+        <StyledBackButton onClick={() => history.push(Paths.HOME)} />
+        <StyledScrollableData>
+        <StyledHeading level="4" style={{ marginTop: '0rem'}}>Image Information</StyledHeading>
+          <Box>
+            <Attribute attribute={{ name: 'Uploaded', value: getImageCreationDateTime(created) }} />
+            {metaValues.map(({ name, value }) => (
+              <Attribute key={`meta_attribute_${name}`} attribute={{ name, value }} />
+            ))}
+          </Box>
+          <StyledHeading level="4">Labels ({labels.length})</StyledHeading>
+          <AsyncContainer loading={loading}>
+            <Labels
+              labels={labels}
               selectedLabel={selectedLabel}
-              selectedFace={selectedFace}
+              onLabelClick={(label) => handleLabelClick(label)}
             />
-          </StyledImageBoxContainer>
-        </StyledImageBox>
-        <StyledDataBox pad={{ vertical: 'none', horizontal: 'small' }}>
-          <StyledBackButton onClick={() => history.push(Paths.HOME)} />
-          <StyledScrollableData>
-          <StyledHeading level="4" style={{ marginTop: '0rem'}}>Image Information</StyledHeading>
-            <Box>
-              <Attribute attribute={{ name: 'Uploaded', value: getImageCreationDateTime(created) }} />
-              {metaValues.map(({ name, value }) => (
-                <Attribute key={`meta_attribute_${name}`} attribute={{ name, value }} />
-              ))}
-            </Box>
-            <StyledHeading level="4">Labels ({labels.length})</StyledHeading>
-            <AsyncContainer loading={loading}>
-              <Labels
-                labels={labels}
-                selectedLabel={selectedLabel}
-                onLabelClick={(label) => this.handleLabelClick(label)}
-              />
-            </AsyncContainer>
-            { faces.length > 0 && (
-              <Fragment>
-                <StyledHeading level="4">Faces ({faces.length})</StyledHeading>
-                <AsyncContainer loading={loading}>
-                  <Faces
-                    faces={faces}
-                    selectedFace={selectedFace}
-                    onFaceClick={(face) => this.handleFaceClick(face)}
-                  />
-                </AsyncContainer>
-              </Fragment>
-            )}
-          </StyledScrollableData>
-        </StyledDataBox>
-      </StyledView>
-    );
-  }
-}
+          </AsyncContainer>
+          { faces.length > 0 && (
+            <Fragment>
+              <StyledHeading level="4">Faces ({faces.length})</StyledHeading>
+              <AsyncContainer loading={loading}>
+                <Faces
+                  faces={faces}
+                  selectedFace={selectedFace}
+                  onFaceClick={(face) => handleFaceClick(face)}
+                />
+              </AsyncContainer>
+            </Fragment>
+          )}
+        </StyledScrollableData>
+      </StyledDataBox>
+    </StyledView>
+  );
+};
 
 DetailView.propTypes = {
   image: PropTypes.shape({

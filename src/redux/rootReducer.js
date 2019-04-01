@@ -1,7 +1,7 @@
 /* global requestAnimationFrame */
 import { combineReducers } from 'redux';
 
-import applicationReducer from './application';
+import applicationReducer, { APP_RESET } from './application';
 import authReducer from './auth';
 import imagesReducer from './images';
 import labelsReducer from './labels';
@@ -18,4 +18,15 @@ const reducers = combineReducers({
   user: userReducer,
 });
 
-export default reducers;
+const rootReducer = (state, action) => {
+  let usedState = state;
+
+  // handle reset
+  if (action.type === APP_RESET) {
+    usedState = undefined;
+  }
+
+  return reducers(usedState, action);
+}
+
+export default rootReducer;

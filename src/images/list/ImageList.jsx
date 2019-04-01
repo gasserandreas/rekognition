@@ -8,7 +8,7 @@ import { Clock, Group, Tag } from 'grommet-icons';
 import AsyncImage from '../../ui/async/AsyncImage';
 import LoadingIndicator from '../../ui/async/LoadingIndicator';
 
-import { getImageSrc, getDefaultFormatedDate } from '../../util/util';
+import { getThumbImageSrc, getDefaultFormatedDate } from '../../util/util';
 import { HOCRequestPropTypes, ImagePropType } from '../../util/PropTypes';
 import { Colors, MediaSize } from '../../styles';
 
@@ -160,7 +160,7 @@ const ListItem = ({ image, ...props }) => {
         numberOfFaces={numberOfFaces}
         numberOfLabels={numberOfLabels}
       />
-      <StyledImage src={getImageSrc(path)} fit="cover" />
+      <StyledImage src={getThumbImageSrc(path)} fit="cover" />
     </StyledListItem>
   );
 }

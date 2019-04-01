@@ -11,7 +11,6 @@ export const MESSAGE_TYPES = {
 };
 
 const getColor = (props) => {
-  console.log(props);
   switch (props.appearance) {
     case MESSAGE_TYPES.ERROR:
       return Colors.ColorsPalette.TextInvers;
@@ -42,8 +41,9 @@ const getBorderColor = (props) => {
   }
 }
 
+/* istanbul ignore next */
 const StyledMessage = styled.div`
-  color: ${props => getColor(props)}
+  color: ${props => getColor(props)};
   background-color: ${props => getBackgroundColor(props)};
   border-color: ${props => getBorderColor(props)};
   border-width: ${props => props.border ? '1px' : '0'};
@@ -53,27 +53,27 @@ const StyledMessage = styled.div`
   text-align: center;
   vertical-align: middle;
   padding: 0.5rem 0.75rem;
-}
 `;
 
-const Message = (props) => {
-  const { children } = props;
-  console.log(props);
-  return (
-    <StyledMessage {...props}>
-      {children}
-    </StyledMessage>
-  );
-}
+/** Create a Message component to be used in forms */
+const Message = ({ children, ...props}) => (
+  <StyledMessage {...props}>
+    {children}
+  </StyledMessage>
+);
 
 Message.propTypes = {
+  /** Specify message appearance */
   appearance: PropTypes.oneOf([
     MESSAGE_TYPES.INFO,
     MESSAGE_TYPES.ERROR,
     MESSAGE_TYPES.WARNING,
   ]),
+  /** Add children to be rendered */
   children: PropTypes.node.isRequired,
+  /** Should be displayed with border */
   border: PropTypes.bool,
+  /** Should be displayed with round corners */
   rounded: PropTypes.bool,
 };
 
@@ -81,6 +81,13 @@ Message.defaultProps = {
   appearance: MESSAGE_TYPES.INFO,
   border: false,
   rounded: true,
+};
+
+export const __testables__ = {
+  getColor,
+  getBorderColor,
+  getBackgroundColor,
+  StyledMessage,
 };
 
 export default Message;

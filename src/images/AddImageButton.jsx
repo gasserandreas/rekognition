@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import uuid from 'uuid';
@@ -95,36 +95,43 @@ const StyledImageAttributes = styled(Box)`
   }
 `;
 
-class AddImageButton extends Component {
-  state = {
-    showMessage: false,
-    image: null,
-  }
+const initialState = {
+  showMessage: false,
+  image: null,
+};
 
-  uploadImage = this.uploadImage.bind(this);
-  openImageDialog = this.openImageDialog.bind(this);
-  resetForm = this.resetForm.bind(this);
-
-  resetForm() {
-    this.setState({
+const AddImageButton = ({
+  loading,
+  addImage,
+  afterOnClick,
+  ...props,
+}) => {
+  const [state, setState] = useState(initialState);
+  const uploadRef = useRef();
+  
+  const handleResetForm = () => {
+    setState({
       showMessage: false,
       image: null,
     });
+  };
+
+  const handleOpenImageDialog = () => {
+    const dialog = uploadRef.current;
+
+    if (dialog) {
+      dialog.open();
+    }
   }
 
-  openImageDialog() {
-    this.uploadRef.open();
-  }
-
-  uploadImage(files) {
+  const handleUploadImage = (files) => {
     // only supports single files
     if (files.length > 0) {
-      const { addImage, afterOnClick } = this.props;
       files.forEach((file) => {
         const { size } = file;
         if (size > 6000000) {
           // image is to big
-          this.setState({
+          setState({
             showMessage: true,
             image: file,
           });
@@ -134,7 +141,7 @@ class AddImageButton extends Component {
           addImage({ file, id });
 
           // reset form
-          this.resetForm();
+          handleResetForm();
 
           if (afterOnClick) {
             afterOnClick();
@@ -142,71 +149,68 @@ class AddImageButton extends Component {
         }
       });
     }
-  }
+  };
 
-  render() {
-    const { showMessage, image } = this.state;
-    const { loading, ...props } = this.props;
-    return (
-      <Fragment>
-        <AppMessage show={showMessage}>
-          <Heading level="2">Image is too big</Heading>
-          <Box>
-          <p>Hey it seems your image to big for being uploaded. We only allow uploading images up to <strong>6 MB</strong>, please choose a different image.</p>
-            {image  && (
-              <StyledImageWrapper>
-                <StyledImage
-                  src={URL.createObjectURL(image)}
-                  fit="cover"
-                />
-                <StyledImageAttributes>
-                  <div>
-                    <strong>Size: </strong>
-                    <span style={{ color: Colors.Red.Default }}>{getFormattedFileSize(image.size)} MB</span>
-                  </div>
-                  <div><strong>Name: </strong>{image.name}</div>
-                  <div><strong>Created: </strong>{getImageCreationDateTime(image.lastModified)}</div>
-                  <div><strong>Type: </strong>{image.type}</div>
-                </StyledImageAttributes>
-              </StyledImageWrapper>
-            )}
-            <ButtonGroup>
-              <Button
-                type="button"
-                buttonStyle="link"
-                onClick={this.resetForm}
-              >Cancel</Button>
-              <Button
-                type="button"
-                buttonStyle="primary"
-                style={{ marginLeft: '1rem' }}
-                onClick={this.openImageDialog}
-              >Change image</Button>
-            </ButtonGroup>
-          </Box>
-        </AppMessage>
-        <Dropzone
-          onDrop={this.uploadImage}
-          ref={(el) => { if (el) { this.uploadRef = el; }}}
-        >{({getRootProps, getInputProps}) => (
-            <span {...getRootProps()}>
-              <input {...getInputProps()} />
-              <StyledAddImageButton
-                {...props}
-                type="button"
-                icon={<Add color={Colors.ColorsPalette.White}/>}
-                size="xlarge"
-                buttonStyle="primary"
-                elevation="medium"
-                disabled={loading}
+  const { showMessage, image } = state;
+  return (
+    <Fragment>
+      <AppMessage show={showMessage}>
+        <Heading level="2">Image is too big</Heading>
+        <Box>
+        <p>Hey it seems your image to big for being uploaded. We only allow uploading images up to <strong>6 MB</strong>, please choose a different image.</p>
+          {image  && (
+            <StyledImageWrapper>
+              <StyledImage
+                src={URL.createObjectURL(image)}
+                fit="cover"
               />
-            </span>
+              <StyledImageAttributes>
+                <div>
+                  <strong>Size: </strong>
+                  <span style={{ color: Colors.Red.Default }}>{getFormattedFileSize(image.size)} MB</span>
+                </div>
+                <div><strong>Name: </strong>{image.name}</div>
+                <div><strong>Created: </strong>{getImageCreationDateTime(image.lastModified)}</div>
+                <div><strong>Type: </strong>{image.type}</div>
+              </StyledImageAttributes>
+            </StyledImageWrapper>
           )}
-        </Dropzone>
-      </Fragment>
-    );
-  }
-}
+          <ButtonGroup>
+            <Button
+              type="button"
+              buttonStyle="link"
+              onClick={handleResetForm}
+            >Cancel</Button>
+            <Button
+              type="button"
+              buttonStyle="primary"
+              style={{ marginLeft: '1rem' }}
+              onClick={handleOpenImageDialog}
+            >Change image</Button>
+          </ButtonGroup>
+        </Box>
+      </AppMessage>
+      <Dropzone
+        onDrop={handleUploadImage}
+        ref={uploadRef}
+      >{({getRootProps, getInputProps}) => (
+          <span {...getRootProps()}>
+            <input {...getInputProps()} />
+            <StyledAddImageButton
+              {...props}
+              type="button"
+              icon={<Add color={Colors.ColorsPalette.White}/>}
+              size="xlarge"
+              buttonStyle="primary"
+              elevation="medium"
+              disabled={loading}
+            />
+          </span>
+        )}
+      </Dropzone>
+    </Fragment>
+  );
+};
 
 AddImageButton.propTypes = {
   loading: PropTypes.bool.isRequired,

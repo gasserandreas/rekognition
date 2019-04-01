@@ -9,63 +9,73 @@ export const hocCreateTypes = (baseType) => ({
 
 const checkHocTypes = types => {
   const { START, SUCCESS, ERROR } = types;
-  return START && SUCCESS && ERROR;
-};
 
-export const parsePayloadById = payload => {
-  const byId = {};
-  const ids = [];
+  if (!START || !SUCCESS || !ERROR) {
+    return false;
+  }
 
-  payload.forEach((item) => {
-    const { id } = item;
-    byId[id] = item;
-    ids.push(id);
-  });
+  if (START.indexOf('START') < 0) {
+    return false;
+  }
 
-  return Promise.resolve({
-    byId,
-    ids: [...new Set(ids)],
-  });
+  if (SUCCESS.indexOf('SUCCESS') < 0) {
+    return false;
+  }
+
+  if (ERROR.indexOf('ERROR') < 0) {
+    return false;
+  }
+
+  return true;
 };
 
 // actions
-export const hocAsyncAction = (ACTION_TYPE, createThunk, rejectable = false) => (...args) => {
-  // create function for passed properties / args
-  const thunk = createThunk(...args);
-
+export const hocAsyncAction = (ACTION_TYPE, createThunk, userOptions) => {
   // basic check
   if (!checkHocTypes(ACTION_TYPE)) {
     console.log(`No valid types specified for ${JSON.stringify(ACTION_TYPE)}`);
-    return Promise.reject(new Error('No valid ACTION_TYPE specified'));
+    throw new Error('No valid ACTION_TYPE specified');
   }
 
-  return (dispatch) => {
-    // start async job
-    dispatch({ type: ACTION_TYPE.START });
+  // actual HOC action
+  return (...args) => {
+    const { rejectable, handled } = {
+      rejectable: false,
+      handled: true,
+      ...userOptions,
+    };
 
-    // except to receive promise from create thunk method
-    return dispatch(thunk)
-      // proceed with success
-      .then(payload => {
-        dispatch({
-          type: ACTION_TYPE.SUCCESS,
-          payload,
+    // create function for passed properties / args
+    const thunk = createThunk(...args);
+
+    return (dispatch) => {
+      // start async job
+      dispatch({ type: ACTION_TYPE.START });
+
+      // except to receive promise from create thunk method
+      return dispatch(thunk)
+        // proceed with success
+        .then(payload => {
+          dispatch({
+            type: ACTION_TYPE.SUCCESS,
+            payload,
+          });
+
+          return Promise.resolve(payload);
+        })
+        // proceed with error
+        .catch((error) => {
+          dispatch({
+            type: ACTION_TYPE.ERROR,
+            payload: createNetworkError(error),
+            error: handled, // only flag as error if not rejectable
+          });
+
+          // only reject error if asked by user
+          if (rejectable) return Promise.reject(error);
         });
-
-        return Promise.resolve(payload);
-      })
-      // proceed with error
-      .catch((error) => {
-        dispatch({
-          type: ACTION_TYPE.ERROR,
-          payload: createNetworkError(error),
-          error: true,
-        });
-
-        // only reject error if asked by user
-        if (rejectable) return Promise.reject(error);
-      });
-  }
+    }
+  };
 };
 
 // export reducer
@@ -77,7 +87,7 @@ export default ({
   // basic check
   if (!checkHocTypes(ACTION_TYPE)) {
     console.log(`No valid types specified for ${JSON.stringify(ACTION_TYPE)}`);
-    return Promise.reject(new Error('No valid ACTION_TYPE specified'));
+    throw new Error('No valid ACTION_TYPE specified');
   }
 
   const defaultInitialState = {
@@ -90,7 +100,7 @@ export default ({
     lastFetch: null,
     // a flat to check whether currently loading
     loading: false,
-  };
+  };  
 
   // hoc reducer stuff
   return (state = initialState || defaultInitialState, action) => {
@@ -117,4 +127,8 @@ export default ({
         return state;
     }
   };
+};
+
+export const __testables__ = {
+  checkHocTypes,
 };

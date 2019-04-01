@@ -4,37 +4,27 @@ phases:
   install:
     commands:
       - echo Entered the install phase...
-      - apt-get update -y
-      - apt-get install apt-transport-https
-      # Setup for Yarn
-      - echo Installing YARN
-      - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-      - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-      - apt-get update -y
-      - apt-get install -y yarn
+      - ls -a
+      - echo Close git repo to get .git folder
+      - git clone https://github.com/gasserandreas/rekognition.git
+      - rm -rf .git
+      - mv ./rekognition/.git ./
+      - echo Delete rekognition
+      - rm -rf rekognition
   pre_build:
     commands:
       - echo Installing npm dependencies
-      - yarn install
-      - echo Check version number
-      - "OLD_PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F= \"{ print $2 }\" | sed 's/[version:,\\\",]//g' | tr -d '[[:space:]]')"
-      - |
-        if [ -n "$CODEBUILD_SOURCE_VERSION" ]; then
-          NEW_VERSION="$OLD_PACKAGE_VERSION-$CODEBUILD_SOURCE_VERSION"
-        else
-          NEW_VERSION="$OLD_PACKAGE_VERSION-$CODEBUILD_START_TIME"
-        fi
-      - |
-        if [ "${BUILD_ENVIRONMENT}" != "production" ]; then
-          echo "Set new version ${NEW_VERSION}"
-          npm --no-git-tag-version version $NEW_VERSION
-        fi
+      - npm install
       - echo Copy .env.* files into project
       - aws s3 cp $S3_UTILS_BUCKET$ENV_VAR ./
   build:
     commands:
+      - echo "Start test"
+      - CI=true npm test 
+      - echo "Run Semantic Release"
+      - GH_TOKEN="$GH_ACCESS_TOKEN" npx semantic-release
       - echo "Build started on $CODEBUILD_START_TIME"
-      - yarn run build
+      - npm run build
   post_build:
     commands:
       - echo Updating S3 Hosting

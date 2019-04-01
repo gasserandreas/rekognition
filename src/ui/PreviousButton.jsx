@@ -5,7 +5,7 @@ import { Previous } from 'grommet-icons';
 
 import { Colors } from '../styles';
 
-const StyledPrevious = styled(Previous)`
+export const StyledPrevious = styled(Previous)`
   display: block;
   visibility: visible;
 
@@ -15,6 +15,7 @@ const StyledPrevious = styled(Previous)`
   }
 `;
 
+/** Render go previous button as left arrow icon */
 const PreviousButton = (props) => <StyledPrevious {...props} />;
 
 export default PreviousButton;

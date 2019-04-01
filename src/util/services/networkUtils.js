@@ -1,4 +1,5 @@
 import networkEndpoints from './network_endpoints.json';
+import { getWindowUrl } from './windowUtils';
 import { createNetworkError, createInvalidDataError } from '../ErrorHandler';
 
 const defaultConfig = {
@@ -10,8 +11,10 @@ const defaultConfig = {
   },
 };
 
+// const getWindowUrl = () => window.location.href.toLowerCase();
+
 const getEnv = () => {
-  const url = window.location.href.toLowerCase();
+  const url = getWindowUrl().toLowerCase();
 
   // check for localhost / 127.0.0.1
   if (url.indexOf('localhost') >= 0) {
@@ -63,6 +66,10 @@ export const genericJsonFetch = (url, config) => genericFetch(url, config)
   // handle invalid json payload
     .catch(error => Promise.reject(createInvalidDataError(error, response))));
 
+export const __testables__ = { // eslint-disable-line no-underscore-dangle
+  getEnv,
+  getWindowUrl,
+};
 
 export default {
   getUrl,
