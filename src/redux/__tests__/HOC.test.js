@@ -14,7 +14,8 @@ describe('HOCH test suite', () => {
   let dateNowMock;
 
   beforeAll(() => {
-    dateNowMock = jest.spyOn(Date, 'now').mockImplementation(() => 1553838359745);
+    const now = Date.now();
+    dateNowMock = jest.spyOn(Date, 'now').mockImplementation(() => now);
   })
 
   afterAll(() => {

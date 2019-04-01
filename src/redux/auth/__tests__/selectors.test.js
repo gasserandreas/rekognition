@@ -30,6 +30,17 @@ const state = {
 };
 
 describe('auth selector test suite', () => {
+  let dateNowMock;
+
+  beforeAll(() => {
+    const now = Date.now();
+    dateNowMock = jest.spyOn(Date, 'now').mockImplementation(() => now);
+  });
+
+  afterAll(() => {
+    dateNowMock.mockRestore();
+  });
+
   it('isAuthenticatedSelector value', () => {
     // value
     expect(selectors.isAuthenticatedSelector(state))

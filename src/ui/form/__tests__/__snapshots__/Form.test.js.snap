@@ -18,6 +18,7 @@ exports[`Checkbox Input should render correctly 1`] = `
         },
       ],
       "description": "A checkbox toggle control.",
+      "intrinsicElement": "input",
       "name": "CheckBox",
       "properties": Array [
         Object {
@@ -83,6 +84,13 @@ NOTE: This can only be used with non-toggle components",
   theme={
     Object {
       "accordion": Object {
+        "border": Object {
+          "color": "border",
+          "side": "bottom",
+        },
+        "heading": Object {
+          "level": "4",
+        },
         "icons": Object {
           "collapse": [Function],
           "expand": [Function],
@@ -107,11 +115,6 @@ NOTE: This can only be used with non-toggle components",
           "radius": "18px",
           "width": "2px",
         },
-        "disabled": Object {
-          "opacity": 0.3,
-        },
-        "maxWidth": "384px",
-        "minWidth": "96px",
         "padding": Object {
           "horizontal": "22px",
           "vertical": "4px",
@@ -153,6 +156,7 @@ NOTE: This can only be used with non-toggle components",
           "previous": [Function],
         },
       },
+      "chart": Object {},
       "checkBox": Object {
         "border": Object {
           "color": Object {
@@ -289,6 +293,11 @@ NOTE: This can only be used with non-toggle components",
           },
         },
       },
+      "diagram": Object {
+        "line": Object {
+          "color": "accent-1",
+        },
+      },
       "formField": Object {
         "border": Object {
           "color": "border",
@@ -301,10 +310,20 @@ NOTE: This can only be used with non-toggle components",
           "position": "inner",
           "side": "bottom",
         },
+        "content": Object {
+          "pad": Object {
+            "bottom": "small",
+            "horizontal": "small",
+          },
+        },
         "error": Object {
           "color": Object {
             "dark": "status-critical",
             "light": "status-critical",
+          },
+          "margin": Object {
+            "horizontal": "small",
+            "vertical": "xsmall",
           },
         },
         "help": Object {
@@ -312,8 +331,19 @@ NOTE: This can only be used with non-toggle components",
             "dark": "dark-3",
             "light": "dark-3",
           },
+          "margin": Object {
+            "left": "small",
+          },
         },
-        "label": Object {},
+        "label": Object {
+          "margin": Object {
+            "horizontal": "small",
+            "vertical": "xsmall",
+          },
+        },
+        "margin": Object {
+          "bottom": "small",
+        },
       },
       "global": Object {
         "animation": Object {
@@ -428,6 +458,9 @@ NOTE: This can only be used with non-toggle components",
             "radius": "4px",
             "width": "1px",
           },
+          "disabled": Object {
+            "opacity": 0.3,
+          },
         },
         "debounceDelay": 300,
         "deviceBreakpoints": Object {
@@ -439,7 +472,6 @@ NOTE: This can only be used with non-toggle components",
           "background": "#ffffff",
           "border": Object {
             "radius": "0px",
-            "width": "0px",
           },
           "shadowSize": "small",
           "zIndex": "20",
@@ -582,9 +614,9 @@ NOTE: This can only be used with non-toggle components",
               "size": "34px",
             },
             "medium": Object {
-              "height": "28px",
-              "maxWidth": "528px",
-              "size": "22px",
+              "height": "32px",
+              "maxWidth": "624px",
+              "size": "26px",
             },
             "small": Object {
               "height": "28px",
@@ -620,6 +652,52 @@ NOTE: This can only be used with non-toggle components",
               "size": "18px",
             },
           },
+          "5": Object {
+            "font": Object {},
+            "large": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "medium": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "small": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "xlarge": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+          },
+          "6": Object {
+            "font": Object {},
+            "large": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "medium": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "small": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "xlarge": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+          },
         },
         "responsiveBreakpoint": "small",
         "weight": 600,
@@ -646,10 +724,14 @@ NOTE: This can only be used with non-toggle components",
         "responsiveBreakpoint": "small",
         "zIndex": "10",
       },
+      "maskedInput": Object {},
       "menu": Object {
         "icons": Object {
           "down": [Function],
         },
+      },
+      "meter": Object {
+        "color": "accent-1",
       },
       "paragraph": Object {
         "large": Object {
@@ -712,11 +794,27 @@ NOTE: This can only be used with non-toggle components",
           "height": "4px",
         },
       },
+      "rangeSelector": Object {
+        "background": Object {
+          "invert": Object {
+            "color": "light-4",
+          },
+        },
+      },
       "select": Object {
         "container": Object {},
         "control": Object {},
         "icons": Object {
           "down": [Function],
+        },
+        "options": Object {
+          "box": Object {
+            "align": "start",
+            "pad": "small",
+          },
+          "text": Object {
+            "margin": "none",
+          },
         },
         "step": 20,
       },
@@ -824,6 +922,8 @@ NOTE: This can only be used with non-toggle components",
           "size": "34px",
         },
       },
+      "textArea": Object {},
+      "textInput": Object {},
       "video": Object {
         "captions": Object {
           "background": "rgba(0, 0, 0, 0.7)",
@@ -836,6 +936,9 @@ NOTE: This can only be used with non-toggle components",
           "play": [Function],
           "reduceVolume": [Function],
           "volume": [Function],
+        },
+        "scrubber": Object {
+          "color": "light-4",
         },
       },
       "worldMap": Object {
@@ -874,6 +977,7 @@ exports[`Checkbox styles should be consistent 1`] = `
         },
       ],
       "description": "A checkbox toggle control.",
+      "intrinsicElement": "input",
       "name": "CheckBox",
       "properties": Array [
         Object {
@@ -939,6 +1043,13 @@ NOTE: This can only be used with non-toggle components",
   theme={
     Object {
       "accordion": Object {
+        "border": Object {
+          "color": "border",
+          "side": "bottom",
+        },
+        "heading": Object {
+          "level": "4",
+        },
         "icons": Object {
           "collapse": [Function],
           "expand": [Function],
@@ -963,11 +1074,6 @@ NOTE: This can only be used with non-toggle components",
           "radius": "18px",
           "width": "2px",
         },
-        "disabled": Object {
-          "opacity": 0.3,
-        },
-        "maxWidth": "384px",
-        "minWidth": "96px",
         "padding": Object {
           "horizontal": "22px",
           "vertical": "4px",
@@ -1009,6 +1115,7 @@ NOTE: This can only be used with non-toggle components",
           "previous": [Function],
         },
       },
+      "chart": Object {},
       "checkBox": Object {
         "border": Object {
           "color": Object {
@@ -1145,6 +1252,11 @@ NOTE: This can only be used with non-toggle components",
           },
         },
       },
+      "diagram": Object {
+        "line": Object {
+          "color": "accent-1",
+        },
+      },
       "formField": Object {
         "border": Object {
           "color": "border",
@@ -1157,10 +1269,20 @@ NOTE: This can only be used with non-toggle components",
           "position": "inner",
           "side": "bottom",
         },
+        "content": Object {
+          "pad": Object {
+            "bottom": "small",
+            "horizontal": "small",
+          },
+        },
         "error": Object {
           "color": Object {
             "dark": "status-critical",
             "light": "status-critical",
+          },
+          "margin": Object {
+            "horizontal": "small",
+            "vertical": "xsmall",
           },
         },
         "help": Object {
@@ -1168,8 +1290,19 @@ NOTE: This can only be used with non-toggle components",
             "dark": "dark-3",
             "light": "dark-3",
           },
+          "margin": Object {
+            "left": "small",
+          },
         },
-        "label": Object {},
+        "label": Object {
+          "margin": Object {
+            "horizontal": "small",
+            "vertical": "xsmall",
+          },
+        },
+        "margin": Object {
+          "bottom": "small",
+        },
       },
       "global": Object {
         "animation": Object {
@@ -1284,6 +1417,9 @@ NOTE: This can only be used with non-toggle components",
             "radius": "4px",
             "width": "1px",
           },
+          "disabled": Object {
+            "opacity": 0.3,
+          },
         },
         "debounceDelay": 300,
         "deviceBreakpoints": Object {
@@ -1295,7 +1431,6 @@ NOTE: This can only be used with non-toggle components",
           "background": "#ffffff",
           "border": Object {
             "radius": "0px",
-            "width": "0px",
           },
           "shadowSize": "small",
           "zIndex": "20",
@@ -1438,9 +1573,9 @@ NOTE: This can only be used with non-toggle components",
               "size": "34px",
             },
             "medium": Object {
-              "height": "28px",
-              "maxWidth": "528px",
-              "size": "22px",
+              "height": "32px",
+              "maxWidth": "624px",
+              "size": "26px",
             },
             "small": Object {
               "height": "28px",
@@ -1476,6 +1611,52 @@ NOTE: This can only be used with non-toggle components",
               "size": "18px",
             },
           },
+          "5": Object {
+            "font": Object {},
+            "large": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "medium": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "small": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "xlarge": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+          },
+          "6": Object {
+            "font": Object {},
+            "large": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "medium": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "small": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "xlarge": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+          },
         },
         "responsiveBreakpoint": "small",
         "weight": 600,
@@ -1502,10 +1683,14 @@ NOTE: This can only be used with non-toggle components",
         "responsiveBreakpoint": "small",
         "zIndex": "10",
       },
+      "maskedInput": Object {},
       "menu": Object {
         "icons": Object {
           "down": [Function],
         },
+      },
+      "meter": Object {
+        "color": "accent-1",
       },
       "paragraph": Object {
         "large": Object {
@@ -1568,11 +1753,27 @@ NOTE: This can only be used with non-toggle components",
           "height": "4px",
         },
       },
+      "rangeSelector": Object {
+        "background": Object {
+          "invert": Object {
+            "color": "light-4",
+          },
+        },
+      },
       "select": Object {
         "container": Object {},
         "control": Object {},
         "icons": Object {
           "down": [Function],
+        },
+        "options": Object {
+          "box": Object {
+            "align": "start",
+            "pad": "small",
+          },
+          "text": Object {
+            "margin": "none",
+          },
         },
         "step": 20,
       },
@@ -1680,6 +1881,8 @@ NOTE: This can only be used with non-toggle components",
           "size": "34px",
         },
       },
+      "textArea": Object {},
+      "textInput": Object {},
       "video": Object {
         "captions": Object {
           "background": "rgba(0, 0, 0, 0.7)",
@@ -1692,6 +1895,9 @@ NOTE: This can only be used with non-toggle components",
           "play": [Function],
           "reduceVolume": [Function],
           "volume": [Function],
+        },
+        "scrubber": Object {
+          "color": "light-4",
         },
       },
       "worldMap": Object {
@@ -1736,7 +1942,7 @@ exports[`Disabled input should render correctly 1`] = `
           "url": "https://codesandbox.io/s/github/grommet/grommet-sandbox?initialpath=textinput&module=%2Fsrc%2FTextInput.js",
         },
       ],
-      "description": "A text input field with optional suggestions.",
+      "description": "A control to input a single line of text, with optional suggestions.",
       "intrinsicElement": "input",
       "name": "TextInput",
       "properties": Array [
@@ -1763,11 +1969,26 @@ exports[`Disabled input should render correctly 1`] = `
           "name": "dropAlign",
         },
         Object {
+          "description": "The height of the drop container.",
+          "format": "xsmall
+small
+medium
+large
+xlarge
+string",
+          "name": "dropHeight",
+        },
+        Object {
           "description": "Target where any suggestions drop will be aligned to. This should be
       a React reference. Typically, this is not required as the drop will be
       aligned to the TextInput itself by default.",
           "format": "object",
           "name": "dropTarget",
+        },
+        Object {
+          "description": "Any valid Drop prop.",
+          "format": "object",
+          "name": "dropProps",
         },
         Object {
           "description": "The id attribute of the input.",
@@ -1856,7 +2077,8 @@ suggestions and instead rely on the user to type more.",
         },
         Object {
           "description": "What text to put in the input.",
-          "format": "string",
+          "format": "string
+number",
           "name": "value",
         },
       ],
@@ -1876,6 +2098,13 @@ suggestions and instead rely on the user to type more.",
   theme={
     Object {
       "accordion": Object {
+        "border": Object {
+          "color": "border",
+          "side": "bottom",
+        },
+        "heading": Object {
+          "level": "4",
+        },
         "icons": Object {
           "collapse": [Function],
           "expand": [Function],
@@ -1900,11 +2129,6 @@ suggestions and instead rely on the user to type more.",
           "radius": "18px",
           "width": "2px",
         },
-        "disabled": Object {
-          "opacity": 0.3,
-        },
-        "maxWidth": "384px",
-        "minWidth": "96px",
         "padding": Object {
           "horizontal": "22px",
           "vertical": "4px",
@@ -1946,6 +2170,7 @@ suggestions and instead rely on the user to type more.",
           "previous": [Function],
         },
       },
+      "chart": Object {},
       "checkBox": Object {
         "border": Object {
           "color": Object {
@@ -2082,6 +2307,11 @@ suggestions and instead rely on the user to type more.",
           },
         },
       },
+      "diagram": Object {
+        "line": Object {
+          "color": "accent-1",
+        },
+      },
       "formField": Object {
         "border": Object {
           "color": "border",
@@ -2094,10 +2324,20 @@ suggestions and instead rely on the user to type more.",
           "position": "inner",
           "side": "bottom",
         },
+        "content": Object {
+          "pad": Object {
+            "bottom": "small",
+            "horizontal": "small",
+          },
+        },
         "error": Object {
           "color": Object {
             "dark": "status-critical",
             "light": "status-critical",
+          },
+          "margin": Object {
+            "horizontal": "small",
+            "vertical": "xsmall",
           },
         },
         "help": Object {
@@ -2105,8 +2345,19 @@ suggestions and instead rely on the user to type more.",
             "dark": "dark-3",
             "light": "dark-3",
           },
+          "margin": Object {
+            "left": "small",
+          },
         },
-        "label": Object {},
+        "label": Object {
+          "margin": Object {
+            "horizontal": "small",
+            "vertical": "xsmall",
+          },
+        },
+        "margin": Object {
+          "bottom": "small",
+        },
       },
       "global": Object {
         "animation": Object {
@@ -2221,6 +2472,9 @@ suggestions and instead rely on the user to type more.",
             "radius": "4px",
             "width": "1px",
           },
+          "disabled": Object {
+            "opacity": 0.3,
+          },
         },
         "debounceDelay": 300,
         "deviceBreakpoints": Object {
@@ -2232,7 +2486,6 @@ suggestions and instead rely on the user to type more.",
           "background": "#ffffff",
           "border": Object {
             "radius": "0px",
-            "width": "0px",
           },
           "shadowSize": "small",
           "zIndex": "20",
@@ -2375,9 +2628,9 @@ suggestions and instead rely on the user to type more.",
               "size": "34px",
             },
             "medium": Object {
-              "height": "28px",
-              "maxWidth": "528px",
-              "size": "22px",
+              "height": "32px",
+              "maxWidth": "624px",
+              "size": "26px",
             },
             "small": Object {
               "height": "28px",
@@ -2413,6 +2666,52 @@ suggestions and instead rely on the user to type more.",
               "size": "18px",
             },
           },
+          "5": Object {
+            "font": Object {},
+            "large": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "medium": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "small": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "xlarge": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+          },
+          "6": Object {
+            "font": Object {},
+            "large": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "medium": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "small": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "xlarge": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+          },
         },
         "responsiveBreakpoint": "small",
         "weight": 600,
@@ -2439,10 +2738,14 @@ suggestions and instead rely on the user to type more.",
         "responsiveBreakpoint": "small",
         "zIndex": "10",
       },
+      "maskedInput": Object {},
       "menu": Object {
         "icons": Object {
           "down": [Function],
         },
+      },
+      "meter": Object {
+        "color": "accent-1",
       },
       "paragraph": Object {
         "large": Object {
@@ -2505,11 +2808,27 @@ suggestions and instead rely on the user to type more.",
           "height": "4px",
         },
       },
+      "rangeSelector": Object {
+        "background": Object {
+          "invert": Object {
+            "color": "light-4",
+          },
+        },
+      },
       "select": Object {
         "container": Object {},
         "control": Object {},
         "icons": Object {
           "down": [Function],
+        },
+        "options": Object {
+          "box": Object {
+            "align": "start",
+            "pad": "small",
+          },
+          "text": Object {
+            "margin": "none",
+          },
         },
         "step": 20,
       },
@@ -2617,6 +2936,8 @@ suggestions and instead rely on the user to type more.",
           "size": "34px",
         },
       },
+      "textArea": Object {},
+      "textInput": Object {},
       "video": Object {
         "captions": Object {
           "background": "rgba(0, 0, 0, 0.7)",
@@ -2629,6 +2950,9 @@ suggestions and instead rely on the user to type more.",
           "play": [Function],
           "reduceVolume": [Function],
           "volume": [Function],
+        },
+        "scrubber": Object {
+          "color": "light-4",
         },
       },
       "worldMap": Object {
@@ -2673,7 +2997,7 @@ exports[`Error Input should render correctly 1`] = `
           "url": "https://codesandbox.io/s/github/grommet/grommet-sandbox?initialpath=textinput&module=%2Fsrc%2FTextInput.js",
         },
       ],
-      "description": "A text input field with optional suggestions.",
+      "description": "A control to input a single line of text, with optional suggestions.",
       "intrinsicElement": "input",
       "name": "TextInput",
       "properties": Array [
@@ -2700,11 +3024,26 @@ exports[`Error Input should render correctly 1`] = `
           "name": "dropAlign",
         },
         Object {
+          "description": "The height of the drop container.",
+          "format": "xsmall
+small
+medium
+large
+xlarge
+string",
+          "name": "dropHeight",
+        },
+        Object {
           "description": "Target where any suggestions drop will be aligned to. This should be
       a React reference. Typically, this is not required as the drop will be
       aligned to the TextInput itself by default.",
           "format": "object",
           "name": "dropTarget",
+        },
+        Object {
+          "description": "Any valid Drop prop.",
+          "format": "object",
+          "name": "dropProps",
         },
         Object {
           "description": "The id attribute of the input.",
@@ -2793,7 +3132,8 @@ suggestions and instead rely on the user to type more.",
         },
         Object {
           "description": "What text to put in the input.",
-          "format": "string",
+          "format": "string
+number",
           "name": "value",
         },
       ],
@@ -2813,6 +3153,13 @@ suggestions and instead rely on the user to type more.",
   theme={
     Object {
       "accordion": Object {
+        "border": Object {
+          "color": "border",
+          "side": "bottom",
+        },
+        "heading": Object {
+          "level": "4",
+        },
         "icons": Object {
           "collapse": [Function],
           "expand": [Function],
@@ -2837,11 +3184,6 @@ suggestions and instead rely on the user to type more.",
           "radius": "18px",
           "width": "2px",
         },
-        "disabled": Object {
-          "opacity": 0.3,
-        },
-        "maxWidth": "384px",
-        "minWidth": "96px",
         "padding": Object {
           "horizontal": "22px",
           "vertical": "4px",
@@ -2883,6 +3225,7 @@ suggestions and instead rely on the user to type more.",
           "previous": [Function],
         },
       },
+      "chart": Object {},
       "checkBox": Object {
         "border": Object {
           "color": Object {
@@ -3019,6 +3362,11 @@ suggestions and instead rely on the user to type more.",
           },
         },
       },
+      "diagram": Object {
+        "line": Object {
+          "color": "accent-1",
+        },
+      },
       "formField": Object {
         "border": Object {
           "color": "border",
@@ -3031,10 +3379,20 @@ suggestions and instead rely on the user to type more.",
           "position": "inner",
           "side": "bottom",
         },
+        "content": Object {
+          "pad": Object {
+            "bottom": "small",
+            "horizontal": "small",
+          },
+        },
         "error": Object {
           "color": Object {
             "dark": "status-critical",
             "light": "status-critical",
+          },
+          "margin": Object {
+            "horizontal": "small",
+            "vertical": "xsmall",
           },
         },
         "help": Object {
@@ -3042,8 +3400,19 @@ suggestions and instead rely on the user to type more.",
             "dark": "dark-3",
             "light": "dark-3",
           },
+          "margin": Object {
+            "left": "small",
+          },
         },
-        "label": Object {},
+        "label": Object {
+          "margin": Object {
+            "horizontal": "small",
+            "vertical": "xsmall",
+          },
+        },
+        "margin": Object {
+          "bottom": "small",
+        },
       },
       "global": Object {
         "animation": Object {
@@ -3158,6 +3527,9 @@ suggestions and instead rely on the user to type more.",
             "radius": "4px",
             "width": "1px",
           },
+          "disabled": Object {
+            "opacity": 0.3,
+          },
         },
         "debounceDelay": 300,
         "deviceBreakpoints": Object {
@@ -3169,7 +3541,6 @@ suggestions and instead rely on the user to type more.",
           "background": "#ffffff",
           "border": Object {
             "radius": "0px",
-            "width": "0px",
           },
           "shadowSize": "small",
           "zIndex": "20",
@@ -3312,9 +3683,9 @@ suggestions and instead rely on the user to type more.",
               "size": "34px",
             },
             "medium": Object {
-              "height": "28px",
-              "maxWidth": "528px",
-              "size": "22px",
+              "height": "32px",
+              "maxWidth": "624px",
+              "size": "26px",
             },
             "small": Object {
               "height": "28px",
@@ -3350,6 +3721,52 @@ suggestions and instead rely on the user to type more.",
               "size": "18px",
             },
           },
+          "5": Object {
+            "font": Object {},
+            "large": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "medium": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "small": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "xlarge": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+          },
+          "6": Object {
+            "font": Object {},
+            "large": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "medium": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "small": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "xlarge": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+          },
         },
         "responsiveBreakpoint": "small",
         "weight": 600,
@@ -3376,10 +3793,14 @@ suggestions and instead rely on the user to type more.",
         "responsiveBreakpoint": "small",
         "zIndex": "10",
       },
+      "maskedInput": Object {},
       "menu": Object {
         "icons": Object {
           "down": [Function],
         },
+      },
+      "meter": Object {
+        "color": "accent-1",
       },
       "paragraph": Object {
         "large": Object {
@@ -3442,11 +3863,27 @@ suggestions and instead rely on the user to type more.",
           "height": "4px",
         },
       },
+      "rangeSelector": Object {
+        "background": Object {
+          "invert": Object {
+            "color": "light-4",
+          },
+        },
+      },
       "select": Object {
         "container": Object {},
         "control": Object {},
         "icons": Object {
           "down": [Function],
+        },
+        "options": Object {
+          "box": Object {
+            "align": "start",
+            "pad": "small",
+          },
+          "text": Object {
+            "margin": "none",
+          },
         },
         "step": 20,
       },
@@ -3554,6 +3991,8 @@ suggestions and instead rely on the user to type more.",
           "size": "34px",
         },
       },
+      "textArea": Object {},
+      "textInput": Object {},
       "video": Object {
         "captions": Object {
           "background": "rgba(0, 0, 0, 0.7)",
@@ -3566,6 +4005,9 @@ suggestions and instead rely on the user to type more.",
           "play": [Function],
           "reduceVolume": [Function],
           "volume": [Function],
+        },
+        "scrubber": Object {
+          "color": "light-4",
         },
       },
       "worldMap": Object {
@@ -3680,7 +4122,10 @@ exports[`FieldRow styles should be consistent 1`] = `
           "url": "https://codesandbox.io/s/github/grommet/grommet-sandbox?initialpath=box&module=%2Fsrc%2FBox.js",
         },
       ],
-      "description": "A flexible box that lays out its contents along a single direction.",
+      "description": "A container that lays out its contents in one direction. Box
+      provides CSS flexbox capabilities for layout, as well as general
+      styling of things like background color, border, and animation.",
+      "intrinsicElement": "div",
       "name": "Box",
       "properties": Array [
         Object {
@@ -3876,6 +4321,14 @@ zoomOut
     medium
     strong
     boolean,
+  repeat: 
+    no-repeat
+    repeat
+    string,
+  size: 
+    cover
+    contain
+    string,
   light: string
 }",
           "name": "background",
@@ -3888,6 +4341,7 @@ small
 medium
 large
 xlarge
+xxlarge
 full
 1/2
 1/3
@@ -3930,7 +4384,17 @@ all
     medium
     large
     xlarge
-    string
+    string,
+  style: 
+    solid
+    dashed
+    dotted
+    double
+    groove
+    ridge
+    inset
+    outset
+    hidden
 }",
           "name": "border",
         },
@@ -3939,7 +4403,9 @@ all
           "description": "The orientation to layout the child components in.",
           "format": "row
 column
-row-responsive",
+row-responsive
+row-reverse
+column-reverse",
           "name": "direction",
         },
         Object {
@@ -3956,10 +4422,14 @@ string",
           "name": "elevation",
         },
         Object {
-          "description": "Whether flex-grow and/or flex-shrink is true.",
+          "description": "Whether flex-grow and/or flex-shrink is true and at a desired factor.",
           "format": "grow
 shrink
-boolean",
+boolean
+{
+  grow: number,
+  shrink: number
+}",
           "name": "flex",
         },
         Object {
@@ -3973,7 +4443,8 @@ boolean",
           "description": "The amount of spacing between child elements. This
         should not be used in conjunction with 'wrap' as the gap elements
         will not wrap gracefully.",
-          "format": "xsmall
+          "format": "xxsmall
+xsmall
 small
 medium
 large
@@ -3983,20 +4454,26 @@ string",
         },
         Object {
           "description": "A fixed height.",
-          "format": "xsmall
+          "format": "xxsmall
+xsmall
 small
 medium
 large
 xlarge
+xxlarge
 string",
           "name": "height",
         },
         Object {
+          "defaultValue": "stretch",
           "description": "How to align the contents along the main axis.",
-          "format": "start
-center
+          "format": "around
 between
-end",
+center
+end
+evenly
+start
+stretch",
           "name": "justify",
         },
         Object {
@@ -4126,22 +4603,26 @@ string
         Object {
           "description": "The DOM tag to use for the element. NOTE: This is deprecated in favor
 of indicating the DOM tag via the 'as' property.",
-          "format": "string",
+          "format": "string
+function",
           "name": "tag",
         },
         Object {
           "defaultValue": "div",
-          "description": "The DOM tag to use for the element.",
-          "format": "string",
+          "description": "The DOM tag or react component to use for the element.",
+          "format": "string
+function",
           "name": "as",
         },
         Object {
           "description": "A fixed width.",
-          "format": "xsmall
+          "format": "xxsmall
+xsmall
 small
 medium
 large
 xlarge
+xxlarge
 string",
           "name": "width",
         },
@@ -4164,6 +4645,13 @@ string",
   theme={
     Object {
       "accordion": Object {
+        "border": Object {
+          "color": "border",
+          "side": "bottom",
+        },
+        "heading": Object {
+          "level": "4",
+        },
         "icons": Object {
           "collapse": [Function],
           "expand": [Function],
@@ -4188,11 +4676,6 @@ string",
           "radius": "18px",
           "width": "2px",
         },
-        "disabled": Object {
-          "opacity": 0.3,
-        },
-        "maxWidth": "384px",
-        "minWidth": "96px",
         "padding": Object {
           "horizontal": "22px",
           "vertical": "4px",
@@ -4234,6 +4717,7 @@ string",
           "previous": [Function],
         },
       },
+      "chart": Object {},
       "checkBox": Object {
         "border": Object {
           "color": Object {
@@ -4370,6 +4854,11 @@ string",
           },
         },
       },
+      "diagram": Object {
+        "line": Object {
+          "color": "accent-1",
+        },
+      },
       "formField": Object {
         "border": Object {
           "color": "border",
@@ -4382,10 +4871,20 @@ string",
           "position": "inner",
           "side": "bottom",
         },
+        "content": Object {
+          "pad": Object {
+            "bottom": "small",
+            "horizontal": "small",
+          },
+        },
         "error": Object {
           "color": Object {
             "dark": "status-critical",
             "light": "status-critical",
+          },
+          "margin": Object {
+            "horizontal": "small",
+            "vertical": "xsmall",
           },
         },
         "help": Object {
@@ -4393,8 +4892,19 @@ string",
             "dark": "dark-3",
             "light": "dark-3",
           },
+          "margin": Object {
+            "left": "small",
+          },
         },
-        "label": Object {},
+        "label": Object {
+          "margin": Object {
+            "horizontal": "small",
+            "vertical": "xsmall",
+          },
+        },
+        "margin": Object {
+          "bottom": "small",
+        },
       },
       "global": Object {
         "animation": Object {
@@ -4509,6 +5019,9 @@ string",
             "radius": "4px",
             "width": "1px",
           },
+          "disabled": Object {
+            "opacity": 0.3,
+          },
         },
         "debounceDelay": 300,
         "deviceBreakpoints": Object {
@@ -4520,7 +5033,6 @@ string",
           "background": "#ffffff",
           "border": Object {
             "radius": "0px",
-            "width": "0px",
           },
           "shadowSize": "small",
           "zIndex": "20",
@@ -4663,9 +5175,9 @@ string",
               "size": "34px",
             },
             "medium": Object {
-              "height": "28px",
-              "maxWidth": "528px",
-              "size": "22px",
+              "height": "32px",
+              "maxWidth": "624px",
+              "size": "26px",
             },
             "small": Object {
               "height": "28px",
@@ -4701,6 +5213,52 @@ string",
               "size": "18px",
             },
           },
+          "5": Object {
+            "font": Object {},
+            "large": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "medium": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "small": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "xlarge": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+          },
+          "6": Object {
+            "font": Object {},
+            "large": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "medium": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "small": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "xlarge": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+          },
         },
         "responsiveBreakpoint": "small",
         "weight": 600,
@@ -4727,10 +5285,14 @@ string",
         "responsiveBreakpoint": "small",
         "zIndex": "10",
       },
+      "maskedInput": Object {},
       "menu": Object {
         "icons": Object {
           "down": [Function],
         },
+      },
+      "meter": Object {
+        "color": "accent-1",
       },
       "paragraph": Object {
         "large": Object {
@@ -4793,11 +5355,27 @@ string",
           "height": "4px",
         },
       },
+      "rangeSelector": Object {
+        "background": Object {
+          "invert": Object {
+            "color": "light-4",
+          },
+        },
+      },
       "select": Object {
         "container": Object {},
         "control": Object {},
         "icons": Object {
           "down": [Function],
+        },
+        "options": Object {
+          "box": Object {
+            "align": "start",
+            "pad": "small",
+          },
+          "text": Object {
+            "margin": "none",
+          },
         },
         "step": 20,
       },
@@ -4905,6 +5483,8 @@ string",
           "size": "34px",
         },
       },
+      "textArea": Object {},
+      "textInput": Object {},
       "video": Object {
         "captions": Object {
           "background": "rgba(0, 0, 0, 0.7)",
@@ -4917,6 +5497,9 @@ string",
           "play": [Function],
           "reduceVolume": [Function],
           "volume": [Function],
+        },
+        "scrubber": Object {
+          "color": "light-4",
         },
       },
       "worldMap": Object {
@@ -4960,7 +5543,7 @@ exports[`Input styles should be consistent 1`] = `
           "url": "https://codesandbox.io/s/github/grommet/grommet-sandbox?initialpath=textinput&module=%2Fsrc%2FTextInput.js",
         },
       ],
-      "description": "A text input field with optional suggestions.",
+      "description": "A control to input a single line of text, with optional suggestions.",
       "intrinsicElement": "input",
       "name": "TextInput",
       "properties": Array [
@@ -4987,11 +5570,26 @@ exports[`Input styles should be consistent 1`] = `
           "name": "dropAlign",
         },
         Object {
+          "description": "The height of the drop container.",
+          "format": "xsmall
+small
+medium
+large
+xlarge
+string",
+          "name": "dropHeight",
+        },
+        Object {
           "description": "Target where any suggestions drop will be aligned to. This should be
       a React reference. Typically, this is not required as the drop will be
       aligned to the TextInput itself by default.",
           "format": "object",
           "name": "dropTarget",
+        },
+        Object {
+          "description": "Any valid Drop prop.",
+          "format": "object",
+          "name": "dropProps",
         },
         Object {
           "description": "The id attribute of the input.",
@@ -5080,7 +5678,8 @@ suggestions and instead rely on the user to type more.",
         },
         Object {
           "description": "What text to put in the input.",
-          "format": "string",
+          "format": "string
+number",
           "name": "value",
         },
       ],
@@ -5100,6 +5699,13 @@ suggestions and instead rely on the user to type more.",
   theme={
     Object {
       "accordion": Object {
+        "border": Object {
+          "color": "border",
+          "side": "bottom",
+        },
+        "heading": Object {
+          "level": "4",
+        },
         "icons": Object {
           "collapse": [Function],
           "expand": [Function],
@@ -5124,11 +5730,6 @@ suggestions and instead rely on the user to type more.",
           "radius": "18px",
           "width": "2px",
         },
-        "disabled": Object {
-          "opacity": 0.3,
-        },
-        "maxWidth": "384px",
-        "minWidth": "96px",
         "padding": Object {
           "horizontal": "22px",
           "vertical": "4px",
@@ -5170,6 +5771,7 @@ suggestions and instead rely on the user to type more.",
           "previous": [Function],
         },
       },
+      "chart": Object {},
       "checkBox": Object {
         "border": Object {
           "color": Object {
@@ -5306,6 +5908,11 @@ suggestions and instead rely on the user to type more.",
           },
         },
       },
+      "diagram": Object {
+        "line": Object {
+          "color": "accent-1",
+        },
+      },
       "formField": Object {
         "border": Object {
           "color": "border",
@@ -5318,10 +5925,20 @@ suggestions and instead rely on the user to type more.",
           "position": "inner",
           "side": "bottom",
         },
+        "content": Object {
+          "pad": Object {
+            "bottom": "small",
+            "horizontal": "small",
+          },
+        },
         "error": Object {
           "color": Object {
             "dark": "status-critical",
             "light": "status-critical",
+          },
+          "margin": Object {
+            "horizontal": "small",
+            "vertical": "xsmall",
           },
         },
         "help": Object {
@@ -5329,8 +5946,19 @@ suggestions and instead rely on the user to type more.",
             "dark": "dark-3",
             "light": "dark-3",
           },
+          "margin": Object {
+            "left": "small",
+          },
         },
-        "label": Object {},
+        "label": Object {
+          "margin": Object {
+            "horizontal": "small",
+            "vertical": "xsmall",
+          },
+        },
+        "margin": Object {
+          "bottom": "small",
+        },
       },
       "global": Object {
         "animation": Object {
@@ -5445,6 +6073,9 @@ suggestions and instead rely on the user to type more.",
             "radius": "4px",
             "width": "1px",
           },
+          "disabled": Object {
+            "opacity": 0.3,
+          },
         },
         "debounceDelay": 300,
         "deviceBreakpoints": Object {
@@ -5456,7 +6087,6 @@ suggestions and instead rely on the user to type more.",
           "background": "#ffffff",
           "border": Object {
             "radius": "0px",
-            "width": "0px",
           },
           "shadowSize": "small",
           "zIndex": "20",
@@ -5599,9 +6229,9 @@ suggestions and instead rely on the user to type more.",
               "size": "34px",
             },
             "medium": Object {
-              "height": "28px",
-              "maxWidth": "528px",
-              "size": "22px",
+              "height": "32px",
+              "maxWidth": "624px",
+              "size": "26px",
             },
             "small": Object {
               "height": "28px",
@@ -5637,6 +6267,52 @@ suggestions and instead rely on the user to type more.",
               "size": "18px",
             },
           },
+          "5": Object {
+            "font": Object {},
+            "large": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "medium": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "small": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "xlarge": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+          },
+          "6": Object {
+            "font": Object {},
+            "large": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "medium": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "small": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "xlarge": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+          },
         },
         "responsiveBreakpoint": "small",
         "weight": 600,
@@ -5663,10 +6339,14 @@ suggestions and instead rely on the user to type more.",
         "responsiveBreakpoint": "small",
         "zIndex": "10",
       },
+      "maskedInput": Object {},
       "menu": Object {
         "icons": Object {
           "down": [Function],
         },
+      },
+      "meter": Object {
+        "color": "accent-1",
       },
       "paragraph": Object {
         "large": Object {
@@ -5729,11 +6409,27 @@ suggestions and instead rely on the user to type more.",
           "height": "4px",
         },
       },
+      "rangeSelector": Object {
+        "background": Object {
+          "invert": Object {
+            "color": "light-4",
+          },
+        },
+      },
       "select": Object {
         "container": Object {},
         "control": Object {},
         "icons": Object {
           "down": [Function],
+        },
+        "options": Object {
+          "box": Object {
+            "align": "start",
+            "pad": "small",
+          },
+          "text": Object {
+            "margin": "none",
+          },
         },
         "step": 20,
       },
@@ -5841,6 +6537,8 @@ suggestions and instead rely on the user to type more.",
           "size": "34px",
         },
       },
+      "textArea": Object {},
+      "textInput": Object {},
       "video": Object {
         "captions": Object {
           "background": "rgba(0, 0, 0, 0.7)",
@@ -5853,6 +6551,9 @@ suggestions and instead rely on the user to type more.",
           "play": [Function],
           "reduceVolume": [Function],
           "volume": [Function],
+        },
+        "scrubber": Object {
+          "color": "light-4",
         },
       },
       "worldMap": Object {
