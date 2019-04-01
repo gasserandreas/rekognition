@@ -179,6 +179,7 @@ describe('auth: complex action test suite', () => {
   
       const expectedActions = [
         __testables__.authLogOut(message),
+        reduxApplication.appReset(),
       ];
 
       // set localStorage and sessionStorage

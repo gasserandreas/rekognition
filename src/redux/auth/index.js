@@ -9,7 +9,7 @@ import hocReducer, { hocAsyncAction, hocCreateTypes  } from '../HOC';
 
 import { authRememberSelector, authUsernameSelector } from './selectors';
 
-import { loadApplicationAuthenticated } from '../application';
+import { loadApplicationAuthenticated, appReset } from '../application';
 
 // action def
 export const AUTH_LOG_IN = 'AUTH_LOG_IN';
@@ -100,6 +100,9 @@ export const logOutUser = (message, broadcast = true) => (dispatch) => {
 
   // fire logout action
   dispatch(authLogOut(message));
+
+  // clear state
+  dispatch(appReset());
 
   // clean up state
   try {

@@ -21,12 +21,17 @@ export const AppStatus = {
 
 // action types
 export const APP_IDLE = 'APP_IDLE';
+export const APP_RESET = 'APP_RESET';
 
 const APPLICATION_STATUS_SET = 'APPLICATION_STATUS_SET';
 
 // simple actions
 export const appIdle = () => ({
   type: APP_IDLE,
+});
+
+export const appReset = () => ({
+  type: APP_RESET,
 });
 
 const applicationWillLoad = () => ({
