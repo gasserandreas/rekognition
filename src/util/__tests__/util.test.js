@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 import * as util from '../util';
 import { getUrl } from '../services/networkUtils';
 
@@ -19,8 +21,9 @@ it('should return correct thumb image src', () => {
 });
 
 it('should return correct image creation date time', () => {
-  const dateTime = '9 Feb 2019 - 09:02:73';
-  expect(util.getImageCreationDateTime(dateString)).toEqual(dateTime);
+  const format = 'D MMM YYYY - HH:MM:SS';
+  expect(util.getImageCreationDateTime(dateString))
+    .toEqual(moment(dateString).format(format));
 });
 
 it('should return default formated date string', () => {
