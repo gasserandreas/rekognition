@@ -20,6 +20,17 @@ const mockedData = {
 
 // simple action tests
 describe('auth: simple action test suite', () => {
+  let dateNowMock;
+
+  beforeAll(() => {
+    const now = Date.now();
+    dateNowMock = jest.spyOn(Date, 'now').mockImplementation(() => now);
+  });
+
+  afterAll(() => {
+    dateNowMock.mockRestore();
+  });
+
   it('should return authLogin object', () => {
     const { remember, username } = mockedData;
 
@@ -34,7 +45,7 @@ describe('auth: simple action test suite', () => {
     });
     
     // check loggedInSince timer
-    expect(Date.now() - loggedInSince < 10).toBeTruthy();
+    expect(Date.now()).toEqual(loggedInSince);
   });
 
   it('should return authLogOut object', () => {

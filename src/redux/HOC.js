@@ -124,7 +124,6 @@ export default ({
           loading: false,
         };
       default:
-        // console.log(state);
         return state;
     }
   };

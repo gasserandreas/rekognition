@@ -18,7 +18,10 @@ exports[`Button should render correctly 1`] = `
           "url": "https://codesandbox.io/s/github/grommet/grommet-sandbox?initialpath=button&module=%2Fsrc%2FButton.js",
         },
       ],
-      "description": "A button. We have a separate component from the browser base so we can style it.",
+      "description": "A button.",
+      "details": "You can provide a single function child that will be called with
+      'hover' and 'focus' keys. This allows you to customize the rendering
+      of the Button in those cases.",
       "intrinsicElement": "button",
       "name": "Button",
       "properties": Array [
@@ -178,7 +181,9 @@ causes the Button to be disabled.",
         },
         Object {
           "defaultValue": false,
-          "description": "Whether this is a plain button with no border or padding.",
+          "description": "Whether this is a plain button with no border or pad. 
+Non plain button will show both pad and border. 
+The plain button has no border and unless the icon prop exist it has no pad as well.",
           "format": "boolean",
           "name": "plain",
         },
@@ -204,8 +209,9 @@ submit",
           "name": "type",
         },
         Object {
-          "description": "The DOM tag to use for the element.",
-          "format": "string",
+          "description": "The DOM tag or react component to use for the element.",
+          "format": "string
+function",
           "name": "as",
         },
       ],
@@ -217,6 +223,13 @@ submit",
   theme={
     Object {
       "accordion": Object {
+        "border": Object {
+          "color": "border",
+          "side": "bottom",
+        },
+        "heading": Object {
+          "level": "4",
+        },
         "icons": Object {
           "collapse": [Function],
           "expand": [Function],
@@ -241,11 +254,6 @@ submit",
           "radius": "18px",
           "width": "2px",
         },
-        "disabled": Object {
-          "opacity": 0.3,
-        },
-        "maxWidth": "384px",
-        "minWidth": "96px",
         "padding": Object {
           "horizontal": "22px",
           "vertical": "4px",
@@ -287,6 +295,7 @@ submit",
           "previous": [Function],
         },
       },
+      "chart": Object {},
       "checkBox": Object {
         "border": Object {
           "color": Object {
@@ -423,6 +432,11 @@ submit",
           },
         },
       },
+      "diagram": Object {
+        "line": Object {
+          "color": "accent-1",
+        },
+      },
       "formField": Object {
         "border": Object {
           "color": "border",
@@ -435,10 +449,20 @@ submit",
           "position": "inner",
           "side": "bottom",
         },
+        "content": Object {
+          "pad": Object {
+            "bottom": "small",
+            "horizontal": "small",
+          },
+        },
         "error": Object {
           "color": Object {
             "dark": "status-critical",
             "light": "status-critical",
+          },
+          "margin": Object {
+            "horizontal": "small",
+            "vertical": "xsmall",
           },
         },
         "help": Object {
@@ -446,8 +470,19 @@ submit",
             "dark": "dark-3",
             "light": "dark-3",
           },
+          "margin": Object {
+            "left": "small",
+          },
         },
-        "label": Object {},
+        "label": Object {
+          "margin": Object {
+            "horizontal": "small",
+            "vertical": "xsmall",
+          },
+        },
+        "margin": Object {
+          "bottom": "small",
+        },
       },
       "global": Object {
         "animation": Object {
@@ -562,6 +597,9 @@ submit",
             "radius": "4px",
             "width": "1px",
           },
+          "disabled": Object {
+            "opacity": 0.3,
+          },
         },
         "debounceDelay": 300,
         "deviceBreakpoints": Object {
@@ -573,7 +611,6 @@ submit",
           "background": "#ffffff",
           "border": Object {
             "radius": "0px",
-            "width": "0px",
           },
           "shadowSize": "small",
           "zIndex": "20",
@@ -716,9 +753,9 @@ submit",
               "size": "34px",
             },
             "medium": Object {
-              "height": "28px",
-              "maxWidth": "528px",
-              "size": "22px",
+              "height": "32px",
+              "maxWidth": "624px",
+              "size": "26px",
             },
             "small": Object {
               "height": "28px",
@@ -754,6 +791,52 @@ submit",
               "size": "18px",
             },
           },
+          "5": Object {
+            "font": Object {},
+            "large": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "medium": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "small": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "xlarge": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+          },
+          "6": Object {
+            "font": Object {},
+            "large": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "medium": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "small": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "xlarge": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+          },
         },
         "responsiveBreakpoint": "small",
         "weight": 600,
@@ -780,10 +863,14 @@ submit",
         "responsiveBreakpoint": "small",
         "zIndex": "10",
       },
+      "maskedInput": Object {},
       "menu": Object {
         "icons": Object {
           "down": [Function],
         },
+      },
+      "meter": Object {
+        "color": "accent-1",
       },
       "paragraph": Object {
         "large": Object {
@@ -846,11 +933,27 @@ submit",
           "height": "4px",
         },
       },
+      "rangeSelector": Object {
+        "background": Object {
+          "invert": Object {
+            "color": "light-4",
+          },
+        },
+      },
       "select": Object {
         "container": Object {},
         "control": Object {},
         "icons": Object {
           "down": [Function],
+        },
+        "options": Object {
+          "box": Object {
+            "align": "start",
+            "pad": "small",
+          },
+          "text": Object {
+            "margin": "none",
+          },
         },
         "step": 20,
       },
@@ -958,6 +1061,8 @@ submit",
           "size": "34px",
         },
       },
+      "textArea": Object {},
+      "textInput": Object {},
       "video": Object {
         "captions": Object {
           "background": "rgba(0, 0, 0, 0.7)",
@@ -970,6 +1075,9 @@ submit",
           "play": [Function],
           "reduceVolume": [Function],
           "volume": [Function],
+        },
+        "scrubber": Object {
+          "color": "light-4",
         },
       },
       "worldMap": Object {
@@ -1012,7 +1120,10 @@ exports[`Button should render error styles 1`] = `
           "url": "https://codesandbox.io/s/github/grommet/grommet-sandbox?initialpath=button&module=%2Fsrc%2FButton.js",
         },
       ],
-      "description": "A button. We have a separate component from the browser base so we can style it.",
+      "description": "A button.",
+      "details": "You can provide a single function child that will be called with
+      'hover' and 'focus' keys. This allows you to customize the rendering
+      of the Button in those cases.",
       "intrinsicElement": "button",
       "name": "Button",
       "properties": Array [
@@ -1172,7 +1283,9 @@ causes the Button to be disabled.",
         },
         Object {
           "defaultValue": false,
-          "description": "Whether this is a plain button with no border or padding.",
+          "description": "Whether this is a plain button with no border or pad. 
+Non plain button will show both pad and border. 
+The plain button has no border and unless the icon prop exist it has no pad as well.",
           "format": "boolean",
           "name": "plain",
         },
@@ -1198,8 +1311,9 @@ submit",
           "name": "type",
         },
         Object {
-          "description": "The DOM tag to use for the element.",
-          "format": "string",
+          "description": "The DOM tag or react component to use for the element.",
+          "format": "string
+function",
           "name": "as",
         },
       ],
@@ -1211,6 +1325,13 @@ submit",
   theme={
     Object {
       "accordion": Object {
+        "border": Object {
+          "color": "border",
+          "side": "bottom",
+        },
+        "heading": Object {
+          "level": "4",
+        },
         "icons": Object {
           "collapse": [Function],
           "expand": [Function],
@@ -1235,11 +1356,6 @@ submit",
           "radius": "18px",
           "width": "2px",
         },
-        "disabled": Object {
-          "opacity": 0.3,
-        },
-        "maxWidth": "384px",
-        "minWidth": "96px",
         "padding": Object {
           "horizontal": "22px",
           "vertical": "4px",
@@ -1281,6 +1397,7 @@ submit",
           "previous": [Function],
         },
       },
+      "chart": Object {},
       "checkBox": Object {
         "border": Object {
           "color": Object {
@@ -1417,6 +1534,11 @@ submit",
           },
         },
       },
+      "diagram": Object {
+        "line": Object {
+          "color": "accent-1",
+        },
+      },
       "formField": Object {
         "border": Object {
           "color": "border",
@@ -1429,10 +1551,20 @@ submit",
           "position": "inner",
           "side": "bottom",
         },
+        "content": Object {
+          "pad": Object {
+            "bottom": "small",
+            "horizontal": "small",
+          },
+        },
         "error": Object {
           "color": Object {
             "dark": "status-critical",
             "light": "status-critical",
+          },
+          "margin": Object {
+            "horizontal": "small",
+            "vertical": "xsmall",
           },
         },
         "help": Object {
@@ -1440,8 +1572,19 @@ submit",
             "dark": "dark-3",
             "light": "dark-3",
           },
+          "margin": Object {
+            "left": "small",
+          },
         },
-        "label": Object {},
+        "label": Object {
+          "margin": Object {
+            "horizontal": "small",
+            "vertical": "xsmall",
+          },
+        },
+        "margin": Object {
+          "bottom": "small",
+        },
       },
       "global": Object {
         "animation": Object {
@@ -1556,6 +1699,9 @@ submit",
             "radius": "4px",
             "width": "1px",
           },
+          "disabled": Object {
+            "opacity": 0.3,
+          },
         },
         "debounceDelay": 300,
         "deviceBreakpoints": Object {
@@ -1567,7 +1713,6 @@ submit",
           "background": "#ffffff",
           "border": Object {
             "radius": "0px",
-            "width": "0px",
           },
           "shadowSize": "small",
           "zIndex": "20",
@@ -1710,9 +1855,9 @@ submit",
               "size": "34px",
             },
             "medium": Object {
-              "height": "28px",
-              "maxWidth": "528px",
-              "size": "22px",
+              "height": "32px",
+              "maxWidth": "624px",
+              "size": "26px",
             },
             "small": Object {
               "height": "28px",
@@ -1748,6 +1893,52 @@ submit",
               "size": "18px",
             },
           },
+          "5": Object {
+            "font": Object {},
+            "large": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "medium": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "small": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "xlarge": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+          },
+          "6": Object {
+            "font": Object {},
+            "large": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "medium": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "small": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "xlarge": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+          },
         },
         "responsiveBreakpoint": "small",
         "weight": 600,
@@ -1774,10 +1965,14 @@ submit",
         "responsiveBreakpoint": "small",
         "zIndex": "10",
       },
+      "maskedInput": Object {},
       "menu": Object {
         "icons": Object {
           "down": [Function],
         },
+      },
+      "meter": Object {
+        "color": "accent-1",
       },
       "paragraph": Object {
         "large": Object {
@@ -1840,11 +2035,27 @@ submit",
           "height": "4px",
         },
       },
+      "rangeSelector": Object {
+        "background": Object {
+          "invert": Object {
+            "color": "light-4",
+          },
+        },
+      },
       "select": Object {
         "container": Object {},
         "control": Object {},
         "icons": Object {
           "down": [Function],
+        },
+        "options": Object {
+          "box": Object {
+            "align": "start",
+            "pad": "small",
+          },
+          "text": Object {
+            "margin": "none",
+          },
         },
         "step": 20,
       },
@@ -1952,6 +2163,8 @@ submit",
           "size": "34px",
         },
       },
+      "textArea": Object {},
+      "textInput": Object {},
       "video": Object {
         "captions": Object {
           "background": "rgba(0, 0, 0, 0.7)",
@@ -1964,6 +2177,9 @@ submit",
           "play": [Function],
           "reduceVolume": [Function],
           "volume": [Function],
+        },
+        "scrubber": Object {
+          "color": "light-4",
         },
       },
       "worldMap": Object {
@@ -2006,7 +2222,10 @@ exports[`Button should render link styles 1`] = `
           "url": "https://codesandbox.io/s/github/grommet/grommet-sandbox?initialpath=button&module=%2Fsrc%2FButton.js",
         },
       ],
-      "description": "A button. We have a separate component from the browser base so we can style it.",
+      "description": "A button.",
+      "details": "You can provide a single function child that will be called with
+      'hover' and 'focus' keys. This allows you to customize the rendering
+      of the Button in those cases.",
       "intrinsicElement": "button",
       "name": "Button",
       "properties": Array [
@@ -2166,7 +2385,9 @@ causes the Button to be disabled.",
         },
         Object {
           "defaultValue": false,
-          "description": "Whether this is a plain button with no border or padding.",
+          "description": "Whether this is a plain button with no border or pad. 
+Non plain button will show both pad and border. 
+The plain button has no border and unless the icon prop exist it has no pad as well.",
           "format": "boolean",
           "name": "plain",
         },
@@ -2192,8 +2413,9 @@ submit",
           "name": "type",
         },
         Object {
-          "description": "The DOM tag to use for the element.",
-          "format": "string",
+          "description": "The DOM tag or react component to use for the element.",
+          "format": "string
+function",
           "name": "as",
         },
       ],
@@ -2205,6 +2427,13 @@ submit",
   theme={
     Object {
       "accordion": Object {
+        "border": Object {
+          "color": "border",
+          "side": "bottom",
+        },
+        "heading": Object {
+          "level": "4",
+        },
         "icons": Object {
           "collapse": [Function],
           "expand": [Function],
@@ -2229,11 +2458,6 @@ submit",
           "radius": "18px",
           "width": "2px",
         },
-        "disabled": Object {
-          "opacity": 0.3,
-        },
-        "maxWidth": "384px",
-        "minWidth": "96px",
         "padding": Object {
           "horizontal": "22px",
           "vertical": "4px",
@@ -2275,6 +2499,7 @@ submit",
           "previous": [Function],
         },
       },
+      "chart": Object {},
       "checkBox": Object {
         "border": Object {
           "color": Object {
@@ -2411,6 +2636,11 @@ submit",
           },
         },
       },
+      "diagram": Object {
+        "line": Object {
+          "color": "accent-1",
+        },
+      },
       "formField": Object {
         "border": Object {
           "color": "border",
@@ -2423,10 +2653,20 @@ submit",
           "position": "inner",
           "side": "bottom",
         },
+        "content": Object {
+          "pad": Object {
+            "bottom": "small",
+            "horizontal": "small",
+          },
+        },
         "error": Object {
           "color": Object {
             "dark": "status-critical",
             "light": "status-critical",
+          },
+          "margin": Object {
+            "horizontal": "small",
+            "vertical": "xsmall",
           },
         },
         "help": Object {
@@ -2434,8 +2674,19 @@ submit",
             "dark": "dark-3",
             "light": "dark-3",
           },
+          "margin": Object {
+            "left": "small",
+          },
         },
-        "label": Object {},
+        "label": Object {
+          "margin": Object {
+            "horizontal": "small",
+            "vertical": "xsmall",
+          },
+        },
+        "margin": Object {
+          "bottom": "small",
+        },
       },
       "global": Object {
         "animation": Object {
@@ -2550,6 +2801,9 @@ submit",
             "radius": "4px",
             "width": "1px",
           },
+          "disabled": Object {
+            "opacity": 0.3,
+          },
         },
         "debounceDelay": 300,
         "deviceBreakpoints": Object {
@@ -2561,7 +2815,6 @@ submit",
           "background": "#ffffff",
           "border": Object {
             "radius": "0px",
-            "width": "0px",
           },
           "shadowSize": "small",
           "zIndex": "20",
@@ -2704,9 +2957,9 @@ submit",
               "size": "34px",
             },
             "medium": Object {
-              "height": "28px",
-              "maxWidth": "528px",
-              "size": "22px",
+              "height": "32px",
+              "maxWidth": "624px",
+              "size": "26px",
             },
             "small": Object {
               "height": "28px",
@@ -2742,6 +2995,52 @@ submit",
               "size": "18px",
             },
           },
+          "5": Object {
+            "font": Object {},
+            "large": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "medium": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "small": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "xlarge": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+          },
+          "6": Object {
+            "font": Object {},
+            "large": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "medium": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "small": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "xlarge": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+          },
         },
         "responsiveBreakpoint": "small",
         "weight": 600,
@@ -2768,10 +3067,14 @@ submit",
         "responsiveBreakpoint": "small",
         "zIndex": "10",
       },
+      "maskedInput": Object {},
       "menu": Object {
         "icons": Object {
           "down": [Function],
         },
+      },
+      "meter": Object {
+        "color": "accent-1",
       },
       "paragraph": Object {
         "large": Object {
@@ -2834,11 +3137,27 @@ submit",
           "height": "4px",
         },
       },
+      "rangeSelector": Object {
+        "background": Object {
+          "invert": Object {
+            "color": "light-4",
+          },
+        },
+      },
       "select": Object {
         "container": Object {},
         "control": Object {},
         "icons": Object {
           "down": [Function],
+        },
+        "options": Object {
+          "box": Object {
+            "align": "start",
+            "pad": "small",
+          },
+          "text": Object {
+            "margin": "none",
+          },
         },
         "step": 20,
       },
@@ -2946,6 +3265,8 @@ submit",
           "size": "34px",
         },
       },
+      "textArea": Object {},
+      "textInput": Object {},
       "video": Object {
         "captions": Object {
           "background": "rgba(0, 0, 0, 0.7)",
@@ -2958,6 +3279,9 @@ submit",
           "play": [Function],
           "reduceVolume": [Function],
           "volume": [Function],
+        },
+        "scrubber": Object {
+          "color": "light-4",
         },
       },
       "worldMap": Object {
@@ -3000,7 +3324,10 @@ exports[`Button should render primary styles 1`] = `
           "url": "https://codesandbox.io/s/github/grommet/grommet-sandbox?initialpath=button&module=%2Fsrc%2FButton.js",
         },
       ],
-      "description": "A button. We have a separate component from the browser base so we can style it.",
+      "description": "A button.",
+      "details": "You can provide a single function child that will be called with
+      'hover' and 'focus' keys. This allows you to customize the rendering
+      of the Button in those cases.",
       "intrinsicElement": "button",
       "name": "Button",
       "properties": Array [
@@ -3160,7 +3487,9 @@ causes the Button to be disabled.",
         },
         Object {
           "defaultValue": false,
-          "description": "Whether this is a plain button with no border or padding.",
+          "description": "Whether this is a plain button with no border or pad. 
+Non plain button will show both pad and border. 
+The plain button has no border and unless the icon prop exist it has no pad as well.",
           "format": "boolean",
           "name": "plain",
         },
@@ -3186,8 +3515,9 @@ submit",
           "name": "type",
         },
         Object {
-          "description": "The DOM tag to use for the element.",
-          "format": "string",
+          "description": "The DOM tag or react component to use for the element.",
+          "format": "string
+function",
           "name": "as",
         },
       ],
@@ -3199,6 +3529,13 @@ submit",
   theme={
     Object {
       "accordion": Object {
+        "border": Object {
+          "color": "border",
+          "side": "bottom",
+        },
+        "heading": Object {
+          "level": "4",
+        },
         "icons": Object {
           "collapse": [Function],
           "expand": [Function],
@@ -3223,11 +3560,6 @@ submit",
           "radius": "18px",
           "width": "2px",
         },
-        "disabled": Object {
-          "opacity": 0.3,
-        },
-        "maxWidth": "384px",
-        "minWidth": "96px",
         "padding": Object {
           "horizontal": "22px",
           "vertical": "4px",
@@ -3269,6 +3601,7 @@ submit",
           "previous": [Function],
         },
       },
+      "chart": Object {},
       "checkBox": Object {
         "border": Object {
           "color": Object {
@@ -3405,6 +3738,11 @@ submit",
           },
         },
       },
+      "diagram": Object {
+        "line": Object {
+          "color": "accent-1",
+        },
+      },
       "formField": Object {
         "border": Object {
           "color": "border",
@@ -3417,10 +3755,20 @@ submit",
           "position": "inner",
           "side": "bottom",
         },
+        "content": Object {
+          "pad": Object {
+            "bottom": "small",
+            "horizontal": "small",
+          },
+        },
         "error": Object {
           "color": Object {
             "dark": "status-critical",
             "light": "status-critical",
+          },
+          "margin": Object {
+            "horizontal": "small",
+            "vertical": "xsmall",
           },
         },
         "help": Object {
@@ -3428,8 +3776,19 @@ submit",
             "dark": "dark-3",
             "light": "dark-3",
           },
+          "margin": Object {
+            "left": "small",
+          },
         },
-        "label": Object {},
+        "label": Object {
+          "margin": Object {
+            "horizontal": "small",
+            "vertical": "xsmall",
+          },
+        },
+        "margin": Object {
+          "bottom": "small",
+        },
       },
       "global": Object {
         "animation": Object {
@@ -3544,6 +3903,9 @@ submit",
             "radius": "4px",
             "width": "1px",
           },
+          "disabled": Object {
+            "opacity": 0.3,
+          },
         },
         "debounceDelay": 300,
         "deviceBreakpoints": Object {
@@ -3555,7 +3917,6 @@ submit",
           "background": "#ffffff",
           "border": Object {
             "radius": "0px",
-            "width": "0px",
           },
           "shadowSize": "small",
           "zIndex": "20",
@@ -3698,9 +4059,9 @@ submit",
               "size": "34px",
             },
             "medium": Object {
-              "height": "28px",
-              "maxWidth": "528px",
-              "size": "22px",
+              "height": "32px",
+              "maxWidth": "624px",
+              "size": "26px",
             },
             "small": Object {
               "height": "28px",
@@ -3736,6 +4097,52 @@ submit",
               "size": "18px",
             },
           },
+          "5": Object {
+            "font": Object {},
+            "large": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "medium": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "small": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "xlarge": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+          },
+          "6": Object {
+            "font": Object {},
+            "large": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "medium": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "small": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "xlarge": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+          },
         },
         "responsiveBreakpoint": "small",
         "weight": 600,
@@ -3762,10 +4169,14 @@ submit",
         "responsiveBreakpoint": "small",
         "zIndex": "10",
       },
+      "maskedInput": Object {},
       "menu": Object {
         "icons": Object {
           "down": [Function],
         },
+      },
+      "meter": Object {
+        "color": "accent-1",
       },
       "paragraph": Object {
         "large": Object {
@@ -3828,11 +4239,27 @@ submit",
           "height": "4px",
         },
       },
+      "rangeSelector": Object {
+        "background": Object {
+          "invert": Object {
+            "color": "light-4",
+          },
+        },
+      },
       "select": Object {
         "container": Object {},
         "control": Object {},
         "icons": Object {
           "down": [Function],
+        },
+        "options": Object {
+          "box": Object {
+            "align": "start",
+            "pad": "small",
+          },
+          "text": Object {
+            "margin": "none",
+          },
         },
         "step": 20,
       },
@@ -3940,6 +4367,8 @@ submit",
           "size": "34px",
         },
       },
+      "textArea": Object {},
+      "textInput": Object {},
       "video": Object {
         "captions": Object {
           "background": "rgba(0, 0, 0, 0.7)",
@@ -3952,6 +4381,9 @@ submit",
           "play": [Function],
           "reduceVolume": [Function],
           "volume": [Function],
+        },
+        "scrubber": Object {
+          "color": "light-4",
         },
       },
       "worldMap": Object {
@@ -3994,7 +4426,10 @@ exports[`Button should render warning styles 1`] = `
           "url": "https://codesandbox.io/s/github/grommet/grommet-sandbox?initialpath=button&module=%2Fsrc%2FButton.js",
         },
       ],
-      "description": "A button. We have a separate component from the browser base so we can style it.",
+      "description": "A button.",
+      "details": "You can provide a single function child that will be called with
+      'hover' and 'focus' keys. This allows you to customize the rendering
+      of the Button in those cases.",
       "intrinsicElement": "button",
       "name": "Button",
       "properties": Array [
@@ -4154,7 +4589,9 @@ causes the Button to be disabled.",
         },
         Object {
           "defaultValue": false,
-          "description": "Whether this is a plain button with no border or padding.",
+          "description": "Whether this is a plain button with no border or pad. 
+Non plain button will show both pad and border. 
+The plain button has no border and unless the icon prop exist it has no pad as well.",
           "format": "boolean",
           "name": "plain",
         },
@@ -4180,8 +4617,9 @@ submit",
           "name": "type",
         },
         Object {
-          "description": "The DOM tag to use for the element.",
-          "format": "string",
+          "description": "The DOM tag or react component to use for the element.",
+          "format": "string
+function",
           "name": "as",
         },
       ],
@@ -4193,6 +4631,13 @@ submit",
   theme={
     Object {
       "accordion": Object {
+        "border": Object {
+          "color": "border",
+          "side": "bottom",
+        },
+        "heading": Object {
+          "level": "4",
+        },
         "icons": Object {
           "collapse": [Function],
           "expand": [Function],
@@ -4217,11 +4662,6 @@ submit",
           "radius": "18px",
           "width": "2px",
         },
-        "disabled": Object {
-          "opacity": 0.3,
-        },
-        "maxWidth": "384px",
-        "minWidth": "96px",
         "padding": Object {
           "horizontal": "22px",
           "vertical": "4px",
@@ -4263,6 +4703,7 @@ submit",
           "previous": [Function],
         },
       },
+      "chart": Object {},
       "checkBox": Object {
         "border": Object {
           "color": Object {
@@ -4399,6 +4840,11 @@ submit",
           },
         },
       },
+      "diagram": Object {
+        "line": Object {
+          "color": "accent-1",
+        },
+      },
       "formField": Object {
         "border": Object {
           "color": "border",
@@ -4411,10 +4857,20 @@ submit",
           "position": "inner",
           "side": "bottom",
         },
+        "content": Object {
+          "pad": Object {
+            "bottom": "small",
+            "horizontal": "small",
+          },
+        },
         "error": Object {
           "color": Object {
             "dark": "status-critical",
             "light": "status-critical",
+          },
+          "margin": Object {
+            "horizontal": "small",
+            "vertical": "xsmall",
           },
         },
         "help": Object {
@@ -4422,8 +4878,19 @@ submit",
             "dark": "dark-3",
             "light": "dark-3",
           },
+          "margin": Object {
+            "left": "small",
+          },
         },
-        "label": Object {},
+        "label": Object {
+          "margin": Object {
+            "horizontal": "small",
+            "vertical": "xsmall",
+          },
+        },
+        "margin": Object {
+          "bottom": "small",
+        },
       },
       "global": Object {
         "animation": Object {
@@ -4538,6 +5005,9 @@ submit",
             "radius": "4px",
             "width": "1px",
           },
+          "disabled": Object {
+            "opacity": 0.3,
+          },
         },
         "debounceDelay": 300,
         "deviceBreakpoints": Object {
@@ -4549,7 +5019,6 @@ submit",
           "background": "#ffffff",
           "border": Object {
             "radius": "0px",
-            "width": "0px",
           },
           "shadowSize": "small",
           "zIndex": "20",
@@ -4692,9 +5161,9 @@ submit",
               "size": "34px",
             },
             "medium": Object {
-              "height": "28px",
-              "maxWidth": "528px",
-              "size": "22px",
+              "height": "32px",
+              "maxWidth": "624px",
+              "size": "26px",
             },
             "small": Object {
               "height": "28px",
@@ -4730,6 +5199,52 @@ submit",
               "size": "18px",
             },
           },
+          "5": Object {
+            "font": Object {},
+            "large": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "medium": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "small": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "xlarge": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+          },
+          "6": Object {
+            "font": Object {},
+            "large": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "medium": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "small": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "xlarge": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+          },
         },
         "responsiveBreakpoint": "small",
         "weight": 600,
@@ -4756,10 +5271,14 @@ submit",
         "responsiveBreakpoint": "small",
         "zIndex": "10",
       },
+      "maskedInput": Object {},
       "menu": Object {
         "icons": Object {
           "down": [Function],
         },
+      },
+      "meter": Object {
+        "color": "accent-1",
       },
       "paragraph": Object {
         "large": Object {
@@ -4822,11 +5341,27 @@ submit",
           "height": "4px",
         },
       },
+      "rangeSelector": Object {
+        "background": Object {
+          "invert": Object {
+            "color": "light-4",
+          },
+        },
+      },
       "select": Object {
         "container": Object {},
         "control": Object {},
         "icons": Object {
           "down": [Function],
+        },
+        "options": Object {
+          "box": Object {
+            "align": "start",
+            "pad": "small",
+          },
+          "text": Object {
+            "margin": "none",
+          },
         },
         "step": 20,
       },
@@ -4934,6 +5469,8 @@ submit",
           "size": "34px",
         },
       },
+      "textArea": Object {},
+      "textInput": Object {},
       "video": Object {
         "captions": Object {
           "background": "rgba(0, 0, 0, 0.7)",
@@ -4946,6 +5483,9 @@ submit",
           "play": [Function],
           "reduceVolume": [Function],
           "volume": [Function],
+        },
+        "scrubber": Object {
+          "color": "light-4",
         },
       },
       "worldMap": Object {
@@ -4987,7 +5527,10 @@ exports[`Button styles should be consistent 1`] = `
           "url": "https://codesandbox.io/s/github/grommet/grommet-sandbox?initialpath=button&module=%2Fsrc%2FButton.js",
         },
       ],
-      "description": "A button. We have a separate component from the browser base so we can style it.",
+      "description": "A button.",
+      "details": "You can provide a single function child that will be called with
+      'hover' and 'focus' keys. This allows you to customize the rendering
+      of the Button in those cases.",
       "intrinsicElement": "button",
       "name": "Button",
       "properties": Array [
@@ -5147,7 +5690,9 @@ causes the Button to be disabled.",
         },
         Object {
           "defaultValue": false,
-          "description": "Whether this is a plain button with no border or padding.",
+          "description": "Whether this is a plain button with no border or pad. 
+Non plain button will show both pad and border. 
+The plain button has no border and unless the icon prop exist it has no pad as well.",
           "format": "boolean",
           "name": "plain",
         },
@@ -5173,8 +5718,9 @@ submit",
           "name": "type",
         },
         Object {
-          "description": "The DOM tag to use for the element.",
-          "format": "string",
+          "description": "The DOM tag or react component to use for the element.",
+          "format": "string
+function",
           "name": "as",
         },
       ],
@@ -5186,6 +5732,13 @@ submit",
   theme={
     Object {
       "accordion": Object {
+        "border": Object {
+          "color": "border",
+          "side": "bottom",
+        },
+        "heading": Object {
+          "level": "4",
+        },
         "icons": Object {
           "collapse": [Function],
           "expand": [Function],
@@ -5210,11 +5763,6 @@ submit",
           "radius": "18px",
           "width": "2px",
         },
-        "disabled": Object {
-          "opacity": 0.3,
-        },
-        "maxWidth": "384px",
-        "minWidth": "96px",
         "padding": Object {
           "horizontal": "22px",
           "vertical": "4px",
@@ -5256,6 +5804,7 @@ submit",
           "previous": [Function],
         },
       },
+      "chart": Object {},
       "checkBox": Object {
         "border": Object {
           "color": Object {
@@ -5392,6 +5941,11 @@ submit",
           },
         },
       },
+      "diagram": Object {
+        "line": Object {
+          "color": "accent-1",
+        },
+      },
       "formField": Object {
         "border": Object {
           "color": "border",
@@ -5404,10 +5958,20 @@ submit",
           "position": "inner",
           "side": "bottom",
         },
+        "content": Object {
+          "pad": Object {
+            "bottom": "small",
+            "horizontal": "small",
+          },
+        },
         "error": Object {
           "color": Object {
             "dark": "status-critical",
             "light": "status-critical",
+          },
+          "margin": Object {
+            "horizontal": "small",
+            "vertical": "xsmall",
           },
         },
         "help": Object {
@@ -5415,8 +5979,19 @@ submit",
             "dark": "dark-3",
             "light": "dark-3",
           },
+          "margin": Object {
+            "left": "small",
+          },
         },
-        "label": Object {},
+        "label": Object {
+          "margin": Object {
+            "horizontal": "small",
+            "vertical": "xsmall",
+          },
+        },
+        "margin": Object {
+          "bottom": "small",
+        },
       },
       "global": Object {
         "animation": Object {
@@ -5531,6 +6106,9 @@ submit",
             "radius": "4px",
             "width": "1px",
           },
+          "disabled": Object {
+            "opacity": 0.3,
+          },
         },
         "debounceDelay": 300,
         "deviceBreakpoints": Object {
@@ -5542,7 +6120,6 @@ submit",
           "background": "#ffffff",
           "border": Object {
             "radius": "0px",
-            "width": "0px",
           },
           "shadowSize": "small",
           "zIndex": "20",
@@ -5685,9 +6262,9 @@ submit",
               "size": "34px",
             },
             "medium": Object {
-              "height": "28px",
-              "maxWidth": "528px",
-              "size": "22px",
+              "height": "32px",
+              "maxWidth": "624px",
+              "size": "26px",
             },
             "small": Object {
               "height": "28px",
@@ -5723,6 +6300,52 @@ submit",
               "size": "18px",
             },
           },
+          "5": Object {
+            "font": Object {},
+            "large": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "medium": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "small": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+            "xlarge": Object {
+              "height": "22px",
+              "maxWidth": "384px",
+              "size": "16px",
+            },
+          },
+          "6": Object {
+            "font": Object {},
+            "large": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "medium": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "small": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+            "xlarge": Object {
+              "height": "20px",
+              "maxWidth": "336px",
+              "size": "14px",
+            },
+          },
         },
         "responsiveBreakpoint": "small",
         "weight": 600,
@@ -5749,10 +6372,14 @@ submit",
         "responsiveBreakpoint": "small",
         "zIndex": "10",
       },
+      "maskedInput": Object {},
       "menu": Object {
         "icons": Object {
           "down": [Function],
         },
+      },
+      "meter": Object {
+        "color": "accent-1",
       },
       "paragraph": Object {
         "large": Object {
@@ -5815,11 +6442,27 @@ submit",
           "height": "4px",
         },
       },
+      "rangeSelector": Object {
+        "background": Object {
+          "invert": Object {
+            "color": "light-4",
+          },
+        },
+      },
       "select": Object {
         "container": Object {},
         "control": Object {},
         "icons": Object {
           "down": [Function],
+        },
+        "options": Object {
+          "box": Object {
+            "align": "start",
+            "pad": "small",
+          },
+          "text": Object {
+            "margin": "none",
+          },
         },
         "step": 20,
       },
@@ -5927,6 +6570,8 @@ submit",
           "size": "34px",
         },
       },
+      "textArea": Object {},
+      "textInput": Object {},
       "video": Object {
         "captions": Object {
           "background": "rgba(0, 0, 0, 0.7)",
@@ -5939,6 +6584,9 @@ submit",
           "play": [Function],
           "reduceVolume": [Function],
           "volume": [Function],
+        },
+        "scrubber": Object {
+          "color": "light-4",
         },
       },
       "worldMap": Object {

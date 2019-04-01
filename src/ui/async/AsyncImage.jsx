@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -17,13 +17,13 @@ export const StyledAsyncImage = styled(Box)`
 
 const AsyncImage = ({ onLoad, ...props }) => {
   const [loaded, setLoaded] = useState(false);
-  const imgRef = useRef(null);
   
-  const handleOnImageLoad = (image) => {
+  const handleOnImageLoad = (e) => {
     setLoaded(true);
 
     if(onLoad) {
-      onLoad(image);
+      const { target } = e;
+      onLoad(target);
     }
   };
 
@@ -32,12 +32,11 @@ const AsyncImage = ({ onLoad, ...props }) => {
       { !loaded && <LoadingIndicator /> }
       <Image
         {...props}
-        onLoad={() => handleOnImageLoad(imgRef.current)}
-        ref={imgRef}
+        onLoad={handleOnImageLoad}
       />
     </StyledAsyncImage>
   )
-}
+};
 
 AsyncImage.propTypes = {
   src: PropTypes.string.isRequired,
