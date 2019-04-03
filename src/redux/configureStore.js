@@ -50,18 +50,19 @@ const getComposeEnhancers = () => {
 
 const getEnhancers = () => [];
 
+const getErrorOptions = () => ({
+  logToUI: (error, dispatch) => {
+    const message = {
+      title: error.title,
+      text: error.detail ? JSON.stringify(error.detail) : null,
+      showRefresh: true,
+    };
+    addMessage(message)(dispatch);
+  }
+});
+
 const configureStore = (initialState = {}) => {
-  // configure error middleware
-  const errorOptions = {
-    logToUI: (error, dispatch) => {
-      const message = {
-        title: error.title,
-        text: error.detail ? JSON.stringify(error.detail) : null,
-        showRefresh: true,
-      };
-      addMessage(message)(dispatch);
-    }
-  };
+  const errorOptions = getErrorOptions();
   const errorMiddleware = createMiddleware(errorOptions);
 
   const middleware = [
@@ -74,7 +75,13 @@ const configureStore = (initialState = {}) => {
          * Not the best design but works for now, redo later on
          * or in next project find different solution for that...
          */
-        onAuthError: (message) => store.dispatch(logOutUser(message)), //AUTH_LOG_OUT
+        /* istanbul ignore next */
+        onAuthError: (message) =>
+          /* istanbul ignore next */
+          store.dispatch(
+            /* istanbul ignore next */
+            logOutUser(message)
+          ), //AUTH_LOG_OUT
       }),
     }),
     errorMiddleware,
@@ -99,15 +106,19 @@ const configureStore = (initialState = {}) => {
   store.subscribe(configureReactors(store, reactors));
 
   // idle configuration
+  /* istanbul ignore next */
   const idleDispatcher = () => {
+    /* istanbul ignore next */
     store.dispatch({ type: APP_IDLE });
   };
 
   // debounce app idle all 30 seconds
+  /* istanbul ignore next */
   const deBounced = debounce(() => {
     // The requestAnimationFrame ensures it doesn't run when tab isn't active
     // the requestIdleCallback makes sure the browser isn't busy with something
     // else.
+    /* istanbul ignore next */
     requestAnimationFrame(() => ric(idleDispatcher, { timeout: 500 }));
   }, 30000);
 
@@ -131,6 +142,7 @@ export const __testables__ = { // eslint-disable-line no-underscore-dangle
   getEnhancers,
   getComposeEnhancers,
   getPersistedReducer,
+  getErrorOptions,
 };
 
 export default configureStore;

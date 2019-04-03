@@ -98,6 +98,10 @@ const status = (state = AppStatus.INITIAL, action) => {
   }
 };
 
+export const __testables__ = {
+  applicationWillLoad,
+  applicationDidLoad,
+};
 
 export default combineReducers({
   status,
