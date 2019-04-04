@@ -85,6 +85,12 @@ const show = (state = false, action) => {
   }
 };
 
+export const __testables__ = {
+  APPLICATION_MESSAGE_SHOW,
+  APPLICATION_MESSAGE_HIDE,
+  APPLICATION_MESSAGE_ADD,
+};
+
 export default combineReducers({
   text,
   title,
