@@ -24,7 +24,6 @@ const ListView = (props) => {
 };
 
 ListView.propTypes = {
-  user: PropTypes.shape({}),
   images: PropTypes.arrayOf(
     PropTypes.shape({})
   ).isRequired,
@@ -32,8 +31,6 @@ ListView.propTypes = {
   listImages: PropTypes.func.isRequired,
 };
 
-ListView.defaultProps = {
-  user: null,
-};
+ListView.defaultProps = {};
 
 export default ListView;
