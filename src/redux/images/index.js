@@ -283,6 +283,9 @@ export const getImage = hocAsyncAction(
 
         const { faces, labels, ...image } = getImage;
         const { id } = image;
+
+        console.log(faces);
+        console.log(labels);
         
         dispatch(imagesAddImage(image));
         dispatch(labelsAddLabels(id, labels.items));

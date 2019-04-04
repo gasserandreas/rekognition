@@ -63,6 +63,10 @@ const persistConfig = {
   stateReconciler: autoMergeLevel2,
 };
 
+export const __testables__ = {
+  FACES_ADD_FACES,
+};
+
 export default persistReducer(
   persistConfig,
   combineReducers({

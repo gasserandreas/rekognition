@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const facesStateSelector = state => state.faces;
+export const facesStateSelector = state => state.faces;
 
 export const facesIdsByImageIdSelector = createSelector(
   facesStateSelector,

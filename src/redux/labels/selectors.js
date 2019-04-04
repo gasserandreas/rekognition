@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const labelsStateSelector = state => state.labels;
+export const labelsStateSelector = state => state.labels;
 
 export const labelsIdsByImageIdSelector = createSelector(
   labelsStateSelector,
@@ -13,7 +13,7 @@ export const labelsByIdSelector = createSelector(
 );
 
 // dynamic selectors
-export const labelsByImageId = (state, imageId) => {
+export const labelsByImageIdSelector = (state, imageId) => {
   if (!imageId) {
     return [];
   }

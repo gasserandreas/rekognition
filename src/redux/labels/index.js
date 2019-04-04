@@ -63,6 +63,10 @@ const persistConfig = {
   stateReconciler: autoMergeLevel2,
 };
 
+export const __testables__ = {
+  LABELS_ADD_LABELS,
+};
+
 export default persistReducer(
   persistConfig,
   combineReducers({
