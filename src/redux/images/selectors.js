@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const imagesStateSelector = state => state.images;
+export const imagesStateSelector = state => state.images;
 
 export const imagesListSelector = createSelector(
   imagesStateSelector,
@@ -10,7 +10,7 @@ export const imagesListSelector = createSelector(
     }
 
     return ids.map(id => byId[id])
-      .filter(item => item !== null);
+      .filter(item => item !== null && item !== undefined);
   }
 );
 
@@ -19,8 +19,12 @@ export const sortedImageListSelector = createSelector(
   (images) => {
     // sort function
     const sortBy = ({ created: createdA }, { created: createdB }) => {
-      if (!createdA || !createdB) {
-        return createdA ? 1 : -1;
+      if (!createdA) {
+        return 1;
+      }
+
+      if (!createdB) {
+        return -1;
       }
 
       return new Date(createdB) - new Date(createdA);

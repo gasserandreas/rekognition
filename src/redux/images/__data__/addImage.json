@@ -1,0 +1,174 @@
+{
+	"data": {
+		"addImage": {
+			"image": {
+				"id": "ca57a08b-2b14-44df-a39b-2a175c5a6970",
+				"name": "ca57a08b-2b14-44df-a39b-2a175c5a6970.jpeg",
+				"path": "d10074b0-1d6d-448c-9621-3a29cb5a2c85/ca57a08b-2b14-44df-a39b-2a175c5a6970.jpeg",
+				"created": "2019-04-05T07:37:39.960Z",
+				"meta": {
+					"type": "jpeg",
+					"size": 181319,
+					"orientation": "LANDSCAPE",
+					"width": 1277,
+					"height": 930,
+					"density": null,
+					"numberOfLabels": 10,
+					"numberOfFaces": 1,
+					"__typename": "Meta"
+				},
+				"labels": {
+					"items": [{
+						"id": "76ad7a42-9523-424c-a9e3-91926ce9fd5b",
+						"name": "Human",
+						"confidence": 98.91755676269531,
+						"parents": [],
+						"instances": [],
+						"__typename": "Label"
+					}, {
+						"id": "ae1f94b0-a090-4e09-aa70-2fdc23e74bcb",
+						"name": "Person",
+						"confidence": 98.91755676269531,
+						"parents": [],
+						"instances": [{
+							"height": 0.9495741128921509,
+							"width": 0.7815497517585754,
+							"left": 0.13508452475070953,
+							"top": 0.0364857017993927,
+							"__typename": "BoundingBox"
+						}],
+						"__typename": "Label"
+					}, {
+						"id": "fb33a1e0-69a2-49b8-9f8a-8150c7e66f8b",
+						"name": "Tai Chi",
+						"confidence": 98.73216247558594,
+						"parents": ["Martial Arts", "Sport", "Person"],
+						"instances": [],
+						"__typename": "Label"
+					}, {
+						"id": "6e474384-3392-4851-93e3-e2d1cb171aef",
+						"name": "Sport",
+						"confidence": 98.73216247558594,
+						"parents": ["Person"],
+						"instances": [],
+						"__typename": "Label"
+					}, {
+						"id": "3651070d-fd46-47f4-9997-cb2a7f86fadf",
+						"name": "Sports",
+						"confidence": 98.73216247558594,
+						"parents": ["Person"],
+						"instances": [],
+						"__typename": "Label"
+					}, {
+						"id": "e6994191-38f9-4e3f-90dd-fe17feadf394",
+						"name": "Martial Arts",
+						"confidence": 98.73216247558594,
+						"parents": ["Sport", "Person"],
+						"instances": [],
+						"__typename": "Label"
+					}, {
+						"id": "bad18fac-8bb4-413e-a71b-1cbcae78113b",
+						"name": "Finger",
+						"confidence": 84.38758850097656,
+						"parents": [],
+						"instances": [],
+						"__typename": "Label"
+					}, {
+						"id": "59a3acac-3d0c-4ed1-81b6-a5b6f8eeb3df",
+						"name": "Hand",
+						"confidence": 61.91082000732422,
+						"parents": [],
+						"instances": [],
+						"__typename": "Label"
+					}, {
+						"id": "b355db37-b99b-4e27-bddf-8488ab1fc21d",
+						"name": "Thumbs Up",
+						"confidence": 56.3029899597168,
+						"parents": ["Finger", "Person"],
+						"instances": [],
+						"__typename": "Label"
+					}, {
+						"id": "54ba9140-5b7f-49ac-b494-d150810ac21f",
+						"name": "Duel",
+						"confidence": 50.56919479370117,
+						"parents": [],
+						"instances": [],
+						"__typename": "Label"
+					}],
+					"__typename": "LabelPayload"
+				},
+				"faces": {
+					"items": [{
+						"id": "d4dd0b74-3e17-4835-840b-031d658dba04",
+						"age": {
+							"low": 26,
+							"high": 43,
+							"__typename": "FaceAge"
+						},
+						"position": {
+							"height": 0.23437920212745667,
+							"width": 0.1378326714038849,
+							"left": 0.554311215877533,
+							"top": 0.14555378258228302,
+							"__typename": "BoundingBox"
+						},
+						"emotions": [{
+							"name": "CALM",
+							"confidence": 63.303672790527344,
+							"__typename": "Attribute"
+						}, {
+							"name": "ANGRY",
+							"confidence": 9.167359352111816,
+							"__typename": "Attribute"
+						}, {
+							"name": "DISGUSTED",
+							"confidence": 3.9062936305999756,
+							"__typename": "Attribute"
+						}, {
+							"name": "CONFUSED",
+							"confidence": 6.548408508300781,
+							"__typename": "Attribute"
+						}, {
+							"name": "HAPPY",
+							"confidence": 0.5967737436294556,
+							"__typename": "Attribute"
+						}, {
+							"name": "SAD",
+							"confidence": 14.506290435791016,
+							"__typename": "Attribute"
+						}, {
+							"name": "SURPRISED",
+							"confidence": 1.9712016582489014,
+							"__typename": "Attribute"
+						}],
+						"attributes": [{
+							"name": "eyesOpen",
+							"confidence": 96.67288208007812,
+							"value": "true",
+							"__typename": "Attribute"
+						}, {
+							"name": "gender",
+							"confidence": 95.66466522216797,
+							"value": "Male",
+							"__typename": "Attribute"
+						}, {
+							"name": "brightness",
+							"confidence": 100,
+							"value": "47.45582962036133",
+							"__typename": "Attribute"
+						}, {
+							"name": "sharpness",
+							"confidence": 100,
+							"value": "89.85481262207031",
+							"__typename": "Attribute"
+						}],
+						"__typename": "Face"
+					}],
+					"__typename": "FacePayload"
+				},
+				"__typename": "Image"
+			},
+			"__typename": "AddImagePayload"
+		}
+	}
+}

@@ -1,0 +1,127 @@
+{
+	"data": {
+		"listImage": {
+			"items": [{
+				"id": "2a2bdf23-e73f-4a2a-913e-da29926a195c",
+				"created": "2019-02-09T08:12:11.736Z",
+				"name": "2a2bdf23-e73f-4a2a-913e-da29926a195c.jpeg",
+				"path": "d10074b0-1d6d-448c-9621-3a29cb5a2c85/2a2bdf23-e73f-4a2a-913e-da29926a195c.jpeg",
+				"meta": {
+					"type": "jpeg",
+					"size": 2264753,
+					"orientation": "LANDSCAPE",
+					"width": 4813,
+					"height": 3209,
+					"density": 72,
+					"numberOfFaces": 3,
+					"numberOfLabels": 17,
+					"__typename": "Meta"
+				},
+				"__typename": "Image"
+			}, {
+				"id": "39982447-a18e-4d88-9f16-53b9df1bfdb3",
+				"created": "2019-01-24T17:07:51.270Z",
+				"name": "39982447-a18e-4d88-9f16-53b9df1bfdb3.jpeg",
+				"path": "d10074b0-1d6d-448c-9621-3a29cb5a2c85/39982447-a18e-4d88-9f16-53b9df1bfdb3.jpeg",
+				"meta": {
+					"type": "jpeg",
+					"size": 2792114,
+					"orientation": "LANDSCAPE",
+					"width": 5718,
+					"height": 3588,
+					"density": 72,
+					"numberOfFaces": 2,
+					"numberOfLabels": 21,
+					"__typename": "Meta"
+				},
+				"__typename": "Image"
+			}, {
+				"id": "7bf2bbd2-8749-4b37-a3d5-4498c7ea68bd",
+				"created": "2019-01-23T05:54:00.352Z",
+				"name": "7bf2bbd2-8749-4b37-a3d5-4498c7ea68bd.jpeg",
+				"path": "d10074b0-1d6d-448c-9621-3a29cb5a2c85/7bf2bbd2-8749-4b37-a3d5-4498c7ea68bd.jpeg",
+				"meta": {
+					"type": "jpeg",
+					"size": 2142379,
+					"orientation": "PORTRAIT",
+					"width": 4516,
+					"height": 5622,
+					"density": 72,
+					"numberOfFaces": 0,
+					"numberOfLabels": 0,
+					"__typename": "Meta"
+				},
+				"__typename": "Image"
+			}, {
+				"id": "c325457b-e12e-4596-a374-b2140fe9e931",
+				"created": "2019-01-21T21:02:39.633Z",
+				"name": "c325457b-e12e-4596-a374-b2140fe9e931.jpeg",
+				"path": "d10074b0-1d6d-448c-9621-3a29cb5a2c85/c325457b-e12e-4596-a374-b2140fe9e931.jpeg",
+				"meta": {
+					"type": "jpeg",
+					"size": 233477,
+					"orientation": "LANDSCAPE",
+					"width": 1599,
+					"height": 899,
+					"density": null,
+					"numberOfFaces": 0,
+					"numberOfLabels": 0,
+					"__typename": "Meta"
+				},
+				"__typename": "Image"
+			}, {
+				"id": "eba22679-3774-48e7-8a54-9acbb63a9910",
+				"created": "2019-01-23T06:39:54.675Z",
+				"name": "eba22679-3774-48e7-8a54-9acbb63a9910.jpeg",
+				"path": "d10074b0-1d6d-448c-9621-3a29cb5a2c85/eba22679-3774-48e7-8a54-9acbb63a9910.jpeg",
+				"meta": {
+					"type": "jpeg",
+					"size": 2142379,
+					"orientation": "PORTRAIT",
+					"width": 4516,
+					"height": 5622,
+					"density": 72,
+					"numberOfFaces": 1,
+					"numberOfLabels": 13,
+					"__typename": "Meta"
+				},
+				"__typename": "Image"
+			}, {
+				"id": "ef5a9597-f300-4c38-8212-bbade75ace8c",
+				"created": "2019-02-09T08:11:05.031Z",
+				"name": "ef5a9597-f300-4c38-8212-bbade75ace8c.jpeg",
+				"path": "d10074b0-1d6d-448c-9621-3a29cb5a2c85/ef5a9597-f300-4c38-8212-bbade75ace8c.jpeg",
+				"meta": {
+					"type": "jpeg",
+					"size": 3007474,
+					"orientation": "LANDSCAPE",
+					"width": 5760,
+					"height": 3840,
+					"density": 72,
+					"numberOfFaces": 0,
+					"numberOfLabels": 20,
+					"__typename": "Meta"
+				},
+				"__typename": "Image"
+			}, {
+				"id": "f27b9ae8-834b-43bb-ad29-aef2dd7ab10c",
+				"created": "2019-03-21T08:36:37.012Z",
+				"name": "f27b9ae8-834b-43bb-ad29-aef2dd7ab10c.jpeg",
+				"path": "d10074b0-1d6d-448c-9621-3a29cb5a2c85/f27b9ae8-834b-43bb-ad29-aef2dd7ab10c.jpeg",
+				"meta": {
+					"type": "jpeg",
+					"size": 181319,
+					"orientation": "LANDSCAPE",
+					"width": 1277,
+					"height": 930,
+					"density": null,
+					"numberOfFaces": 1,
+					"numberOfLabels": 10,
+					"__typename": "Meta"
+				},
+				"__typename": "Image"
+			}],
+			"__typename": "ImageConnection"
+		}
+	}
+}
