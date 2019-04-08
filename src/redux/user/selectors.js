@@ -16,3 +16,7 @@ export const updateUserRequestSelector = createSelector(
   userStateSelector,
   ({ updateUserRequest }) => updateUserRequest,
 );
+
+export const __testables__ = {
+  userStateSelector,
+};

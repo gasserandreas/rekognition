@@ -116,6 +116,13 @@ const persistConfig = {
   stateReconciler: autoMergeLevel2,
 };
 
+export const __testables__ = {
+  USER_UPDATE_USER_REQUEST,
+  USER_GET_USER_INFO_REQUEST,
+  USER_SET_USER,
+  userSetUser,
+};
+
 export default persistReducer(
   persistConfig,
   combineReducers({
