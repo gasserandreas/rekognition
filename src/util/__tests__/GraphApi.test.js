@@ -145,7 +145,55 @@ describe('GraphApi test suite', () => {
   });
 
   it('should handle general graph errors', () => {
+    const API = new GraphApi({
+      endpoint: mockedData.endpoint,
+      onAuthError: onAuthErrorMock,
+    });
 
+    const errorOptions = {
+      extensions: {
+        code: '',
+      },
+      message: 'error message',
+      path: '/base/path',
+    }
+
+    // basic error handling
+    const error = API.handleGraphError(errorOptions);
+
+    expect(error).toEqual({
+      code: errorOptions.extensions.code,
+      message: errorOptions.message,
+      path: errorOptions.path,
+    });
+
+    // error with code extension is null
+    const errorWithCodeIsNull = API.handleGraphError({
+      ...errorOptions,
+      extensions: null,
+    });
+
+    expect(errorWithCodeIsNull).toEqual({
+      code: null,
+      message: errorOptions.message,
+      path: errorOptions.path,
+    });
+
+    // error with code is UNAUTHENTICATED
+    const errorUnAuthenticated = API.handleGraphError({
+      ...errorOptions,
+      extensions: {
+        code: 'UNAUTHENTICATED',
+      },
+    });
+
+    expect(errorUnAuthenticated).toEqual({
+      code: 'UNAUTHENTICATED',
+      message: errorOptions.message,
+      path: errorOptions.path,
+    });
+
+    expect(onAuthErrorMock).toHaveBeenCalledTimes(1);
   });
 
   it('should handle auth errors', () => {
