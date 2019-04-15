@@ -125,6 +125,10 @@ describe('auth: complex action test suite', () => {
     afterEach(() => {
       setTokenMock.mockClear();
       setUserIdMock.mockClear();
+
+      // clear session and local storage
+      window.localStorage.clear();
+      window.sessionStorage.clear();
     });
 
     it('should handle handleAuth without remember', async (done) => {
@@ -203,6 +207,59 @@ describe('auth: complex action test suite', () => {
       expect(consoleLogMock).toHaveBeenCalled();
 
       expect(store.getActions()).toEqual(expectedActions);
+  
+      done();
+    });
+
+    it('should handle logOutUser with disabled broadcast', async (done) => {
+      const message = 'logout';
+      const broadcast = false;
+  
+      const store = mockstore();
+      const { dispatch } = store;
+  
+      const expectedActions = [
+        __testables__.authLogOut(message),
+        reduxApplication.appReset(),
+      ];
+
+      // set localStorage and sessionStorage
+      const testValue = 'test';
+      window.localStorage.setItem('test', testValue);
+      window.sessionStorage.setItem('test', testValue);
+
+      // check before dispatch
+      expect(window.localStorage.test).toEqual(testValue);
+      expect(window.sessionStorage.test).toEqual(testValue);
+      expect(window.localStorage.logout).toBeFalsy();
+
+      await reduxAuth.logOutUser(message, broadcast)(dispatch);
+
+      // check after dispatch
+      expect(window.localStorage.test).toEqual(undefined);
+      expect(window.sessionStorage.test).toEqual(undefined);
+      expect(window.localStorage.logout).toBeFalsy();
+      
+      expect(setTokenMock).toHaveBeenCalledWith(null);
+      expect(consoleLogMock).toHaveBeenCalled();
+
+      expect(store.getActions()).toEqual(expectedActions);
+  
+      done();
+    });
+
+    it('should handle logOutUser with default value for broadcast', async (done) => {
+      const message = 'logout';
+  
+      const store = mockstore();
+      const { dispatch } = store;
+
+      expect(window.localStorage.logout).toBeFalsy();
+
+      await reduxAuth.logOutUser(message)(dispatch);
+
+      // check after dispatch
+      expect(window.localStorage.logout).toBeTruthy();
   
       done();
     });
