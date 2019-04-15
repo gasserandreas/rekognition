@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AppMessage content should be styled consistently 1`] = `
+exports[`ViewMessage content should be styled consistently 1`] = `
 <StyledComponent
   direction="column"
   forwardedComponent={
@@ -1416,7 +1416,7 @@ string",
 />
 `;
 
-exports[`AppMessage content should be visible 1`] = `
+exports[`ViewMessage content should be visible 1`] = `
 <StyledComponent
   direction="column"
   forwardedComponent={
@@ -3722,7 +3722,7 @@ string",
 </StyledComponent>
 `;
 
-exports[`AppMessage should be styled consistently 1`] = `
+exports[`ViewMessage should be styled consistently 1`] = `
 <StyledComponent
   direction="column"
   forwardedComponent={
@@ -5138,7 +5138,7 @@ string",
 />
 `;
 
-exports[`AppMessage should render correctly 1`] = `
+exports[`ViewMessage should render correctly 1`] = `
 <StyledComponent
   direction="column"
   forwardedComponent={

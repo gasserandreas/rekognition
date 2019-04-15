@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Grommet, Box } from 'grommet';
@@ -19,7 +19,7 @@ import {
 
 // base style components
 import PrivateRoute from './PrivateRoute';
-import AppMessage from '../ui/AppMessage';
+import AppMessage from './AppMessage';
 import AppHeader from './AppHeader';
 import AppFooter from './AppFooter';
 
@@ -36,8 +36,6 @@ import NotFound from './NotFound';
 import * as Paths from '../paths';
 
 import { Theme } from '../styles';
-import Button from '../ui/form/Button';
-import ButtonGroup from '../ui/form/ButtonGroup';
 
 const StyledAppContent = styled(Box)`
   min-height: 100%;
@@ -63,33 +61,12 @@ class App extends Component {
     return (
       <Grommet theme={Theme} full={true}>
         <AppMessage
-          message={message.text}
-          show={message.show}
-        >
-          <h1>{message.title}</h1>
-          <p>{message.text}</p>
-          {message.showRefresh && (
-            <Fragment>
-              <p>Please refresh page and try again. If error persists please try later.</p>
-              <ButtonGroup>
-                <Button
-                  type="button"
-                  buttonStyle="primary"
-                  onClick={() => window.location.reload()}
-                >Refresh page</Button>
-              </ButtonGroup>
-            </Fragment>
-          )}
-        </AppMessage>
-        <Switch>
-          <Route path="*" component={(props) => (
-            <AppHeader
-              isAuthenticated={isAuthenticated}
-              username={username}
-              {...props}
-            />
-          )} />
-        </Switch>
+          message={message}
+        />
+        <AppHeader
+          isAuthenticated={isAuthenticated}
+          username={username}
+        />
         <StyledAppContent fill justify='between' direction='column'>
           <Box flex fill pad="none">
             <Switch>
@@ -121,20 +98,7 @@ class App extends Component {
               <Route exact path={Paths.PRIVACY} component={Privacy} />
               <Route path="*" component={NotFound} />
             </Switch>
-            <Switch>
-              <Route exact path={Paths.GET_IMAGES_DETAIL(Paths.ID)} component={(props) => (
-                <AppFooter withSidebar {...props} />
-              )} />
-              <Route exact path={Paths.LOGIN} component={(props) => (
-                <AppFooter alternativeColor {...props} />
-              )} />
-              <Route exact path={Paths.REGISTER} component={(props) => (
-                <AppFooter alternativeColor {...props} />
-              )} />
-              <Route path="*" component={(props) => (
-                <AppFooter {...props} />
-              )} />
-            </Switch>
+            <AppFooter />
           </Box>
         </StyledAppContent>
       </Grommet>
@@ -157,5 +121,9 @@ const mapDispatchToProps = ({
   loadApplication,
   logOutUser,
 });
+
+export const __testables__ = {
+  App,
+};
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

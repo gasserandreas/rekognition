@@ -6,7 +6,7 @@ import { Box } from 'grommet';
 
 import { Colors, MediaSize } from '../styles';
 
-export const StyledAppMessage = styled(Box)`
+export const StyledViewMessage = styled(Box)`
   visibility: ${props => props.show ? 'visible' : 'none'};
   display: ${props => props.show ? 'block' : 'none' };
   position: fixed;
@@ -24,7 +24,7 @@ export const StyledAppMessage = styled(Box)`
   }
 `;
 
-export const StyledAppMessageContent = styled(Box)`
+export const StyledViewMessageContent = styled(Box)`
   background-color: ${Colors.ColorsPalette.White};
   transition: top ease-in-out 500ms;
   padding: 2rem;
@@ -59,22 +59,22 @@ export const StyledAppMessageContent = styled(Box)`
 `;
 
 /** Show App message as application modal and use fullsize on mobile devices */
-const AppMessage = ({ children, show, ...props }) => (<StyledAppMessage show={show} {...props}>
-    <StyledAppMessageContent elevation="xlarge" show={show}>
+const ViewMessage = ({ children, show, ...props }) => (<StyledViewMessage show={show} {...props}>
+    <StyledViewMessageContent elevation="xlarge" show={show}>
       {children}
-    </StyledAppMessageContent>
-  </StyledAppMessage>
+    </StyledViewMessageContent>
+  </StyledViewMessage>
 );
 
-AppMessage.propTypes = {
+ViewMessage.propTypes = {
   /** Required children node to be rendered within component */
   children: PropTypes.node.isRequired,
   /** Boolean indicating whether message is shown or not */
   show: PropTypes.bool,
 }
 
-AppMessage.defaultProps = {
+ViewMessage.defaultProps = {
   show: false,
 }
 
-export default AppMessage;
+export default ViewMessage;
