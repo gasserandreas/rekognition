@@ -7,7 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
-import App from './app/App';
+import AppContainer from './app/AppContainer';
 import * as serviceWorker from './serviceWorker';
 
 import configureStore from './redux/configureStore';
@@ -26,7 +26,7 @@ class Index extends Component { // eslint-disable-line react/prefer-stateless-fu
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <BrowserRouter>
-            <App />
+            <AppContainer />
           </BrowserRouter>
         </PersistGate>
       </Provider>    

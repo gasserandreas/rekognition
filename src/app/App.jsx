@@ -3,19 +3,19 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Grommet, Box } from 'grommet';
 import { Switch, Route, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 
-// redux
-import { logOutUser } from '../redux/auth';
-import { isAuthenticatedSelector, authUsernameSelector } from '../redux/auth/selectors';
+// // redux
+// import { logOutUser } from '../redux/auth';
+// import { isAuthenticatedSelector, authUsernameSelector } from '../redux/auth/selectors';
 
-import { loadApplication } from '../redux/application';
-import {
-  messageShowSelector,
-  messageTextSelector,
-  messageTitleSelector,
-  messageShowRefreshSelector,
-} from '../redux/application/message/selectors';
+// import { loadApplication } from '../redux/application';
+// import {
+//   messageShowSelector,
+//   messageTextSelector,
+//   messageTitleSelector,
+//   messageShowRefreshSelector,
+// } from '../redux/application/message/selectors';
 
 // base style components
 import PrivateRoute from './PrivateRoute';
@@ -57,7 +57,7 @@ class App extends Component {
 
   render() {
     const { isAuthenticated, username, message } = this.props;
-
+    console.log('test');
     return (
       <Grommet theme={Theme} full={true}>
         <AppMessage
@@ -106,24 +106,26 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  isAuthenticated: isAuthenticatedSelector(state),
-  username: authUsernameSelector(state),
-  message: {
-    show: messageShowSelector(state),
-    text: messageTextSelector(state),
-    title: messageTitleSelector(state),
-    showRefresh: messageShowRefreshSelector(state),
-  },
-});
+export default App;
 
-const mapDispatchToProps = ({
-  loadApplication,
-  logOutUser,
-});
+// const mapStateToProps = (state) => ({
+//   isAuthenticated: isAuthenticatedSelector(state),
+//   username: authUsernameSelector(state),
+//   message: {
+//     show: messageShowSelector(state),
+//     text: messageTextSelector(state),
+//     title: messageTitleSelector(state),
+//     showRefresh: messageShowRefreshSelector(state),
+//   },
+// });
 
-export const __testables__ = {
-  App,
-};
+// const mapDispatchToProps = ({
+//   loadApplication,
+//   logOutUser,
+// });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+// export const __testables__ = {
+//   App,
+// };
+
+// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
