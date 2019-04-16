@@ -36,8 +36,11 @@ const AppMessage = ({
 
 AppMessage.propTypes = {
   message: PropTypes.shape({
-
-  })
-}
+    show: PropTypes.bool.isRequired,
+    text: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    showRefresh: PropTypes.bool.isRequired,
+  }).isRequired,
+};
 
 export default AppMessage;

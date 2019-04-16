@@ -31,4 +31,9 @@ const mapDispatchToProps = ({
   logOutUser,
 });
 
+export const __testables__ = {
+  mapStateToProps,
+  mapDispatchToProps,
+};
+
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

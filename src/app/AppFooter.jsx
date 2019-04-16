@@ -7,17 +7,19 @@ import Footer from '../ui/Footer';
 
 import * as Paths from '../paths';
 
-const isAlternativeColor = (path) => {
-  if (path.includes(Paths.LOGIN)) {
+const isAlternativeColor = (pathname) => {
+  if (pathname.includes(Paths.LOGIN)) {
     return true;
   }
 
-  if (path.includes(Paths.REGISTER)) {
+  if (pathname.includes(Paths.REGISTER)) {
     return true;
   }
 
   return false;
 }
+
+const isWithSidebar = pathname => pathname.includes(Paths.GET_IMAGES_DETAIL(''));
 
 const AppFooter = ({
   history: {
@@ -26,7 +28,7 @@ const AppFooter = ({
     }
   },
 }) => {
-  const withSidebar = pathname.includes(Paths.GET_IMAGES_DETAIL(''));
+  const withSidebar = isWithSidebar(pathname);
   const alternativeColor = isAlternativeColor(pathname);
 
   return (
@@ -44,5 +46,11 @@ AppFooter.propTypes = {
     }).isRequired,
   }).isRequired,
 };
+
+export const __testables__ = {
+  isWithSidebar,
+  isAlternativeColor,
+  AppFooter,
+}
 
 export default withRouter(AppFooter);

@@ -6,18 +6,19 @@ import Header from '../ui/Header';
 
 import * as Paths from '../paths';
 
+const shouldShowPreviousButton = pathname => pathname !== '/';
+
 const AppHeader = ({
   isAuthenticated,
   username,
   history,
 }) => {
   const { location: { pathname } } = history;
-  const showPreviousButton = pathname !== '/';
 
   return (
     <Header
       isAuthenticated={isAuthenticated}
-      showPreviousButton={showPreviousButton}
+      showPreviousButton={shouldShowPreviousButton(pathname)}
       username={username}
       onGoToPrevious={() => history.push(Paths.HOME)}
     />
@@ -36,6 +37,11 @@ AppHeader.propTypes = {
 
 AppHeader.defaultProps = {
   username: '',
+};
+
+export const __testables__ = {
+  AppHeader,
+  shouldShowPreviousButton,
 };
 
 export default withRouter(AppHeader);

@@ -11,10 +11,7 @@ import AppHeader from '../AppHeader';
 import AppMessage from '../AppMessage';
 import PrivateRoute from '../PrivateRoute';
 
-import ImagesContainer from '../../images/list/Container';
-
 import { Theme } from '../../styles';
-import * as Paths from '../../paths';
 
 describe('App test suite', () => {
   const initialState = {
@@ -101,38 +98,5 @@ describe('App test suite', () => {
 
     expect(wrapper).toBeTruthy();
     expect(loadApplication).toHaveBeenCalled();
-  });
-
-  describe('routing test suite', () => {
-    const getPrivatePaths = (path) => {
-      const routes = getApp(mockedData).find(PrivateRoute);
-      console.log('ROUTES');
-      console.log(routes);
-
-      return routes.filter((route) => {
-        const routePath = route.props().path;
-        return routePath === path;
-      });
-    };
-
-    it('should have route configuration for IMAGES', () => {
-      // const wrapper = getApp(mockedData);
-      // const privatePaths = wrapper.find(PrivateRoute);
-      const imagesRoute = getPrivatePaths(Paths.IMAGES);
-
-      expect(imagesRoute.props().component).toBeInstanceOf(ImagesContainer);
-
-      // check for IMAGES
-      // expect(getPrivatePaths)
-    });
-
-    // it('should render ImagesContainer for IMAGES path', () => {
-    //   const wrapper = getApp(mockedData, Paths.IMAGES);
-    //   expect(wrapper).toBeTruthy();
-
-    //   jest.mock('../../images/list/Container', ()  => jest.fn());
-
-    //   console.log(ImagesContainer);
-    // });
   });
 });
