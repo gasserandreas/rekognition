@@ -26,12 +26,16 @@ const AppHeader = ({
 
 AppHeader.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
-  username: PropTypes.string.isRequired,
+  username: PropTypes.string,
   history: PropTypes.shape({
     location: PropTypes.shape({
       pathname: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
+};
+
+AppHeader.defaultProps = {
+  username: '',
 };
 
 export default withRouter(AppHeader);
