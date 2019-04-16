@@ -1,6 +1,11 @@
 import { createSelector } from 'reselect';
 
-export const messageStateSelector = state => state.application.message;
+import { applicationStateSelector } from '../selectors';
+
+export const messageStateSelector = createSelector(
+  applicationStateSelector,
+  ({ message }) => message || {},
+);
 
 export const messageShowSelector = createSelector(
   messageStateSelector,

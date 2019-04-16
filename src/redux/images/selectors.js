@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-export const imagesStateSelector = state => state.images;
+export const imagesStateSelector = state => state.images || {};
 
 export const imagesListSelector = createSelector(
   imagesStateSelector,

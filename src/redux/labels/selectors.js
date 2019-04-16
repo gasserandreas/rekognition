@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-export const labelsStateSelector = state => state.labels;
+export const labelsStateSelector = state => state.labels || {};
 
 export const labelsIdsByImageIdSelector = createSelector(
   labelsStateSelector,
