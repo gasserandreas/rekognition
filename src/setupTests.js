@@ -59,10 +59,15 @@ const createHocReducerState = (state) => ({
   ...state,
 });
 
+const dummyTestAction = (type = 'EMPTY') => ({
+  type: `JEST_ACTION_${type}`,
+});
+
 // create and export testUtils
 global.testUtils = {
   createMockStore,
   createMockStoreWithApi,
   createHocActions,
   createHocReducerState,
+  dummyTestAction,
 };

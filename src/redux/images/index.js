@@ -18,9 +18,9 @@ const IMAGES_ADD_NEW_IMAGE = 'IMAGES_ADD_NEW_IMAGE';
 const IMAGES_ADD_IMAGES = 'IMAGES_ADD_IMAGES';
 const IMAGES_ADD_IMAGE = 'IMAGES_ADD_IMAGE';
 
-const IMAGES_ADD_REQUEST_TYPES = hocCreateTypes('IMAGES_ADD_REQUEST_TYPES');
-const IMAGES_LIST_REQUEST_TYPES = hocCreateTypes('IMAGES_LIST_REQUEST_TYPES');
-const IMAGES_GET_REQUEST_TYPES = hocCreateTypes('IMAGES_GET_REQUEST_TYPES');
+const IMAGES_ADD_REQUEST_TYPES = hocCreateTypes('IMAGES_ADD_REQUEST');
+const IMAGES_LIST_REQUEST_TYPES = hocCreateTypes('IMAGES_LIST_REQUEST');
+const IMAGES_GET_REQUEST_TYPES = hocCreateTypes('IMAGES_GET_REQUEST');
 
 // simple actions
 const imagesAddNewImage = image => ({
@@ -55,11 +55,12 @@ const imagesAddImages = (images) => {
 // complex actions
 export const addImage = hocAsyncAction(
   IMAGES_ADD_REQUEST_TYPES,
-  ({ file, shouldAnalyse = true, imageId = uuid.v4() }) => (dispatch, getState, { GraphApi }) => {
+  ({ file, shouldAnalyse = true, imageId = uuid.v4() }) => (dispatch, _, { GraphApi }) => {
 
     // get file ending
     let filetype = undefined;
     const { type } = file;
+    
     switch (type) {
       case 'image/jpeg':
         filetype = 'jpeg';
@@ -71,7 +72,15 @@ export const addImage = hocAsyncAction(
         filetype = undefined;
     }
 
+    // stop
+    if (!filetype) {
+      return Promise.reject('Not a valid file type');
+    }
+
     // create new image name
+    /**
+     * TODO: ID handling should be done in the backend...
+     */
     const imageName = `${imageId}.${filetype}`;
 
     return readAsDataURL(file)
@@ -345,6 +354,18 @@ const persistConfig = {
   storage,
   whitelist: ['ids', 'byId'],
   stateReconciler: autoMergeLevel2,
+};
+
+export const __testables__ = {
+  IMAGES_ADD_NEW_IMAGE,
+  IMAGES_ADD_IMAGES,
+  IMAGES_ADD_IMAGE,
+  IMAGES_ADD_REQUEST_TYPES,
+  IMAGES_LIST_REQUEST_TYPES,
+  IMAGES_GET_REQUEST_TYPES,
+  imagesAddNewImage,
+  imagesAddImage,
+  imagesAddImages,
 };
 
 export default persistReducer(

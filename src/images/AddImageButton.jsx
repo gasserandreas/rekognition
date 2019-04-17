@@ -10,7 +10,7 @@ import { Add } from 'grommet-icons';
 
 import Button from '../ui/form/Button';
 import ButtonGroup from '../ui/form/ButtonGroup';
-import AppMessage from '../ui/AppMessage';
+import ViewMessage from '../ui/ViewMessage';
 import {
   getImageCreationDateTime,
   getFormattedFileSize,
@@ -154,7 +154,7 @@ const AddImageButton = ({
   const { showMessage, image } = state;
   return (
     <Fragment>
-      <AppMessage show={showMessage}>
+      <ViewMessage show={showMessage}>
         <Heading level="2">Image is too big</Heading>
         <Box>
         <p>Hey it seems your image to big for being uploaded. We only allow uploading images up to <strong>6 MB</strong>, please choose a different image.</p>
@@ -189,7 +189,7 @@ const AddImageButton = ({
             >Change image</Button>
           </ButtonGroup>
         </Box>
-      </AppMessage>
+      </ViewMessage>
       <Dropzone
         onDrop={handleUploadImage}
         ref={uploadRef}

@@ -1,15 +1,18 @@
-import thunkMiddleware from 'redux-thunk';
+/* global testUtils */
 import { compose } from 'redux';
 
-import { createMiddleware as createErrorMiddleware } from '../../util/ErrorHandler';
+import configureStore, { __testables__ } from '../configureStore';
 
-import configureStore, { __testables__ } from '../configureStore'; // 
-
+import {
+  applicationMessageAdd,
+  applicationMessageShow,
+} from '../application/message';
+  
 const {
   getComposeEnhancers,
   getEnhancers,
-  getMiddleware,
-} = __testables__; // 
+  getErrorOptions,
+} = __testables__;
 
 it('should create redux store', () => {
   const { store } = configureStore();
@@ -81,5 +84,45 @@ describe('redux getComposeEnhancers test suite', () => {
 describe('redux getEnhancers test suite', () => {
   it('should return default enhancers', () => {
     expect(getEnhancers()).toEqual([]);
+  });
+});
+
+describe('redux getErrorOptions test sutie', () => {
+  const mockstore = testUtils.createMockStore();
+
+  it('should return object with error middleware options', () => {
+    const options = getErrorOptions();
+    expect(options).toBeTruthy();
+    
+    // check for attributes
+    const { logToUI } = options;
+    expect(logToUI).toBeInstanceOf(Function);
+  });
+
+  it('logToUI should fire "addMessage" redux action', () => {
+    const error = {
+      title: 'Error',
+      detail: 'Error detail',
+    };
+
+    const store = mockstore();
+    const { dispatch } = store;
+
+    const options = getErrorOptions();
+    const { logToUI } = options;
+
+    const expectedActions = [
+      applicationMessageAdd({
+        title: error.title,
+        text: JSON.stringify(error.detail),
+        showRefresh: true,
+      }),
+      applicationMessageShow(),
+    ];
+
+    // fire action
+    logToUI(error, dispatch);
+
+    expect(store.getActions()).toEqual(expectedActions);
   });
 });

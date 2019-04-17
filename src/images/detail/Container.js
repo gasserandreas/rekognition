@@ -4,7 +4,7 @@ import { getImage } from '../../redux/images';
 import { imagesByIdSelector, getImageRequestSelector } from '../../redux/images/selectors';
 
 
-import { labelsByImageId, labelsByIdSelector } from '../../redux/labels/selectors';
+import { labelsByImageIdSelector, labelsByIdSelector } from '../../redux/labels/selectors';
 import { facesByImageId, facesByIdSelector } from '../../redux/faces/selectors';
 
 import DetailView from './DetailView';
@@ -36,7 +36,7 @@ const select = (state, props) => {
 
   return {
     image,
-    labels: labelsByImageId(state, id),
+    labels: labelsByImageIdSelector(state, id),
     faces: facesByImageId(state, id),
     selectedFace: params.face
       ? facesByIdSelector(state)[params.face] || null

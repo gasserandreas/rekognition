@@ -9,7 +9,12 @@ import facesReducer from './faces';
 import userReducer from './user';
 
 const reducers = combineReducers({
-  appTime: Date.now,
+  /**
+   * Do not use Date.now as pointer to prevent
+   * jest mock issues (by using pointer jest mock cannot
+   * replace function call)
+   */
+  appTime: () => Date.now(),
   application: applicationReducer,
   auth: authReducer,
   images: imagesReducer,

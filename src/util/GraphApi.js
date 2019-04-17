@@ -1,11 +1,23 @@
-import { createNetworkError } from './ErrorHandler';
-import { getToken } from './sessionUtil';
-
 import { ApolloLink } from 'apollo-link';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { setContext } from 'apollo-link-context';
 import { createHttpLink } from 'apollo-link-http';
+
+import { createNetworkError } from './ErrorHandler';
+import { getToken } from './sessionUtil';
+
+const getAuthToken = (_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = getToken();
+
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}`: '',
+    },
+  };
+};
 
 class GraphApi {
   client = null;
@@ -25,18 +37,7 @@ class GraphApi {
       uri: endpoint,
     });
 
-    // set auth
-    const authLink = setContext((_, { headers }) => {
-      // get the authentication token from local storage if it exists
-      const token = getToken();
-
-      return {
-        headers: {
-          ...headers,
-          authorization: token ? `Bearer ${token}`: '',
-        },
-      };
-    });
+    const authLink = setContext(getAuthToken);
 
     const link = ApolloLink.from([
       authLink,
@@ -111,6 +112,10 @@ class GraphApi {
     .catch(this.handleNetworkError)
     .then(this.handleResponse);
   }
+}
+
+export const __testables__ = {
+  getAuthToken,
 }
 
 export default GraphApi;
