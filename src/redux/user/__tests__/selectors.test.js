@@ -14,6 +14,11 @@ describe('user selector test suite', () => {
     }
   };
 
+  it('should return empty object for null state', () => {
+    expect(selectors.__testables__.userStateSelector({}))
+      .toEqual({});
+  });
+
   it('should handle userStateSelector', () => {
     expect(selectors.__testables__.userStateSelector(initialState))
       .toEqual(initialState.user);

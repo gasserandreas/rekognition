@@ -20,6 +20,11 @@ const initialState = {
 };
 
 describe('labels selector test suite', () => {
+  it('should return empty object for null state', () => {
+    expect(selectors.labelsStateSelector({}))
+      .toEqual({});
+  });
+
   it('should return labelsState state', () => {
     expect(selectors.labelsStateSelector(initialState))
       .toEqual(initialState.labels);

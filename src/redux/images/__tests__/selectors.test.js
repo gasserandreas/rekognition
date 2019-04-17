@@ -25,6 +25,11 @@ const initialState = {
 };
 
 describe('images selector test suite', () => {
+  it('should return empty object for null state', () => {
+    expect(selectors.imagesStateSelector({}))
+      .toEqual({});
+  });
+
   it('should handle imagesStateSelector', () => {
     expect(selectors.imagesStateSelector(initialState))
       .toEqual(initialState.images);

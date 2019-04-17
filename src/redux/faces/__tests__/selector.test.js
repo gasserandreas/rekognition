@@ -20,6 +20,11 @@ const initialState = {
 };
 
 describe('faces selector test suite', () => {
+  it('should return empty object for null state', () => {
+    expect(selectors.facesStateSelector({}))
+      .toEqual({});
+  });
+
   it('should return facesState state', () => {
     expect(selectors.facesStateSelector(initialState))
       .toEqual(initialState.faces);
