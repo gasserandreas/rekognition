@@ -17,4 +17,9 @@ const mapDispatchToProps = ({
   logInUser,
 });
 
+export const __testables__ = {
+  select,
+  mapDispatchToProps,
+};
+
 export default connect(select, mapDispatchToProps)(LoginView);

@@ -58,3 +58,8 @@ AuthFooter.propTypes = {
   href: PropTypes.string.isRequired,
 };
 
+export const __testables__ = {
+  StyledAuthFooter,
+  StyledAuthHeader,
+};
+
