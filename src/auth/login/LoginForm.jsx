@@ -15,26 +15,34 @@ import Message from '../../ui/form/Message';
 
 import ButtonGroup from '../../ui/form/ButtonGroup';
 
-// formik setups
-const formikEnhancer = withFormik({
-  validationSchema: Yup.object().shape({
-    email: Yup.string()
-      .email('Invalid email address')
-      .required('Email is required!'),
-    password: Yup.string()
-      .required('Password is required!'),
-  }),
-  mapPropsToValues: (obj) => {
-    const { user } = obj;
-    return {
-      ...user,
-    }
-  },
-  handleSubmit: (payload, { props }, b, c) => {
-    props.onSubmit(payload);
-  },
-  displayName: 'LoginForm',
+// formik setup
+const validationSchema = Yup.object().shape({
+  email: Yup.string()
+    .email('Invalid email address')
+    .required('Email is required!'),
+  password: Yup.string()
+    .required('Password is required!'),
 });
+
+const mapPropsToValues = (obj) => {
+  const { user } = obj;
+  return {
+    ...user,
+  };
+};
+
+const handleSubmit = (payload, { props }, b, c) => {
+  props.onSubmit(payload);
+};
+
+const formikConfig = {
+  validationSchema,
+  mapPropsToValues,
+  handleSubmit,
+  displayName: 'LoginForm',
+};
+
+const formikEnhancer = withFormik(formikConfig);
 
 // styled
 const StyledLoginForm = styled.form``;
@@ -87,6 +95,7 @@ const LoginForm = (props) => {
       <Field
         id="remember"
         label="Remember me"
+        error={touched.remember && errors.remember}
       >
         <CheckBox
           id="remember"
@@ -105,6 +114,7 @@ const LoginForm = (props) => {
           buttonStyle="link"
           onClick={handleReset}
           disabled={!dirty || submitting}
+          testId="jestResetButton"
         >Reset</Button>
         <Button
           type="submit"
@@ -112,6 +122,7 @@ const LoginForm = (props) => {
           buttonStyle="primary"
           style={{ marginLeft: '1rem' }}
           loading={submitting}
+          testId="jestSubmitButton"
         >Submit</Button>
       </ButtonGroup>
     </StyledLoginForm>
@@ -134,6 +145,15 @@ EnhancedLoginForm.defaultProps = {
     password: '',
     remember: false,
   },
+};
+
+export const __testables__ = {
+  formikConfig,
+  formikEnhancer,
+  validationSchema,
+  mapPropsToValues,
+  handleSubmit,
+  LoginForm,
 };
 
 export default EnhancedLoginForm;

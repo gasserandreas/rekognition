@@ -63,6 +63,28 @@ const dummyTestAction = (type = 'EMPTY') => ({
   type: `JEST_ACTION_${type}`,
 });
 
+const createFormitState = (formElements = {}) => ({
+  values: formElements.reduce((prev, cur) => ({
+    ...prev,
+    [cur]: cur,
+  }), {}),
+  touched: formElements.reduce((prev, cur) => ({
+    ...prev,
+    [cur]: false,
+  }), {}),
+  errors: formElements.reduce((prev, cur) => ({
+    ...prev,
+    [cur]: false,
+  }), {}),
+  dirty: false,
+  submitting: false,
+  error: false,
+  handleChange: jest.fn(),
+  handleBlur: jest.fn(),
+  handleSubmit: jest.fn(),
+  handleReset: jest.fn(),
+});
+
 // create and export testUtils
 global.testUtils = {
   createMockStore,
@@ -70,4 +92,5 @@ global.testUtils = {
   createHocActions,
   createHocReducerState,
   dummyTestAction,
+  createFormitState,
 };
