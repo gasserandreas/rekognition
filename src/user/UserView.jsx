@@ -44,7 +44,7 @@ const UserView = ({
 
   return (
     <View>
-      <Card>
+      <Card id="jestProfileInformation">
         <Heading level="4" margin={{ top: 'small', bottom: 'none' }}>Profile information</Heading>
         <Paragraph size="small" margin={{ bottom: 'none' }}>Update your basic profile information.</Paragraph>
         <AsyncContainer loading={getUserInfoRequest.loading}>
@@ -56,7 +56,7 @@ const UserView = ({
           />
         </AsyncContainer>
       </Card>
-      <Card>
+      <Card id="jestSessionInformation">
       <Heading level="4" margin={{ top: 'small', bottom: 'none' }}>Current session</Heading>
       <ResponsiveContext.Consumer>
         {size => (
@@ -65,14 +65,15 @@ const UserView = ({
               <Paragraph size="small" margin={{ bottom: 'none' }}>
                 <strong>Logged in since:</strong>
                 {' '}
-                {loggedInSince ? getDefaultFormatedDate(loggedInSince) : 'unknown'}
+                <span id="jestLoggedInSince">{loggedInSince ? getDefaultFormatedDate(loggedInSince) : 'unknown'}</span>
               </Paragraph>
               <Paragraph size="small" margin={{ bottom: 'none' }}>
-                <strong>Auto login:</strong> {remember ? 'enabled' : 'disabled'}
+                <strong>Auto login:</strong>
+                <span id="jestAutoLoggedIn">{remember ? 'enabled' : 'disabled'}</span>
               </Paragraph>
               <Paragraph size="small" margin={{ bottom: 'none' }}>
                 <strong>Privacy information: </strong>
-                Click <Link to={Paths.PRIVACY}>here</Link> to view our privacy policy
+                <span id="jestPrivacyLink" >Click <Link to={Paths.PRIVACY}>here</Link> to view our privacy policy</span>
               </Paragraph>
             </Box>
             <Box
@@ -87,6 +88,7 @@ const UserView = ({
                 <Button
                   buttonStyle="error"
                   onClick={logOutUser}
+                  id="jestLogOutUser"
                 >Logout</Button>
               </Box>
             </Box>
