@@ -15,23 +15,31 @@ import Message from '../../ui/form/Message';
 import ButtonGroup from '../../ui/form/ButtonGroup';
 
 // formik setups
-const formikEnhancer = withFormik({
-  validationSchema: Yup.object().shape({
-    email: Yup.string()
-      .email('Invalid email address')
-      .required('Email is required!'),
-  }),
-  mapPropsToValues: (obj) => {
-    const { user } = obj;
-    return {
-      ...user,
-    }
-  },
-  handleSubmit: (payload, { props }, b, c) => {
-    props.onSubmit(payload);
-  },
-  displayName: 'CheckEmailForm',
+const validationSchema = Yup.object().shape({
+  email: Yup.string()
+    .email('Invalid email address')
+    .required('Email is required!'),
 });
+
+const mapPropsToValues = (obj) => {
+  const { user } = obj;
+  return {
+    ...user,
+  }
+};
+
+const handleSubmit = (payload, { props }, b, c) => {
+  props.onSubmit(payload);
+};
+
+const formikConfig = {
+  validationSchema,
+  mapPropsToValues,
+  handleSubmit,
+  displayName: 'CheckEmailForm',
+};
+
+const formikEnhancer = withFormik(formikConfig);
 
 // styled
 const StyledCheckEmailForm = styled.form``;
@@ -75,6 +83,7 @@ const CheckEmailForm = (props) => {
           buttonStyle="link"
           onClick={handleReset}
           disabled={!dirty || submitting}
+          testId="jestResetButton"
         >Cancel</Button>
         <Button
           type="submit"
@@ -82,6 +91,7 @@ const CheckEmailForm = (props) => {
           buttonStyle="primary"
           style={{ marginLeft: '1rem' }}
           loading={submitting}
+          testId="jestSubmitButton"
         >Check email</Button>
       </ButtonGroup>
     </StyledCheckEmailForm>
@@ -95,6 +105,7 @@ EnhancedCheckEmailForm.propTypes = {
     email: PropTypes.string,
   }),
   validEmail: PropTypes.bool,
+  error: PropTypes.string,
 };
 
 EnhancedCheckEmailForm.defaultProps = {
@@ -102,6 +113,17 @@ EnhancedCheckEmailForm.defaultProps = {
     email: '',
   },
   validEmail: null,
+  error: '',
+};
+
+
+export const __testables__ = {
+  formikConfig,
+  formikEnhancer,
+  validationSchema,
+  mapPropsToValues,
+  handleSubmit,
+  CheckEmailForm,
 };
 
 export default EnhancedCheckEmailForm;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import toJson from 'enzyme-to-json';
+
 import 'jest-styled-components';
 import { MemoryRouter } from 'react-router-dom';
 
@@ -9,22 +9,27 @@ import LoginForm from '../LoginForm';
 import { AuthHeader, AuthFooter } from '../../AuthComponents';
 
 describe('LoginView test suite', () => {
-  const initialProps = {
-    isAuthenticated: false,
-    histroy: {
-      push: jest.fn(),
-    },
-    loginRequest: {
-      error: null,
-      loading: false,
-    },
-  };
+  let initialProps;
 
   const getLoginView = (props) => mount(
     <MemoryRouter>
       <LoginView {...props} />
     </MemoryRouter>
   );
+
+  beforeEach(() => {
+    initialProps = {
+      isAuthenticated: false,
+      histroy: {
+        push: jest.fn(),
+      },
+      loginRequest: {
+        error: null,
+        loading: false,
+      },
+      logInUser: jest.fn(),
+    };
+  });
 
   it('should render', () => {
     const wrapper = getLoginView(initialProps);
@@ -54,5 +59,20 @@ describe('LoginView test suite', () => {
     
     const loginForm = wrapper.find(LoginForm);
     expect(loginForm.props().error).toEqual(message);
+  });
+
+  it('should handle onSubmit', () => {
+    const wrapper = getLoginView(initialProps);
+    expect(wrapper.exists()).toBeTruthy();
+
+    const loginForm = wrapper.find(LoginForm);
+    expect(loginForm.exists()).toBeTruthy();
+
+    // fire submit
+    expect(initialProps.logInUser).not.toHaveBeenCalled();
+    loginForm.props().onSubmit();
+
+    // check callback
+    expect(initialProps.logInUser).toHaveBeenCalled();
   });
 });

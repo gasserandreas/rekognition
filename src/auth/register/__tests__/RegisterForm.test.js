@@ -7,20 +7,19 @@ import { TextInput, CheckBox, Field } from '../../../ui/form/Form';
 import Message from '../../../ui/form/Message';
 import Button from '../../../ui/form/Button';
 
-import { __testables__ } from '../LoginForm';
+import { __testables__ } from '../RegisterForm';
 const {
   formikConfig,
   validationSchema,
   mapPropsToValues,
   handleSubmit,
-  LoginForm,
-
+  RegisterForm,
 } = __testables__;
 
-describe('Login form test suite', () => {
+describe('Register form test suite', () => {
 
-  describe('LoginForm test suite', () => {
-    const inputFields = ['email', 'password', 'remember'];
+  describe('Register test suite', () => {
+    const inputFields = ['password', 'firstname', 'lastname', 'remember'];
 
     const getFormProps = (values) => {
       // create basic formit state
@@ -29,6 +28,7 @@ describe('Login form test suite', () => {
       // enhance and modify for local usage
       return {
         ...props,
+        error: null,
         values: {
           ...props.values,
           'remember': false,
@@ -37,9 +37,15 @@ describe('Login form test suite', () => {
       };
     };
 
+    const disabledFilter = (a) => {
+      const { disabled } = a.props();
+
+      return !disabled;
+    }
+
     it('should render', () => {
       const props = getFormProps();
-      const wrapper = mount(<LoginForm {...props} />);
+      const wrapper = mount(<RegisterForm {...props} />);
       expect(wrapper).toBeTruthy();
     });
 
@@ -56,16 +62,16 @@ describe('Login form test suite', () => {
           [cur]: true,
         }), {}),
       };
-      const wrapper = mount(<LoginForm {...props} />);
+      const wrapper = mount(<RegisterForm {...props} />);
       
       // test fields
-      const fields = wrapper.find(Field);
+      const fields = wrapper.find(Field).filterWhere(disabledFilter);
       fields.forEach((field) => {
         expect(field.props().error).toBeTruthy();
       });
 
       // test input fields
-      const textInputs = wrapper.find(TextInput);
+      const textInputs = wrapper.find(TextInput).filterWhere(disabledFilter);
       textInputs.forEach((textInput) => {
         expect(textInput.props().error).toBeTruthy();
       });
@@ -87,16 +93,16 @@ describe('Login form test suite', () => {
           [cur]: true,
         }), {}),
       };
-      const wrapper = mount(<LoginForm {...props} />);
+      const wrapper = mount(<RegisterForm {...props} />);
       
       // test fields
-      const fields = wrapper.find(Field);
+      const fields = wrapper.find(Field).filterWhere(disabledFilter);;
       fields.forEach((field) => {
         expect(field.props().error).toBeFalsy();
       });
 
       // test input fields
-      const textInputs = wrapper.find(TextInput);
+      const textInputs = wrapper.find(TextInput).filterWhere(disabledFilter);;
       textInputs.forEach((textInput) => {
         expect(textInput.props().error).toBeFalsy();
       });
@@ -106,24 +112,18 @@ describe('Login form test suite', () => {
     });
 
     it('should show error message if error props is set', () => {
+      const error = "Error message";
       const props = {
         ...getFormProps(),
-        error: true,
+        error,
       };
-      const wrapper = mount(<LoginForm {...props} />);
+      const wrapper = mount(<RegisterForm {...props} />);
       expect(wrapper).toBeTruthy();
 
       // check for error message
       const message = wrapper.find(Message);
       expect(message).toBeTruthy();
-    });
-
-    it('reset button should be disabled if not dirty', () => {
-      const wrapper = mount(<LoginForm {...getFormProps()} />);
-      const resetButton = wrapper
-        .find(Button)
-        .filterWhere(n => n.props().testId === 'jestResetButton');
-      expect(resetButton.props().disabled).toBeTruthy();
+      expect(message.text()).toEqual(error);
     });
 
     it('reset button should be disabled if submitting', () => {
@@ -132,7 +132,7 @@ describe('Login form test suite', () => {
         dirty: true,
         submitting: true,
       };
-      const wrapper = mount(<LoginForm {...props} />);
+      const wrapper = mount(<RegisterForm {...props} />);
       const resetButton = wrapper
         .find(Button)
         .filterWhere(n => n.props().testId === 'jestResetButton');
@@ -144,7 +144,7 @@ describe('Login form test suite', () => {
         ...getFormProps(),
         submitting: true,
       };
-      const wrapper = mount(<LoginForm {...props} />);
+      const wrapper = mount(<RegisterForm {...props} />);
       const submitButton = wrapper
         .find(Button)
         .filterWhere(n => n.props().testId === 'jestSubmitButton');
@@ -156,7 +156,7 @@ describe('Login form test suite', () => {
         ...getFormProps(),
         submitting: true,
       };
-      const wrapper = mount(<LoginForm {...props} />);
+      const wrapper = mount(<RegisterForm {...props} />);
       const submitButton = wrapper
         .find(Button)
         .filterWhere(n => n.props().testId === 'jestSubmitButton');
@@ -165,11 +165,34 @@ describe('Login form test suite', () => {
 
     // important to trigger Formik
     it('submit button should be type of submit', () => {
-      const wrapper = mount(<LoginForm {...getFormProps()} />);
+      const wrapper = mount(<RegisterForm {...getFormProps()} />);
       const submitButton = wrapper
         .find(Button)
         .filterWhere(n => n.props().testId === 'jestSubmitButton');
       expect(submitButton.props().type).toEqual('submit');
+    });
+
+    it('should handle handleOnReset', () => {
+      const props = {
+        ...getFormProps(),
+        handleReset: jest.fn(),
+        onCancel: jest.fn(),
+      };
+
+      const wrapper = mount(<RegisterForm {...props} />);
+      const resetButton = wrapper
+        .find(Button)
+        .filterWhere(n => n.props().testId === 'jestResetButton');
+      expect(resetButton.exists()).toBeTruthy();
+
+      expect(props.handleReset).not.toHaveBeenCalled();
+      expect(props.onCancel).not.toHaveBeenCalled();
+
+      // simulate click
+      resetButton.simulate('click');
+
+      expect(props.handleReset).toHaveBeenCalled();
+      expect(props.onCancel).toHaveBeenCalled();
     });
   });
 
@@ -185,15 +208,17 @@ describe('Login form test suite', () => {
 
     it('validationSchema should be consistent', () => {
       const { fields } = validationSchema;
-      const { email, password } = fields;
+      const { password, firstname, lastname } = fields;
 
-      expect(email).toBeTruthy();
       expect(password).toBeTruthy();
+      expect(firstname).toBeTruthy();
+      expect(lastname).toBeTruthy();
     });
 
     it('should handle mapPropsToValues', () => {
       const user = {
-        name: 'Test user',
+        name: 'User',
+        firstname: 'Test'
       };
       const props = { user };
       expect(mapPropsToValues(props)).toEqual(user);

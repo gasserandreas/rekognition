@@ -1,26 +1,31 @@
 import { __testables__ } from '../Container';
-import { logInUser } from '../../../redux/auth';
+import { signupUser, checkEmail, invalidateEmail } from '../../../redux/auth';
 
 const { select, mapDispatchToProps } = __testables__;
 
-describe('auth login container test suite', () => {
+describe('auth register container test suite', () => {
   it('should return container state', () => {
     const state = select({});
-
     expect(state).toEqual({
       isAuthenticated: false,
-      loginRequest: undefined,
+      signupRequest: undefined,
+      checkEmailRequest: undefined,
+      validEmail: undefined,
     });
 
     expect(Object.keys(state)).toEqual([
       'isAuthenticated',
-      'loginRequest',
+      'signupRequest',
+      'validEmail',
+      'checkEmailRequest',
     ]);
   });
 
   it('should return redux actions', () => {
     expect(mapDispatchToProps).toEqual({
-      logInUser,
+      signupUser,
+      checkEmail,
+      invalidateEmail,
     });
   });
 });
