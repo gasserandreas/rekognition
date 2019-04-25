@@ -15,12 +15,9 @@ import * as Paths from '../../paths';
 
 describe('RegisterView test suite', () => {
   const jestProfileInformation = 'jestProfileInformation';
-  const jestSessionInformation = 'jestSessionInformation';
   const jestLoggedInSince = 'jestLoggedInSince';
   const jestPrivacyLink = 'jestPrivacyLink';
   const jestAutoLoggedIn = 'jestAutoLoggedIn';
-  const jestPrivacyInformation = 'jestPrivacyInformation';
-  const jestLogoutBox = 'jestLogoutBox';
   const jestLogOutUser = 'jestLogOutUser';
 
   let initialProps;
