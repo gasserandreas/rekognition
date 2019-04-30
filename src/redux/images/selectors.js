@@ -53,7 +53,7 @@ export const addImageRequestSelector = createSelector(
 
 export const addImageIsLoading = createSelector(
   addImageRequestSelector,
-  ({ loading }) => loading,
+  (addImageRequestSelector) => addImageRequestSelector ? addImageRequestSelector.loading : false,
 );
 
 // get image
