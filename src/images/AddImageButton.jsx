@@ -5,16 +5,18 @@ import uuid from 'uuid';
 import styled from 'styled-components';
 import Dropzone from 'react-dropzone'
 
-import { Box, Heading, Image } from 'grommet';
+// import { Box, Heading, Image } from 'grommet';
 import { Add } from 'grommet-icons';
 
+import AddImageMessage from './AddImageMessage';
+
 import Button from '../ui/form/Button';
-import ButtonGroup from '../ui/form/ButtonGroup';
-import ViewMessage from '../ui/ViewMessage';
-import {
-  getImageCreationDateTime,
-  getFormattedFileSize,
-} from '../util/util';
+// import ButtonGroup from '../ui/form/ButtonGroup';
+// import ViewMessage from '../ui/ViewMessage';
+// import {
+//   getImageCreationDateTime,
+//   getFormattedFileSize,
+// } from '../util/util';
 
 import { addImage } from '../redux/images';
 import { addImageIsLoading } from '../redux/images/selectors';
@@ -37,63 +39,63 @@ const StyledAddImageButton = styled(Button)`
   }
 `;
 
-const StyledImageWrapper = styled(Box)`
-  flex-grow: 1;
-  flex-shrink: 1;
-  margin: 1rem 0;
+// const StyledImageWrapper = styled(Box)`
+//   flex-grow: 1;
+//   flex-shrink: 1;
+//   margin: 1rem 0;
 
-  @media (min-width: ${MediaSize.Tablet}) {
-    flex-direction: row;
-  }
-`;
+//   @media (min-width: ${MediaSize.Tablet}) {
+//     flex-direction: row;
+//   }
+// `;
 
-const StyledImage = styled(Image)`
-  width: 100%;
-  height: auto;
-  max-height: 40vw;
-  flex-shrink: 0;
-  flex-grow: 0;
-  overflow: inherit;
-  margin-bottom: 1rem;
+// const StyledImage = styled(Image)`
+//   width: 100%;
+//   height: auto;
+//   max-height: 40vw;
+//   flex-shrink: 0;
+//   flex-grow: 0;
+//   overflow: inherit;
+//   margin-bottom: 1rem;
 
-  @media (min-width: ${MediaSize.Tablet}) {
-    width: 60%;
-    height: auto;
-    margin-right: 2rem;
-    margin-bottom: 0 0 1rem;
-  }
-`;
+//   @media (min-width: ${MediaSize.Tablet}) {
+//     width: 60%;
+//     height: auto;
+//     margin-right: 2rem;
+//     margin-bottom: 0 0 1rem;
+//   }
+// `;
 
-const StyledImageAttributes = styled(Box)`
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-  align-content: start;
+// const StyledImageAttributes = styled(Box)`
+//   flex-direction: row;
+//   flex-wrap: wrap;
+//   justify-content: space-between;
+//   align-items: flex-start;
+//   align-content: start;
 
-  @media (min-width: ${MediaSize.Tablet}) {
-    flex-direction: column;
-    justify-content: flex-start;
-  }
+//   @media (min-width: ${MediaSize.Tablet}) {
+//     flex-direction: column;
+//     justify-content: flex-start;
+//   }
 
-  div {
-    box-sizing: border-box;
-    flex-shrink: 1;
-    flex-grow: 1;
-    padding: 0.25rem;
-    width: 49%;
+//   div {
+//     box-sizing: border-box;
+//     flex-shrink: 1;
+//     flex-grow: 1;
+//     padding: 0.25rem;
+//     width: 49%;
 
-    @media (min-width: ${MediaSize.Tablet}) {
-      width: auto;
-      flex-shrink: 0;
-      flex-grow: 0;
-    }
-  }
+//     @media (min-width: ${MediaSize.Tablet}) {
+//       width: auto;
+//       flex-shrink: 0;
+//       flex-grow: 0;
+//     }
+//   }
 
-  strong {
-    margin-right: 0.25rem;
-  }
-`;
+//   strong {
+//     margin-right: 0.25rem;
+//   }
+// `;
 
 const initialState = {
   showMessage: false,
@@ -104,6 +106,7 @@ const AddImageButton = ({
   loading,
   addImage,
   afterOnClick,
+  children,
   ...props,
 }) => {
   const [state, setState] = useState(initialState);
@@ -129,12 +132,14 @@ const AddImageButton = ({
     if (files.length > 0) {
       files.forEach((file) => {
         const { size } = file;
-        if (size > 6000000) {
+        // if (size > 6000000) {
+        if (size > 1000000) {
           // image is to big
           setState({
             showMessage: true,
             image: file,
           });
+          console.log(file);
         } else {
           // upload
           const id = uuid.v4();
@@ -152,9 +157,16 @@ const AddImageButton = ({
   };
 
   const { showMessage, image } = state;
+  console.log(state);
   return (
     <Fragment>
-      <ViewMessage show={showMessage}>
+      <AddImageMessage
+        show={showMessage}
+        image={image}
+        onHandleResetForm={handleResetForm}
+        onHandleOpenImageDialog={handleOpenImageDialog}
+      />
+      {/* <ViewMessage show={showMessage}>
         <Heading level="2">Image is too big</Heading>
         <Box>
         <p>Hey it seems your image to big for being uploaded. We only allow uploading images up to <strong>6 MB</strong>, please choose a different image.</p>
@@ -189,7 +201,7 @@ const AddImageButton = ({
             >Change image</Button>
           </ButtonGroup>
         </Box>
-      </ViewMessage>
+      </ViewMessage> */}
       <Dropzone
         onDrop={handleUploadImage}
         ref={uploadRef}
@@ -230,5 +242,15 @@ const select = (state) => ({
 const mapDispatchToProps = ({
   addImage,
 });
+
+export const __testables__ = {
+  select,
+  mapDispatchToProps,
+  AddImageButton,
+  StyledAddImageButton,
+  // StyledImage,
+  // StyledImageAttributes,
+  // StyledImageWrapper,
+};
 
 export default connect(select, mapDispatchToProps)(AddImageButton);
