@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -176,16 +176,16 @@ const ImageContainer = ({
         fill
       >
         <StyledImageWrapper pos={imageWrapperPosition}>
-          {selectedFace && <StyledSelector pos={selectedFace.position} />}
+          {selectedFace && <StyledSelector id="jestSelectedFace" pos={selectedFace.position} />}
           {selectedLabel && (
-            <Fragment>
+            <span id="jestSelectedLabel">
               {selectedLabel.instances.map((pos, i) => (
                 <StyledSelector
                   key={`label_selector_${i}`}
                   pos={pos}
                 />
               ))}
-            </Fragment>
+            </span>
           )}
           <StyledAsyncImage
             src={getImageSrc(path)}
