@@ -36,7 +36,7 @@ export const sortedImageListSelector = createSelector(
 
 export const imagesByIdSelector = createSelector(
   imagesStateSelector,
-  ({ byId }) => byId,
+  ({ byId }) => byId || {},
 );
 
 // list
