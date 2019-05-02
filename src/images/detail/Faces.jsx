@@ -23,6 +23,7 @@ const Emotions = ({ faceId, emotions, ...props }) => (
       bold
     >Emotions</StyledAttrLabel>
       {emotions
+         /* istanbul ignore next */ 
         .sort((a, b) => a.confidence < b.confidence ? 1 : -1)
         .map(({ name, confidence }) => (
           <Label
@@ -145,5 +146,12 @@ Faces.defaultProps = {
     id: null,
   },
 }
+
+export const __testables__ = {
+  StyledEmotions,
+  Emotions,
+  StyledFace,
+  Face,
+};
 
 export default Faces;

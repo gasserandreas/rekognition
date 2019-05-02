@@ -182,6 +182,10 @@ const DetailView = ({
     history.push(path);
   };
 
+  console.log(faces);
+  console.log(labels);
+  console.log(selectedFace);
+
   return (
     <StyledView>
       <AddImageButton afterOnClick={() => history.push(Paths.HOME)} />
