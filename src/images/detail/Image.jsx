@@ -58,6 +58,72 @@ StyledImageWrapper.defaultProps = {
 // image wrapper comp
 const StyledImageContainer = styled(Box)``;
 
+const getPositions = (meta, wrapperBounding) => {
+  const {
+    height: imageHeight,
+    width: imageWidth,
+    orientation,
+  } = meta;
+
+  // get wrapper positions
+  const imageContainerPosition = {
+    x: wrapperBounding.x,
+    y: wrapperBounding.y,
+    width: wrapperBounding.width,
+    height: wrapperBounding.height,
+    top: wrapperBounding.top,
+    bottom: wrapperBounding.bottom,
+  };
+
+  let width, height, ratio;
+
+  if (orientation === 'LANDSCAPE') {
+    // simple case, use full wrapper width
+    width = imageContainerPosition.width;
+
+    // get height by sticking with the ratio
+    ratio = imageWidth / width;
+    height = imageHeight / ratio;
+
+    // check if image height fits into viewport by using max width
+    if (height > imageContainerPosition.height) {
+      height = imageContainerPosition.height;
+      ratio = imageHeight / height;
+      width = imageWidth / ratio;
+    }
+  } else {
+    // portrait mode full height
+    height = imageContainerPosition.height;
+    ratio = imageHeight / height;
+    width = imageWidth / ratio;
+
+    // check if image width fits into viewport by using max height
+    if (width > imageContainerPosition.width) {
+      // scale image down to full width
+      width = imageContainerPosition.width;
+      ratio = imageWidth / width;
+      height = imageHeight / ratio;
+    }
+  }
+
+  // calculate top position (center of container)
+  const top = imageContainerPosition.height / 2 - (height / 2);
+  const left = imageContainerPosition.width / 2 -(width / 2);
+
+  // define image position
+  const imageWrapperPosition = {
+    top,
+    left,
+    width,
+    height,
+  };
+
+  return {
+    imageContainerPosition,
+    imageWrapperPosition,
+  };
+};
+
 const ImageContainer = ({
   image: {
     meta,
@@ -73,70 +139,13 @@ const ImageContainer = ({
   });
 
   const handleWrapperPosition = () => {
-    const {
-      height: imageHeight,
-      width: imageWidth,
-      orientation,
-    } = meta;
-
     const wrapperBounding = wrapperRef.current.getBoundingClientRect();
 
     // (deep) equals check based on string
     if (JSON.stringify(state.wrapperBounding)
       !== JSON.stringify(wrapperBounding)) {
-        // get wrapper positions
-        const imageContainerPosition = {
-          x: wrapperBounding.x,
-          y: wrapperBounding.y,
-          width: wrapperBounding.width,
-          height: wrapperBounding.height,
-          top: wrapperBounding.top,
-          bottom: wrapperBounding.bottom,
-        };
 
-        let width, height, ratio;
-
-
-        if (orientation === 'LANDSCAPE') {
-          // simple case, use full wrapper width
-          width = imageContainerPosition.width;
-
-          // get height by sticking with the ratio
-          ratio = imageWidth / width;
-          height = imageHeight / ratio;
-
-          // check if image height fits into viewport by using max width
-          if (height > imageContainerPosition.height) {
-            height = imageContainerPosition.height;
-            ratio = imageHeight / height;
-            width = imageWidth / ratio;
-          }
-        } else {
-          // portrait mode full height
-          height = imageContainerPosition.height;
-          ratio = imageHeight / height;
-          width = imageWidth / ratio;
-
-          // check if image width fits into viewport by using max height
-          if (width > imageContainerPosition.width) {
-            // scale image down to full width
-            width = imageContainerPosition.width;
-            ratio = imageWidth / width;
-            height = imageHeight / ratio;
-          }
-        }
-
-        // calculate top position (center of container)
-        const top = imageContainerPosition.height / 2 - (height / 2);
-        const left = imageContainerPosition.width / 2 -(width / 2);
-
-        // define image position
-        const imageWrapperPosition = {
-          top,
-          left,
-          width,
-          height,
-        };
+        const { imageContainerPosition, imageWrapperPosition } = getPositions(meta, wrapperBounding);
 
         setState({
           imageContainerPosition,
@@ -185,6 +194,27 @@ const ImageContainer = ({
         </StyledImageWrapper>
       </StyledImageContainer>
   );
+};
+
+Image.propTypes = {
+  image: PropTypes.shape({
+    meta: PropTypes.shape({
+      height: PropTypes.number.isRequired,
+      width: PropTypes.number.isRequired,
+      orientation: PropTypes.string.isRequired,
+    }).isRequired,
+    path: PropTypes.string.isRequired,
+  }),
+  selectedFace: PropTypes.shape({}),
+  selectedLabel: PropTypes.shape({}),
+}
+
+export const __testables__ = {
+  StyledSelector,
+  StyledAsyncImage,
+  StyledImageWrapper,
+  generateInitPos,
+  getPositions,
 };
 
 export default ImageContainer;
