@@ -58,7 +58,7 @@ StyledFace.defaultProps = {
   selected: false,
 }
 
-const Face = ({ face, number, ...props }) => {
+export const Face = ({ face, number, ...props }) => {
   const { id, age, attributes, emotions } = face;
 
   // generate age attribute

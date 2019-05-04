@@ -3,8 +3,6 @@ import { mount, shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import 'jest-styled-components';
 
-import { Paragraph } from 'grommet';
-
 import Image, { __testables__ } from '../Image';
 
 const {
@@ -15,7 +13,11 @@ const {
   getPositions,
 } = __testables__;
 
-describe('Faces test suite', () => {
+ /**
+     * Can't test handleResetForm hooks with Enzyme.
+     * Waiting for Hooks support in Enzyme
+     */
+describe('Image test suite', () => {
   const mockedImage = {
     meta: {
       height: 100,

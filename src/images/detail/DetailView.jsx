@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -121,14 +121,36 @@ const StyledView = styled(View)`
   }
 `;
 
+const convertMetaToAttributes = (meta) => {
+  const { density, height, width, type, size } = meta;
+  return [
+    {
+      name: 'Type',
+      value: type,
+    },
+    {
+      name: 'Size',
+      value: size > 0 ? `${getFormattedFileSize(size)} MB` : null,
+    },
+    {
+      name: 'Dimension',
+      value: height > 0 ? `${width}px x ${height}px` : null,
+    },
+    {
+      name: 'Density',
+      value: density > 0 ? `${density} DPI` : null,
+    },
+  ].filter(({ value }) => value !== null);
+};
+
 const DetailView = ({
   history,
+  image,
   labels,
   selectedLabel,
   faces,
   selectedFace,
   getImage,
-  image,
   getImageRequest,
 }) => {
   const { id: imageId, created, meta } = image;
@@ -143,25 +165,7 @@ const DetailView = ({
 
   // generate meta render array
   const metaValues = useMemo(() => {
-    const { density, height, width, type, size } = meta;
-    return [
-      {
-        name: 'Type',
-        value: type,
-      },
-      {
-        name: 'Size',
-        value: size > 0 ? `${getFormattedFileSize(size)} MB` : null,
-      },
-      {
-        name: 'Dimension',
-        value: height > 0 ? `${width}px x ${height}px` : null,
-      },
-      {
-        name: 'Density',
-        value: density > 0 ? `${density} DPI` : null,
-      },
-    ].filter(({ value }) => value !== null);
+    return convertMetaToAttributes(meta);
   }, [meta]);
 
   // url handlers
@@ -182,10 +186,6 @@ const DetailView = ({
     history.push(path);
   };
 
-  console.log(faces);
-  console.log(labels);
-  console.log(selectedFace);
-
   return (
     <StyledView>
       <AddImageButton afterOnClick={() => history.push(Paths.HOME)} />
@@ -202,14 +202,14 @@ const DetailView = ({
         <StyledBackButton onClick={() => history.push(Paths.HOME)} />
         <StyledScrollableData>
         <StyledHeading level="4" style={{ marginTop: '0rem'}}>Image Information</StyledHeading>
-          <Box>
+          <Box id="jestImageAttributes">
             <Attribute attribute={{ name: 'Uploaded', value: getImageCreationDateTime(created) }} />
             {metaValues.map(({ name, value }) => (
               <Attribute key={`meta_attribute_${name}`} attribute={{ name, value }} />
             ))}
           </Box>
           <StyledHeading level="4">Labels ({labels.length})</StyledHeading>
-          <AsyncContainer loading={loading}>
+          <AsyncContainer id="jestLabelsAsyncContainer" loading={loading}>
             <Labels
               labels={labels}
               selectedLabel={selectedLabel}
@@ -217,16 +217,16 @@ const DetailView = ({
             />
           </AsyncContainer>
           { faces.length > 0 && (
-            <Fragment>
+            <div id="jestFacesContainer">
               <StyledHeading level="4">Faces ({faces.length})</StyledHeading>
-              <AsyncContainer loading={loading}>
+              <AsyncContainer id="jestFacesAsyncContainer" loading={loading}>
                 <Faces
                   faces={faces}
                   selectedFace={selectedFace}
                   onFaceClick={(face) => handleFaceClick(face)}
                 />
               </AsyncContainer>
-            </Fragment>
+            </div>
           )}
         </StyledScrollableData>
       </StyledDataBox>
@@ -253,6 +253,17 @@ DetailView.defaultProps = {
   selectedFace: null,
   selectedLabel: null,
 }
+
+export const __testables__ = {
+  StyledBackButton,
+  StyledHeading,
+  StyledImageBoxContainer,
+  StyledImageBox,
+  StyledDataBox,
+  StyledScrollableData,
+  StyledView,
+  convertMetaToAttributes,
+};
 
 export default DetailView;
 

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Faces test suite should render ImageContainer consistently 1`] = `
+exports[`Image test suite should render ImageContainer consistently 1`] = `
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -16465,19 +16465,19 @@ string",
 </ImageContainer>
 `;
 
-exports[`Faces test suite should render StyledAsyncImage consistently 1`] = `
+exports[`Image test suite should render StyledAsyncImage consistently 1`] = `
 <ContextConsumer>
   <Component />
 </ContextConsumer>
 `;
 
-exports[`Faces test suite should render StyledImageWrapper consistently 1`] = `
+exports[`Image test suite should render StyledImageWrapper consistently 1`] = `
 <ContextConsumer>
   <Component />
 </ContextConsumer>
 `;
 
-exports[`Faces test suite should render StyledSelector consistently 1`] = `
+exports[`Image test suite should render StyledSelector consistently 1`] = `
 <ContextConsumer>
   <Component />
 </ContextConsumer>
