@@ -218,5 +218,14 @@ ImageList.propTypes = {
   onImageClick: PropTypes.func.isRequired,
 }
 
+export const __testables__ = {
+  StyledImageAttr,
+  ImageAttr,
+  StyledImage,
+  StyledListItem,
+  ListItem,
+  ListItemAdd,
+  StyledImageList,
+};
 
 export default ImageList;
