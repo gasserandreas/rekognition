@@ -3,7 +3,7 @@ import { getImage } from '../../../redux/images';
 
 const { select, mapDispatchToProps, mapKeyToValue } = __testables__;
 
-describe('auth register container test suite', () => {
+describe('image details container test suite', () => {
   const expectedInitialState = {
     image: undefined,
     labels: [],

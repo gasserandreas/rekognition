@@ -5,7 +5,7 @@ export const imagesStateSelector = state => state.images || {};
 export const imagesListSelector = createSelector(
   imagesStateSelector,
   ({ ids, byId }) => {
-    if (ids.length === 0) {
+    if (!ids || !byId || ids.length === 0) {
       return [];
     }
 

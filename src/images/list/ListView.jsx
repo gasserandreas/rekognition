@@ -28,7 +28,6 @@ ListView.propTypes = {
     PropTypes.shape({})
   ).isRequired,
   addImageRequest: HOCRequestPropTypes.isRequired,
-  listImages: PropTypes.func.isRequired,
 };
 
 ListView.defaultProps = {};
