@@ -1,4 +1,5 @@
-import 'react-app-polyfill/ie9';
+/* eslint-disable react/jsx-filename-extension */
+import 'react-app-polyfill/ie9'; // eslint-disable-line import/no-extraneous-dependencies
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
@@ -17,8 +18,7 @@ const { store, persistor } = configureStore();
 
 // persistor.purge();
 
-class Index extends Component {
-  // eslint-disable-line react/prefer-stateless-function
+class Index extends Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       <Provider store={store}>

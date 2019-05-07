@@ -77,7 +77,7 @@ const getPositions = (meta, wrapperBounding) => {
 
   if (orientation === 'LANDSCAPE') {
     // simple case, use full wrapper width
-    width = imageContainerPosition.width;
+    width = imageContainerPosition.width; // eslint-disable-line prefer-destructuring
 
     // get height by sticking with the ratio
     ratio = imageWidth / width;
@@ -85,20 +85,20 @@ const getPositions = (meta, wrapperBounding) => {
 
     // check if image height fits into viewport by using max width
     if (height > imageContainerPosition.height) {
-      height = imageContainerPosition.height;
+      height = imageContainerPosition.height; // eslint-disable-line prefer-destructuring
       ratio = imageHeight / height;
       width = imageWidth / ratio;
     }
   } else {
     // portrait mode full height
-    height = imageContainerPosition.height;
+    height = imageContainerPosition.height; // eslint-disable-line prefer-destructuring
     ratio = imageHeight / height;
     width = imageWidth / ratio;
 
     // check if image width fits into viewport by using max height
     if (width > imageContainerPosition.width) {
       // scale image down to full width
-      width = imageContainerPosition.width;
+      width = imageContainerPosition.width; // eslint-disable-line prefer-destructuring
       ratio = imageWidth / width;
       height = imageHeight / ratio;
     }
@@ -164,7 +164,7 @@ const ImageContainer = ({ image: { meta, path }, selectedFace, selectedLabel }) 
         {selectedLabel && (
           <span id="jestSelectedLabel">
             {selectedLabel.instances.map((pos, i) => (
-              <StyledSelector key={`label_selector_${i}`} pos={pos} />
+              <StyledSelector key={`label_selector_${i}`} pos={pos} /> // eslint-disable-line react/no-array-index-key
             ))}
           </span>
         )}
@@ -174,17 +174,13 @@ const ImageContainer = ({ image: { meta, path }, selectedFace, selectedLabel }) 
   );
 };
 
-Image.propTypes = {
+ImageContainer.propTypes = {
   image: PropTypes.shape({
-    meta: PropTypes.shape({
-      height: PropTypes.number.isRequired,
-      width: PropTypes.number.isRequired,
-      orientation: PropTypes.string.isRequired,
-    }).isRequired,
+    meta: PropTypes.shape({}),
     path: PropTypes.string.isRequired,
-  }),
-  selectedFace: PropTypes.shape({}),
-  selectedLabel: PropTypes.shape({}),
+  }).isRequired,
+  selectedFace: PropTypes.shape({}).isRequired,
+  selectedLabel: PropTypes.shape({}).isRequired,
 };
 
 export const __testables__ = {

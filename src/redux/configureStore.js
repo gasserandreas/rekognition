@@ -1,3 +1,4 @@
+/* global requestAnimationFrame */
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { debounce } from 'lodash';
@@ -76,19 +77,14 @@ const configureStore = (initialState = {}) => {
          * or in next project find different solution for that...
          */
         /* istanbul ignore next */
-        onAuthError: message => (
+        onAuthError: (message) => {
           /* istanbul ignore next */
-          store.dispatch(
-            /* istanbul ignore next */
-            logOutUser(message)
-          )
-                          )
-                             )
-                         )
-                     ) // AUTH_LOG_OUT
-      })
+          store.dispatch(logOutUser(message)); // eslint-disable-line no-use-before-define
+          // AUTH_LOG_OUT
+        },
+      }),
     }),
-    errorMiddleware
+    errorMiddleware,
   ];
 
   const enhancers = getEnhancers();
@@ -98,7 +94,7 @@ const configureStore = (initialState = {}) => {
   const store = createStore(
     persistedReducer,
     initialState,
-    composeEnhancers(applyMiddleware(...middleware), ...enhancers)
+    composeEnhancers(applyMiddleware(...middleware), ...enhancers),
   );
 
   const persistor = persistStore(store);
@@ -108,19 +104,19 @@ const configureStore = (initialState = {}) => {
 
   // idle configuration
   /* istanbul ignore next */
-  const idleDispatcher = () => ( {
+  const idleDispatcher = () => {
     /* istanbul ignore next */
     store.dispatch({ type: APP_IDLE });
   };
 
   // debounce app idle all 30 seconds
   /* istanbul ignore next */
-  const deBounced = debounce(() => ( {
+  const deBounced = debounce(() => {
     // The requestAnimationFrame ensures it doesn't run when tab isn't active
     // the requestIdleCallback makes sure the browser isn't busy with something
     // else.
     /* istanbul ignore next */
-    requestAnimationFrame(() => ( ric(idleDispatcher, { timeout: 500 }));
+    requestAnimationFrame(() => ric(idleDispatcher, { timeout: 500 }));
   }, 30000);
 
   // Now this will run *each time* something

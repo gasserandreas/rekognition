@@ -54,7 +54,9 @@ StyledFace.defaultProps = {
   selected: false,
 };
 
-export const Face = ({ face, number, ...props }) => {
+export const Face = ({
+  face, number, selected, ...props
+}) => {
   const {
     id, age, attributes, emotions,
   } = face;
@@ -75,7 +77,7 @@ export const Face = ({ face, number, ...props }) => {
         Face
         {' '}
         {number}
-        {props.selected && (
+        {selected && (
           <Text color="brand" size="small">
             {' '}
             (selected)
@@ -109,6 +111,8 @@ Face.propTypes = {
     emotions: PropTypes.arrayOf(AttributePropType).isRequired,
     attributes: PropTypes.arrayOf(AttributePropType).isRequired,
   }).isRequired,
+  number: PropTypes.number.isRequired,
+  selected: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
 };
 

@@ -71,10 +71,15 @@ export const Field = ({
 
 Field.propTypes = {
   inline: PropTypes.bool,
+  id: PropTypes.string.isRequired,
+  label: PropTypes.node.isRequired,
+  error: PropTypes.node,
+  children: PropTypes.node.isRequired,
 };
 
 Field.defaultProps = {
   inline: false,
+  error: undefined,
 };
 
 const StyledFieldRow = styled(Grommet.Box)`
@@ -94,6 +99,10 @@ export const FieldRow = ({ children, ...props }) => (
     {children}
   </StyledFieldRow>
 );
+
+FieldRow.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export const __testables__ = {
   StyledTextInput,

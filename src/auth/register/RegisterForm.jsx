@@ -31,7 +31,7 @@ const mapPropsToValues = (obj) => {
   };
 };
 
-const handleSubmit = (payload, { props }, b, c) => {
+const handleSubmit = (payload, { props }) => {
   props.onSubmit(payload);
 };
 
@@ -136,6 +136,20 @@ const RegisterForm = ({
   );
 };
 
+RegisterForm.propTypes = {
+  validEmail: undefined,
+  error: '',
+  values: PropTypes.shape({}).isRequired,
+  touched: PropTypes.bool.isRequired,
+  errors: PropTypes.shape({}).isRequired,
+  dirty: PropTypes.shape({}).isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleBlur: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  handleReset: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
+};
+
 const EnhancedRegisterForm = formikEnhancer(RegisterForm);
 
 EnhancedRegisterForm.propTypes = {
@@ -159,8 +173,6 @@ EnhancedRegisterForm.defaultProps = {
     password: '',
     remember: false,
   },
-  validEmail: undefined,
-  error: '',
 };
 
 export const __testables__ = {

@@ -130,7 +130,14 @@ describe('ImageList test suite', () => {
       const image = initialProps.images[0];
       const { meta, created } = image;
       const { numberOfFaces, numberOfLabels } = meta;
-      return mount(<ImageAttr created={created} numberOfFaces={numberOfFaces} numberOfLabels={numberOfLabels} />);
+      return mount(
+        <ImageAttr
+          created={created}
+          numberOfFaces={numberOfFaces}
+          numberOfLabels={numberOfLabels}
+          {...props}
+        />,
+      );
     };
 
     it('should render', () => {

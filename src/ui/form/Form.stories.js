@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { storiesOf } from '@storybook/react';
 import { select, boolean, text } from '@storybook/addon-knobs';
@@ -33,7 +34,7 @@ const formikEnhancer = withFormik({
       ...user,
     };
   },
-  handleSubmit: (payload, { props }, b, c) => {
+  handleSubmit: (payload, { props }) => {
     props.onSubmit(payload);
   },
   displayName: 'SimpleForm',
@@ -95,6 +96,23 @@ const SimpleForm = (props) => {
       </ButtonGroup>
     </form>
   );
+};
+
+SimpleForm.propTypes = {
+  values: PropTypes.shape({}).isRequired,
+  touched: PropTypes.bool.isRequired,
+  errors: PropTypes.shape({}).isRequired,
+  dirty: PropTypes.shape({}).isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleBlur: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  handleReset: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
+  error: PropTypes.bool,
+};
+
+SimpleForm.defaultProps = {
+  error: false,
 };
 
 const EnhancedSimpleForm = formikEnhancer(SimpleForm);

@@ -11,7 +11,7 @@ import Card from '../../ui/Card';
 import { createUseIsAuthenticatedHistoryPush } from '../../ui/hooks/auth';
 
 import * as Paths from '../../paths';
-import { HOCRequestPropTypes } from '../../util/PropTypes';
+import { HOCRequestPropTypes, HistoryPropType } from '../../util/PropTypes';
 import { Colors } from '../../styles';
 
 // creat hook
@@ -56,6 +56,8 @@ const LoginView = ({
 LoginView.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   loginRequest: HOCRequestPropTypes.isRequired,
+  logInUser: PropTypes.shape({}).isRequired,
+  history: HistoryPropType.isRequired,
 };
 
 export default LoginView;

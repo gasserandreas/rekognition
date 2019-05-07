@@ -26,7 +26,7 @@ const mapPropsToValues = (obj) => {
   };
 };
 
-const handleSubmit = (payload, { props }, b, c) => {
+const handleSubmit = (payload, { props }, _, __) => {
   props.onSubmit(payload);
 };
 
@@ -114,6 +114,19 @@ const LoginForm = (props) => {
       </ButtonGroup>
     </StyledLoginForm>
   );
+};
+
+LoginForm.propTypes = {
+  values: PropTypes.shape({}).isRequired,
+  touched: PropTypes.bool.isRequired,
+  errors: PropTypes.shape({}).isRequired,
+  dirty: PropTypes.shape({}).isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleBlur: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  handleReset: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
+  error: PropTypes.string.isRequired,
 };
 
 const EnhancedLoginForm = formikEnhancer(LoginForm);

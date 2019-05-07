@@ -106,7 +106,7 @@ export const logOutUser = (message, broadcast = true) => (dispatch) => {
 
   // clean up state
   try {
-    console.log('clear local & session storage');
+    console.log('clear local & session storage'); // eslint-disable-line no-console
     window.localStorage.clear();
     window.sessionStorage.clear();
 
@@ -116,7 +116,7 @@ export const logOutUser = (message, broadcast = true) => (dispatch) => {
     }
   } catch (error) {
     /* istanbul ignore next */
-    console.log('could not clear local and session storage');
+    console.log('could not clear local and session storage'); // eslint-disable-line no-console
   }
 
   // force reload to clear cache
@@ -268,16 +268,13 @@ export const refreshToken = (token, userId) => (dispatch, getState, { GraphApi }
 
   return GraphApi.mutation(REFRESH_TOKEN, variables)
     .then((data) => {
-      const {
-        refreshToken: { token },
-      } = data;
       const user = {
         id: userId,
         firstname: username,
       };
-      dispatch(handleAuth(token, user, remember));
+      dispatch(handleAuth(data.refreshToken.token, user, remember));
     })
-    .catch((error) => {
+    .catch(() => {
       /* istanbul ignore next */
       dispatch(logOutUser('Could not refresh token', true));
     });

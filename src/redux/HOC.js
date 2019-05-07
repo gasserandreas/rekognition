@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { createNetworkError } from '../util/ErrorHandler';
 
 // utils
@@ -65,7 +66,7 @@ export const hocAsyncAction = (ACTION_TYPE, createThunk, userOptions) => {
             return Promise.resolve(payload);
           })
           // proceed with error
-          .catch((error) => {
+          .catch((error) => { // eslint-disable-line consistent-return
             dispatch({
               type: ACTION_TYPE.ERROR,
               payload: createNetworkError(error),

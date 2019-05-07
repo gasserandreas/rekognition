@@ -45,29 +45,38 @@ export const reportCustomError = error => ({
 });
 
 // create custom errors
-export const createNetworkError = (error, response) => Object.assign(new Error(error ? error.message : 'Unknown network error'), {
-  type: ErrorTypes.NetworkError,
-  title: 'Network error',
-  payload: response,
-  detail: error,
-  logLevel: LogLevel.Error,
-});
+export const createNetworkError = (error, response) => Object.assign(
+  new Error(error ? error.message : 'Unknown network error'),
+  {
+    type: ErrorTypes.NetworkError,
+    title: 'Network error',
+    payload: response,
+    detail: error,
+    logLevel: LogLevel.Error,
+  },
+);
 
-export const createInvalidDataError = (error, data) => Object.assign(new Error(error ? error.message : 'Unknown data error'), {
-  type: ErrorTypes.InvalidDataError,
-  title: 'Invalid data',
-  payload: data,
-  detail: error,
-  logLevel: LogLevel.Error,
-});
+export const createInvalidDataError = (error, data) => Object.assign(
+  new Error(error ? error.message : 'Unknown data error'),
+  {
+    type: ErrorTypes.InvalidDataError,
+    title: 'Invalid data',
+    payload: data,
+    detail: error,
+    logLevel: LogLevel.Error,
+  },
+);
 
-export const createUnknownError = (error, data = null) => Object.assign(new Error(error ? error.message : 'Unhandled exception detected'), {
-  type: ErrorTypes.UnknownError,
-  title: 'Caught unhandled exception',
-  payload: data,
-  detail: error,
-  logLevel: LogLevel.Error,
-});
+export const createUnknownError = (error, data = null) => Object.assign(
+  new Error(error ? error.message : 'Unhandled exception detected'),
+  {
+    type: ErrorTypes.UnknownError,
+    title: 'Caught unhandled exception',
+    payload: data,
+    detail: error,
+    logLevel: LogLevel.Error,
+  },
+);
 
 // global promise error catch
 export const addUnhandledPromiseCatcher = (store) => {
@@ -97,16 +106,13 @@ export const createMiddleware = (userOptions) => {
     shouldLogToUI: ({ logLevel }) => logLevel >= LogLevel.Log,
     shouldLogToServer: ({ logLevel }) => logLevel >= LogLevel.Log && process.env.NODE_ENV === 'production',
     shouldLogToConsole: ({ logLevel }) => process.env.NODE_ENV !== 'production' || logLevel >= LogLevel.Error,
-    logToUI: (error, dispatch, store) => {
-      // eslint-disable-line no-unused-vars
+    logToUI: (error, dispatch, store) => { // eslint-disable-line no-unused-vars
       // TODO: log to UI...
     },
-    logToServer: (error, dispatch, store) => {
-      // eslint-disable-line no-unused-vars
+    logToServer: (error, dispatch, store) => { // eslint-disable-line no-unused-vars
       // TODO: let's fire User analytics
     },
-    logToConsole: (error, dispatch, store) => {
-      // eslint-disable-line no-unused-vars
+    logToConsole: (error, dispatch, store) => { // eslint-disable-line no-unused-vars
       const { logLevel } = error;
       switch (logLevel) {
         case LogLevel.Error:

@@ -1,4 +1,3 @@
-/* global testUtils */
 import * as selectors from '../selectors';
 
 import * as reduxApplication from '../index';

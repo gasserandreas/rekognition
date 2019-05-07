@@ -1,7 +1,7 @@
 import { __testables__ } from '../Container';
 import { listImages } from '../../../redux/images';
 
-const { select, mapDispatchToProps, mapKeyToValue } = __testables__;
+const { select, mapDispatchToProps } = __testables__;
 
 describe('images list container test suite', () => {
   const expectedInitialState = {

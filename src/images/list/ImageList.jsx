@@ -43,7 +43,7 @@ const StyledImageAttr = styled(Box)`
     cursor: pointer;
   }
 
-  label {
+  span {
     display: flex;
     flex-flow: row;
     flex-wrap: 0;
@@ -56,23 +56,29 @@ const ImageAttr = ({
 }) => (
   <StyledImageAttr direction="row" {...props}>
     <Box align="center">
-      <label id="jestDateTimeLabel">
+      <span id="jestDateTimeLabel">
         <Clock />
         {getDefaultFormatedDate(created)}
-      </label>
+      </span>
     </Box>
     <Box align="center" alignContent="between" direction="row">
-      <label style={{ marginRight: '0.5rem' }}>
+      <span style={{ marginRight: '0.5rem' }}>
         <Group />
         {numberOfFaces}
-      </label>
-      <label>
+      </span>
+      <span>
         <Tag />
         {numberOfLabels}
-      </label>
+      </span>
     </Box>
   </StyledImageAttr>
 );
+
+ImageAttr.propTypes = {
+  created: PropTypes.string.isRequired,
+  numberOfFaces: PropTypes.number.isRequired,
+  numberOfLabels: PropTypes.number.isRequired,
+};
 
 // image
 const StyledImage = styled(AsyncImage)`

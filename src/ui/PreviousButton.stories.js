@@ -3,7 +3,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import styled from 'styled-components'
+import styled from 'styled-components';
 import PreviousButton from './PreviousButton';
 
 import { Colors } from '../styles';
@@ -14,8 +14,7 @@ const StyledBackground = styled.div`
 `;
 
 storiesOf('PreviousButton', module).add('default', () => (
-  (
-<StyledBackground>
+  <StyledBackground>
     <PreviousButton
       onClick={action('on-click')}
     />

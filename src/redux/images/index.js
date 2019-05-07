@@ -73,7 +73,7 @@ export const addImage = hocAsyncAction(
 
     // stop
     if (!filetype) {
-      return Promise.reject('Not a valid file type');
+      return Promise.reject(new Error('Not a valid file type'));
     }
 
     // create new image name
@@ -275,9 +275,7 @@ export const getImage = hocAsyncAction(IMAGES_GET_REQUEST_TYPES, imageId => (dis
   };
 
   return GraphApi.query(GET_IMAGE, variables).then((data) => {
-    const { getImage } = data;
-
-    const { faces, labels, ...image } = getImage;
+    const { faces, labels, ...image } = data.getImage;
     const { id } = image;
 
     dispatch(imagesAddImage(image));

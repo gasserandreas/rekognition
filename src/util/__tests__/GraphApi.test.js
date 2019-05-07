@@ -1,4 +1,3 @@
-/* global testUtils */
 import { ApolloClient } from 'apollo-client';
 import gql from 'graphql-tag';
 import * as apolloLinkContext from 'apollo-link-context';
@@ -11,7 +10,7 @@ import * as sessionUtil from '../sessionUtil';
 describe('GraphApi test suite', () => {
   const mockedData = {
     token:
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MzBkZDIxNS1hNWY2LTRiMzItYmI4MS1jZjFlOGVjODkwMzkiLCJjcmVhdGVkQXQiOjE1NTMyMDEwMjM5NzYsImlhdCI6MTU1MzIwMTAyM30.CI1ZSQodWkuGMAQJQRZ5F7bGFKJHTWj-ql0f_INVALID',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MzBkZDIxNS1hNWY2LTRiMzItYmI4MS1jZjFlOGVjODkwMzkiLCJjcmVhdGVkQXQiOjE1NTMyMDEwMjM5NzYsImlhdCI6MTU1MzIwMTAyM30.CI1ZSQodWkuGMAQJQRZ5F7bGFKJHTWj-ql0f_INVALID', // eslint-disable-line max-len
     endpoint: 'https://graph/api/endpoint',
   };
 
@@ -58,10 +57,12 @@ describe('GraphApi test suite', () => {
   });
 
   it('should add Bearer token to every request call', () => {
-    new GraphApi({
+    const api = new GraphApi({
       endpoint: mockedData.endpoint,
       onAuthError: onAuthErrorMock,
     });
+
+    expect(api).toBeTruthy();
 
     // check if getAuthToken was called
     expect(setContextMock).toBeCalled();
@@ -341,7 +342,9 @@ describe('GraphApi test suite', () => {
     });
 
     afterEach(() => {
-      graphApiQueryMock && graphApiQueryMock.mockClear();
+      if (graphApiQueryMock) {
+        graphApiQueryMock.mockClear();
+      }
     });
 
     afterAll(() => {
@@ -438,7 +441,9 @@ describe('GraphApi test suite', () => {
     });
 
     afterEach(() => {
-      graphApiMutationMock && graphApiMutationMock.mockClear();
+      if (graphApiMutationMock) {
+        graphApiMutationMock.mockClear();
+      }
     });
 
     afterAll(() => {

@@ -17,7 +17,7 @@ describe('Register form test suite', () => {
   describe('Register test suite', () => {
     const inputFields = ['password', 'firstname', 'lastname', 'remember'];
 
-    const getFormProps = (values) => {
+    const getFormProps = () => {
       // create basic formit state
       const props = testUtils.createFormitState(inputFields);
       return props;

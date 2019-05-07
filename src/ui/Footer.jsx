@@ -26,7 +26,10 @@ const getWithSidebar = ({ withSidebar }) => (withSidebar
   }
 `
   : '');
-const getLinkColor = ({ alternativeColor }) => (alternativeColor ? Colors.ColorsPalette.White : Colors.Neutrals.MidDark);
+
+const getLinkColor = ({ alternativeColor }) => (alternativeColor
+  ? Colors.ColorsPalette.White
+  : Colors.Neutrals.MidDark);
 
 const StyledFooter = styled(Box)`
   width: 100%;

@@ -1,4 +1,4 @@
-/* global testUtils */
+/* global FileReader, File */
 import fs from 'fs';
 import path from 'path';
 

@@ -11,7 +11,7 @@ import Privacy from '../Privacy';
 describe('Privacy test suite', () => {
   const getPrivacy = props => mount(
     <MemoryRouter>
-      <Privacy {...props}/>
+      <Privacy {...props} />
     </MemoryRouter>,
   );
 

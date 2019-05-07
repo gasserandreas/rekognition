@@ -30,14 +30,14 @@ const mapPropsToValues = (obj) => {
   };
 };
 
-const handleSubmit = (payload, { props }, b, c) => {
+const onHandleSubmit = (payload, { props }) => {
   props.onSubmit(payload);
 };
 
 const formikConfig = {
   validationSchema,
   mapPropsToValues,
-  handleSubmit,
+  handleSubmit: onHandleSubmit,
   displayName: 'UpdateUserForm',
 };
 
@@ -120,6 +120,19 @@ const UpdateUserForm = ({
   );
 };
 
+UpdateUserForm.propTypes = {
+  values: PropTypes.shape({}).isRequired,
+  touched: PropTypes.bool.isRequired,
+  errors: PropTypes.shape({}).isRequired,
+  dirty: PropTypes.shape({}).isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleBlur: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  handleReset: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
+  error: PropTypes.bool.isRequired,
+};
+
 const EnhancedUpdateUserForm = formikEnhancer(UpdateUserForm);
 
 EnhancedUpdateUserForm.propTypes = {
@@ -127,7 +140,6 @@ EnhancedUpdateUserForm.propTypes = {
     firstname: PropTypes.string,
     lastname: PropTypes.string,
   }),
-  validEmail: PropTypes.bool,
 };
 
 EnhancedUpdateUserForm.defaultProps = {
@@ -142,7 +154,7 @@ export const __testables__ = {
   formikEnhancer,
   validationSchema,
   mapPropsToValues,
-  handleSubmit,
+  handleSubmit: onHandleSubmit,
   UpdateUserForm,
 };
 

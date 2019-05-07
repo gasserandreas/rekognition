@@ -40,6 +40,13 @@ const applicationDidLoad = () => ({
   payload: AppStatus.APPLICATION_DID_LOAD,
 });
 
+export const loadApplicationAuthenticated = () => (dispatch) => {
+  // do more stuff in here
+  dispatch(listImages());
+
+  dispatch(applicationDidLoad());
+};
+
 // complex actions
 export const loadApplication = () => async (dispatch, getState) => {
   dispatch(applicationWillLoad());
@@ -75,13 +82,6 @@ export const loadApplication = () => async (dispatch, getState) => {
     // finalized app init
     dispatch(applicationDidLoad());
   }
-};
-
-export const loadApplicationAuthenticated = () => (dispatch) => {
-  // do more stuff in here
-  dispatch(listImages());
-
-  dispatch(applicationDidLoad());
 };
 
 // reducers

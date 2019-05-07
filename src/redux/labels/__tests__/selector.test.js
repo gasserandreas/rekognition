@@ -1,15 +1,12 @@
-/* global testUtils */
 import * as selectors from '../selectors';
 
 import data from '../__data__/labels';
-
-const { labels } = data;
 
 const imageId = '2a2bdf23-e73f-4a2a-913e-da29926a195c';
 
 const initialState = {
   labels: {
-    byId: labels.items.reduce(
+    byId: data.labels.items.reduce(
       (prev, cur) => ({
         ...prev,
         [cur.id]: cur,
@@ -17,7 +14,7 @@ const initialState = {
       {},
     ),
     idsByImageId: {
-      [imageId]: labels.items.map(item => item.id),
+      [imageId]: data.labels.items.map(item => item.id),
     },
     imageId,
   },

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-export const createUseIsAuthenticatedHistoryPush = path => (isAuthenticated, history) => {
+export const createUseIsAuthenticatedHistoryPush = path => (isAuthenticated, history) => { // eslint-disable-line import/prefer-default-export, max-len
   useEffect(() => {
     let timeout;
 
@@ -18,7 +18,9 @@ export const createUseIsAuthenticatedHistoryPush = path => (isAuthenticated, his
     /* istanbul ignore next */
     return () => {
       /* istanbul ignore next */
-      timeout && clearTimeout(timeout);
+      if (timeout) {
+        clearTimeout(timeout);
+      }
     };
   });
 };

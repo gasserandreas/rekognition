@@ -1,8 +1,7 @@
+/* eslint-disable global-require */
 import { getUrl, genericFetch, genericJsonFetch } from '../services/networkUtils';
 import networkEndpoints from '../services/network_endpoints.json';
 import { createNetworkError, createInvalidDataError } from '../ErrorHandler';
-
-// const { getEnv } = __testables__;
 
 const defaultUrl = 'https://my-custom-api';
 const defaultConfig = {

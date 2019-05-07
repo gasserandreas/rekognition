@@ -34,6 +34,13 @@
       "rules": {
         "react/jsx-filename-extension": 0
       }
+    },
+    {
+      "files": ["**/*.stories.js", ".storybook/**/*"],
+      "rules": {
+        "import/no-extraneous-dependencies": 0,
+        "react/jsx-filename-extension": 0
+      }
     }
   ]
 }

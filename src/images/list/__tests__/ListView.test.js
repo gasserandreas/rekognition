@@ -1,8 +1,7 @@
 /* globals testUtils */
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
-import toJson from 'enzyme-to-json';
 import 'jest-styled-components';
 
 import ListView from '../ListView';

@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 
-import { View, ViewHeading } from '../View';
+import View, { ViewHeading } from '../View';
 
 it('View should render correctly', () => {
   const wrapper = shallow(<View>View Content</View>);
@@ -30,7 +30,7 @@ it('view should pass additional props to component', () => {
   const compProps = output.props();
 
   // check for props in compProps
-  Object.keys(props).map((key) => {
+  Object.keys(props).forEach((key) => {
     const value = props[key];
     expect(compProps[key]).toEqual(value);
   });

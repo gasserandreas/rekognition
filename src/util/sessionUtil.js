@@ -1,3 +1,5 @@
+/* global sessionStorage */
+
 export const setItem = (key, value) => sessionStorage.setItem(key, value);
 export const getItem = key => sessionStorage.getItem(key);
 

@@ -1,6 +1,6 @@
 // mocked functions
-export const setItem = (key, value) => true;
-export const getItem = key => null;
+export const setItem = () => true;
+export const getItem = () => null;
 
 export const getToken = () => getItem('token');
 export const setToken = value => setItem('token', value);

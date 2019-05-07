@@ -132,10 +132,21 @@ describe('ErrorHandler addUnhandledPromiseCatcher test suite', () => {
   let spyComplexEventPreventDefault;
 
   afterEach(() => {
-    spyConsole && spyConsole.mockClear();
-    spyAddEventListener && spyAddEventListener.mockClear();
-    spySimpleEventPreventDefault && spySimpleEventPreventDefault.mockClear();
-    spyComplexEventPreventDefault && spyComplexEventPreventDefault.mockClear();
+    if (spyConsole) {
+      spyConsole.mockClear();
+    }
+
+    if (spyAddEventListener) {
+      spyAddEventListener.mockClear();
+    }
+
+    if (spySimpleEventPreventDefault) {
+      spySimpleEventPreventDefault.mockClear();
+    }
+
+    if (spyComplexEventPreventDefault) {
+      spyComplexEventPreventDefault.mockClear();
+    }
   });
 
   it('should add event handler to window object', () => {
@@ -211,13 +222,16 @@ describe('ErrorHandler addUnhandledPromiseCatcher test suite', () => {
 
 describe('ErrorHandler middleware test suite', () => {
   // helpers
-  const createTestError = (logLevel, error, data = null) => Object.assign(new Error(error ? error.message : 'Unhandled Test Error detected'), {
-    type: ErrorTypes.UnknownError,
-    title: 'Caught Test Error',
-    payload: data,
-    detail: error,
-    logLevel,
-  });
+  const createTestError = (logLevel, error, data = null) => Object.assign(
+    new Error(error ? error.message : 'Unhandled Test Error detected'),
+    {
+      type: ErrorTypes.UnknownError,
+      title: 'Caught Test Error',
+      payload: data,
+      detail: error,
+      logLevel,
+    },
+  );
 
   // test configuration
   let spyConsoleLog;
@@ -456,7 +470,7 @@ describe('ErrorHandler middleware test suite', () => {
     const expectedActions = [
       reportInternalReduxError(
         new Error(
-          'Actions may not have an undefined "type" property. Have you misspelled a constant? Action: {"typee":"IDLE","payload":{}}',
+          'Actions may not have an undefined "type" property. Have you misspelled a constant? Action: {"typee":"IDLE","payload":{}}', // eslint-disable-line max-len
         ),
       ),
     ];

@@ -36,6 +36,14 @@ const UserProfile = props => (
   </StyledUserProfile>
 );
 
+UserProfile.propTypes = {
+  username: PropTypes.string,
+};
+
+UserProfile.defaultProps = {
+  username: '',
+};
+
 const StyledHeader = styled(Box)`
   ${props => (props.isAuthenticated
     ? `

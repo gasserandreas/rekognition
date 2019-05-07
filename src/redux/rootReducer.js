@@ -1,4 +1,3 @@
-/* global requestAnimationFrame */
 import { combineReducers } from 'redux';
 
 import applicationReducer, { APP_RESET } from './application';

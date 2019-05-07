@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
+import { HistoryPropType } from '../../../util/PropTypes';
 import * as authHooks from '../auth';
 
 describe('auth hooks test suite', () => {
@@ -19,10 +21,16 @@ describe('auth hooks test suite', () => {
   });
 
   const hook = authHooks.createUseIsAuthenticatedHistoryPush(path);
+
   const HookTester = ({ isAuthenticated, history }) => {
     hook(isAuthenticated, history);
 
     return <div>empty div</div>;
+  };
+
+  HookTester.propTypes = {
+    isAuthenticated: PropTypes.bool.isRequired,
+    history: HistoryPropType.isRequired,
   };
 
   it('should call history push if authenticated ', (done) => {
@@ -63,6 +71,6 @@ describe('auth hooks test suite', () => {
   it('should clearTimeout after hook', () => {
     // not able to test right now, waiting for hook support in enzyme
     // link: https://github.com/airbnb/enzyme/issues/2011
-    console.log('createUseIsAuthenticatedHistoryPush return value not tesable due missing hook support in enzyme');
+    console.log('createUseIsAuthenticatedHistoryPush return value not tesable due missing hook support in enzyme'); // eslint-disable-line no-console, max-len
   });
 });

@@ -7,7 +7,7 @@ import ButtonGroup from '../ButtonGroup';
 it('ButtonGroup should render correctly', () => {
   const wrapper = shallow(
     <ButtonGroup>
-      <button>Click me</button>
+      <button type="button">Click me</button>
     </ButtonGroup>,
   );
   expect(toJson(wrapper.dive())).toMatchSnapshot();

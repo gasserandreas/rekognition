@@ -6,6 +6,8 @@ import Message, { MESSAGE_TYPES, __testables__ } from '../Message';
 
 import { Colors } from '../../../styles';
 
+const { StyledMessage } = __testables__;
+
 it('Message should render correctly', () => {
   const wrapper = shallow(
     <Message>
@@ -16,7 +18,7 @@ it('Message should render correctly', () => {
 });
 
 it('should render Message consistently', () => {
-  const wrapper = shallow(<__testables__.StyledMessage />);
+  const wrapper = shallow(<StyledMessage />);
   expect(toJson(wrapper)).toMatchSnapshot();
 });
 

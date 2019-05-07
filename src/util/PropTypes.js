@@ -15,3 +15,7 @@ export const ImagePropType = PropTypes.shape({
   name: PropTypes.string,
   type: PropTypes.string,
 });
+
+export const HistoryPropType = PropTypes.shape({
+  push: PropTypes.func.isRequired,
+});

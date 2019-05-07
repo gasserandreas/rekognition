@@ -1,4 +1,4 @@
-// store mock data
+/* global jest */
 let queryCounter = 0;
 let queryMockResponses = [];
 

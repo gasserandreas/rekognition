@@ -38,11 +38,7 @@ export const updateUser = hocAsyncAction(USER_UPDATE_USER_REQUEST, user => (disp
   };
 
   return GraphApi.mutation(UPDATE_USER, variables).then((data) => {
-    const {
-      updateUser: { user },
-    } = data;
-
-    dispatch(userSetUser(user));
+    dispatch(userSetUser(data.user));
 
     return data;
   });
@@ -66,9 +62,7 @@ export const getUserInfo = hocAsyncAction(USER_GET_USER_INFO_REQUEST, () => (dis
   };
 
   return GraphApi.query(GET_USER_INFO, variables).then((data) => {
-    const { getUserInfo } = data;
-
-    dispatch(userSetUser(getUserInfo));
+    dispatch(userSetUser(data.getUserInfo));
 
     return data;
   });

@@ -1,4 +1,5 @@
-export const readAsDataURL = (file) => {
+/* globals FileReader, DOMException */
+export const readAsDataURL = (file) => { // eslint-disable-line import/prefer-default-export
   const fileReader = new FileReader();
 
   return new Promise((resolve, reject) => {
