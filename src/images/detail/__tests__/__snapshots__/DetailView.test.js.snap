@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DetailView test suite should render StyledBackButton consistently 1`] = `
+<ContextConsumer>
+  <Component />
+</ContextConsumer>
+`;
+
+exports[`DetailView test suite should render StyledDataBox consistently 1`] = `
+<ContextConsumer>
+  <Component />
+</ContextConsumer>
+`;
+
+exports[`DetailView test suite should render StyledHeading consistently 1`] = `
+<ContextConsumer>
+  <Component />
+</ContextConsumer>
+`;
+
+exports[`DetailView test suite should render StyledImageBox consistently 1`] = `
+<ContextConsumer>
+  <Component />
+</ContextConsumer>
+`;
+
+exports[`DetailView test suite should render StyledImageBoxContainer consistently 1`] = `
+<ContextConsumer>
+  <Component />
+</ContextConsumer>
+`;
+
+exports[`DetailView test suite should render StyledScrollableData consistently 1`] = `
+<ContextConsumer>
+  <Component />
+</ContextConsumer>
+`;
+
+exports[`DetailView test suite should render StyledView consistently 1`] = `
+<ContextConsumer>
+  <Component />
+</ContextConsumer>
+`;

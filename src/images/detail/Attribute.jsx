@@ -10,6 +10,8 @@ export const AttributePropType = PropTypes.shape({
   value: PropTypes.string,
 });
 
+const getFontWeith = ({ bold }) => bold ? 600 : 400;
+
 // components
 const StyledConfidence = styled.span`
   display: inline-block;
@@ -24,7 +26,7 @@ const StyledConfidence = styled.span`
 `;
 
 export const StyledAttrLabel = styled.label`
-  font-weight: ${props => props.bold ? 600 : 400};
+  font-weight: ${props => getFontWeith(props)};
   flex-shrink: 0;
   flex-grow: 0;
   width: 7rem;
@@ -32,7 +34,7 @@ export const StyledAttrLabel = styled.label`
   text-transform: capitalize;
 `;
 
-export const StyledAttrContent = styled.div`
+const StyledAttrContent = styled.div`
   flex-shrink: 1;
   flex-grow: 1;
 `;
@@ -63,7 +65,7 @@ export const Attribute = ({
       )}
     </StyledAttrContent>
   </StyledAttr>
-)
+);
 
 Attribute.propTypes = {
   attribute: AttributePropType.isRequired,
@@ -74,6 +76,13 @@ Attribute.propTypes = {
 Attribute.defaultProps = {
   showConfidence: false,
   boldLabel: true,
+};
+
+export const __testables__ = {
+  StyledConfidence,
+  StyledAttrContent,
+  StyledAttr,
+  getFontWeith,
 };
 
 export default Attribute;

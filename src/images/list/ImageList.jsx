@@ -57,7 +57,7 @@ const ImageAttr = ({ created, numberOfFaces, numberOfLabels, ...props}) => (
     {...props} 
   >
     <Box align="center">
-      <label><Clock />{getDefaultFormatedDate(created)}</label>
+      <label id="jestDateTimeLabel"><Clock />{getDefaultFormatedDate(created)}</label>
     </Box>
     <Box align="center" alignContent="between" direction="row">
       <label style={{ marginRight: '0.5rem' }}><Group />{numberOfFaces}</label>
@@ -218,5 +218,14 @@ ImageList.propTypes = {
   onImageClick: PropTypes.func.isRequired,
 }
 
+export const __testables__ = {
+  StyledImageAttr,
+  ImageAttr,
+  StyledImage,
+  StyledListItem,
+  ListItem,
+  ListItemAdd,
+  StyledImageList,
+};
 
 export default ImageList;

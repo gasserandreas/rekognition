@@ -1,0 +1,336 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Faces test suite should render consistently 1`] = `
+.c0 {
+  border: 1.5px solid #6B778C;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  display: inline-block;
+  font-size: 0.8rem;
+  margin-right: 0.25rem;
+  margin-bottom: 0.5rem;
+  color: #0052CC;
+  border-color: #0052CC;
+}
+
+.c0 span {
+  font-size: 0.75rem;
+}
+
+.c0:hover {
+  cursor: pointer;
+  background-color: #0052CC;
+  color: #ffffff;
+}
+
+<Label
+  isClickable={true}
+  label={
+    Object {
+      "confidence": 100,
+      "id": "f7ba4488-4db3-484d-9af9-37f1a7a2aeb2",
+      "instances": Array [
+        Object {
+          "height": 100,
+          "left": 80,
+          "top": 70,
+          "width": 90,
+        },
+      ],
+      "name": "name",
+      "parents": Array [],
+      "value": "value",
+    }
+  }
+  onClick={[MockFunction]}
+  selected={false}
+>
+  <styled.div
+    isClickable={true}
+    onClick={[MockFunction]}
+    selected={false}
+  >
+    <StyledComponent
+      forwardedComponent={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bdVaJa",
+            "isStatic": false,
+            "lastClassName": "c0",
+            "rules": Array [
+              "
+  border: 1.5px solid ",
+              "#6B778C",
+              ";
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  display: inline-block
+  font-size: 0.8rem;
+  margin-right: 0.25rem;
+  margin-bottom: 0.5rem;
+
+  span {
+    font-size: 0.75rem;
+  }
+
+  ",
+              [Function],
+              "
+",
+            ],
+          },
+          "displayName": "styled.div",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bdVaJa",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        }
+      }
+      forwardedRef={null}
+      isClickable={true}
+      onClick={[MockFunction]}
+      selected={false}
+    >
+      <div
+        className="c0"
+        onClick={[MockFunction]}
+        selected={false}
+      >
+        name
+         
+        <span
+          id="jestConfidence"
+        >
+          (
+          100.00
+          )
+        </span>
+      </div>
+    </StyledComponent>
+  </styled.div>
+</Label>
+`;
+
+exports[`Faces test suite should render consistently for being selected 1`] = `
+.c0 {
+  border: 1.5px solid #6B778C;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  display: inline-block;
+  font-size: 0.8rem;
+  margin-right: 0.25rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  background-color: #0052CC;
+  color: #ffffff;
+}
+
+.c0 span {
+  font-size: 0.75rem;
+}
+
+<Label
+  isClickable={true}
+  label={
+    Object {
+      "confidence": 100,
+      "id": "f7ba4488-4db3-484d-9af9-37f1a7a2aeb2",
+      "instances": Array [
+        Object {
+          "height": 100,
+          "left": 80,
+          "top": 70,
+          "width": 90,
+        },
+      ],
+      "name": "name",
+      "parents": Array [],
+      "value": "value",
+    }
+  }
+  onClick={[MockFunction]}
+  selected={true}
+>
+  <styled.div
+    isClickable={true}
+    onClick={[MockFunction]}
+    selected={true}
+  >
+    <StyledComponent
+      forwardedComponent={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bdVaJa",
+            "isStatic": false,
+            "lastClassName": "c0",
+            "rules": Array [
+              "
+  border: 1.5px solid ",
+              "#6B778C",
+              ";
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  display: inline-block
+  font-size: 0.8rem;
+  margin-right: 0.25rem;
+  margin-bottom: 0.5rem;
+
+  span {
+    font-size: 0.75rem;
+  }
+
+  ",
+              [Function],
+              "
+",
+            ],
+          },
+          "displayName": "styled.div",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bdVaJa",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        }
+      }
+      forwardedRef={null}
+      isClickable={true}
+      onClick={[MockFunction]}
+      selected={true}
+    >
+      <div
+        className="c0"
+        onClick={[MockFunction]}
+        selected={true}
+      >
+        name
+         
+        <span
+          id="jestConfidence"
+        >
+          (
+          100.00
+          )
+        </span>
+      </div>
+    </StyledComponent>
+  </styled.div>
+</Label>
+`;
+
+exports[`Faces test suite should render consistently for isClickable not enabled 1`] = `
+.c0 {
+  border: 1.5px solid #6B778C;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  display: inline-block;
+  font-size: 0.8rem;
+  margin-right: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.c0 span {
+  font-size: 0.75rem;
+}
+
+<Label
+  isClickable={false}
+  label={
+    Object {
+      "confidence": 100,
+      "id": "f7ba4488-4db3-484d-9af9-37f1a7a2aeb2",
+      "instances": Array [
+        Object {
+          "height": 100,
+          "left": 80,
+          "top": 70,
+          "width": 90,
+        },
+      ],
+      "name": "name",
+      "parents": Array [],
+      "value": "value",
+    }
+  }
+  onClick={[MockFunction]}
+  selected={false}
+>
+  <styled.div
+    isClickable={false}
+    onClick={[MockFunction]}
+    selected={false}
+  >
+    <StyledComponent
+      forwardedComponent={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bdVaJa",
+            "isStatic": false,
+            "lastClassName": "c0",
+            "rules": Array [
+              "
+  border: 1.5px solid ",
+              "#6B778C",
+              ";
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  display: inline-block
+  font-size: 0.8rem;
+  margin-right: 0.25rem;
+  margin-bottom: 0.5rem;
+
+  span {
+    font-size: 0.75rem;
+  }
+
+  ",
+              [Function],
+              "
+",
+            ],
+          },
+          "displayName": "styled.div",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bdVaJa",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        }
+      }
+      forwardedRef={null}
+      isClickable={false}
+      onClick={[MockFunction]}
+      selected={false}
+    >
+      <div
+        className="c0"
+        onClick={[MockFunction]}
+        selected={false}
+      >
+        name
+         
+        <span
+          id="jestConfidence"
+        >
+          (
+          100.00
+          )
+        </span>
+      </div>
+    </StyledComponent>
+  </styled.div>
+</Label>
+`;

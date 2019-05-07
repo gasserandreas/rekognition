@@ -1,0 +1,156 @@
+[{
+	"id": "a465d79f-f65c-44bd-9974-7d8ecb0325c7",
+	"name": "Restaurant",
+	"confidence": 99.84324645996094,
+	"parents": [],
+	"instances": [],
+	"__typename": "Label"
+}, {
+	"id": "8bfbfb55-d4ac-46fc-8d09-3bc98a5040bb",
+	"name": "Human",
+	"confidence": 99.75186920166016,
+	"parents": [],
+	"instances": [],
+	"__typename": "Label"
+}, {
+	"id": "f705f130-40ed-4c66-95e3-7d63e438ed5a",
+	"name": "Person",
+	"confidence": 99.75186920166016,
+	"parents": [],
+	"instances": [{
+		"height": 0.788449764251709,
+		"width": 0.37145188450813293,
+		"left": 0.5232441425323486,
+		"top": 0.20031282305717468,
+		"__typename": "BoundingBox"
+	}, {
+		"height": 0.27881088852882385,
+		"width": 0.11530932039022446,
+		"left": 0.3354623317718506,
+		"top": 0.1961989402770996,
+		"__typename": "BoundingBox"
+	}, {
+		"height": 0.7772222757339478,
+		"width": 0.352791428565979,
+		"left": 0.03594960644841194,
+		"top": 0.20243647694587708,
+		"__typename": "BoundingBox"
+	}, {
+		"height": 0.3490219712257385,
+		"width": 0.3184428811073303,
+		"left": 0.3262154459953308,
+		"top": 0.2951163053512573,
+		"__typename": "BoundingBox"
+	}],
+	"__typename": "Label"
+}, {
+	"id": "aec89fb8-7840-4462-9658-62a6bf54599f",
+	"name": "Sitting",
+	"confidence": 99.7125015258789,
+	"parents": ["Person"],
+	"instances": [],
+	"__typename": "Label"
+}, {
+	"id": "30bd00f0-8a13-4f5a-9a5c-8408182bb75d",
+	"name": "Furniture",
+	"confidence": 98.73352813720703,
+	"parents": [],
+	"instances": [],
+	"__typename": "Label"
+}, {
+	"id": "65b4c64e-0737-4b7a-be84-77c7577ceaca",
+	"name": "Chair",
+	"confidence": 98.73352813720703,
+	"parents": ["Furniture"],
+	"instances": [{
+		"height": 0.35435470938682556,
+		"width": 0.30652856826782227,
+		"left": 0.012152209877967834,
+		"top": 0.6453336477279663,
+		"__typename": "BoundingBox"
+	}],
+	"__typename": "Label"
+}, {
+	"id": "0ac2318e-67c3-4ddc-adc2-0711bb4766fe",
+	"name": "Sunglasses",
+	"confidence": 97.88621520996094,
+	"parents": ["Accessories"],
+	"instances": [{
+		"height": 0.0482422336935997,
+		"width": 0.07262253016233444,
+		"left": 0.4590190351009369,
+		"top": 0.3799567222595215,
+		"__typename": "BoundingBox"
+	}],
+	"__typename": "Label"
+}, {
+	"id": "71ab816d-8dc3-403a-9a5c-bff2bd7f73b5",
+	"name": "Accessory",
+	"confidence": 97.88621520996094,
+	"parents": [],
+	"instances": [],
+	"__typename": "Label"
+}, {
+	"id": "d8436c1a-9d42-4070-9623-caa44e3bd2b6",
+	"name": "Accessories",
+	"confidence": 97.88621520996094,
+	"parents": [],
+	"instances": [],
+	"__typename": "Label"
+}, {
+	"id": "86af5c75-9c6f-435f-8cb0-d4ae73e26f4c",
+	"name": "Cafe",
+	"confidence": 95.34770965576172,
+	"parents": ["Restaurant"],
+	"instances": [],
+	"__typename": "Label"
+}, {
+	"id": "6b934aa7-35fb-4f32-a69b-2d5a067db392",
+	"name": "Food Court",
+	"confidence": 94.11480712890625,
+	"parents": ["Restaurant", "Food"],
+	"instances": [],
+	"__typename": "Label"
+}, {
+	"id": "ad9d4ff2-5961-442e-a985-3af9a71dd1c3",
+	"name": "Food",
+	"confidence": 94.11480712890625,
+	"parents": [],
+	"instances": [],
+	"__typename": "Label"
+}, {
+	"id": "c53fed94-b6b5-44cc-90c4-2d221051c895",
+	"name": "Cafeteria",
+	"confidence": 92.61895751953125,
+	"parents": ["Restaurant"],
+	"instances": [],
+	"__typename": "Label"
+}, {
+	"id": "4deaecd3-f04e-4527-9665-63bb2c9fb6be",
+	"name": "Dating",
+	"confidence": 82.52543640136719,
+	"parents": ["Person"],
+	"instances": [],
+	"__typename": "Label"
+}, {
+	"id": "0aaf6e3f-fb3a-4853-9746-31179fe464ab",
+	"name": "Electronics",
+	"confidence": 58.003883361816406,
+	"parents": [],
+	"instances": [],
+	"__typename": "Label"
+}, {
+	"id": "cb2b4155-f2fd-406e-befa-cf2e5126ee0d",
+	"name": "Hair",
+	"confidence": 51.47688293457031,
+	"parents": [],
+	"instances": [],
+	"__typename": "Label"
+}, {
+	"id": "54d71713-637c-4124-a4de-42b8b176ac58",
+	"name": "Couch",
+	"confidence": 50.86988830566406,
+	"parents": ["Furniture"],
+	"instances": [],
+	"__typename": "Label"
+}]

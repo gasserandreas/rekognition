@@ -16,28 +16,36 @@ import Message from '../ui/form/Message';
 import ButtonGroup from '../ui/form/ButtonGroup';
 
 // formik setups
-const formikEnhancer = withFormik({
-  validationSchema: Yup.object().shape({
-    firstname: Yup.string()
-      .min(2)
-      .max(30)
-      .required('Firstname is required!'),
-    lastname: Yup.string()
-      .min(2)
-      .max(30)
-      .required('Lastname is required!'),
-  }),
-  mapPropsToValues: (obj) => {
-    const { user } = obj;
-    return {
-      ...user,
-    }
-  },
-  handleSubmit: (payload, { props }, b, c) => {
-    props.onSubmit(payload);
-  },
-  displayName: 'UpdateUserForm',
+const validationSchema = Yup.object().shape({
+  firstname: Yup.string()
+    .min(2)
+    .max(30)
+    .required('Firstname is required!'),
+  lastname: Yup.string()
+    .min(2)
+    .max(30)
+    .required('Lastname is required!'),
 });
+
+const mapPropsToValues = (obj) => {
+  const { user } = obj;
+  return {
+    ...user,
+  }
+};
+
+const handleSubmit = (payload, { props }, b, c) => {
+  props.onSubmit(payload);
+};
+
+const formikConfig = {
+  validationSchema,
+  mapPropsToValues,
+  handleSubmit,
+  displayName: 'UpdateUserForm',
+};
+
+const formikEnhancer = withFormik(formikConfig);
 
 // styled
 const StyledUpdateUserForm = styled.form``;
@@ -103,12 +111,14 @@ const UpdateUserForm = ({
           buttonStyle="link"
           onClick={handleOnReset}
           disabled={!dirty || submitting}
+          testId="jestResetButton"
         >Reset</Button>
         <Button
           type="submit"
           disabled={submitting}
           buttonStyle="primary"
           style={{ marginLeft: '1rem' }}
+          testId="jestSubmitButton"
         >Update profile</Button>
       </ButtonGroup>
     </StyledUpdateUserForm>
@@ -130,6 +140,15 @@ EnhancedUpdateUserForm.defaultProps = {
     firstname: '',
     lastname: '',
   },
+};
+
+export const __testables__ = {
+  formikConfig,
+  formikEnhancer,
+  validationSchema,
+  mapPropsToValues,
+  handleSubmit,
+  UpdateUserForm,
 };
 
 export default EnhancedUpdateUserForm;

@@ -10,15 +10,24 @@ const hoverSelectedStyles = `
   color: ${Colors.ColorsPalette.White};
 `;
 
-const handleLabelHover = (props) => props.isClickable
-  ? `
-    color: ${Colors.Blue.Default};
-    border-color: ${Colors.Blue.Default};
+const handleLabelHover = ({ isClickable, selected }) => {
+  if(selected) {
+    return hoverSelectedStyles;
+  }
 
-    &:hover {
-      ${hoverSelectedStyles}
-    }
-  ` : '';
+  if (isClickable) {
+    return `
+      color: ${Colors.Blue.Default};
+      border-color: ${Colors.Blue.Default};
+
+      &:hover {
+        ${hoverSelectedStyles}
+      }
+    `;
+  }
+
+  return '';
+};
 
 const StyledLabel = styled.div`
   border: 1.5px solid ${Colors.Neutrals.Mid};
@@ -33,8 +42,7 @@ const StyledLabel = styled.div`
     font-size: 0.75rem;
   }
 
-  ${(props) => handleLabelHover(props)}
-  ${props => props.selected ? hoverSelectedStyles : ''}
+  ${props => handleLabelHover(props)}
 `;
 
 const Label = (props) => {
@@ -45,7 +53,7 @@ const Label = (props) => {
     <StyledLabel
       {...rest}
     >
-      {name} { confidence && <span>({confidence.toFixed(2)})</span>}
+      {name} { confidence && <span id="jestConfidence">({confidence.toFixed(2)})</span>}
     </StyledLabel>
   );
 };
@@ -54,7 +62,7 @@ Label.propTypes = {
   label: PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string.isRequired,
-    confidence: PropTypes.number.isRequired,
+    confidence: PropTypes.number,
     parents: PropTypes.arrayOf(PropTypes.string),
     instances: PropTypes.arrayOf(PropTypes.shape({
       height: PropTypes.number.isRequired,
@@ -72,6 +80,11 @@ Label.defaultProps = {
   onClick: null,
   isClickable: false,
   selected: false,
+};
+
+export const __testables__ = {
+  StyledLabel,
+  handleLabelHover,
 };
 
 export default Label;

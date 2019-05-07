@@ -15,4 +15,9 @@ const mapDispatchToProps = ({
   listImages,
 });
 
+export const __testables__ = {
+  select,
+  mapDispatchToProps,
+};
+
 export default connect(select, mapDispatchToProps)(ListView);

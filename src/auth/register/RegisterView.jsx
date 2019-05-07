@@ -92,6 +92,7 @@ const RegisterView = ({
 RegisterView.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   signupRequest: HOCRequestPropTypes.isRequired,
+  checkEmailRequest: HOCRequestPropTypes.isRequired,
   validEmail: PropTypes.bool,
   signupUser: PropTypes.func.isRequired,
   checkEmail: PropTypes.func.isRequired,
