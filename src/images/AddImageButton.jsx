@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import uuid from 'uuid';
 import styled from 'styled-components';
-import Dropzone from 'react-dropzone'
+import Dropzone from 'react-dropzone';
 
 import { Add } from 'grommet-icons';
 
@@ -44,11 +44,11 @@ const AddImageButton = ({
   addImage,
   afterOnClick,
   children,
-  ...props,
+  ...props
 }) => {
   const [state, setState] = useState(initialState);
   const uploadRef = useRef();
-  
+
   const handleResetForm = () => {
     setState({
       showMessage: false,
@@ -62,7 +62,7 @@ const AddImageButton = ({
     if (dialog) {
       dialog.open();
     }
-  }
+  };
 
   /* instanbul ignore-next */
   const handleUploadImage = (files) => {
@@ -110,13 +110,14 @@ const AddImageButton = ({
       <Dropzone
         onDrop={handleUploadImage}
         ref={uploadRef}
-      >{({getRootProps, getInputProps}) => (
+      >
+        {({ getRootProps, getInputProps }) => (
           <span {...getRootProps()}>
             <input {...getInputProps()} />
             <StyledAddImageButton
               {...props}
               type="button"
-              icon={<Add color={Colors.ColorsPalette.White}/>}
+              icon={<Add color={Colors.ColorsPalette.White} />}
               size="xlarge"
               buttonStyle="primary"
               elevation="medium"
@@ -133,14 +134,14 @@ AddImageButton.propTypes = {
   loading: PropTypes.bool.isRequired,
   addImage: PropTypes.func.isRequired,
   afterOnClick: PropTypes.func,
-}
+};
 
 AddImageButton.defaultProps = {
   afterOnClick: null,
-}
+};
 
 // redux
-const select = (state) => ({
+const select = state => ({
   loading: addImageIsLoading(state),
 });
 

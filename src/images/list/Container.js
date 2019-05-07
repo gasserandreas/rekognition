@@ -11,13 +11,16 @@ const select = state => ({
   addImageRequest: addImageRequestSelector(state),
 });
 
-const mapDispatchToProps = ({
+const mapDispatchToProps = {
   listImages,
-});
+};
 
 export const __testables__ = {
   select,
   mapDispatchToProps,
 };
 
-export default connect(select, mapDispatchToProps)(ListView);
+export default connect(
+  select,
+  mapDispatchToProps,
+)(ListView);

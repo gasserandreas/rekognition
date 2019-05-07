@@ -32,12 +32,7 @@ describe('ImageList test suite', () => {
     onImageClick: jest.fn(),
   };
 
-  const getImageList = (props) => mount(
-    <ImageList
-      {...initialProps}
-      {...props}
-    />
-  );
+  const getImageList = props => mount(<ImageList {...initialProps} {...props} />);
 
   afterEach(() => {
     initialProps.history.push.mockClear();
@@ -106,12 +101,7 @@ describe('ImageList test suite', () => {
   });
 
   describe('ListItem test suite', () => {
-    const getListItem = (props) => mount(
-      <ListItem
-        image={initialProps.images[0]}
-        {...props}
-      />
-    );
+    const getListItem = props => mount(<ListItem image={initialProps.images[0]} {...props} />);
 
     it('should render', () => {
       const wrapper = getListItem();
@@ -140,14 +130,8 @@ describe('ImageList test suite', () => {
       const image = initialProps.images[0];
       const { meta, created } = image;
       const { numberOfFaces, numberOfLabels } = meta;
-      return mount(
-        <ImageAttr
-          created={created}
-          numberOfFaces={numberOfFaces}
-          numberOfLabels={numberOfLabels}
-        />
-      );
-    }
+      return mount(<ImageAttr created={created} numberOfFaces={numberOfFaces} numberOfLabels={numberOfLabels} />);
+    };
 
     it('should render', () => {
       const wrapper = getImageAttr();

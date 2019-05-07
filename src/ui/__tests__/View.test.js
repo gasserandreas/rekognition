@@ -10,10 +10,12 @@ it('View should render correctly', () => {
 });
 
 it('View should render with content', () => {
-  const wrapper = shallow(<View>
-    <h1>Hello</h1>
-    <p>Some more content, yeaah.</p>
-  </View>);
+  const wrapper = shallow(
+    <View>
+      <h1>Hello</h1>
+      <p>Some more content, yeaah.</p>
+    </View>,
+  );
   expect(toJson(wrapper.dive())).toMatchSnapshot();
 });
 
@@ -28,11 +30,10 @@ it('view should pass additional props to component', () => {
   const compProps = output.props();
 
   // check for props in compProps
-  Object.keys(props)
-    .map((key) => {
-      const value = props[key];
-      expect(compProps[key]).toEqual(value);
-    });
+  Object.keys(props).map((key) => {
+    const value = props[key];
+    expect(compProps[key]).toEqual(value);
+  });
 });
 
 it('ViewHeading should render correctly', () => {

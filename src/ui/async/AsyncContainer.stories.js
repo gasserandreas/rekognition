@@ -15,9 +15,13 @@ const Styles = {
   `,
 };
 
-storiesOf(`${baseName}/AsyncContainer`, module)
-  .add('default', () => (<Styles.Background>
+storiesOf(`${baseName}/AsyncContainer`, module).add('default', () => (
+  <Styles.Background>
     <AsyncContainer loading={sharedKnobs.getLoading()}>
-      <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+      <p>
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+        dolore magna aliquyam erat, sed diam voluptua.
+      </p>
     </AsyncContainer>
-  </Styles.Background>));
+  </Styles.Background>
+));

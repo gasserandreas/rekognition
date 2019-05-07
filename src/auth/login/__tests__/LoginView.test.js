@@ -11,10 +11,10 @@ import { AuthHeader, AuthFooter } from '../../AuthComponents';
 describe('LoginView test suite', () => {
   let initialProps;
 
-  const getLoginView = (props) => mount(
+  const getLoginView = props => mount(
     <MemoryRouter>
       <LoginView {...props} />
-    </MemoryRouter>
+    </MemoryRouter>,
   );
 
   beforeEach(() => {
@@ -56,7 +56,7 @@ describe('LoginView test suite', () => {
     });
 
     expect(wrapper).toBeTruthy();
-    
+
     const loginForm = wrapper.find(LoginForm);
     expect(loginForm.props().error).toEqual(message);
   });

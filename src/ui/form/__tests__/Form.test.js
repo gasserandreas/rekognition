@@ -3,19 +3,11 @@ import { shallow, mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 
 import {
-  Field,
-  TextInput,
-  CheckBox,
-  FieldRow,
-  __testables__,
+  Field, TextInput, CheckBox, FieldRow, __testables__,
 } from '../Form';
 
 const {
-  StyledFieldLabel,
-  StyledFieldFeedback,
-  StyledTextInput,
-  StyledCheckBox,
-  StyledFieldRow,
+  StyledFieldLabel, StyledFieldFeedback, StyledTextInput, StyledCheckBox, StyledFieldRow,
 } = __testables__;
 
 const getShallowField = (props = {}) => shallow(<Field {...props} />);
@@ -31,9 +23,7 @@ it('Extended Field should render correctly', () => {
   const Input = <TextInput value="" onChange={() => {}} />;
   const label = 'Custom label';
 
-  const wrapper = shallow(<Field
-    label={label}
-  >{Input}</Field>);
+  const wrapper = shallow(<Field label={label}>{Input}</Field>);
   expect(toJson(wrapper.dive())).toMatchSnapshot();
 });
 
@@ -67,7 +57,7 @@ it('Field should render label with custom props', () => {
 
   // check for label props
   const labelProps = label.props();
-  
+
   expect(labelProps.children).toEqual(props.label);
   expect(labelProps.htmlFor).toEqual(props.id);
 });
@@ -82,7 +72,7 @@ it('Field should render Feedback with error', () => {
     error: 'error',
   };
   const output = getShallowField(props);
-  
+
   const feedback = output.find(StyledFieldFeedback);
   expect(feedback).toBeTruthy();
 
@@ -101,7 +91,7 @@ it('Input styles should be consistent', () => {
 });
 
 it('Disabled input should render correctly', () => {
-  const wrapper = shallow(<StyledTextInput disabled/>);
+  const wrapper = shallow(<StyledTextInput disabled />);
   expect(toJson(wrapper)).toMatchSnapshot();
 });
 

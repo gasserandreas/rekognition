@@ -6,11 +6,7 @@ import 'jest-styled-components';
 import AddImageMessage, { __testables__ } from '../AddImageMessage';
 import ViewMessage from '../../ui/ViewMessage';
 
-const {
-  StyledImage,
-  StyledImageAttributes,
-  StyledImageWrapper,
-} = __testables__;
+const { StyledImage, StyledImageAttributes, StyledImageWrapper } = __testables__;
 
 describe('AddImageMessage test suite', () => {
   const initialProps = {
@@ -31,7 +27,7 @@ describe('AddImageMessage test suite', () => {
     initialProps.onHandleOpenImageDialog.mockClear();
   });
 
-  const getAddImageMessage = (props) => mount(<AddImageMessage {...props} />);
+  const getAddImageMessage = props => mount(<AddImageMessage {...props} />);
 
   it('should render', () => {
     expect(getAddImageMessage(initialProps).exists()).toBeTruthy();
@@ -80,18 +76,15 @@ describe('AddImageMessage test suite', () => {
 
   describe('AddImageMessage appeareance test suite', () => {
     it('should render StyledImage consitently', () => {
-      expect(toJson(mount(<StyledImage />)))
-        .toMatchSnapshot();
+      expect(toJson(mount(<StyledImage />))).toMatchSnapshot();
     });
 
     it('should render StyledImageAttributes consitently', () => {
-      expect(toJson(mount(<StyledImageAttributes />)))
-        .toMatchSnapshot();
+      expect(toJson(mount(<StyledImageAttributes />))).toMatchSnapshot();
     });
 
     it('should render StyledImageWrapper consitently', () => {
-      expect(toJson(mount(<StyledImageWrapper />)))
-        .toMatchSnapshot();
+      expect(toJson(mount(<StyledImageWrapper />))).toMatchSnapshot();
     });
   });
 });

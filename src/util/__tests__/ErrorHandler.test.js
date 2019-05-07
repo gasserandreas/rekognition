@@ -50,93 +50,75 @@ describe('ErrorHandler error creator test suite', () => {
   it('should create network error', () => {
     const error = new Error('Network error');
     const response = 'response';
-    const expectedError = Object.assign(
-      new Error('Network error'),
-      {
-        type: ErrorTypes.NetworkError,
-        title: 'Network error',
-        payload: response,
-        detail: error,
-        logLevel: LogLevel.Error,
-      }
-    );
+    const expectedError = Object.assign(new Error('Network error'), {
+      type: ErrorTypes.NetworkError,
+      title: 'Network error',
+      payload: response,
+      detail: error,
+      logLevel: LogLevel.Error,
+    });
     expect(createNetworkError(error, response)).toEqual(expectedError);
   });
 
   it('should create unknown network error', () => {
     const response = 'response';
-    const expectedError = Object.assign(
-      new Error('Unknown network error'),
-      {
-        type: ErrorTypes.NetworkError,
-        title: 'Network error',
-        payload: response,
-        detail: null,
-        logLevel: LogLevel.Error,
-      }
-    );
+    const expectedError = Object.assign(new Error('Unknown network error'), {
+      type: ErrorTypes.NetworkError,
+      title: 'Network error',
+      payload: response,
+      detail: null,
+      logLevel: LogLevel.Error,
+    });
     expect(createNetworkError(null, response)).toEqual(expectedError);
   });
 
   it('should create data error', () => {
     const error = new Error('Data error');
     const data = {};
-    const expectedError = Object.assign(
-      new Error('Data error'),
-      {
-        type: ErrorTypes.InvalidDataError,
-        title: 'Invalid data',
-        payload: data,
-        detail: error,
-        logLevel: LogLevel.Error,
-      }
-    );
+    const expectedError = Object.assign(new Error('Data error'), {
+      type: ErrorTypes.InvalidDataError,
+      title: 'Invalid data',
+      payload: data,
+      detail: error,
+      logLevel: LogLevel.Error,
+    });
     expect(createInvalidDataError(error, data)).toEqual(expectedError);
   });
 
   it('should create unknown data error', () => {
     const data = {};
-    const expectedError = Object.assign(
-      new Error('Unknown data error'),
-      {
-        type: ErrorTypes.InvalidDataError,
-        title: 'Invalid data',
-        payload: data,
-        detail: null,
-        logLevel: LogLevel.Error,
-      }
-    );
+    const expectedError = Object.assign(new Error('Unknown data error'), {
+      type: ErrorTypes.InvalidDataError,
+      title: 'Invalid data',
+      payload: data,
+      detail: null,
+      logLevel: LogLevel.Error,
+    });
     expect(createInvalidDataError(null, data)).toEqual(expectedError);
   });
 
   it('should create unhandled / unknown error', () => {
     const error = new Error('Unhandled / unknown error');
     const data = {};
-    const expectedError = Object.assign(
-      new Error('Unhandled / unknown error'),
-      {
-        type: ErrorTypes.UnknownError,
-        title: 'Caught unhandled exception',
-        payload: data,
-        detail: error,
-        logLevel: LogLevel.Error,
-      }
-    );
+    const expectedError = Object.assign(new Error('Unhandled / unknown error'), {
+      type: ErrorTypes.UnknownError,
+      title: 'Caught unhandled exception',
+      payload: data,
+      detail: error,
+      logLevel: LogLevel.Error,
+    });
     expect(createInvalidDataError(error, data)).toEqual(expectedError);
   });
 
   it('should create unhandled / unknown error without error object and without data object', () => {
     const data = undefined;
-    const expectedError = Object.assign(
-      new Error('Unhandled exception detected'),
-      {
-        type: ErrorTypes.UnknownError,
-        title: 'Caught unhandled exception',
-        payload: data,
-        detail: null,
-        logLevel: LogLevel.Error,
-      }
-    );
+    const expectedError = Object.assign(new Error('Unhandled exception detected'), {
+      type: ErrorTypes.UnknownError,
+      title: 'Caught unhandled exception',
+      payload: data,
+      detail: null,
+      logLevel: LogLevel.Error,
+    });
     expect(createUnknownError(null, data)).toEqual(expectedError);
   });
 });
@@ -158,8 +140,7 @@ describe('ErrorHandler addUnhandledPromiseCatcher test suite', () => {
 
   it('should add event handler to window object', () => {
     spyAddEventListener = jest.spyOn(window, 'addEventListener');
-    spyConsole = jest.spyOn(console, 'error')
-      .mockImplementationOnce(() => {});
+    spyConsole = jest.spyOn(console, 'error').mockImplementationOnce(() => {});
 
     const store = mockstore();
     addUnhandledPromiseCatcher(store);
@@ -169,8 +150,7 @@ describe('ErrorHandler addUnhandledPromiseCatcher test suite', () => {
   });
 
   it('should not fire on other window events', () => {
-    spyConsole = jest.spyOn(console, 'error')
-      .mockImplementationOnce(() => {});
+    spyConsole = jest.spyOn(console, 'error').mockImplementationOnce(() => {});
 
     const store = mockstore();
     addUnhandledPromiseCatcher(store);
@@ -200,7 +180,7 @@ describe('ErrorHandler addUnhandledPromiseCatcher test suite', () => {
     spyComplexEventPreventDefault = jest.spyOn(complexEvent, 'preventDefault');
 
     // action creator
-    const createErrorAction = (event) => ({
+    const createErrorAction = event => ({
       ...new Error(event.reason ? event.reason : 'Internal application error: Uncaught promise in code detected'),
       title: 'Uncaught promise in code detected',
       payload: undefined,
@@ -231,16 +211,13 @@ describe('ErrorHandler addUnhandledPromiseCatcher test suite', () => {
 
 describe('ErrorHandler middleware test suite', () => {
   // helpers
-  const createTestError = (logLevel, error, data = null) => Object.assign(
-    new Error(error ? error.message : 'Unhandled Test Error detected'),
-    {
-      type: ErrorTypes.UnknownError,
-      title: 'Caught Test Error',
-      payload: data,
-      detail: error,
-      logLevel,
-    }
-  );
+  const createTestError = (logLevel, error, data = null) => Object.assign(new Error(error ? error.message : 'Unhandled Test Error detected'), {
+    type: ErrorTypes.UnknownError,
+    title: 'Caught Test Error',
+    payload: data,
+    detail: error,
+    logLevel,
+  });
 
   // test configuration
   let spyConsoleLog;
@@ -277,7 +254,7 @@ describe('ErrorHandler middleware test suite', () => {
   const ERROR = 'ERROR';
 
   const idleAction = () => ({ type: IDLE });
-  const errorAction = (payload) => ({
+  const errorAction = payload => ({
     type: ERROR,
     payload,
     error: true,
@@ -337,7 +314,6 @@ describe('ErrorHandler middleware test suite', () => {
     expect(options.logToServer).toBeCalledTimes(0);
     expect(options.logToConsole).toBeCalledTimes(1);
 
-
     /**
      * check default behaviour for:
      *  - middleware in not prod environment
@@ -387,7 +363,6 @@ describe('ErrorHandler middleware test suite', () => {
     expect(options.logToUI).toBeCalledTimes(1);
     expect(options.logToServer).toBeCalledTimes(1);
     expect(options.logToConsole).toBeCalledTimes(0);
-
 
     /**
      * check default behaviour for:
@@ -479,7 +454,11 @@ describe('ErrorHandler middleware test suite', () => {
     });
 
     const expectedActions = [
-      reportInternalReduxError(new Error('Actions may not have an undefined "type" property. Have you misspelled a constant? Action: {"typee":"IDLE","payload":{}}')),
+      reportInternalReduxError(
+        new Error(
+          'Actions may not have an undefined "type" property. Have you misspelled a constant? Action: {"typee":"IDLE","payload":{}}',
+        ),
+      ),
     ];
 
     store.dispatch(invalidReduxAction());

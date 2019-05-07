@@ -7,27 +7,19 @@ import ButtonGroup from '../ui/form/ButtonGroup';
 
 const AppMessage = ({
   message: {
-    text,
-    show,
-    title,
-    showRefresh,
+    text, show, title, showRefresh,
   },
 }) => (
-  <ViewMessage
-    message={text}
-    show={show}
-  >
+  <ViewMessage message={text} show={show}>
     <h1>{title}</h1>
     <p>{text}</p>
     {showRefresh && (
       <Fragment>
         <p>Please refresh page and try again. If error persists please try later.</p>
         <ButtonGroup>
-          <Button
-            type="button"
-            buttonStyle="primary"
-            onClick={() => window.location.reload()}
-          >Refresh page</Button>
+          <Button type="button" buttonStyle="primary" onClick={() => window.location.reload()}>
+            Refresh page
+          </Button>
         </ButtonGroup>
       </Fragment>
     )}

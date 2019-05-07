@@ -13,14 +13,12 @@ import * as serviceWorker from './serviceWorker';
 import configureStore from './redux/configureStore';
 
 // create store object
-const {
-  store,
-  persistor,
-} = configureStore();
+const { store, persistor } = configureStore();
 
 // persistor.purge();
 
-class Index extends Component { // eslint-disable-line react/prefer-stateless-function
+class Index extends Component {
+  // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       <Provider store={store}>
@@ -29,7 +27,7 @@ class Index extends Component { // eslint-disable-line react/prefer-stateless-fu
             <AppContainer />
           </BrowserRouter>
         </PersistGate>
-      </Provider>    
+      </Provider>
     );
   }
 }

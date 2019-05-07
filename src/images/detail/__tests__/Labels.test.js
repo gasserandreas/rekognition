@@ -15,12 +15,14 @@ describe('Faces test suite', () => {
     confidence: 100,
     value: 'value',
     parents: [],
-    instances: [{
-      height: 100,
-      width: 90,
-      left: 80,
-      top: 70,
-    }],
+    instances: [
+      {
+        height: 100,
+        width: 90,
+        left: 80,
+        top: 70,
+      },
+    ],
   };
 
   const alternativeLabel = {
@@ -30,20 +32,12 @@ describe('Faces test suite', () => {
   };
 
   const initialProps = {
-    labels: [
-      mockedLabel,
-      alternativeLabel,
-    ],
+    labels: [mockedLabel, alternativeLabel],
     selectedLabel: mockedLabel,
     onLabelClick: jest.fn(),
   };
 
-  const getLabels = (props) => mount(
-    <Labels
-      {...initialProps}
-      {...props}
-    />
-  );
+  const getLabels = props => mount(<Labels {...initialProps} {...props} />);
 
   afterEach(() => {
     initialProps.onLabelClick.mockClear();
@@ -66,9 +60,7 @@ describe('Faces test suite', () => {
     const wrapper = getLabels();
     expect(wrapper.exists()).toBeTruthy();
 
-    const label = wrapper
-      .find(Label)
-      .filterWhere(n => n.props().label.id === mockedLabel.id);
+    const label = wrapper.find(Label).filterWhere(n => n.props().label.id === mockedLabel.id);
     expect(label.exists()).toBeTruthy();
 
     expect(initialProps.onLabelClick).not.toHaveBeenCalled();
@@ -91,9 +83,7 @@ describe('Faces test suite', () => {
     });
     expect(wrapper.exists()).toBeTruthy();
 
-    const label = wrapper
-      .find(Label)
-      .filterWhere(n => n.props().label.id === mockedLabel.id);
+    const label = wrapper.find(Label).filterWhere(n => n.props().label.id === mockedLabel.id);
     expect(label.exists()).toBeTruthy();
 
     expect(initialProps.onLabelClick).not.toHaveBeenCalled();
@@ -108,9 +98,7 @@ describe('Faces test suite', () => {
     const wrapper = getLabels();
     expect(wrapper.exists()).toBeTruthy();
 
-    const label = wrapper
-      .find(Label)
-      .filterWhere(n => n.props().selected);
+    const label = wrapper.find(Label).filterWhere(n => n.props().selected);
     expect(label.exists()).toBeTruthy();
 
     expect(label.props().label).toEqual(initialProps.selectedLabel);

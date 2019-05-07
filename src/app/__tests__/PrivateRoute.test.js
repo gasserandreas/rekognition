@@ -1,4 +1,3 @@
-/* global testUtils */
 import React from 'react';
 import * as ReactRouterDom from 'react-router-dom';
 
@@ -10,8 +9,7 @@ describe('PrivateRoute test suite', () => {
   let reactRouterDomRedirectMock;
   beforeAll(() => {
     // orgRedirect = Redirect
-    reactRouterDomRedirectMock = jest.spyOn(ReactRouterDom, 'Redirect')
-      .mockImplementation(() => <p>redirect</p>);
+    reactRouterDomRedirectMock = jest.spyOn(ReactRouterDom, 'Redirect').mockImplementation(() => <p>redirect</p>);
   });
 
   afterAll(() => {
@@ -20,10 +18,10 @@ describe('PrivateRoute test suite', () => {
 
   const DummyComponent = () => <h1>Test Heading</h1>;
 
-  const getPrivateRoute = (props) => mount(
+  const getPrivateRoute = props => mount(
     <ReactRouterDom.MemoryRouter>
       <PrivateRoute {...props} />
-    </ReactRouterDom.MemoryRouter>
+    </ReactRouterDom.MemoryRouter>,
   );
 
   const initialProps = {

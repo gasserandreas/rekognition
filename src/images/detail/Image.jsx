@@ -59,11 +59,7 @@ StyledImageWrapper.defaultProps = {
 const StyledImageContainer = styled(Box)``;
 
 const getPositions = (meta, wrapperBounding) => {
-  const {
-    height: imageHeight,
-    width: imageWidth,
-    orientation,
-  } = meta;
+  const { height: imageHeight, width: imageWidth, orientation } = meta;
 
   // get wrapper positions
   const imageContainerPosition = {
@@ -75,7 +71,9 @@ const getPositions = (meta, wrapperBounding) => {
     bottom: wrapperBounding.bottom,
   };
 
-  let width, height, ratio;
+  let width;
+  let height;
+  let ratio;
 
   if (orientation === 'LANDSCAPE') {
     // simple case, use full wrapper width
@@ -107,8 +105,8 @@ const getPositions = (meta, wrapperBounding) => {
   }
 
   // calculate top position (center of container)
-  const top = imageContainerPosition.height / 2 - (height / 2);
-  const left = imageContainerPosition.width / 2 -(width / 2);
+  const top = imageContainerPosition.height / 2 - height / 2;
+  const left = imageContainerPosition.width / 2 - width / 2;
 
   // define image position
   const imageWrapperPosition = {
@@ -124,14 +122,7 @@ const getPositions = (meta, wrapperBounding) => {
   };
 };
 
-const ImageContainer = ({
-  image: {
-    meta,
-    path,
-  },
-  selectedFace,
-  selectedLabel,
-}) => {
+const ImageContainer = ({ image: { meta, path }, selectedFace, selectedLabel }) => {
   const wrapperRef = useRef();
   const [state, setState] = useState({
     imageWrapperPosition: generateInitPos(),
@@ -142,17 +133,15 @@ const ImageContainer = ({
     const wrapperBounding = wrapperRef.current.getBoundingClientRect();
 
     // (deep) equals check based on string
-    if (JSON.stringify(state.wrapperBounding)
-      !== JSON.stringify(wrapperBounding)) {
+    if (JSON.stringify(state.wrapperBounding) !== JSON.stringify(wrapperBounding)) {
+      const { imageContainerPosition, imageWrapperPosition } = getPositions(meta, wrapperBounding);
 
-        const { imageContainerPosition, imageWrapperPosition } = getPositions(meta, wrapperBounding);
-
-        setState({
-          imageContainerPosition,
-          imageWrapperPosition,
-        });
+      setState({
+        imageContainerPosition,
+        imageWrapperPosition,
+      });
     }
-  }
+  };
 
   useEffect(() => {
     // add event listener
@@ -163,36 +152,25 @@ const ImageContainer = ({
 
     return () => {
       window.removeEventListener('resize', handleWrapperPosition);
-    }
-  }, [path]);
-
+    };
+  }, [handleWrapperPosition, path]);
 
   const { imageWrapperPosition } = state;
 
   return (
-    <StyledImageContainer
-        ref={wrapperRef}
-        style={{ justifyContent: 'center' }}
-        fill
-      >
-        <StyledImageWrapper pos={imageWrapperPosition}>
-          {selectedFace && <StyledSelector id="jestSelectedFace" pos={selectedFace.position} />}
-          {selectedLabel && (
-            <span id="jestSelectedLabel">
-              {selectedLabel.instances.map((pos, i) => (
-                <StyledSelector
-                  key={`label_selector_${i}`}
-                  pos={pos}
-                />
-              ))}
-            </span>
-          )}
-          <StyledAsyncImage
-            src={getImageSrc(path)}
-            fit="contain"
-          />
-        </StyledImageWrapper>
-      </StyledImageContainer>
+    <StyledImageContainer ref={wrapperRef} style={{ justifyContent: 'center' }} fill>
+      <StyledImageWrapper pos={imageWrapperPosition}>
+        {selectedFace && <StyledSelector id="jestSelectedFace" pos={selectedFace.position} />}
+        {selectedLabel && (
+          <span id="jestSelectedLabel">
+            {selectedLabel.instances.map((pos, i) => (
+              <StyledSelector key={`label_selector_${i}`} pos={pos} />
+            ))}
+          </span>
+        )}
+        <StyledAsyncImage src={getImageSrc(path)} fit="contain" />
+      </StyledImageWrapper>
+    </StyledImageContainer>
   );
 };
 
@@ -207,7 +185,7 @@ Image.propTypes = {
   }),
   selectedFace: PropTypes.shape({}),
   selectedLabel: PropTypes.shape({}),
-}
+};
 
 export const __testables__ = {
   StyledSelector,

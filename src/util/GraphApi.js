@@ -14,14 +14,16 @@ const getAuthToken = (_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}`: '',
+      authorization: token ? `Bearer ${token}` : '',
     },
   };
 };
 
 class GraphApi {
   client = null;
+
   onAuthError = null;
+
   endpoint = null;
 
   handleResponse = this.handleResponse.bind(this);
@@ -99,8 +101,8 @@ class GraphApi {
       variables,
       errorPolicy: 'all',
     })
-    .catch(this.handleNetworkError)
-    .then(this.handleResponse);
+      .catch(this.handleNetworkError)
+      .then(this.handleResponse);
   }
 
   mutation(mutation, variables = {}) {
@@ -109,13 +111,13 @@ class GraphApi {
       variables,
       errorPolicy: 'all',
     })
-    .catch(this.handleNetworkError)
-    .then(this.handleResponse);
+      .catch(this.handleNetworkError)
+      .then(this.handleResponse);
   }
 }
 
 export const __testables__ = {
   getAuthToken,
-}
+};
 
 export default GraphApi;

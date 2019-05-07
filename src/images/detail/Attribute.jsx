@@ -10,18 +10,18 @@ export const AttributePropType = PropTypes.shape({
   value: PropTypes.string,
 });
 
-const getFontWeith = ({ bold }) => bold ? 600 : 400;
+const getFontWeith = ({ bold }) => (bold ? 600 : 400);
 
 // components
 const StyledConfidence = styled.span`
   display: inline-block;
   margin-left: 0.25rem;
   &:before {
-    content: "(";
+    content: '(';
   }
-  
+
   &:after {
-    content: ")";
+    content: ')';
   }
 `;
 
@@ -43,26 +43,12 @@ const StyledAttr = styled(Box)`
   margin-bottom: 0.25rem;
 `;
 
-export const Attribute = ({
-  attribute: {
-    name,
-    confidence,
-    value,
-  },
-  showConfidence,
-  boldLabel,
-}) => (
-  <StyledAttr
-    fill
-    direction="row"
-    alignContent="between"
-  >
+export const Attribute = ({ attribute: { name, confidence, value }, showConfidence, boldLabel }) => (
+  <StyledAttr fill direction="row" alignContent="between">
     <StyledAttrLabel bold={boldLabel}>{name}</StyledAttrLabel>
     <StyledAttrContent>
       {value}
-      {showConfidence && (
-        <StyledConfidence>{String(confidence).substring(0,5)}</StyledConfidence>
-      )}
+      {showConfidence && <StyledConfidence>{String(confidence).substring(0, 5)}</StyledConfidence>}
     </StyledAttrContent>
   </StyledAttr>
 );
@@ -71,7 +57,7 @@ Attribute.propTypes = {
   attribute: AttributePropType.isRequired,
   showConfidence: PropTypes.bool,
   boldLabel: PropTypes.bool,
-}
+};
 
 Attribute.defaultProps = {
   showConfidence: false,

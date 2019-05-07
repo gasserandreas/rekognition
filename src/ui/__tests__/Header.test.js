@@ -12,11 +12,8 @@ describe('Header test suite', () => {
   const getHeader = (props = {}) => {
     const wrapper = mount(
       <MemoryRouter>
-        <Header
-          isAuthenticated={false}
-          {...props}
-        />
-      </MemoryRouter>
+        <Header isAuthenticated={false} {...props} />
+      </MemoryRouter>,
     );
     const header = wrapper.find(Header);
     return header;

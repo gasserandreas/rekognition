@@ -19,18 +19,8 @@ storiesOf('Header', module)
     />
   ))
   .add('is authenticated', () => (
-    <Header
-      isAuthenticated={true}
-      username={"Andreas G."}
-      showPreviousButton
-      onGoToPrevious={action('onGoToPrevious')}
-    />
+    <Header isAuthenticated username="Andreas G." showPreviousButton onGoToPrevious={action('onGoToPrevious')} />
   ))
   .add('is not authenticated', () => (
-    <Header
-      isAuthenticated={false}
-      showPreviousButton
-      onGoToPrevious={action('onGoToPrevious')}
-    />
+    <Header isAuthenticated={false} showPreviousButton onGoToPrevious={action('onGoToPrevious')} />
   ));
-

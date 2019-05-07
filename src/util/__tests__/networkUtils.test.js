@@ -15,7 +15,7 @@ const defaultConfig = {
 };
 
 it('should return dev url for graph api', () => {
-  expect(networkEndpoints['graphql']['development']).toEqual(getUrl('graphql'));
+  expect(networkEndpoints.graphql.development).toEqual(getUrl('graphql'));
 });
 
 describe('getEnv test suite', () => {
@@ -25,7 +25,7 @@ describe('getEnv test suite', () => {
 
   beforeEach(() => {
     jest.resetModules();
-  })
+  });
 
   it('should return environment for localhost url', () => {
     jest.mock('../services/windowUtils', () => ({
@@ -134,16 +134,7 @@ describe('test genericFetch', () => {
     const getErrorMessage = status => `Network error detected, status code: ${status}`;
 
     // mock responses
-    fetch.mockResponses(
-      [
-        mockSuccessResponse,
-        { status: 300 },
-      ],
-      [
-        mockSuccessResponse,
-        { status: 100 },
-      ],
-    );
+    fetch.mockResponses([mockSuccessResponse, { status: 300 }], [mockSuccessResponse, { status: 100 }]);
 
     // test for status code >= 300
     try {
@@ -152,8 +143,7 @@ describe('test genericFetch', () => {
       expect(fetch.mock.calls.length).toEqual(1);
       expect(fetch.mock.calls[0][0]).toEqual(defaultUrl);
 
-      expect(requestError)
-        .toEqual(createNetworkError(new Error(getErrorMessage(300)), mockSuccessResponse));
+      expect(requestError).toEqual(createNetworkError(new Error(getErrorMessage(300)), mockSuccessResponse));
     }
 
     // test for status code < 200
@@ -163,8 +153,7 @@ describe('test genericFetch', () => {
       expect(fetch.mock.calls.length).toEqual(2);
       expect(fetch.mock.calls[1][0]).toEqual(defaultUrl);
 
-      expect(requestError)
-        .toEqual(createNetworkError(new Error(getErrorMessage(100)), mockSuccessResponse));
+      expect(requestError).toEqual(createNetworkError(new Error(getErrorMessage(100)), mockSuccessResponse));
     }
   });
 });
@@ -201,12 +190,7 @@ describe('test genericJsonFetch', () => {
     const getErrorMessage = status => `Network error detected, status code: ${status}`;
 
     // mock responses
-    fetch.mockResponses(
-      [
-        mockSuccessData,
-        { status: 300 },
-      ],
-    );
+    fetch.mockResponses([mockSuccessData, { status: 300 }]);
 
     // test for status code >= 300
     try {
@@ -215,8 +199,7 @@ describe('test genericJsonFetch', () => {
       expect(fetch.mock.calls.length).toEqual(1);
       expect(fetch.mock.calls[0][0]).toEqual(defaultUrl);
 
-      expect(requestError)
-        .toEqual(createNetworkError(new Error(getErrorMessage(300)), mockSuccessData));
+      expect(requestError).toEqual(createNetworkError(new Error(getErrorMessage(300)), mockSuccessData));
     }
   });
 

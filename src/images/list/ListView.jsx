@@ -10,23 +10,19 @@ import { HOCRequestPropTypes } from '../../util/PropTypes';
 
 import * as Paths from '../../paths';
 
-const ListView = (props) => {
-  return (
-    <View pad="none">
-      <ImageList
-        images={props.images}
-        addImageRequest={props.addImageRequest}
-        onImageClick={image => props.history.push(Paths.GET_IMAGES_DETAIL(image.id))}
-      />
-      <AddImageButton />
-    </View>
-  );
-};
+const ListView = props => (
+  <View pad="none">
+    <ImageList
+      images={props.images}
+      addImageRequest={props.addImageRequest}
+      onImageClick={image => props.history.push(Paths.GET_IMAGES_DETAIL(image.id))}
+    />
+    <AddImageButton />
+  </View>
+);
 
 ListView.propTypes = {
-  images: PropTypes.arrayOf(
-    PropTypes.shape({})
-  ).isRequired,
+  images: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   addImageRequest: HOCRequestPropTypes.isRequired,
 };
 

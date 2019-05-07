@@ -4,7 +4,6 @@ import { mount } from 'enzyme';
 import * as authHooks from '../auth';
 
 describe('auth hooks test suite', () => {
-  
   const path = 'my/custom/path';
   const initialProps = {
     isAuthenticated: true,
@@ -12,20 +11,19 @@ describe('auth hooks test suite', () => {
       push: jest.fn(),
     },
   };
-  const clearTimeoutSpyOn = jest.spyOn(window, 'clearTimeout')
+  const clearTimeoutSpyOn = jest.spyOn(window, 'clearTimeout');
 
   beforeEach(() => {
     initialProps.history.push.mockClear();
     clearTimeoutSpyOn.mockClear();
   });
 
-
   const hook = authHooks.createUseIsAuthenticatedHistoryPush(path);
   const HookTester = ({ isAuthenticated, history }) => {
     hook(isAuthenticated, history);
 
     return <div>empty div</div>;
-  }
+  };
 
   it('should call history push if authenticated ', (done) => {
     // should not be called

@@ -50,7 +50,7 @@ describe('Faces test suite', () => {
       high: 43,
       low: 26,
     },
-  }
+  };
 
   const initialProps = {
     faces: [mockedFace],
@@ -60,7 +60,7 @@ describe('Faces test suite', () => {
 
   const alternativeId = 'a4dd0b74-3e17-4835-840b-031d658dba20';
 
-  const getFaces = (props) => mount(<Faces {...props} />);
+  const getFaces = props => mount(<Faces {...props} />);
 
   afterEach(() => {
     initialProps.onFaceClick.mockClear();
@@ -139,14 +139,7 @@ describe('Faces test suite', () => {
   });
 
   describe('Faces: Face component test suite', () => {
-    const getFace = (props) => shallow(
-      <Face
-        number={1}
-        onClick={() => {}}
-        face={mockedFace}
-        {...props}
-      />
-    );
+    const getFace = props => shallow(<Face number={1} onClick={() => {}} face={mockedFace} {...props} />);
 
     it('should render', () => {
       const wrapper = getFace();
@@ -169,9 +162,7 @@ describe('Faces test suite', () => {
       const wrapper = getFace();
       expect(wrapper.exists()).toBeTruthy();
 
-      const ageAttribute = wrapper
-        .find(Attribute)
-        .filterWhere(n => n.props().attribute.name === 'age');
+      const ageAttribute = wrapper.find(Attribute).filterWhere(n => n.props().attribute.name === 'age');
       expect(ageAttribute.exists()).toBeTruthy();
 
       const { value } = ageAttribute.props().attribute;
@@ -185,16 +176,18 @@ describe('Faces test suite', () => {
       // create new attributes props
       const newAttributes = [
         ...mockedFace.attributes,
-        ...filteredAttributeNames.map((name) => ({
+        ...filteredAttributeNames.map(name => ({
           name,
           confidence: 100,
           value: name,
         })),
       ];
-      const wrapper = getFace({ face: {
-        ...mockedFace,
-        attributes: newAttributes,
-      }});
+      const wrapper = getFace({
+        face: {
+          ...mockedFace,
+          attributes: newAttributes,
+        },
+      });
       expect(wrapper.exists()).toBeTruthy();
 
       const attributes = wrapper.find(Attribute);
@@ -202,10 +195,10 @@ describe('Faces test suite', () => {
       expect(attributes.length).toEqual(
         newAttributes.length
         - filteredAttributeNames.length // remove filtered attributes
-        + 1 // add age attributes
+          + 1, // add age attributes
       );
 
-      const attributeNames = attributes.map((attribute) => attribute.props().attribute.name);
+      const attributeNames = attributes.map(attribute => attribute.props().attribute.name);
 
       // check for missing filtered attribute names
       filteredAttributeNames.forEach((filteredAttribute) => {
@@ -219,17 +212,13 @@ describe('Faces test suite', () => {
     });
 
     it('should render consistently if selected', () => {
-      const wrapper = getFace({ selected: true})
+      const wrapper = getFace({ selected: true });
       expect(toJson(wrapper.dive())).toMatchSnapshot();
     });
   });
 
   describe('Faces: Emotions component test suite', () => {
-    const getEmotions = (props) => shallow(<Emotions
-      faceId={mockedFace.id}
-      emotions={mockedFace.emotions}
-      {...props}
-    />);
+    const getEmotions = props => shallow(<Emotions faceId={mockedFace.id} emotions={mockedFace.emotions} {...props} />);
 
     it('should render', () => {
       const wrapper = getEmotions();
@@ -246,17 +235,17 @@ describe('Faces test suite', () => {
 
     it('should sort emotions by confidence', () => {
       const sortedEmotionNames = mockedFace.emotions
-        .sort((a, b) => a.confidence < b.confidence ? 1 : -1)
+        .sort((a, b) => (a.confidence < b.confidence ? 1 : -1))
         .map(emotion => emotion.name);
-      
+
       const wrapper = getEmotions();
       expect(wrapper.exists()).toBeTruthy();
 
       const labels = wrapper.find(Label);
       expect(labels.exists()).toBeTruthy();
 
-      const emotionLabelNames = labels.map((label) => label.props().label.name);
+      const emotionLabelNames = labels.map(label => label.props().label.name);
       expect(sortedEmotionNames).toEqual(emotionLabelNames);
-    })
+    });
   });
 });

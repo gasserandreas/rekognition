@@ -1,6 +1,4 @@
-/* global testUtils */
 import React from 'react';
-import { act } from 'react-dom/test-utils';
 import toJson from 'enzyme-to-json';
 import 'jest-styled-components';
 
@@ -15,11 +13,7 @@ describe('NotFound test suite', () => {
     },
   };
 
-  const getNotFound = (props) => mount(
-    <NotFound
-      {...initialProps}
-    />
-  );
+  const getNotFound = props => mount(<NotFound {...initialProps} {...props} />);
 
   it('should render NotFound', () => {
     const wrapper = getNotFound();

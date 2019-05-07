@@ -2,7 +2,7 @@
 import reducer, * as reduxApplication from '../index';
 
 import * as sessionUtil from '../../../util/sessionUtil';
-import * as reduxAuth from '../../auth'
+import * as reduxAuth from '../../auth';
 import * as authSelectors from '../../auth/selectors';
 import * as reduxImages from '../../images';
 import messageReducer from '../message';
@@ -51,7 +51,8 @@ describe('application complex action test suite', () => {
       },
     },
     userId: '730dd215-a5f6-4b32-bb81-cf1e8ec89099',
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MzBkZDIxNS1hNWY2LTRiMzItYmI4MS1jZjFlOGVjODkwMzkiLCJjcmVhdGVkQXQiOjE1NTMyMDEwMjM5NzYsImlhdCI6MTU1MzIwMTAyM30.CI1ZSQodWkuGMAQJQRZ5F7bGFKJHTWj-ql0f_INVALID',
+    token:
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MzBkZDIxNS1hNWY2LTRiMzItYmI4MS1jZjFlOGVjODkwMzkiLCJjcmVhdGVkQXQiOjE1NTMyMDEwMjM5NzYsImlhdCI6MTU1MzIwMTAyM30.CI1ZSQodWkuGMAQJQRZ5F7bGFKJHTWj-ql0f_INVALID',
   };
 
   const jestDummyActionListImage = testUtils.dummyTestAction('LIST_IMAGES');
@@ -60,15 +61,13 @@ describe('application complex action test suite', () => {
   let mockGetToken;
   let mockGetUserId;
   let spyOnTokenSelector;
-  let spyOnAuthUserIdSelector
+  let spyOnAuthUserIdSelector;
 
   beforeAll(() => {
-    jest.spyOn(reduxImages, 'listImages')
-      .mockImplementation(() => jestDummyActionListImage);
-    
-    jest.spyOn(reduxAuth, 'refreshToken')
-      .mockImplementation(() => jestDummyActionRefreshToken);
-    
+    jest.spyOn(reduxImages, 'listImages').mockImplementation(() => jestDummyActionListImage);
+
+    jest.spyOn(reduxAuth, 'refreshToken').mockImplementation(() => jestDummyActionRefreshToken);
+
     spyOnTokenSelector = jest.spyOn(authSelectors, 'tokenSelector');
     spyOnAuthUserIdSelector = jest.spyOn(authSelectors, 'authUserIdSelector');
   });
@@ -79,13 +78,11 @@ describe('application complex action test suite', () => {
 
   beforeEach(() => {
     /** need to be triggered before every test case
-    * to allow modification on test case.
-    */
-    mockGetToken = jest.spyOn(sessionUtil, 'getToken')
-      .mockImplementation(() => null);
-    
-    mockGetUserId = jest.spyOn(sessionUtil, 'getUserId')
-      .mockImplementation(() => null);
+     * to allow modification on test case.
+     */
+    mockGetToken = jest.spyOn(sessionUtil, 'getToken').mockImplementation(() => null);
+
+    mockGetUserId = jest.spyOn(sessionUtil, 'getUserId').mockImplementation(() => null);
   });
 
   afterEach(() => {
@@ -100,7 +97,7 @@ describe('application complex action test suite', () => {
     const { dispatch } = store;
 
     reduxApplication.loadApplication()(dispatch, () => mockData.state);
-    
+
     const expectedActions = [
       reduxApplication.__testables__.applicationWillLoad(),
       reduxApplication.__testables__.applicationDidLoad(),
@@ -113,11 +110,9 @@ describe('application complex action test suite', () => {
   });
 
   it('should handle loadApplication while being authenticated token / userId from session', (done) => {
-    mockGetToken = jest.spyOn(sessionUtil, 'getToken')
-      .mockImplementation(() => mockData.token);
-    
-    mockGetUserId = jest.spyOn(sessionUtil, 'getUserId')
-      .mockImplementation(() => mockData.userId);
+    mockGetToken = jest.spyOn(sessionUtil, 'getToken').mockImplementation(() => mockData.token);
+
+    mockGetUserId = jest.spyOn(sessionUtil, 'getUserId').mockImplementation(() => mockData.userId);
 
     const store = mockstore();
     const { dispatch } = store;
@@ -193,15 +188,13 @@ describe('application reducer test suite', () => {
   };
 
   it('should create application redux state', () => {
-    expect(reducer(undefined, reduxApplication.appIdle()))
-      .toEqual(initialState);
+    expect(reducer(undefined, reduxApplication.appIdle())).toEqual(initialState);
   });
 
   it('should handle APPLICATION_STATUS_SET', () => {
-    expect(reducer(initialState, reduxApplication.__testables__.applicationWillLoad()))
-      .toEqual({
-        ...initialState,
-        status: reduxApplication.AppStatus.APPLICATION_WILL_LOAD,
-      });
+    expect(reducer(initialState, reduxApplication.__testables__.applicationWillLoad())).toEqual({
+      ...initialState,
+      status: reduxApplication.AppStatus.APPLICATION_WILL_LOAD,
+    });
   });
 });

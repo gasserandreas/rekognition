@@ -3,16 +3,9 @@ import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import 'jest-styled-components';
 
-import Attribute, {
-  __testables__,
-  StyledAttrLabel,
-} from '../Attribute';
+import Attribute, { __testables__, StyledAttrLabel } from '../Attribute';
 
-const {
-  StyledConfidence,
-  StyledAttrContent,
-  getFontWeith,
-} = __testables__;
+const { StyledConfidence, StyledAttrContent, getFontWeith } = __testables__;
 
 describe('Image Detail Attribute', () => {
   const initialProps = {
@@ -30,8 +23,6 @@ describe('Image Detail Attribute', () => {
   it('should render', () => {
     const wrapper = getAttribute(initialProps);
     expect(wrapper.exists()).toBeTruthy();
-
-
   });
 
   it('should not render confidence if set', () => {
@@ -57,7 +48,7 @@ describe('Image Detail Attribute', () => {
     });
 
     it('StyledAttrLabel should render consistently with bold styles', () => {
-      const attrLabel = shallow(<StyledAttrLabel bold={true} />);
+      const attrLabel = shallow(<StyledAttrLabel bold />);
       expect(toJson(attrLabel)).toMatchSnapshot();
     });
 

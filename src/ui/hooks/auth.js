@@ -19,6 +19,6 @@ export const createUseIsAuthenticatedHistoryPush = path => (isAuthenticated, his
     return () => {
       /* istanbul ignore next */
       timeout && clearTimeout(timeout);
-    }
+    };
   });
 };

@@ -23,6 +23,18 @@ const StyledAppContent = styled(Box)`
 class App extends Component {
   static propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
+    loadApplication: PropTypes.func.isRequired,
+    username: PropTypes.string,
+    message: PropTypes.shape({
+      show: PropTypes.bool,
+      showRefresh: PropTypes.bool,
+      text: PropTypes.string,
+      title: PropTypes.string,
+    }).isRequired,
+  }
+
+  static defaultProps = {
+    username: undefined,
   }
 
   componentWillMount() {
@@ -32,7 +44,7 @@ class App extends Component {
   render() {
     const { isAuthenticated, username, message } = this.props;
     return (
-      <Grommet theme={Theme} full={true}>
+      <Grommet theme={Theme} full>
         <AppMessage
           message={message}
         />
@@ -40,7 +52,7 @@ class App extends Component {
           isAuthenticated={isAuthenticated}
           username={username}
         />
-        <StyledAppContent fill justify='between' direction='column'>
+        <StyledAppContent fill justify="between" direction="column">
           <Box flex fill pad="none">
             <AppRoutes isAuthenticated={isAuthenticated} />
             <AppFooter />

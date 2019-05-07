@@ -24,10 +24,7 @@ describe('images list container test suite', () => {
     const state = select({}, initialProps);
     expect(state).toEqual(expectedInitialState);
 
-    expect(Object.keys(state)).toEqual([
-      'images',
-      'addImageRequest',
-    ]);
+    expect(Object.keys(state)).toEqual(['images', 'addImageRequest']);
   });
 
   it('should return redux actions', () => {

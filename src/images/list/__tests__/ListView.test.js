@@ -14,7 +14,6 @@ import * as Paths from '../../../paths';
 const { createMockStore } = testUtils;
 
 describe('ListView test suite', () => {
-  
   const initialProps = {
     history: {
       push: jest.fn(),
@@ -39,11 +38,8 @@ describe('ListView test suite', () => {
     const store = mockStore();
     const provider = mount(
       <Provider store={store}>
-        <ListView
-          {...initialProps}
-          {...props}
-        />
-      </Provider>
+        <ListView {...initialProps} {...props} />
+      </Provider>,
     );
 
     const wrapper = provider.find(ListView);

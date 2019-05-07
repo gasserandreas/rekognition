@@ -5,11 +5,7 @@ import styled from 'styled-components';
 import * as Yup from 'yup';
 import { withFormik } from 'formik';
 
-import {
-  Field,
-  TextInput,
-  CheckBox,
-} from '../../ui/form/Form';
+import { Field, TextInput, CheckBox } from '../../ui/form/Form';
 import Button from '../../ui/form/Button';
 import Message from '../../ui/form/Message';
 
@@ -20,8 +16,7 @@ const validationSchema = Yup.object().shape({
   email: Yup.string()
     .email('Invalid email address')
     .required('Email is required!'),
-  password: Yup.string()
-    .required('Password is required!'),
+  password: Yup.string().required('Password is required!'),
 });
 
 const mapPropsToValues = (obj) => {
@@ -62,11 +57,7 @@ const LoginForm = (props) => {
   } = props;
   return (
     <StyledLoginForm onSubmit={handleSubmit}>
-      <Field
-        id="email"
-        label="Email"
-        error={touched.email && errors.email}
-      >
+      <Field id="email" label="Email" error={touched.email && errors.email}>
         <TextInput
           id="email"
           type="email"
@@ -77,11 +68,7 @@ const LoginForm = (props) => {
           onBlur={handleBlur}
         />
       </Field>
-      <Field
-        id="password"
-        label="Password"
-        error={touched.password && errors.password}
-      >
+      <Field id="password" label="Password" error={touched.password && errors.password}>
         <TextInput
           id="password"
           type="password"
@@ -92,11 +79,7 @@ const LoginForm = (props) => {
           onBlur={handleBlur}
         />
       </Field>
-      <Field
-        id="remember"
-        label="Remember me"
-        error={touched.remember && errors.remember}
-      >
+      <Field id="remember" label="Remember me" error={touched.remember && errors.remember}>
         <CheckBox
           id="remember"
           name="remember"
@@ -115,7 +98,9 @@ const LoginForm = (props) => {
           onClick={handleReset}
           disabled={!dirty || submitting}
           testId="jestResetButton"
-        >Reset</Button>
+        >
+          Reset
+        </Button>
         <Button
           type="submit"
           disabled={submitting}
@@ -123,7 +108,9 @@ const LoginForm = (props) => {
           style={{ marginLeft: '1rem' }}
           loading={submitting}
           testId="jestSubmitButton"
-        >Submit</Button>
+        >
+          Submit
+        </Button>
       </ButtonGroup>
     </StyledLoginForm>
   );

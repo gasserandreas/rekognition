@@ -3,18 +3,14 @@ import { mount, shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import 'jest-styled-components';
 
-import Dropzone from 'react-dropzone'
+import Dropzone from 'react-dropzone';
 
 import { __testables__ } from '../AddImageButton';
 import AddImageMessage from '../AddImageMessage';
 import { addImage } from '../../redux/images';
 
 const {
-  select,
-  mapDispatchToProps,
-  AddImageButton,
-  StyledAddImageButton,
-  maxFileSize,
+  select, mapDispatchToProps, AddImageButton, StyledAddImageButton, maxFileSize,
 } = __testables__;
 
 describe('AddImageButton test suite', () => {
@@ -29,25 +25,26 @@ describe('AddImageButton test suite', () => {
     initialProps.afterOnClick.mockClear();
   });
 
-  const getAddImageButton = (props) => mount(<AddImageButton {...props} />);
+  const getAddImageButton = props => mount(<AddImageButton {...props} />);
 
   describe('AddImageButton appeareance test suite', () => {
     it('should render StyledAddImageButton consitently', () => {
-      expect(toJson(mount(<StyledAddImageButton />)))
-        .toMatchSnapshot();
+      expect(toJson(mount(<StyledAddImageButton />))).toMatchSnapshot();
     });
 
     it('should render AddImageButton consitently', () => {
-      expect(toJson(getAddImageButton(initialProps)))
-        .toMatchSnapshot();
+      expect(toJson(getAddImageButton(initialProps))).toMatchSnapshot();
     });
 
     it('should render AddImageButton consitently while loading', () => {
-      expect(toJson(getAddImageButton({
-        ...initialProps,
-        loading: true,
-      })))
-        .toMatchSnapshot();
+      expect(
+        toJson(
+          getAddImageButton({
+            ...initialProps,
+            loading: true,
+          }),
+        ),
+      ).toMatchSnapshot();
     });
   });
 
@@ -85,7 +82,7 @@ describe('AddImageButton test suite', () => {
      */
     // it('should handle handleResetForm', () => {
     //   const wrapper = getAddImageButton(initialProps);
-      
+
     //   const state = {
     //     showMessage: true,
     //     image: {},
@@ -131,9 +128,11 @@ describe('AddImageButton test suite', () => {
       const dropzone = wrapper.find(Dropzone);
       expect(dropzone.exists()).toBeTruthy();
 
-      dropzone.simulate('drop', [{
-        size: maxFileSize + 1,
-      }]);
+      dropzone.simulate('drop', [
+        {
+          size: maxFileSize + 1,
+        },
+      ]);
 
       expect(initialProps.addImage).not.toHaveBeenCalled();
       expect(initialProps.afterOnClick).not.toHaveBeenCalled();
@@ -142,7 +141,7 @@ describe('AddImageButton test suite', () => {
     it('should not handle fire afterOnClick if not set', () => {
       const wrapper = getAddImageButton({
         ...initialProps,
-        afterOnClick: () =>  {
+        afterOnClick: () => {
           throw new Error('I should not have been thrown');
         },
       });
@@ -164,12 +163,10 @@ describe('AddImageButton test suite', () => {
       expect(state).toEqual({
         loading: false,
       });
-  
-      expect(Object.keys(state)).toEqual([
-        'loading',
-      ]);
+
+      expect(Object.keys(state)).toEqual(['loading']);
     });
-  
+
     it('should return redux actions', () => {
       expect(mapDispatchToProps).toEqual({
         addImage,

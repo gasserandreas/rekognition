@@ -51,20 +51,28 @@ const StyledImageAttr = styled(Box)`
   }
 `;
 
-const ImageAttr = ({ created, numberOfFaces, numberOfLabels, ...props}) => (
-  <StyledImageAttr
-    direction="row"
-    {...props} 
-  >
+const ImageAttr = ({
+  created, numberOfFaces, numberOfLabels, ...props
+}) => (
+  <StyledImageAttr direction="row" {...props}>
     <Box align="center">
-      <label id="jestDateTimeLabel"><Clock />{getDefaultFormatedDate(created)}</label>
+      <label id="jestDateTimeLabel">
+        <Clock />
+        {getDefaultFormatedDate(created)}
+      </label>
     </Box>
     <Box align="center" alignContent="between" direction="row">
-      <label style={{ marginRight: '0.5rem' }}><Group />{numberOfFaces}</label>
-      <label><Tag />{numberOfLabels}</label>
+      <label style={{ marginRight: '0.5rem' }}>
+        <Group />
+        {numberOfFaces}
+      </label>
+      <label>
+        <Tag />
+        {numberOfLabels}
+      </label>
     </Box>
   </StyledImageAttr>
-)
+);
 
 // image
 const StyledImage = styled(AsyncImage)`
@@ -155,17 +163,13 @@ const ListItem = ({ image, ...props }) => {
   const { numberOfFaces, numberOfLabels } = meta;
   return (
     <StyledListItem {...props}>
-      <ImageAttr
-        created={created}
-        numberOfFaces={numberOfFaces}
-        numberOfLabels={numberOfLabels}
-      />
+      <ImageAttr created={created} numberOfFaces={numberOfFaces} numberOfLabels={numberOfLabels} />
       <StyledImage src={getThumbImageSrc(path)} fit="cover" />
     </StyledListItem>
   );
-}
+};
 
-const ListItemAdd = (props) => (
+const ListItemAdd = props => (
   <StyledListItem {...props} style={{ justifyContent: 'center' }}>
     <StyledImageAttr />
     <LoadingIndicator />
@@ -193,20 +197,11 @@ const ImageList = (props) => {
   const { images, addImageRequest, onImageClick } = props;
   return (
     <StyledImageList fill>
-      {addImageRequest.loading && (
-        <ListItemAdd />
-      )}
+      {addImageRequest.loading && <ListItemAdd />}
       {images.map((image) => {
         const { id } = image;
         const key = `image_list_item_${id}`;
-        return (
-          <ListItem
-            key={key}
-            image={image}
-            onClick={() => onImageClick(image)}
-            elevation="xsmall"
-          />
-        );
+        return <ListItem key={key} image={image} onClick={() => onImageClick(image)} elevation="xsmall" />;
       })}
     </StyledImageList>
   );
@@ -216,7 +211,7 @@ ImageList.propTypes = {
   images: PropTypes.arrayOf(ImagePropType).isRequired,
   addImageRequest: HOCRequestPropTypes.isRequired,
   onImageClick: PropTypes.func.isRequired,
-}
+};
 
 export const __testables__ = {
   StyledImageAttr,

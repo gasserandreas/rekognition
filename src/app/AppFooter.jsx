@@ -17,26 +17,19 @@ const isAlternativeColor = (pathname) => {
   }
 
   return false;
-}
+};
 
 const isWithSidebar = pathname => pathname.includes(Paths.GET_IMAGES_DETAIL(''));
 
 const AppFooter = ({
   history: {
-    location: {
-      pathname,
-    }
+    location: { pathname },
   },
 }) => {
   const withSidebar = isWithSidebar(pathname);
   const alternativeColor = isAlternativeColor(pathname);
 
-  return (
-    <Footer
-      withSidebar={withSidebar}
-      alternativeColor={alternativeColor}
-    />
-  );
+  return <Footer withSidebar={withSidebar} alternativeColor={alternativeColor} />;
 };
 
 AppFooter.propTypes = {
@@ -51,6 +44,6 @@ export const __testables__ = {
   isWithSidebar,
   isAlternativeColor,
   AppFooter,
-}
+};
 
 export default withRouter(AppFooter);

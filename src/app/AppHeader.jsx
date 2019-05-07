@@ -8,12 +8,10 @@ import * as Paths from '../paths';
 
 const shouldShowPreviousButton = pathname => pathname !== '/';
 
-const AppHeader = ({
-  isAuthenticated,
-  username,
-  history,
-}) => {
-  const { location: { pathname } } = history;
+const AppHeader = ({ isAuthenticated, username, history }) => {
+  const {
+    location: { pathname },
+  } = history;
 
   return (
     <Header

@@ -12,10 +12,7 @@ describe('auth login container test suite', () => {
       loginRequest: undefined,
     });
 
-    expect(Object.keys(state)).toEqual([
-      'isAuthenticated',
-      'loginRequest',
-    ]);
+    expect(Object.keys(state)).toEqual(['isAuthenticated', 'loginRequest']);
   });
 
   it('should return redux actions', () => {

@@ -6,10 +6,7 @@ import { Box, Heading, Image } from 'grommet';
 import Button from '../ui/form/Button';
 import ButtonGroup from '../ui/form/ButtonGroup';
 import ViewMessage from '../ui/ViewMessage';
-import {
-  getImageCreationDateTime,
-  getFormattedFileSize,
-} from '../util/util';
+import { getImageCreationDateTime, getFormattedFileSize } from '../util/util';
 
 import { Colors, MediaSize } from '../styles';
 
@@ -72,44 +69,50 @@ const StyledImageAttributes = styled(Box)`
 `;
 
 const AddImageMessage = ({
-  show,
-  image,
-  onHandleResetForm,
-  onHandleOpenImageDialog,
+  show, image, onHandleResetForm, onHandleOpenImageDialog,
 }) => (
   <ViewMessage show={show}>
     <Heading level="2">Image is too big</Heading>
     <Box>
-    <p>Hey it seems your image to big for being uploaded. We only allow uploading images up to <strong>6 MB</strong>, please choose a different image.</p>
-      {image  && (
+      <p>
+        Hey it seems your image to big for being uploaded. We only allow uploading images up to
+        <strong>6 MB</strong>
+, please choose a different image.
+      </p>
+      {image && (
         <StyledImageWrapper>
-          <StyledImage
-            src={URL.createObjectURL(image)}
-            fit="cover"
-          />
+          <StyledImage src={URL.createObjectURL(image)} fit="cover" />
           <StyledImageAttributes>
             <div>
               <strong>Size: </strong>
-              <span style={{ color: Colors.Red.Default }}>{getFormattedFileSize(image.size)} MB</span>
+              <span style={{ color: Colors.Red.Default }}>
+                {getFormattedFileSize(image.size)}
+                {' '}
+MB
+              </span>
             </div>
-            <div><strong>Name: </strong>{image.name}</div>
-            <div><strong>Created: </strong>{getImageCreationDateTime(image.lastModified)}</div>
-            <div><strong>Type: </strong>{image.type}</div>
+            <div>
+              <strong>Name: </strong>
+              {image.name}
+            </div>
+            <div>
+              <strong>Created: </strong>
+              {getImageCreationDateTime(image.lastModified)}
+            </div>
+            <div>
+              <strong>Type: </strong>
+              {image.type}
+            </div>
           </StyledImageAttributes>
         </StyledImageWrapper>
       )}
       <ButtonGroup>
-        <Button
-          type="button"
-          buttonStyle="link"
-          onClick={onHandleResetForm}
-        >Cancel</Button>
-        <Button
-          type="button"
-          buttonStyle="primary"
-          style={{ marginLeft: '1rem' }}
-          onClick={onHandleOpenImageDialog}
-        >Change image</Button>
+        <Button type="button" buttonStyle="link" onClick={onHandleResetForm}>
+          Cancel
+        </Button>
+        <Button type="button" buttonStyle="primary" style={{ marginLeft: '1rem' }} onClick={onHandleOpenImageDialog}>
+          Change image
+        </Button>
       </ButtonGroup>
     </Box>
   </ViewMessage>

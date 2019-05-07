@@ -23,10 +23,10 @@ describe('AuthComponent test suite', () => {
       const wrapper = mount(
         <MemoryRouter>
           <AuthFooter {...props} />
-        </MemoryRouter>
+        </MemoryRouter>,
       );
       return wrapper.find(AuthFooter);
-    }
+    };
 
     it('should render with children', () => {
       const href = 'http://www.google.com';

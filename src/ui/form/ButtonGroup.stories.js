@@ -12,8 +12,6 @@ storiesOf('ButtonGroup', module)
   .addDecorator(withDefaultMargin())
   .add('default', () => (
     <ButtonGroup>
-      <Button
-        onClick={action('onClick')}
-      >Click me</Button>
+      <Button onClick={action('onClick')}>Click me</Button>
     </ButtonGroup>
-    ));
+  ));

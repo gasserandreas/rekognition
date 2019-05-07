@@ -64,34 +64,44 @@ describe('image details container test suite', () => {
     };
 
     // check for valid face
-    expect(select({
-      // set faces state
-      faces: {
-        byId: {
-          [id]: face,
+    expect(
+      select(
+        {
+          // set faces state
+          faces: {
+            byId: {
+              [id]: face,
+            },
+          },
         },
-      },
-    }, {
-      ...initialProps,
-      location: {
-        search: url,
-      },
-    })).toEqual(expectedState);
+        {
+          ...initialProps,
+          location: {
+            search: url,
+          },
+        },
+      ),
+    ).toEqual(expectedState);
 
     // check for invalid face
-    expect(select({
-      // set faces state
-      faces: {
-        byId: {
-          'invalid-id': face,
+    expect(
+      select(
+        {
+          // set faces state
+          faces: {
+            byId: {
+              'invalid-id': face,
+            },
+          },
         },
-      },
-    }, {
-      ...initialProps,
-      location: {
-        search: url,
-      },
-    })).toEqual(expectedInitialState);
+        {
+          ...initialProps,
+          location: {
+            search: url,
+          },
+        },
+      ),
+    ).toEqual(expectedInitialState);
   });
 
   it('should select label based on label url attr', () => {
@@ -107,33 +117,43 @@ describe('image details container test suite', () => {
     };
 
     // check for valid face
-    expect(select({
-      // set faces state
-      labels: {
-        byId: {
-          [id]: label,
+    expect(
+      select(
+        {
+          // set faces state
+          labels: {
+            byId: {
+              [id]: label,
+            },
+          },
         },
-      },
-    }, {
-      ...initialProps,
-      location: {
-        search: url,
-      },
-    })).toEqual(expectedState);
+        {
+          ...initialProps,
+          location: {
+            search: url,
+          },
+        },
+      ),
+    ).toEqual(expectedState);
 
     // check for invalid label
-    expect(select({
-      // set label state
-      labels: {
-        byId: {
-          'invalid-id': label,
+    expect(
+      select(
+        {
+          // set label state
+          labels: {
+            byId: {
+              'invalid-id': label,
+            },
+          },
         },
-      },
-    }, {
-      ...initialProps,
-      location: {
-        search: url,
-      },
-    })).toEqual(expectedInitialState);
+        {
+          ...initialProps,
+          location: {
+            search: url,
+          },
+        },
+      ),
+    ).toEqual(expectedInitialState);
   });
 });

@@ -1,11 +1,8 @@
-/* global testUtils */
-import React from 'react';
-
 import Container, { __testables__ } from '../AppContainer';
 import { logOutUser } from '../../redux/auth';
 import { loadApplication } from '../../redux/application';
 
-const { mapStateToProps, mapDispatchToProps, } = __testables__;
+const { mapStateToProps, mapDispatchToProps } = __testables__;
 
 describe('AppContainer test suite', () => {
   it('check container function', () => {
@@ -13,24 +10,22 @@ describe('AppContainer test suite', () => {
   });
 
   it('should return props from state', () => {
-    expect(mapStateToProps({}, {}))
-      .toEqual({
-        isAuthenticated: false,
-        username: undefined,
-        message: {
-          show: undefined,
-          text: undefined,
-          title: undefined,
-          showRefresh: undefined,
-        }
-      });
+    expect(mapStateToProps({}, {})).toEqual({
+      isAuthenticated: false,
+      username: undefined,
+      message: {
+        show: undefined,
+        text: undefined,
+        title: undefined,
+        showRefresh: undefined,
+      },
+    });
   });
 
   it('should return redux actions', () => {
-    expect(mapDispatchToProps)
-      .toEqual({
-        loadApplication,
-        logOutUser,
-      });
+    expect(mapDispatchToProps).toEqual({
+      loadApplication,
+      logOutUser,
+    });
   });
 });

@@ -31,9 +31,7 @@ const StyledHeading = styled(Heading)`
 `;
 
 /** Default heading for view */
-export const ViewHeading = (props) => (
-  <StyledHeading level="4" {...props} />
-);
+export const ViewHeading = props => <StyledHeading level="4" {...props} />;
 
 View.propTypes = {
   /** Add view header here */

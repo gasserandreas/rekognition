@@ -15,4 +15,3 @@ export const ImagePropType = PropTypes.shape({
   name: PropTypes.string,
   type: PropTypes.string,
 });
-

@@ -2,10 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import {
-  AuthHeader,
-  AuthFooter,
-} from '../AuthComponents';
+import { AuthHeader, AuthFooter } from '../AuthComponents';
 
 import LoginForm from './LoginForm';
 
@@ -32,15 +29,8 @@ const StyledView = styled(View)`
 `;
 
 const LoginView = ({
-  loginRequest: {
-    error,
-    loading
-  },
-  logInUser,
-  isAuthenticated,
-  history,
+  loginRequest: { error, loading }, logInUser, isAuthenticated, history,
 }) => {
-
   // handle auth check
   useIsAuthenticatedHistoryPush(isAuthenticated, history);
 
@@ -50,7 +40,7 @@ const LoginView = ({
       <div className="content">
         <Card pad="large">
           <LoginForm
-            user={{ email: '', password: '', remember: false, }}
+            user={{ email: '', password: '', remember: false }}
             onSubmit={logInUser}
             submitting={loading}
             error={error ? error.message : null}

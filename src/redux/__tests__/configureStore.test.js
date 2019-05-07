@@ -3,16 +3,9 @@ import { compose } from 'redux';
 
 import configureStore, { __testables__ } from '../configureStore';
 
-import {
-  applicationMessageAdd,
-  applicationMessageShow,
-} from '../application/message';
-  
-const {
-  getComposeEnhancers,
-  getEnhancers,
-  getErrorOptions,
-} = __testables__;
+import { applicationMessageAdd, applicationMessageShow } from '../application/message';
+
+const { getComposeEnhancers, getEnhancers, getErrorOptions } = __testables__;
 
 it('should create redux store', () => {
   const { store } = configureStore();
@@ -93,7 +86,7 @@ describe('redux getErrorOptions test sutie', () => {
   it('should return object with error middleware options', () => {
     const options = getErrorOptions();
     expect(options).toBeTruthy();
-    
+
     // check for attributes
     const { logToUI } = options;
     expect(logToUI).toBeInstanceOf(Function);

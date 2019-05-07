@@ -11,22 +11,15 @@ const StyledLabels = styled(Box)``;
 
 const isClickEnabled = label => label.instances.length > 0;
 
-const Labels = ({
-  selectedLabel,
-  labels,
-  onLabelClick,
-}) => {
+const Labels = ({ selectedLabel, labels, onLabelClick }) => {
   const handleOnLabelClick = (label) => {
     if (isClickEnabled(label)) {
-      onLabelClick(label)
+      onLabelClick(label);
     }
   };
 
   return (
-    <StyledLabels
-      wrap
-      direction="row"
-    >
+    <StyledLabels wrap direction="row">
       {labels.map((label) => {
         const labelProps = {
           key: `image_label_${label.id}`,

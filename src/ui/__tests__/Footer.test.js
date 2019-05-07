@@ -8,11 +8,7 @@ import Footer, { __testables__ } from '../Footer';
 import { Colors } from '../../styles';
 
 const {
-  StyledFooter,
-  getColor,
-  getBackgroundColor,
-  getWithSidebar,
-  getLinkColor,
+  StyledFooter, getColor, getBackgroundColor, getWithSidebar, getLinkColor,
 } = __testables__;
 
 describe('Footer test suite', () => {
@@ -23,23 +19,20 @@ describe('Footer test suite', () => {
   });
 
   it('test consistent styling', () => {
-    expect(toJson(shallow(<StyledFooter />)))
-      .toMatchSnapshot();
+    expect(toJson(shallow(<StyledFooter />))).toMatchSnapshot();
   });
 
   it('Footer should render with sidebar prop enabled', () => {
-    const wrapper = mount(<Footer withSidebar={true} />);
+    const wrapper = mount(<Footer withSidebar />);
     expect(toJson(wrapper)).toMatchSnapshot();
-    expect(toJson(shallow(<StyledFooter withSidebar={true} />)))
-      .toMatchSnapshot();
+    expect(toJson(shallow(<StyledFooter withSidebar />))).toMatchSnapshot();
   });
 
   it('Footer should render with alternative Color', () => {
-    const wrapper = mount(<Footer alternativeColor={true} />);
+    const wrapper = mount(<Footer alternativeColor />);
     expect(toJson(wrapper)).toMatchSnapshot();
 
-    expect(toJson(shallow(<StyledFooter alternativeColor={true} />)))
-      .toMatchSnapshot();
+    expect(toJson(shallow(<StyledFooter alternativeColor />))).toMatchSnapshot();
   });
 
   it('getWithSidebar should return not return empty string if withSidebar is set', () => {
@@ -47,26 +40,20 @@ describe('Footer test suite', () => {
   });
 
   it('getColor should return color', () => {
-    expect(getColor({ alternativeColor: false }))
-      .toEqual(Colors.ColorsPalette.TextFaded);
+    expect(getColor({ alternativeColor: false })).toEqual(Colors.ColorsPalette.TextFaded);
 
-      expect(getColor({ alternativeColor: true }))
-      .toEqual(Colors.ColorsPalette.White);
+    expect(getColor({ alternativeColor: true })).toEqual(Colors.ColorsPalette.White);
   });
 
   it('getBackgroundColor should return color', () => {
-    expect(getBackgroundColor({ alternativeColor: false }))
-      .toEqual('inherit');
+    expect(getBackgroundColor({ alternativeColor: false })).toEqual('inherit');
 
-      expect(getBackgroundColor({ alternativeColor: true }))
-      .toEqual(Colors.ColorsPalette.Background);
+    expect(getBackgroundColor({ alternativeColor: true })).toEqual(Colors.ColorsPalette.Background);
   });
 
   it('getLinkColor should return color', () => {
-    expect(getLinkColor({ alternativeColor: false }))
-      .toEqual(Colors.Neutrals.MidDark);
+    expect(getLinkColor({ alternativeColor: false })).toEqual(Colors.Neutrals.MidDark);
 
-      expect(getLinkColor({ alternativeColor: true }))
-      .toEqual(Colors.ColorsPalette.White);
+    expect(getLinkColor({ alternativeColor: true })).toEqual(Colors.ColorsPalette.White);
   });
 });

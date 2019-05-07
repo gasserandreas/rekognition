@@ -9,9 +9,8 @@ export const imagesListSelector = createSelector(
       return [];
     }
 
-    return ids.map(id => byId[id])
-      .filter(item => item !== null && item !== undefined);
-  }
+    return ids.map(id => byId[id]).filter(item => item !== null && item !== undefined);
+  },
 );
 
 export const sortedImageListSelector = createSelector(
@@ -28,10 +27,10 @@ export const sortedImageListSelector = createSelector(
       }
 
       return new Date(createdB) - new Date(createdA);
-    }
+    };
 
     return images.sort(sortBy);
-  }
+  },
 );
 
 export const imagesByIdSelector = createSelector(
@@ -45,7 +44,7 @@ export const imagesListRequestSelector = createSelector(
   ({ listImageRequest }) => listImageRequest,
 );
 
-// add image 
+// add image
 export const addImageRequestSelector = createSelector(
   imagesStateSelector,
   ({ addImageRequest }) => addImageRequest,
@@ -53,7 +52,7 @@ export const addImageRequestSelector = createSelector(
 
 export const addImageIsLoading = createSelector(
   addImageRequestSelector,
-  (addImageRequestSelector) => addImageRequestSelector ? addImageRequestSelector.loading : false,
+  addImageRequestSelector => (addImageRequestSelector ? addImageRequestSelector.loading : false),
 );
 
 // get image

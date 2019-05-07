@@ -4,7 +4,6 @@ import * as util from '../util';
 import * as reduxFaces from '../../faces';
 import * as reduxLabels from '../../labels';
 
-
 import GraphApi from '../../../util/GraphApi';
 
 import listImagesJson from '../__data__/listImages.json';
@@ -22,19 +21,17 @@ describe('images simple action test suite', () => {
   };
 
   it('should handle imagesAddNewImage', () => {
-    expect(__testables__.imagesAddNewImage(mockedData.image))
-      .toEqual({
-        type: __testables__.IMAGES_ADD_NEW_IMAGE,
-        payload: mockedData.image,
-      });
+    expect(__testables__.imagesAddNewImage(mockedData.image)).toEqual({
+      type: __testables__.IMAGES_ADD_NEW_IMAGE,
+      payload: mockedData.image,
+    });
   });
 
   it('should handle imagesAddImage', () => {
-    expect(__testables__.imagesAddImage(mockedData.image))
-      .toEqual({
-        type: __testables__.IMAGES_ADD_IMAGE,
-        payload: mockedData.image,
-      });
+    expect(__testables__.imagesAddImage(mockedData.image)).toEqual({
+      type: __testables__.IMAGES_ADD_IMAGE,
+      payload: mockedData.image,
+    });
   });
 
   it('should handle imagesAddImages', () => {
@@ -46,15 +43,14 @@ describe('images simple action test suite', () => {
       ids.push(id);
       byId[id] = image;
     });
-    
-    expect(__testables__.imagesAddImages(mockedData.images))
-      .toEqual({
-        type: __testables__.IMAGES_ADD_IMAGES,
-        payload: {
-          byId,
-          ids,
-        },
-      });
+
+    expect(__testables__.imagesAddImages(mockedData.images)).toEqual({
+      type: __testables__.IMAGES_ADD_IMAGES,
+      payload: {
+        byId,
+        ids,
+      },
+    });
   });
 });
 
@@ -67,21 +63,19 @@ describe('images complex action test suite', () => {
 
   let labelsAddLabelsMock;
   let facesAddFacesMock;
-  
+
   beforeAll(() => {
     labelsAddLabelsMock = jest
       .spyOn(reduxLabels, 'labelsAddLabels')
       .mockImplementation(() => labelsAddLabelsDummyAction);
-    
-    facesAddFacesMock = jest
-      .spyOn(reduxFaces, 'facesAddFaces')
-      .mockImplementation(() => facesAddFacesDummyAction);
+
+    facesAddFacesMock = jest.spyOn(reduxFaces, 'facesAddFaces').mockImplementation(() => facesAddFacesDummyAction);
   });
 
   afterAll(() => {
     labelsAddLabelsMock.mockRestore();
     facesAddFacesMock.mockRestore();
-  })
+  });
 
   afterEach(() => {
     API.resetMocks();
@@ -99,7 +93,8 @@ describe('images complex action test suite', () => {
     };
 
     beforeAll(() => {
-      readAsDataURLMock = jest.spyOn(util, 'readAsDataURL')
+      readAsDataURLMock = jest
+        .spyOn(util, 'readAsDataURL')
         .mockResolvedValue('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA');
     });
 
@@ -110,7 +105,7 @@ describe('images complex action test suite', () => {
     afterEach(() => {
       readAsDataURLMock.mockClear();
     });
-    
+
     it('should handle addImage', async (done) => {
       const { addImage } = addImageJson.data;
       const { image } = addImage;
@@ -118,7 +113,7 @@ describe('images complex action test suite', () => {
 
       // mock api response
       API.mockMutationResponseOnce({ addImage });
-      
+
       // prepare expected actions
       const HOC_ACTIONS = testUtils.createHocActions({
         baseType: 'IMAGES_ADD_REQUEST',
@@ -161,7 +156,7 @@ describe('images complex action test suite', () => {
 
       // mock api response
       API.mockMutationResponseOnce({ addImage });
-      
+
       // prepare expected actions
       const HOC_ACTIONS = testUtils.createHocActions({
         baseType: 'IMAGES_ADD_REQUEST',
@@ -207,7 +202,7 @@ describe('images complex action test suite', () => {
 
       // mock api response
       API.mockMutationResponseOnce({ addImage });
-      
+
       // prepare expected actions
       const HOC_ACTIONS = testUtils.createHocActions({
         baseType: 'IMAGES_ADD_REQUEST',
@@ -230,10 +225,7 @@ describe('images complex action test suite', () => {
         imageId: mockData.imageId,
       })(dispatch);
 
-      const expectedActions = [
-        HOC_ACTIONS.START,
-        HOC_ACTIONS.ERROR,
-      ];
+      const expectedActions = [HOC_ACTIONS.START, HOC_ACTIONS.ERROR];
 
       // check redux actions
       expect(store.getActions()).toEqual(expectedActions);
@@ -249,7 +241,7 @@ describe('images complex action test suite', () => {
 
       // mock api response
       API.mockMutationResponseOnce({ addImage });
-      
+
       const store = mockstore();
       const { dispatch } = store;
 
@@ -268,9 +260,7 @@ describe('images complex action test suite', () => {
       expect(id).toBeTruthy();
 
       // check for image name
-      expect(callArgs.name).toEqual(
-        expect.stringContaining(id)
-      );
+      expect(callArgs.name).toEqual(expect.stringContaining(id));
 
       done();
     });
@@ -317,11 +307,7 @@ describe('images complex action test suite', () => {
 
     await reduxImages.listImages()(dispatch);
 
-    const expectedActions = [
-      HOC_ACTIONS.START,
-      __testables__.imagesAddImages(listImage.items),
-      HOC_ACTIONS.SUCCESS,
-    ];
+    const expectedActions = [HOC_ACTIONS.START, __testables__.imagesAddImages(listImage.items), HOC_ACTIONS.SUCCESS];
 
     expect(store.getActions()).toEqual(expectedActions);
 
@@ -373,45 +359,43 @@ describe('auth: reducer test suite', () => {
   };
 
   it('should return initial store', () => {
-    expect(reducer(undefined, dummyTestAction))
-      .toEqual(initialState);
+    expect(reducer(undefined, dummyTestAction)).toEqual(initialState);
   });
 
   it('should handle IMAGES_ADD_NEW_IMAGE', () => {
-    const image = getImageJson.data.getImage
-    expect(reducer(undefined, __testables__.imagesAddNewImage(image)))
-      .toEqual({
-        ...initialState,
-        ids: [image.id],
-        byId: {
-          [image.id]: image,
-        },
-      });
+    const image = getImageJson.data.getImage;
+    expect(reducer(undefined, __testables__.imagesAddNewImage(image))).toEqual({
+      ...initialState,
+      ids: [image.id],
+      byId: {
+        [image.id]: image,
+      },
+    });
   });
 
   it('should handle IMAGES_ADD_IMAGE', () => {
-    const image = getImageJson.data.getImage
-    expect(reducer(undefined, __testables__.imagesAddImage(image)))
-      .toEqual({
-        ...initialState,
-        ids: [image.id],
-        byId: {
-          [image.id]: image,
-        },
-      });
+    const image = getImageJson.data.getImage;
+    expect(reducer(undefined, __testables__.imagesAddImage(image))).toEqual({
+      ...initialState,
+      ids: [image.id],
+      byId: {
+        [image.id]: image,
+      },
+    });
   });
 
   it('should handle IMAGES_ADD_IMAGES', () => {
     const images = listImagesJson.data.listImage.items;
-    expect(reducer(undefined, __testables__.imagesAddImages(images)))
-      .toEqual({
-        ...initialState,
-        ids: images.map(image => image.id),
-        byId: images.reduce((prev, cur) => ({
+    expect(reducer(undefined, __testables__.imagesAddImages(images))).toEqual({
+      ...initialState,
+      ids: images.map(image => image.id),
+      byId: images.reduce(
+        (prev, cur) => ({
           ...prev,
           [cur.id]: cur,
-        }), {}),
-      });
+        }),
+        {},
+      ),
+    });
   });
-
 });
