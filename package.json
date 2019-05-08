@@ -119,7 +119,9 @@
         "statements": 95
       }
     },
-    "coverageReporters": ["text"]
+    "coverageReporters": [
+      "text"
+    ]
   },
   "description": "AWS Rekognition"
 }
