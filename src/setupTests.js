@@ -92,7 +92,7 @@ const createFormitState = (formElements = {}) => ({
   ),
   dirty: false,
   submitting: false,
-  error: false,
+  error: '',
   handleChange: jest.fn(),
   handleBlur: jest.fn(),
   handleSubmit: jest.fn(),

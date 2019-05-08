@@ -21,7 +21,7 @@ describe('RegisterView test suite', () => {
   beforeEach(() => {
     initialProps = {
       isAuthenticated: false,
-      histroy: {
+      history: {
         push: jest.fn(),
       },
       signupRequest: {

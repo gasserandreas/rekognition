@@ -10,12 +10,16 @@ const {
   StyledFieldLabel, StyledFieldFeedback, StyledTextInput, StyledCheckBox, StyledFieldRow,
 } = __testables__;
 
-const getShallowField = (props = {}) => shallow(<Field {...props} />);
-const getMountField = (props = {}) => mount(<Field {...props} />);
+const initialProps = {
+  children: <p>child</p>,
+};
+
+const getShallowField = (props = {}) => shallow(<Field {...initialProps} {...props} />);
+const getMountField = (props = {}) => mount(<Field {...initialProps} {...props} />);
 
 // Field component tests
 it('Field should render correctly', () => {
-  const wrapper = shallow(<Field />);
+  const wrapper = getShallowField();
   expect(toJson(wrapper.dive())).toMatchSnapshot();
 });
 
@@ -36,7 +40,7 @@ it('Field should render content', () => {
 });
 
 it('Field should not render label if no label is passed in', () => {
-  const output = getShallowField();
+  const output = getShallowField({ label: undefined });
   expect(output.find(StyledFieldLabel).length).toEqual(0);
 });
 
@@ -53,7 +57,7 @@ it('Field should render label with custom props', () => {
 
   // check for label component
   const label = output.find(StyledFieldLabel);
-  expect(label).toBeTruthy();
+  expect(label.exists()).toBeTruthy();
 
   // check for label props
   const labelProps = label.props();
@@ -82,7 +86,8 @@ it('Field should render Feedback with error', () => {
 
 // Input tests
 it('TextInput should work correctly', () => {
-  expect(shallow(<TextInput />));
+  const wrapper = shallow(<TextInput />);
+  expect(wrapper.exists()).toBeTruthy();
 });
 
 it('Input styles should be consistent', () => {
@@ -102,7 +107,8 @@ it('Error Input should render correctly', () => {
 
 // Checkbox tests
 it('CheckBox should work correctly', () => {
-  expect(shallow(<CheckBox />));
+  const wrapper = shallow(<CheckBox />);
+  expect(wrapper.exists()).toBeTruthy();
 });
 
 it('Checkbox styles should be consistent', () => {
@@ -117,7 +123,8 @@ it('Checkbox Input should render correctly', () => {
 
 // Test StyledFieldRow
 it('FieldRow should work correctly', () => {
-  expect(shallow(<FieldRow />));
+  const wrapper = shallow(<FieldRow><p>fieldrow</p></FieldRow>);
+  expect(wrapper.exists()).toBeTruthy();
 });
 
 it('FieldRow styles should be consistent', () => {

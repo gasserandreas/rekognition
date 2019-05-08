@@ -71,15 +71,17 @@ export const Field = ({
 
 Field.propTypes = {
   inline: PropTypes.bool,
-  id: PropTypes.string.isRequired,
-  label: PropTypes.node.isRequired,
-  error: PropTypes.node,
+  id: PropTypes.string,
+  label: PropTypes.node,
+  error: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   children: PropTypes.node.isRequired,
 };
 
 Field.defaultProps = {
   inline: false,
   error: undefined,
+  id: undefined,
+  label: null,
 };
 
 const StyledFieldRow = styled(Grommet.Box)`

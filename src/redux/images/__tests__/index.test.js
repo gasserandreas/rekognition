@@ -207,7 +207,7 @@ describe('images complex action test suite', () => {
       const HOC_ACTIONS = testUtils.createHocActions({
         baseType: 'IMAGES_ADD_REQUEST',
         payload: { addImage },
-        error: 'Not a valid file type',
+        error: new Error('Not a valid file type'),
         errorIsHandled: true,
       });
 

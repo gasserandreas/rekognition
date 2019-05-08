@@ -43,7 +43,7 @@ describe('Register form test suite', () => {
         errors: inputFields.reduce(
           (prev, cur) => ({
             ...prev,
-            [cur]: true,
+            [cur]: `Error: ${cur}`,
           }),
           {},
         ),

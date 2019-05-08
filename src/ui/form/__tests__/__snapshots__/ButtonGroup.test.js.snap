@@ -29,7 +29,9 @@ exports[`ButtonGroup should render correctly 1`] = `
   }
   forwardedRef={null}
 >
-  <button>
+  <button
+    type="button"
+  >
     Click me
   </button>
 </StyledComponent>

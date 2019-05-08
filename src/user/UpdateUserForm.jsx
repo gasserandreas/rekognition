@@ -130,11 +130,11 @@ UpdateUserForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   handleReset: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
-  error: PropTypes.bool,
+  error: PropTypes.string,
 };
 
 UpdateUserForm.defaultProps = {
-  error: false,
+  error: null,
 };
 
 const EnhancedUpdateUserForm = formikEnhancer(UpdateUserForm);

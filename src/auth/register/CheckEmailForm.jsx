@@ -97,7 +97,7 @@ const CheckEmailForm = (props) => {
 
 CheckEmailForm.propTypes = {
   error: PropTypes.node,
-  validEmail: PropTypes.string,
+  validEmail: PropTypes.bool,
   values: PropTypes.shape({}).isRequired,
   touched: PropTypes.shape({}).isRequired,
   errors: PropTypes.shape({}).isRequired,

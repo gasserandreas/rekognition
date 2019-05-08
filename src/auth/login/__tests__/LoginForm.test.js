@@ -52,7 +52,7 @@ describe('Login form test suite', () => {
         errors: inputFields.reduce(
           (prev, cur) => ({
             ...prev,
-            [cur]: true,
+            [cur]: `Error ${cur}`,
           }),
           {},
         ),
@@ -89,7 +89,7 @@ describe('Login form test suite', () => {
         errors: inputFields.reduce(
           (prev, cur) => ({
             ...prev,
-            [cur]: true,
+            [cur]: `Error: ${cur}`,
           }),
           {},
         ),
@@ -115,7 +115,7 @@ describe('Login form test suite', () => {
     it('should show error message if error props is set', () => {
       const props = {
         ...getFormProps(),
-        error: true,
+        error: 'custom error',
       };
       const wrapper = mount(<LoginForm {...props} />);
       expect(wrapper).toBeTruthy();

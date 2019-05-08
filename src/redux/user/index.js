@@ -38,7 +38,7 @@ export const updateUser = hocAsyncAction(USER_UPDATE_USER_REQUEST, user => (disp
   };
 
   return GraphApi.mutation(UPDATE_USER, variables).then((data) => {
-    dispatch(userSetUser(data.user));
+    dispatch(userSetUser(data.updateUser.user));
 
     return data;
   });

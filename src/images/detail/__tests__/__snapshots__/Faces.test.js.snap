@@ -618,7 +618,8 @@ string",
   <h3
     level="1"
   >
-    Face 
+    Face
+     
     1
   </h3>
   <WithTheme(Box)
@@ -2095,12 +2096,13 @@ string",
   }
   forwardedRef={null}
   onClick={[Function]}
-  selected={true}
+  selected={false}
 >
   <h3
     level="1"
   >
-    Face 
+    Face
+     
     1
     <Text
       color="brand"
@@ -3124,11 +3126,11 @@ exports[`Faces test suite should render consistently 1`] = `
 }
 
 .c8:before {
-  content: "(";
+  content: '(';
 }
 
 .c8:after {
-  content: ")";
+  content: ')';
 }
 
 .c6 {
@@ -11922,7 +11924,7 @@ string",
                   >
                     <Styled(WithTheme(Box))
                       onClick={[Function]}
-                      selected={true}
+                      selected={false}
                     >
                       <StyledComponent
                         forwardedComponent={
@@ -12457,7 +12459,7 @@ string",
                         }
                         forwardedRef={null}
                         onClick={[Function]}
-                        selected={true}
+                        selected={false}
                       >
                         <WithTheme(Box)
                           className="c2"
@@ -12466,7 +12468,7 @@ string",
                           onClick={[Function]}
                           pad="none"
                           responsive={true}
-                          selected={true}
+                          selected={false}
                           theme={
                             Object {
                               "accordion": Object {
@@ -13351,7 +13353,7 @@ string",
                             onClick={[Function]}
                             pad="none"
                             responsive={true}
-                            selected={true}
+                            selected={false}
                             theme={
                               Object {
                                 "accordion": Object {
@@ -14237,7 +14239,7 @@ string",
                               onClick={[Function]}
                               pad="none"
                               responsive={true}
-                              selected={true}
+                              selected={false}
                               theme={
                                 Object {
                                   "accordion": Object {
@@ -15122,7 +15124,7 @@ string",
                                 onClick={[Function]}
                                 pad="none"
                                 responsive={true}
-                                selected={true}
+                                selected={false}
                                 theme={
                                   Object {
                                     "accordion": Object {
@@ -16074,7 +16076,7 @@ string",
                                   onClick={[Function]}
                                   pad="none"
                                   responsive={true}
-                                  selected={true}
+                                  selected={false}
                                   theme={
                                     Object {
                                       "accordion": Object {
@@ -16955,12 +16957,13 @@ string",
                                   <div
                                     className="c2 c0"
                                     onClick={[Function]}
-                                    selected={true}
+                                    selected={false}
                                   >
                                     <h3
                                       level="1"
                                     >
-                                      Face 
+                                      Face
+                                       
                                       1
                                       <Text
                                         color="brand"
@@ -37059,11 +37062,11 @@ string",
   display: inline-block;
   margin-left: 0.25rem;
   &:before {
-    content: \\"(\\";
+    content: '(';
   }
-  
+
   &:after {
-    content: \\")\\";
+    content: ')';
   }
 ",
                                                                                   ],
@@ -43999,11 +44002,11 @@ string",
   display: inline-block;
   margin-left: 0.25rem;
   &:before {
-    content: \\"(\\";
+    content: '(';
   }
-  
+
   &:after {
-    content: \\")\\";
+    content: ')';
   }
 ",
                                                                                   ],

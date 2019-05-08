@@ -101,7 +101,13 @@ describe('ImageList test suite', () => {
   });
 
   describe('ListItem test suite', () => {
-    const getListItem = props => mount(<ListItem image={initialProps.images[0]} {...props} />);
+    const getListItem = props => mount(
+      <ListItem
+        image={initialProps.images[0]}
+        onClick={jest.fn()}
+        {...props}
+      />,
+    );
 
     it('should render', () => {
       const wrapper = getListItem();

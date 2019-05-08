@@ -20,7 +20,7 @@ describe('LoginView test suite', () => {
   beforeEach(() => {
     initialProps = {
       isAuthenticated: false,
-      histroy: {
+      history: {
         push: jest.fn(),
       },
       loginRequest: {
