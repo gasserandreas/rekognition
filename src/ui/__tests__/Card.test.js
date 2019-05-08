@@ -6,7 +6,11 @@ import Card, { StyledCard } from '../Card';
 
 // test styling
 it('Card should render correctly', () => {
-  const wrapper = shallow(<Card><p>Hello</p></Card>);
+  const wrapper = shallow(
+    <Card>
+      <p>Hello</p>
+    </Card>,
+  );
   expect(toJson(wrapper.dive())).toMatchSnapshot();
 });
 

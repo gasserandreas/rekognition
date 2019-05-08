@@ -21,7 +21,7 @@ it('should show loading spinner while loading only', () => {
   const wrapper = mount(<AsyncImage src="" />);
 
   expect(wrapper.find(LoadingIndicator).length).toEqual(1);
-  
+
   const image = wrapper.find(Image);
   expect(image);
 

@@ -4040,7 +4040,7 @@ exports[`Extended Field should render correctly 1`] = `
         "isStatic": false,
         "rules": Array [
           "
-  margin: .75rem 0;
+  margin: 0.75rem 0;
 
   ",
           [Function],
@@ -4082,7 +4082,7 @@ exports[`Field should render correctly 1`] = `
         "isStatic": false,
         "rules": Array [
           "
-  margin: .75rem 0;
+  margin: 0.75rem 0;
 
   ",
           [Function],
@@ -4102,7 +4102,11 @@ exports[`Field should render correctly 1`] = `
   }
   forwardedRef={null}
   inline={false}
-/>
+>
+  <p>
+    child
+  </p>
+</StyledComponent>
 `;
 
 exports[`FieldRow styles should be consistent 1`] = `

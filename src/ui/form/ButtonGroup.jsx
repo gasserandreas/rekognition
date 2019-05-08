@@ -12,11 +12,7 @@ const StyledButtonGroup = styled.div`
 /** Simple component to render button consistently in every form.
  * Every children (Button) gets moved to right.
  */
-const ButtonGroup = (props) => (
-  <StyledButtonGroup>
-    {props.children}
-  </StyledButtonGroup>
-);
+const ButtonGroup = props => <StyledButtonGroup>{props.children}</StyledButtonGroup>;
 
 ButtonGroup.propTypes = {
   /** Specify children (Button comp) */

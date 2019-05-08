@@ -2,12 +2,8 @@ import { combineReducers } from 'redux';
 
 import messageReducer from './message';
 
-import { refreshToken } from '../auth';
-import {
-  tokenSelector,
-  authUserIdSelector,
-  isAuthenticatedSelector,
-} from '../auth/selectors';
+import { refreshToken } from '../auth'; // eslint-disable-line import/no-cycle
+import { tokenSelector, authUserIdSelector, isAuthenticatedSelector } from '../auth/selectors';
 
 import { listImages } from '../images';
 
@@ -44,17 +40,24 @@ const applicationDidLoad = () => ({
   payload: AppStatus.APPLICATION_DID_LOAD,
 });
 
+export const loadApplicationAuthenticated = () => (dispatch) => {
+  // do more stuff in here
+  dispatch(listImages());
+
+  dispatch(applicationDidLoad());
+};
+
 // complex actions
-export const loadApplication = () => (async (dispatch, getState) => {
+export const loadApplication = () => async (dispatch, getState) => {
   dispatch(applicationWillLoad());
 
   /**
-   * 
+   *
    * 1. check for session token
    * 2. check for state token
    * 3. if session token
    */
-  const state = getState(); 
+  const state = getState();
   let token = getToken();
   let userId = getUserId();
 
@@ -79,14 +82,7 @@ export const loadApplication = () => (async (dispatch, getState) => {
     // finalized app init
     dispatch(applicationDidLoad());
   }
-});
-
-export const loadApplicationAuthenticated = () => (dispatch) => {
-  // do more stuff in here
-  dispatch(listImages());
-
-  dispatch(applicationDidLoad());
-}
+};
 
 // reducers
 const status = (state = AppStatus.INITIAL, action) => {
@@ -98,6 +94,11 @@ const status = (state = AppStatus.INITIAL, action) => {
   }
 };
 
+export const __testables__ = {
+  applicationWillLoad,
+  applicationDidLoad,
+  APPLICATION_STATUS_SET,
+};
 
 export default combineReducers({
   status,

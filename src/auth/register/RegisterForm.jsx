@@ -5,41 +5,44 @@ import styled from 'styled-components';
 import * as Yup from 'yup';
 import { withFormik } from 'formik';
 
-import {
-  Field,
-  TextInput,
-  CheckBox,
-} from '../../ui/form/Form';
+import { Field, TextInput, CheckBox } from '../../ui/form/Form';
 import Button from '../../ui/form/Button';
 import Message from '../../ui/form/Message';
 
 import ButtonGroup from '../../ui/form/ButtonGroup';
 
 // formik setups
-const formikEnhancer = withFormik({
-  validationSchema: Yup.object().shape({
-    password: Yup.string()
-      .required('Password is required!'),
-    firstname: Yup.string()
-      .min(2)
-      .max(30)
-      .required('Firstname is required!'),
-    lastname: Yup.string()
-      .min(2)
-      .max(30)
-      .required('Lastname is required!'),
-  }),
-  mapPropsToValues: (obj) => {
-    const { user } = obj;
-    return {
-      ...user,
-    }
-  },
-  handleSubmit: (payload, { props }, b, c) => {
-    props.onSubmit(payload);
-  },
-  displayName: 'RegisterForm',
+const validationSchema = Yup.object().shape({
+  password: Yup.string().required('Password is required!'),
+  firstname: Yup.string()
+    .min(2)
+    .max(30)
+    .required('Firstname is required!'),
+  lastname: Yup.string()
+    .min(2)
+    .max(30)
+    .required('Lastname is required!'),
 });
+
+const mapPropsToValues = (obj) => {
+  const { user } = obj;
+  return {
+    ...user,
+  };
+};
+
+const onHandleSubmit = (payload, { props }) => {
+  props.onSubmit(payload);
+};
+
+const formikConfig = {
+  validationSchema,
+  mapPropsToValues,
+  handleSubmit: onHandleSubmit,
+  displayName: 'RegisterForm',
+};
+
+const formikEnhancer = withFormik(formikConfig);
 
 // styled
 const StyledRegisterForm = styled.form``;
@@ -66,23 +69,10 @@ const RegisterForm = ({
 
   return (
     <StyledRegisterForm onSubmit={handleSubmit}>
-      <Field
-        id="email"
-        label="Email"
-      >
-        <TextInput
-          id="email"
-          type="email"
-          placeholder="Enter your email"
-          value={values.email}
-          disabled
-        />
+      <Field id="email" label="Email" disabled>
+        <TextInput id="email" type="email" placeholder="Enter your email" value={values.email} disabled />
       </Field>
-      <Field
-        id="password"
-        label="Password"
-        error={touched.password && errors.password}
-      >
+      <Field id="password" label="Password" error={touched.password && errors.password}>
         <TextInput
           id="password"
           type="password"
@@ -93,11 +83,7 @@ const RegisterForm = ({
           onBlur={handleBlur}
         />
       </Field>
-      <Field
-        id="firstname"
-        label="Firstname"
-        error={touched.firstname && errors.firstname}
-      >
+      <Field id="firstname" label="Firstname" error={touched.firstname && errors.firstname}>
         <TextInput
           id="firstname"
           type="text"
@@ -108,11 +94,7 @@ const RegisterForm = ({
           onBlur={handleBlur}
         />
       </Field>
-      <Field
-        id="lastname"
-        label="Lastname"
-        error={touched.lastname && errors.lastname}
-      >
+      <Field id="lastname" label="Lastname" error={touched.lastname && errors.lastname}>
         <TextInput
           id="lastname"
           type="text"
@@ -123,10 +105,7 @@ const RegisterForm = ({
           onBlur={handleBlur}
         />
       </Field>
-      <Field
-        id="remember"
-        label="Remember me"
-      >
+      <Field id="remember" label="Remember me" error={touched.remember && errors.remember}>
         <CheckBox
           id="remember"
           name="remember"
@@ -137,24 +116,41 @@ const RegisterForm = ({
           onBlur={handleBlur}
         />
       </Field>
-      {error && <Message appearance="error">{error}</Message>}
+      {error !== null && <Message appearance="error">{error}</Message>}
       <ButtonGroup>
-        <Button
-          type="button"
-          buttonStyle="link"
-          onClick={handleOnReset}
-          disabled={submitting}
-        >Go back</Button>
+        <Button type="button" buttonStyle="link" onClick={handleOnReset} disabled={submitting} testId="jestResetButton">
+          Go back
+        </Button>
         <Button
           type="submit"
           disabled={submitting}
           buttonStyle="primary"
           style={{ marginLeft: '1rem' }}
           loading={submitting}
-        >Signup</Button>
+          testId="jestSubmitButton"
+        >
+          Signup
+        </Button>
       </ButtonGroup>
     </StyledRegisterForm>
   );
+};
+
+RegisterForm.propTypes = {
+  error: PropTypes.string,
+  values: PropTypes.shape({}).isRequired,
+  touched: PropTypes.shape({}).isRequired,
+  errors: PropTypes.shape({}).isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleBlur: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  handleReset: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
+};
+
+RegisterForm.defaultProps = {
+  error: '',
 };
 
 const EnhancedRegisterForm = formikEnhancer(RegisterForm);
@@ -166,7 +162,11 @@ EnhancedRegisterForm.propTypes = {
     password: PropTypes.string,
     remember: PropTypes.bool,
   }),
+  error: PropTypes.string,
   validEmail: PropTypes.bool,
+  submitting: PropTypes.bool.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
 };
 
 EnhancedRegisterForm.defaultProps = {
@@ -176,6 +176,15 @@ EnhancedRegisterForm.defaultProps = {
     password: '',
     remember: false,
   },
+};
+
+export const __testables__ = {
+  formikConfig,
+  formikEnhancer,
+  validationSchema,
+  mapPropsToValues,
+  handleSubmit: onHandleSubmit,
+  RegisterForm,
 };
 
 export default EnhancedRegisterForm;

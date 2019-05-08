@@ -22,10 +22,10 @@ const getEnv = () => {
     return 'development';
   }
 
-  if (url.indexOf('127.0.0.1') >= 0)  {
+  if (url.indexOf('127.0.0.1') >= 0) {
     return 'local';
   }
-  
+
   if (url.indexOf('rekognition-test.gasserandreas.com') >= 0) {
     return 'test';
   }
@@ -62,11 +62,13 @@ export const genericJsonFetch = (url, config) => genericFetch(url, config)
 // stop if generic fetch fails
   .catch(error => Promise.reject(error))
 // get json response
-  .then((response) => response.json()
+  .then(response => response
+    .json()
   // handle invalid json payload
     .catch(error => Promise.reject(createInvalidDataError(error, response))));
 
-export const __testables__ = { // eslint-disable-line no-underscore-dangle
+export const __testables__ = {
+  // eslint-disable-line no-underscore-dangle
   getEnv,
   getWindowUrl,
 };

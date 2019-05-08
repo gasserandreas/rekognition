@@ -53,7 +53,7 @@ export const createNetworkError = (error, response) => Object.assign(
     payload: response,
     detail: error,
     logLevel: LogLevel.Error,
-  }
+  },
 );
 
 export const createInvalidDataError = (error, data) => Object.assign(
@@ -64,7 +64,7 @@ export const createInvalidDataError = (error, data) => Object.assign(
     payload: data,
     detail: error,
     logLevel: LogLevel.Error,
-  }
+  },
 );
 
 export const createUnknownError = (error, data = null) => Object.assign(
@@ -75,7 +75,7 @@ export const createUnknownError = (error, data = null) => Object.assign(
     payload: data,
     detail: error,
     logLevel: LogLevel.Error,
-  }
+  },
 );
 
 // global promise error catch
@@ -142,7 +142,9 @@ export const createMiddleware = (userOptions) => {
         // Prevent infinite loop, if for some reason error reporting threw.
         /* istanbul ignore next */
         if (action.type === ErrorTypes.ReduxError) {
-          console.error('Exception thrown while attempting to report error.\nHalting to prevent potential infinite loop.');
+          console.error(
+            'Exception thrown while attempting to report error.\nHalting to prevent potential infinite loop.',
+          );
           console.groupCollapsed('Error details');
           console.error('action', action);
           console.error('error', dispatchError);
@@ -151,16 +153,20 @@ export const createMiddleware = (userOptions) => {
         }
         // inject error back into redux
         /* istanbul ignore next */
-        store.dispatch(reportInternalReduxError(Object.assign(
-          new Error(dispatchError.message ? dispatchError.message : `Redux error caught for ${action.type}`),
-          {
-            type: ErrorTypes.ReduxError,
-            title: 'Caught Redux exception',
-            payload: action,
-            detail: dispatchError,
-            logLevel: LogLevel.Error,
-          }
-        )));
+        store.dispatch(
+          reportInternalReduxError(
+            Object.assign(
+              new Error(dispatchError.message ? dispatchError.message : `Redux error caught for ${action.type}`),
+              {
+                type: ErrorTypes.ReduxError,
+                title: 'Caught Redux exception',
+                payload: action,
+                detail: dispatchError,
+                logLevel: LogLevel.Error,
+              },
+            ),
+          ),
+        );
 
         // stop here and wait for next dispatch cycle
         return; // eslint-disable-line consistent-return
@@ -171,12 +177,7 @@ export const createMiddleware = (userOptions) => {
     const { dispatch } = store;
 
     const {
-      shouldLogToConsole,
-      shouldLogToUI,
-      shouldLogToServer,
-      logToConsole,
-      logToUI,
-      logToServer,
+      shouldLogToConsole, shouldLogToUI, shouldLogToServer, logToConsole, logToUI, logToServer,
     } = options;
 
     if (shouldLogToConsole(payload)) {

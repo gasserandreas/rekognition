@@ -9,25 +9,17 @@ import Label from './Label';
 // labels
 const StyledLabels = styled(Box)``;
 
-const Labels = ({
-  selectedLabel,
-  labels,
-  onLabelClick,
-}) => {
+const isClickEnabled = label => label.instances.length > 0;
 
+const Labels = ({ selectedLabel, labels, onLabelClick }) => {
   const handleOnLabelClick = (label) => {
     if (isClickEnabled(label)) {
-      onLabelClick(label)
+      onLabelClick(label);
     }
   };
 
-  const isClickEnabled = label => label.instances.length > 0;
-
   return (
-    <StyledLabels
-      wrap
-      direction="row"
-    >
+    <StyledLabels wrap direction="row">
       {labels.map((label) => {
         const labelProps = {
           key: `image_label_${label.id}`,
@@ -53,6 +45,10 @@ Labels.defaultProps = {
   selectedLabel: {
     id: '',
   },
+};
+
+export const __testables__ = {
+  isClickEnabled,
 };
 
 export default Labels;

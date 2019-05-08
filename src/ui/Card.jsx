@@ -16,11 +16,9 @@ export const StyledCard = styled(Box)`
 /** Simple card layout container. Add your children
  * and use default Grommet props to style this component */
 const Card = ({ children, ...props }) => (
-  <StyledCard
-    elevation="small"
-    pad="medium"
-    {...props}
-  >{children}</StyledCard>
+  <StyledCard elevation="small" pad="medium" {...props}>
+    {children}
+  </StyledCard>
 );
 
 Card.propTypes = {

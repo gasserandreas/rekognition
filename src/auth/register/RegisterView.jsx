@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import {
-  AuthHeader,
-  AuthFooter,
-} from '../AuthComponents';
+import { AuthHeader, AuthFooter } from '../AuthComponents';
 
 import CheckEmailForm from './CheckEmailForm';
 import RegisterForm from './RegisterForm';
@@ -15,7 +12,7 @@ import View from '../../ui/View';
 import { createUseIsAuthenticatedHistoryPush } from '../../ui/hooks/auth';
 
 import * as Paths from '../../paths';
-import { HOCRequestPropTypes } from '../../util/PropTypes';
+import { HOCRequestPropTypes, HistoryPropType } from '../../util/PropTypes';
 import { Colors } from '../../styles';
 
 // creat hook
@@ -64,7 +61,7 @@ const RegisterView = ({
       <AuthHeader>Sinup for Rekognition</AuthHeader>
       <div className="content">
         <Card pad="large">
-          { !validEmail ? (
+          {!validEmail ? (
             <CheckEmailForm
               user={{ email }}
               onSubmit={onCheckEmail}
@@ -74,7 +71,9 @@ const RegisterView = ({
             />
           ) : (
             <RegisterForm
-              user={{ email, password: '', firstname: '', lastname: '', remember: false }}
+              user={{
+                email, password: '', firstname: '', lastname: '', remember: false,
+              }}
               onSubmit={signupUser}
               onCancel={onCancelSignUp}
               submitting={signupRequest.loading}
@@ -92,11 +91,13 @@ const RegisterView = ({
 RegisterView.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   signupRequest: HOCRequestPropTypes.isRequired,
+  checkEmailRequest: HOCRequestPropTypes.isRequired,
+  history: HistoryPropType.isRequired,
   validEmail: PropTypes.bool,
   signupUser: PropTypes.func.isRequired,
   checkEmail: PropTypes.func.isRequired,
   invalidateEmail: PropTypes.func.isRequired,
-}
+};
 
 RegisterView.defaultProps = {
   validEmail: null,

@@ -22,8 +22,7 @@ it('should return correct thumb image src', () => {
 
 it('should return correct image creation date time', () => {
   const format = 'D MMM YYYY - HH:MM:SS';
-  expect(util.getImageCreationDateTime(dateString))
-    .toEqual(moment(dateString).format(format));
+  expect(util.getImageCreationDateTime(dateString)).toEqual(moment(dateString).format(format));
 });
 
 it('should return default formated date string', () => {

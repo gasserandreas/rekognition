@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'
+import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 
 // action types
@@ -8,7 +8,6 @@ const FACES_ADD_FACES = 'FACES_ADD_FACES';
 
 // simple actions
 export const facesAddFaces = (imageId, faces) => {
-  
   const ids = [];
   const byId = {};
   faces.forEach((face) => {
@@ -63,10 +62,14 @@ const persistConfig = {
   stateReconciler: autoMergeLevel2,
 };
 
+export const __testables__ = {
+  FACES_ADD_FACES,
+};
+
 export default persistReducer(
   persistConfig,
   combineReducers({
     byId,
     idsByImageId,
-  })
+  }),
 );

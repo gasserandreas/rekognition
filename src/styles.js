@@ -93,7 +93,7 @@ export const Sizes = {
       Fullscreen: '20vw',
     },
   },
-}
+};
 
 // global theme styles
 export const Theme = {
@@ -122,7 +122,7 @@ export const Theme = {
     },
   },
   checkBox: {
-    gap: "xsmall",
-    size: "18px",
+    gap: 'xsmall',
+    size: '18px',
   },
 };

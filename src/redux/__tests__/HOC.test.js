@@ -16,22 +16,21 @@ describe('HOCH test suite', () => {
   beforeAll(() => {
     const now = Date.now();
     dateNowMock = jest.spyOn(Date, 'now').mockImplementation(() => now);
-  })
+  });
 
   afterAll(() => {
     dateNowMock.mockReset();
-  })
+  });
 
   it('check hocCreateTypes', () => {
-    expect(hocCreateTypes(baseType))
-      .toEqual(ACTION_TYPE);
+    expect(hocCreateTypes(baseType)).toEqual(ACTION_TYPE);
   });
 
   describe('HOC checkHocTypes test suite', () => {
     const hocType = {
       START: 'START',
       SUCCESS: 'SUCCESS',
-      ERROR: 'ERROR'
+      ERROR: 'ERROR',
     };
 
     it('check checkHocTypes default', () => {
@@ -39,48 +38,47 @@ describe('HOCH test suite', () => {
     });
 
     it('check for unset / invalid START', () => {
-      const { START, ...other } = hocType
-      expect(__testables__.checkHocTypes({ ...other }))
-        .toBeFalsy();
-      
-      expect(__testables__.checkHocTypes({
-        ...hocType,
-        START: 'invalid',
-      }))
-        .toBeFalsy();
+      const { START, ...other } = hocType;
+      expect(__testables__.checkHocTypes({ ...other })).toBeFalsy();
+
+      expect(
+        __testables__.checkHocTypes({
+          ...hocType,
+          START: 'invalid',
+        }),
+      ).toBeFalsy();
     });
 
     it('check for unset / invalid SUCCESS', () => {
-      const { SUCCESS, ...other } = hocType
-      expect(__testables__.checkHocTypes({ ...other }))
-        .toBeFalsy();
-      
-      expect(__testables__.checkHocTypes({
-        ...hocType,
-        SUCCESS: 'invalid',
-      }))
-        .toBeFalsy();
+      const { SUCCESS, ...other } = hocType;
+      expect(__testables__.checkHocTypes({ ...other })).toBeFalsy();
+
+      expect(
+        __testables__.checkHocTypes({
+          ...hocType,
+          SUCCESS: 'invalid',
+        }),
+      ).toBeFalsy();
     });
 
     it('check for unset / invalid ERROR', () => {
-      const { ERROR, ...other } = hocType
-      expect(__testables__.checkHocTypes({ ...other }))
-        .toBeFalsy();
-      
-      expect(__testables__.checkHocTypes({
-        ...hocType,
-        ERROR: 'invalid',
-      }))
-        .toBeFalsy();
+      const { ERROR, ...other } = hocType;
+      expect(__testables__.checkHocTypes({ ...other })).toBeFalsy();
+
+      expect(
+        __testables__.checkHocTypes({
+          ...hocType,
+          ERROR: 'invalid',
+        }),
+      ).toBeFalsy();
     });
   });
 
   describe('HOC reducer test suite', () => {
     let consoleLogMock;
-    
+
     beforeEach(() => {
-      consoleLogMock = jest.spyOn(console, 'log')
-        .mockImplementation(() => ({}));
+      consoleLogMock = jest.spyOn(console, 'log').mockImplementation(() => ({}));
     });
 
     afterEach(() => {
@@ -106,24 +104,22 @@ describe('HOCH test suite', () => {
 
     it('should generate initial reducer state', () => {
       const reducer = hocReducer({
-        ACTION_TYPE: ACTION_TYPE,
+        ACTION_TYPE,
         noData: false,
       });
-      expect(reducer(undefined, { type: reduxApplication.APP_IDLE }))
-        .toEqual(testUtils.createHocReducerState());
+      expect(reducer(undefined, { type: reduxApplication.APP_IDLE })).toEqual(testUtils.createHocReducerState());
     });
 
     it('should handle ACTION_TYPE.START', () => {
       const reducer = hocReducer({
-        ACTION_TYPE: ACTION_TYPE,
+        ACTION_TYPE,
         noData: false,
       });
       const expectedState = {
         ...testUtils.createHocReducerState(),
         loading: true,
-      }
-      expect(reducer(undefined, { type: ACTION_TYPE.START }))
-        .toEqual(expectedState);
+      };
+      expect(reducer(undefined, { type: ACTION_TYPE.START })).toEqual(expectedState);
     });
 
     it('should handle ACTION_TYPE.SUCCESS', () => {
@@ -131,7 +127,7 @@ describe('HOCH test suite', () => {
         message: 'hello',
       };
       const reducer = hocReducer({
-        ACTION_TYPE: ACTION_TYPE,
+        ACTION_TYPE,
         noData: false,
       });
       const expectedState = {
@@ -139,8 +135,7 @@ describe('HOCH test suite', () => {
         data: payload,
         lastFetch: Date.now(),
       };
-      expect(reducer(undefined, { type: ACTION_TYPE.SUCCESS, payload, }))
-        .toEqual(expectedState);
+      expect(reducer(undefined, { type: ACTION_TYPE.SUCCESS, payload })).toEqual(expectedState);
     });
 
     it('should handle ACTION_TYPE.SUCCESS with noData flag enabled', () => {
@@ -148,7 +143,7 @@ describe('HOCH test suite', () => {
         message: 'hello',
       };
       const reducer = hocReducer({
-        ACTION_TYPE: ACTION_TYPE,
+        ACTION_TYPE,
         noData: true,
       });
       const expectedState = {
@@ -157,14 +152,13 @@ describe('HOCH test suite', () => {
         lastFetch: Date.now(),
         loading: false,
       };
-      expect(reducer(undefined, { type: ACTION_TYPE.SUCCESS, payload, }))
-        .toEqual(expectedState);
+      expect(reducer(undefined, { type: ACTION_TYPE.SUCCESS, payload })).toEqual(expectedState);
     });
 
     it('should handle ACTION_TYPE.ERROR', () => {
       const payload = new Error('uupppss something broke');
       const reducer = hocReducer({
-        ACTION_TYPE: ACTION_TYPE,
+        ACTION_TYPE,
         noData: false,
       });
       const expectedState = {
@@ -173,8 +167,7 @@ describe('HOCH test suite', () => {
         lastError: Date.now(),
         loading: false,
       };
-      expect(reducer(undefined, { type: ACTION_TYPE.ERROR, payload, }))
-        .toEqual(expectedState);
+      expect(reducer(undefined, { type: ACTION_TYPE.ERROR, payload })).toEqual(expectedState);
     });
   });
 
@@ -183,10 +176,9 @@ describe('HOCH test suite', () => {
     const mockstore = testUtils.createMockStoreWithApi(API);
 
     let consoleLogMock;
-    
+
     beforeEach(() => {
-      consoleLogMock = jest.spyOn(console, 'log')
-        .mockImplementation(() => ({}));
+      consoleLogMock = jest.spyOn(console, 'log').mockImplementation(() => ({}));
     });
 
     afterEach(() => {
@@ -197,14 +189,9 @@ describe('HOCH test suite', () => {
       const invalidActionTypes = {};
 
       try {
-        hocAsyncAction(
-          invalidActionTypes,
-          () => () => {
-            return Promise.resolve();
-          }
-        );
+        hocAsyncAction(invalidActionTypes, () => () => Promise.resolve());
         expect(true).toBeFalsy();
-      } catch(error) {
+      } catch (error) {
         expect(consoleLogMock).toBeCalledTimes(1);
         expect(error).toBeInstanceOf(Error);
         expect(error.message).toEqual('No valid ACTION_TYPE specified');
@@ -220,32 +207,26 @@ describe('HOCH test suite', () => {
       };
 
       const HOC_ACTIONS = testUtils.createHocActions({
-        baseType: baseType,
+        baseType,
         payload,
       });
 
-      const expectedActions = [
-        HOC_ACTIONS.START,
-        HOC_ACTIONS.SUCCESS,
-      ];
+      const expectedActions = [HOC_ACTIONS.START, HOC_ACTIONS.SUCCESS];
 
       const actionAttr = {
         value: null,
       };
 
-      const hocAction = hocAsyncAction(
-        ACTION_TYPE,
-        (input) => (dispatch, getState, createThunk) => {
-          // check input vars
-          expect(input).toEqual(actionAttr);
+      const hocAction = hocAsyncAction(ACTION_TYPE, input => (dispatch, getState, createThunk) => {
+        // check input vars
+        expect(input).toEqual(actionAttr);
 
-          expect(dispatch).toBeInstanceOf(Function);
-          expect(getState).toBeInstanceOf(Function);
-          expect(createThunk).toBeInstanceOf(Object);
+        expect(dispatch).toBeInstanceOf(Function);
+        expect(getState).toBeInstanceOf(Function);
+        expect(createThunk).toBeInstanceOf(Object);
 
-          return Promise.resolve(payload);
-        }
-      );
+        return Promise.resolve(payload);
+      });
 
       await hocAction(actionAttr)(store.dispatch);
 
@@ -260,34 +241,28 @@ describe('HOCH test suite', () => {
       const payload = createNetworkError(error);
 
       const HOC_ACTIONS = testUtils.createHocActions({
-        baseType: baseType,
+        baseType,
         payload,
         error,
         errorIsHandled: true,
       });
 
-      const expectedActions = [
-        HOC_ACTIONS.START,
-        HOC_ACTIONS.ERROR,
-      ];
+      const expectedActions = [HOC_ACTIONS.START, HOC_ACTIONS.ERROR];
 
       const actionAttr = {
         value: null,
       };
 
-      const hocAction = hocAsyncAction(
-        ACTION_TYPE,
-        (input) => (dispatch, getState, createThunk) => {
-          // check input vars
-          expect(input).toEqual(actionAttr);
+      const hocAction = hocAsyncAction(ACTION_TYPE, input => (dispatch, getState, createThunk) => {
+        // check input vars
+        expect(input).toEqual(actionAttr);
 
-          expect(dispatch).toBeInstanceOf(Function);
-          expect(getState).toBeInstanceOf(Function);
-          expect(createThunk).toBeInstanceOf(Object);
+        expect(dispatch).toBeInstanceOf(Function);
+        expect(getState).toBeInstanceOf(Function);
+        expect(createThunk).toBeInstanceOf(Object);
 
-          return Promise.reject(error);
-        }
-      );
+        return Promise.reject(error);
+      });
 
       await hocAction(actionAttr)(store.dispatch);
 
@@ -302,16 +277,13 @@ describe('HOCH test suite', () => {
       const payload = createNetworkError(error);
 
       const HOC_ACTIONS = testUtils.createHocActions({
-        baseType: baseType,
+        baseType,
         payload,
         error,
         errorIsHandled: true,
       });
 
-      const expectedActions = [
-        HOC_ACTIONS.START,
-        HOC_ACTIONS.ERROR,
-      ];
+      const expectedActions = [HOC_ACTIONS.START, HOC_ACTIONS.ERROR];
 
       const actionAttr = {
         value: null,
@@ -319,7 +291,7 @@ describe('HOCH test suite', () => {
 
       const hocAction = hocAsyncAction(
         ACTION_TYPE,
-        (input) => (dispatch, getState, createThunk) => {
+        input => (dispatch, getState, createThunk) => {
           // check input vars
           expect(input).toEqual(actionAttr);
 
@@ -331,7 +303,7 @@ describe('HOCH test suite', () => {
         },
         {
           rejectable: true,
-        }
+        },
       );
 
       try {
