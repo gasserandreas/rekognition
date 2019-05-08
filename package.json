@@ -49,7 +49,7 @@
     "test:coverage": "npm test -- --coverage",
     "test:update": "npm test -- --updateSnapshot",
     "lint": "eslint -c ./.eslintrc './src/**/{*.js,*.jsx}'",
-    "lint-fix": "eslint -c ./.eslintrc './src/**/{*.js,*.jsx}' --fix",
+    "lint:fix": "eslint -c ./.eslintrc './src/**/{*.js,*.jsx}' --fix",
     "release": "aws s3 sync --delete ./build s3://529821714029-rekognition.gasserandreas.com/",
     "env-push-prod": "aws s3 cp .env.production.local s3://529821714029-rekognition.gasserandreas.com-utils/",
     "env-push-test": "aws s3 cp .env.development.local s3://529821714029-rekognition.gasserandreas.com-utils/",
@@ -110,7 +110,16 @@
       "!src/util/sessionUtil.js",
       "!src/util/PropTypes.js",
       "!**/*.stories.js"
-    ]
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 95,
+        "functions": 95,
+        "lines": 95,
+        "statements": 95
+      }
+    },
+    "coverageReporters": ["text"]
   },
   "description": "AWS Rekognition"
 }
