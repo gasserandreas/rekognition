@@ -25,14 +25,14 @@ const mapPropsToValues = (obj) => {
   };
 };
 
-const handleSubmit = (payload, { props }, b, c) => {
+const onHandleSubmit = (payload, { props }) => {
   props.onSubmit(payload);
 };
 
 const formikConfig = {
   validationSchema,
   mapPropsToValues,
-  handleSubmit,
+  handleSubmit: onHandleSubmit,
   displayName: 'CheckEmailForm',
 };
 
@@ -95,6 +95,25 @@ const CheckEmailForm = (props) => {
   );
 };
 
+CheckEmailForm.propTypes = {
+  error: PropTypes.node,
+  validEmail: PropTypes.string,
+  values: PropTypes.shape({}).isRequired,
+  touched: PropTypes.shape({}).isRequired,
+  errors: PropTypes.shape({}).isRequired,
+  dirty: PropTypes.bool.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleBlur: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  handleReset: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
+};
+
+CheckEmailForm.defaultProps = {
+  error: null,
+  validEmail: null,
+};
+
 const EnhancedCheckEmailForm = formikEnhancer(CheckEmailForm);
 
 EnhancedCheckEmailForm.propTypes = {
@@ -118,7 +137,7 @@ export const __testables__ = {
   formikEnhancer,
   validationSchema,
   mapPropsToValues,
-  handleSubmit,
+  handleSubmit: onHandleSubmit,
   CheckEmailForm,
 };
 

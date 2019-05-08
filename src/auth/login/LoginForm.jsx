@@ -26,14 +26,14 @@ const mapPropsToValues = (obj) => {
   };
 };
 
-const handleSubmit = (payload, { props }, _, __) => {
+const onHandleSubmit = (payload, { props }) => {
   props.onSubmit(payload);
 };
 
 const formikConfig = {
   validationSchema,
   mapPropsToValues,
-  handleSubmit,
+  handleSubmit: onHandleSubmit,
   displayName: 'LoginForm',
 };
 
@@ -118,15 +118,19 @@ const LoginForm = (props) => {
 
 LoginForm.propTypes = {
   values: PropTypes.shape({}).isRequired,
-  touched: PropTypes.bool.isRequired,
+  touched: PropTypes.shape({}).isRequired,
   errors: PropTypes.shape({}).isRequired,
-  dirty: PropTypes.shape({}).isRequired,
+  dirty: PropTypes.bool.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleBlur: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   handleReset: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
-  error: PropTypes.string.isRequired,
+  error: PropTypes.string,
+};
+
+LoginForm.defaultProps = {
+  error: null,
 };
 
 const EnhancedLoginForm = formikEnhancer(LoginForm);
@@ -152,7 +156,7 @@ export const __testables__ = {
   formikEnhancer,
   validationSchema,
   mapPropsToValues,
-  handleSubmit,
+  handleSubmit: onHandleSubmit,
   LoginForm,
 };
 

@@ -129,21 +129,21 @@ const ImageContainer = ({ image: { meta, path }, selectedFace, selectedLabel }) 
     imageContainerPosition: generateInitPos(),
   });
 
-  const handleWrapperPosition = () => {
-    const wrapperBounding = wrapperRef.current.getBoundingClientRect();
-
-    // (deep) equals check based on string
-    if (JSON.stringify(state.wrapperBounding) !== JSON.stringify(wrapperBounding)) {
-      const { imageContainerPosition, imageWrapperPosition } = getPositions(meta, wrapperBounding);
-
-      setState({
-        imageContainerPosition,
-        imageWrapperPosition,
-      });
-    }
-  };
-
   useEffect(() => {
+    const handleWrapperPosition = () => {
+      const wrapperBounding = wrapperRef.current.getBoundingClientRect();
+
+      // (deep) equals check based on string
+      if (JSON.stringify(state.wrapperBounding) !== JSON.stringify(wrapperBounding)) {
+        const { imageContainerPosition, imageWrapperPosition } = getPositions(meta, wrapperBounding);
+
+        setState({
+          imageContainerPosition,
+          imageWrapperPosition,
+        });
+      }
+    };
+
     // add event listener
     window.addEventListener('resize', handleWrapperPosition);
 
@@ -153,7 +153,7 @@ const ImageContainer = ({ image: { meta, path }, selectedFace, selectedLabel }) 
     return () => {
       window.removeEventListener('resize', handleWrapperPosition);
     };
-  }, [handleWrapperPosition, path]);
+  }, [meta, path, state.wrapperBounding]);
 
   const { imageWrapperPosition } = state;
 
@@ -179,8 +179,13 @@ ImageContainer.propTypes = {
     meta: PropTypes.shape({}),
     path: PropTypes.string.isRequired,
   }).isRequired,
-  selectedFace: PropTypes.shape({}).isRequired,
-  selectedLabel: PropTypes.shape({}).isRequired,
+  selectedFace: PropTypes.shape({}),
+  selectedLabel: PropTypes.shape({}),
+};
+
+ImageContainer.defaultProps = {
+  selectedFace: null,
+  selectedLabel: null,
 };
 
 export const __testables__ = {

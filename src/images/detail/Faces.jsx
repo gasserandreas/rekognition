@@ -112,8 +112,12 @@ Face.propTypes = {
     attributes: PropTypes.arrayOf(AttributePropType).isRequired,
   }).isRequired,
   number: PropTypes.number.isRequired,
-  selected: PropTypes.bool.isRequired,
+  selected: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
+};
+
+Face.defaultProps = {
+  selected: false,
 };
 
 // faces wrapper component

@@ -6,7 +6,7 @@ import 'jest-styled-components';
 import { Paragraph } from 'grommet';
 
 import Faces, { __testables__ } from '../Faces';
-import Attribute, { StyledAttrLabel } from '../Attribute';
+import { Attribute, StyledAttrLabel } from '../Attribute';
 import Label from '../Label';
 
 const { Emotions, Face } = __testables__;

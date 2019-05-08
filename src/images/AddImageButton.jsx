@@ -11,7 +11,7 @@ import AddImageMessage from './AddImageMessage';
 
 import Button from '../ui/form/Button';
 
-import { addImage } from '../redux/images';
+import * as reduxImages from '../redux/images';
 import { addImageIsLoading } from '../redux/images/selectors';
 
 import { Colors, MediaSize } from '../styles';
@@ -43,7 +43,6 @@ const AddImageButton = ({
   loading,
   addImage,
   afterOnClick,
-  children,
   ...props
 }) => {
   const [state, setState] = useState(initialState);
@@ -146,7 +145,7 @@ const select = state => ({
 });
 
 const mapDispatchToProps = ({
-  addImage,
+  addImage: reduxImages.addImage,
 });
 
 export const __testables__ = {

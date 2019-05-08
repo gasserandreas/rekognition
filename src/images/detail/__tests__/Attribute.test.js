@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import 'jest-styled-components';
 
-import Attribute, { __testables__, StyledAttrLabel } from '../Attribute';
+import { Attribute, __testables__, StyledAttrLabel } from '../Attribute';
 
 const { StyledConfidence, StyledAttrContent, getFontWeith } = __testables__;
 

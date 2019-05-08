@@ -16,8 +16,6 @@ describe('AddImageMessage test suite', () => {
     onHandleOpenImageDialog: jest.fn(),
   };
 
-  const base64Image = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mPUYPg/EwADQQHCL18ShQAAAABJRU5ErkJggg==';
-
   beforeEach(() => {
     global.URL.createObjectURL = jest.fn(() => '');
   });

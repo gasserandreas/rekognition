@@ -9,7 +9,7 @@ import hocReducer, { hocAsyncAction, hocCreateTypes } from '../HOC';
 
 import { authRememberSelector, authUsernameSelector } from './selectors';
 
-import { loadApplicationAuthenticated, appReset } from '../application';
+import { loadApplicationAuthenticated, appReset } from '../application'; // eslint-disable-line import/no-cycle
 
 // action def
 export const AUTH_LOG_IN = 'AUTH_LOG_IN';

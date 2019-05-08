@@ -12,7 +12,7 @@ import View from '../../ui/View';
 import { createUseIsAuthenticatedHistoryPush } from '../../ui/hooks/auth';
 
 import * as Paths from '../../paths';
-import { HOCRequestPropTypes } from '../../util/PropTypes';
+import { HOCRequestPropTypes, HistoryPropType } from '../../util/PropTypes';
 import { Colors } from '../../styles';
 
 // creat hook
@@ -92,6 +92,7 @@ RegisterView.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   signupRequest: HOCRequestPropTypes.isRequired,
   checkEmailRequest: HOCRequestPropTypes.isRequired,
+  history: HistoryPropType.isRequired,
   validEmail: PropTypes.bool,
   signupUser: PropTypes.func.isRequired,
   checkEmail: PropTypes.func.isRequired,

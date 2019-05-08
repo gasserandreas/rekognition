@@ -31,14 +31,14 @@ const mapPropsToValues = (obj) => {
   };
 };
 
-const handleSubmit = (payload, { props }) => {
+const onHandleSubmit = (payload, { props }) => {
   props.onSubmit(payload);
 };
 
 const formikConfig = {
   validationSchema,
   mapPropsToValues,
-  handleSubmit,
+  handleSubmit: onHandleSubmit,
   displayName: 'RegisterForm',
 };
 
@@ -137,17 +137,20 @@ const RegisterForm = ({
 };
 
 RegisterForm.propTypes = {
-  validEmail: undefined,
-  error: '',
+  error: PropTypes.string,
   values: PropTypes.shape({}).isRequired,
-  touched: PropTypes.bool.isRequired,
+  touched: PropTypes.shape({}).isRequired,
   errors: PropTypes.shape({}).isRequired,
-  dirty: PropTypes.shape({}).isRequired,
   handleChange: PropTypes.func.isRequired,
   handleBlur: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   handleReset: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
+};
+
+RegisterForm.defaultProps = {
+  error: '',
 };
 
 const EnhancedRegisterForm = formikEnhancer(RegisterForm);
@@ -180,7 +183,7 @@ export const __testables__ = {
   formikEnhancer,
   validationSchema,
   mapPropsToValues,
-  handleSubmit,
+  handleSubmit: onHandleSubmit,
   RegisterForm,
 };
 

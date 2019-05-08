@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import 'jest-styled-components';
 
@@ -49,20 +49,21 @@ describe('AddImageButton test suite', () => {
   });
 
   describe('AddImageButton component test suite', () => {
-    const base64Image = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mPUYPg/EwADQQHCL18ShQAAAABJRU5ErkJggg==';
+    // eslint-disable-next-line max-len
+    // const base64Image = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mPUYPg/EwADQQHCL18ShQAAAABJRU5ErkJggg==';
 
-    const getImageBlock = (imageString) => {
-      const byteCharacters = atob(imageString);
-      // byte values array creation
-      const byteNumbers = new Array(byteCharacters.length);
-      for (let i = 0; i < byteCharacters.length; i++) {
-        byteNumbers[i] = byteCharacters.charCodeAt(i);
-      }
-      const byteArray = new Uint8Array(byteNumbers);
+    // const getImageBlock = (imageString) => {
+    //   const byteCharacters = atob(imageString);
+    //   // byte values array creation
+    //   const byteNumbers = new Array(byteCharacters.length);
+    //   for (let i = 0; i < byteCharacters.length; i++) {
+    //     byteNumbers[i] = byteCharacters.charCodeAt(i);
+    //   }
+    //   const byteArray = new Uint8Array(byteNumbers);
 
-      // create blob
-      return new Blob([byteArray], { type: 'image/png' });
-    };
+    //   // create blob
+    //   return new Blob([byteArray], { type: 'image/png' });
+    // };
 
     it('should render', () => {
       const wrapper = getAddImageButton(initialProps);

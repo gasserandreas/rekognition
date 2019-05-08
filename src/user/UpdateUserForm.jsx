@@ -122,15 +122,19 @@ const UpdateUserForm = ({
 
 UpdateUserForm.propTypes = {
   values: PropTypes.shape({}).isRequired,
-  touched: PropTypes.bool.isRequired,
+  touched: PropTypes.shape({}).isRequired,
   errors: PropTypes.shape({}).isRequired,
-  dirty: PropTypes.shape({}).isRequired,
+  dirty: PropTypes.bool.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleBlur: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   handleReset: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
-  error: PropTypes.bool.isRequired,
+  error: PropTypes.bool,
+};
+
+UpdateUserForm.defaultProps = {
+  error: false,
 };
 
 const EnhancedUpdateUserForm = formikEnhancer(UpdateUserForm);

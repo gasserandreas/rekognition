@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 
 import messageReducer from './message';
 
-import { refreshToken } from '../auth';
+import { refreshToken } from '../auth'; // eslint-disable-line import/no-cycle
 import { tokenSelector, authUserIdSelector, isAuthenticatedSelector } from '../auth/selectors';
 
 import { listImages } from '../images';

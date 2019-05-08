@@ -15,7 +15,7 @@ import View from '../../ui/View';
 import AsyncContainer from '../../ui/async/AsyncContainer';
 
 import { getImageCreationDateTime, getFormattedFileSize } from '../../util/util';
-import { HOCRequestPropTypes } from '../../util/PropTypes';
+import { HOCRequestPropTypes, HistoryPropType } from '../../util/PropTypes';
 
 import * as Paths from '../../paths';
 import { Colors, MediaSize, Sizes } from '../../styles';
@@ -161,6 +161,13 @@ const DetailView = ({
   // generate meta render array
   const metaValues = useMemo(() => convertMetaToAttributes(meta), [meta]);
 
+  const setBrowserParams = (params) => {
+    const { key, value } = params;
+
+    const path = `${Paths.GET_IMAGES_DETAIL(imageId)}?${key}=${value}`;
+    history.push(path);
+  };
+
   // url handlers
   const handleFaceClick = (face) => {
     const { id } = face;
@@ -170,13 +177,6 @@ const DetailView = ({
   const handleLabelClick = (label) => {
     const { id } = label;
     setBrowserParams({ key: 'label', value: id });
-  };
-
-  const setBrowserParams = (params) => {
-    const { key, value } = params;
-
-    const path = `${Paths.GET_IMAGES_DETAIL(imageId)}?${key}=${value}`;
-    history.push(path);
   };
 
   return (
@@ -226,6 +226,7 @@ Faces (
 };
 
 DetailView.propTypes = {
+  history: HistoryPropType.isRequired,
   image: PropTypes.shape({
     id: PropTypes.string.isRequired,
     path: PropTypes.string.isRequired,

@@ -3,7 +3,7 @@ import React from 'react';
 
 import { mount } from 'enzyme';
 
-import { TextInput, CheckBox, Field } from '../../../ui/form/Form';
+import { TextInput, Field } from '../../../ui/form/Form';
 import Message from '../../../ui/form/Message';
 import Button from '../../../ui/form/Button';
 
@@ -17,28 +17,12 @@ describe('Register form test suite', () => {
   describe('Register test suite', () => {
     const inputFields = ['email'];
 
-    const getFormProps = (values) => {
+    const getFormProps = () => {
       // create basic formit state
       const props = testUtils.createFormitState(inputFields);
 
       return props;
-      // // enhance and modify for local usage
-      // return {
-      //   ...props,
-      //   error: null,
-      //   values: {
-      //     ...props.values,
-      //     'remember': false,
-      //     ...values,
-      //   },
-      // };
     };
-
-    // const disabledFilter = (a) => {
-    //   const { disabled } = a.props();
-
-    //   return !disabled;
-    // }
 
     it('should render', () => {
       const props = getFormProps();

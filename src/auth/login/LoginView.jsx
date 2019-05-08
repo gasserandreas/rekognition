@@ -56,7 +56,7 @@ const LoginView = ({
 LoginView.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   loginRequest: HOCRequestPropTypes.isRequired,
-  logInUser: PropTypes.shape({}).isRequired,
+  logInUser: PropTypes.func.isRequired,
   history: HistoryPropType.isRequired,
 };
 
