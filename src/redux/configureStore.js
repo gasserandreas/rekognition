@@ -1,3 +1,4 @@
+/* global requestAnimationFrame */
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { debounce } from 'lodash';
@@ -19,7 +20,7 @@ import { logOutUser } from './auth';
 import GraphApi from '../util/GraphApi';
 import { getUrl } from '../util/services/networkUtils';
 
-import { addMessage } from '../redux/application/message';
+import { addMessage } from './application/message';
 
 const getPersistedReducer = () => {
   // configure persist store
@@ -31,7 +32,7 @@ const getPersistedReducer = () => {
   };
 
   return persistReducer(persistConfig, rootReducer);
-}
+};
 
 const getComposeEnhancers = () => {
   // enable dev tools in development mode only
@@ -58,7 +59,7 @@ const getErrorOptions = () => ({
       showRefresh: true,
     };
     addMessage(message)(dispatch);
-  }
+  },
 });
 
 const configureStore = (initialState = {}) => {
@@ -76,12 +77,11 @@ const configureStore = (initialState = {}) => {
          * or in next project find different solution for that...
          */
         /* istanbul ignore next */
-        onAuthError: (message) =>
+        onAuthError: (message) => {
           /* istanbul ignore next */
-          store.dispatch(
-            /* istanbul ignore next */
-            logOutUser(message)
-          ), //AUTH_LOG_OUT
+          store.dispatch(logOutUser(message)); // eslint-disable-line no-use-before-define
+          // AUTH_LOG_OUT
+        },
       }),
     }),
     errorMiddleware,
@@ -94,10 +94,7 @@ const configureStore = (initialState = {}) => {
   const store = createStore(
     persistedReducer,
     initialState,
-    composeEnhancers(
-      applyMiddleware(...middleware),
-      ...enhancers
-    )
+    composeEnhancers(applyMiddleware(...middleware), ...enhancers),
   );
 
   const persistor = persistStore(store);
@@ -138,7 +135,8 @@ const configureStore = (initialState = {}) => {
   };
 };
 
-export const __testables__ = { // eslint-disable-line no-underscore-dangle
+export const __testables__ = {
+  // eslint-disable-line no-underscore-dangle
   getEnhancers,
   getComposeEnhancers,
   getPersistedReducer,

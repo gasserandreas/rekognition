@@ -1,13 +1,7 @@
 import rootReducer from '../rootReducer';
 
-import {
-  appIdle,
-  appReset,
-  __testables__ as applicationTestables,
-} from '../application';
-import {
-   __testables__ as authTestables
-} from '../auth';
+import { appIdle, appReset, __testables__ as applicationTestables } from '../application';
+import { __testables__ as authTestables } from '../auth';
 
 const { applicationDidLoad } = applicationTestables;
 const { authSetToken } = authTestables;
@@ -24,15 +18,7 @@ describe('root reducer test suite', () => {
     mockedDateNow.restoreMock();
   });
 
-  const firstLevelKeys = [
-    'appTime',
-    'application',
-    'auth',
-    'images',
-    'labels',
-    'faces',
-    'user',
-  ];
+  const firstLevelKeys = ['appTime', 'application', 'auth', 'images', 'labels', 'faces', 'user'];
 
   it('should return root redux tree', () => {
     const rootState = rootReducer(undefined, appIdle());
@@ -49,7 +35,6 @@ describe('root reducer test suite', () => {
     expect(rootState3).not.toEqual(rootReducer(undefined, appIdle));
 
     // fire reset and check again
-    expect(rootReducer(rootState3, appReset()))
-      .toEqual(rootState1);
+    expect(rootReducer(rootState3, appReset())).toEqual(rootState1);
   });
 });

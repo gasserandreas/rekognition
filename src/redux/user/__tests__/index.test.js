@@ -21,11 +21,10 @@ const mockedData = {
 describe('user: simple action test suite', () => {
   it('should create userSetUser action', () => {
     const { user } = mockedData;
-    expect(__testables__.userSetUser(user))
-      .toEqual({
-        type: __testables__.USER_SET_USER,
-        payload: user,
-      });
+    expect(__testables__.userSetUser(user)).toEqual({
+      type: __testables__.USER_SET_USER,
+      payload: user,
+    });
   });
 });
 
@@ -38,7 +37,8 @@ describe('user: complex action test suite', () => {
 
   beforeAll(() => {
     dateNowMock = jest.spyOn(Date, 'now').mockImplementation(() => 1553237036202);
-    authUserIdSelectorMock = jest.spyOn(selectorsAuth, 'authUserIdSelector')
+    authUserIdSelectorMock = jest
+      .spyOn(selectorsAuth, 'authUserIdSelector')
       .mockImplementation(() => mockedData.userId);
   });
 
@@ -66,11 +66,7 @@ describe('user: complex action test suite', () => {
     const store = mockstore();
     const { dispatch } = store;
 
-    const expectedActions = [
-      HOC_ACTIONS.START,
-      __testables__.userSetUser(user),
-      HOC_ACTIONS.SUCCESS,
-    ];
+    const expectedActions = [HOC_ACTIONS.START, __testables__.userSetUser(user), HOC_ACTIONS.SUCCESS];
 
     await reduxUser.updateUser(user)(dispatch);
 
@@ -94,16 +90,11 @@ describe('user: complex action test suite', () => {
     const store = mockstore();
     const { dispatch } = store;
 
-    const expectedActions = [
-      HOC_ACTIONS.START,
-      __testables__.userSetUser(user),
-      HOC_ACTIONS.SUCCESS,
-    ];
+    const expectedActions = [HOC_ACTIONS.START, __testables__.userSetUser(user), HOC_ACTIONS.SUCCESS];
 
     await reduxUser.getUserInfo()(dispatch, {});
 
-    expect(API.query.mock.calls[0][1])
-      .toEqual({ userId: mockedData.userId });
+    expect(API.query.mock.calls[0][1]).toEqual({ userId: mockedData.userId });
 
     expect(store.getActions()).toEqual(expectedActions);
 
@@ -127,16 +118,14 @@ describe('user: reducer test suite', () => {
   const dummyTestAction = testUtils.dummyTestAction();
 
   it('should create initial store state', () => {
-    expect(reducer(undefined, dummyTestAction))
-      .toEqual(initialState);
+    expect(reducer(undefined, dummyTestAction)).toEqual(initialState);
   });
 
   it('should handle USER_SET_USER', () => {
     const { user } = mockedData;
-    expect(reducer(undefined, __testables__.userSetUser(user)))
-      .toEqual({
-        ...initialState,
-        user,
-      });
+    expect(reducer(undefined, __testables__.userSetUser(user))).toEqual({
+      ...initialState,
+      user,
+    });
   });
 });

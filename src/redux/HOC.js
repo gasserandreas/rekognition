@@ -1,13 +1,14 @@
+/* eslint-disable no-console */
 import { createNetworkError } from '../util/ErrorHandler';
 
 // utils
-export const hocCreateTypes = (baseType) => ({
+export const hocCreateTypes = baseType => ({
   START: `${baseType}_START`,
   SUCCESS: `${baseType}_SUCCESS`,
   ERROR: `${baseType}_ERROR`,
 });
 
-const checkHocTypes = types => {
+const checkHocTypes = (types) => {
   const { START, SUCCESS, ERROR } = types;
 
   if (!START || !SUCCESS || !ERROR) {
@@ -53,37 +54,35 @@ export const hocAsyncAction = (ACTION_TYPE, createThunk, userOptions) => {
       dispatch({ type: ACTION_TYPE.START });
 
       // except to receive promise from create thunk method
-      return dispatch(thunk)
-        // proceed with success
-        .then(payload => {
-          dispatch({
-            type: ACTION_TYPE.SUCCESS,
-            payload,
-          });
+      return (
+        dispatch(thunk)
+          // proceed with success
+          .then((payload) => {
+            dispatch({
+              type: ACTION_TYPE.SUCCESS,
+              payload,
+            });
 
-          return Promise.resolve(payload);
-        })
-        // proceed with error
-        .catch((error) => {
-          dispatch({
-            type: ACTION_TYPE.ERROR,
-            payload: createNetworkError(error),
-            error: handled, // only flag as error if not rejectable
-          });
+            return Promise.resolve(payload);
+          })
+          // proceed with error
+          .catch((error) => { // eslint-disable-line consistent-return
+            dispatch({
+              type: ACTION_TYPE.ERROR,
+              payload: createNetworkError(error),
+              error: handled, // only flag as error if not rejectable
+            });
 
-          // only reject error if asked by user
-          if (rejectable) return Promise.reject(error);
-        });
-    }
+            // only reject error if asked by user
+            if (rejectable) return Promise.reject(error);
+          })
+      );
+    };
   };
 };
 
 // export reducer
-export default ({
-  ACTION_TYPE,
-  noData,
-  initialState,
-}) => {
+export default ({ ACTION_TYPE, noData, initialState }) => {
   // basic check
   if (!checkHocTypes(ACTION_TYPE)) {
     console.log(`No valid types specified for ${JSON.stringify(ACTION_TYPE)}`);
@@ -100,7 +99,7 @@ export default ({
     lastFetch: null,
     // a flat to check whether currently loading
     loading: false,
-  };  
+  };
 
   // hoc reducer stuff
   return (state = initialState || defaultInitialState, action) => {

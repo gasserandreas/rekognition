@@ -13,12 +13,7 @@ describe('auth register container test suite', () => {
       validEmail: undefined,
     });
 
-    expect(Object.keys(state)).toEqual([
-      'isAuthenticated',
-      'signupRequest',
-      'validEmail',
-      'checkEmailRequest',
-    ]);
+    expect(Object.keys(state)).toEqual(['isAuthenticated', 'signupRequest', 'validEmail', 'checkEmailRequest']);
   });
 
   it('should return redux actions', () => {

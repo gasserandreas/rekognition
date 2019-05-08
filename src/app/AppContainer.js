@@ -1,4 +1,4 @@
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import App from './App';
@@ -15,7 +15,7 @@ import {
   messageShowRefreshSelector,
 } from '../redux/application/message/selectors';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   isAuthenticated: isAuthenticatedSelector(state),
   username: authUsernameSelector(state),
   message: {
@@ -26,14 +26,19 @@ const mapStateToProps = (state) => ({
   },
 });
 
-const mapDispatchToProps = ({
+const mapDispatchToProps = {
   loadApplication,
   logOutUser,
-});
+};
 
 export const __testables__ = {
   mapStateToProps,
   mapDispatchToProps,
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(App),
+);

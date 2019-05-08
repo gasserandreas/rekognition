@@ -12,12 +12,14 @@ describe('Faces test suite', () => {
     confidence: 100,
     value: 'value',
     parents: [],
-    instances: [{
-      height: 100,
-      width: 90,
-      left: 80,
-      top: 70,
-    }],
+    instances: [
+      {
+        height: 100,
+        width: 90,
+        left: 80,
+        top: 70,
+      },
+    ],
   };
 
   const initialProps = {
@@ -27,12 +29,7 @@ describe('Faces test suite', () => {
     onClick: jest.fn(),
   };
 
-  const getLabel = (props) => mount(
-    <Label
-      {...initialProps}
-      {...props}
-    />
-  );
+  const getLabel = props => mount(<Label {...initialProps} {...props} />);
 
   afterEach(() => {
     initialProps.onClick.mockClear();
@@ -52,7 +49,7 @@ describe('Faces test suite', () => {
         confidence: undefined,
       },
     });
-    
+
     expect(wrapper.find('#jestConfidence').exists()).toBeFalsy();
   });
 

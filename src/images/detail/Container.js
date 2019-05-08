@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { getImage } from '../../redux/images';
 import { imagesByIdSelector, getImageRequestSelector } from '../../redux/images/selectors';
 
-
 import { labelsByImageIdSelector, labelsByIdSelector } from '../../redux/labels/selectors';
 import { facesByImageId, facesByIdSelector } from '../../redux/faces/selectors';
 
@@ -12,7 +11,8 @@ import DetailView from './DetailView';
 const mapKeyToValue = (searchString) => {
   const params = {};
   let param;
-  searchString.substring(1)
+  searchString
+    .substring(1)
     .split('=')
     .forEach((value, i) => {
       if (i % 2 === 0) {
@@ -29,7 +29,9 @@ const mapKeyToValue = (searchString) => {
 const select = (state, props) => {
   // get image id
   const {
-    match: { params: { id } },
+    match: {
+      params: { id },
+    },
     location: { search },
   } = props;
 
@@ -42,20 +44,15 @@ const select = (state, props) => {
     image,
     labels: labelsByImageIdSelector(state, id),
     faces: facesByImageId(state, id),
-    selectedFace: params.face
-      ? facesByIdSelector(state)[params.face] || null
-      : null,
-    selectedLabel: params.label
-      ? labelsByIdSelector(state)[params.label] || null
-      : null,
+    selectedFace: params.face ? facesByIdSelector(state)[params.face] || null : null,
+    selectedLabel: params.label ? labelsByIdSelector(state)[params.label] || null : null,
     getImageRequest: getImageRequestSelector(state),
   };
 };
 
-const mapDispatchToProps = ({
+const mapDispatchToProps = {
   getImage,
-});
-
+};
 
 export const __testables__ = {
   select,
@@ -63,4 +60,7 @@ export const __testables__ = {
   mapKeyToValue,
 };
 
-export default connect(select, mapDispatchToProps)(DetailView);
+export default connect(
+  select,
+  mapDispatchToProps,
+)(DetailView);

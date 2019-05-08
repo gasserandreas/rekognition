@@ -25,25 +25,23 @@ describe('faces simple action test suite', () => {
     });
 
     // test function
-    expect(reduxFaces.facesAddFaces(imageId, faces.items))
-      .toEqual({
-        type: __testables__.FACES_ADD_FACES,
-        payload: {
-          imageId,
-          ids,
-          byId,
-        },
-      });
+    expect(reduxFaces.facesAddFaces(imageId, faces.items)).toEqual({
+      type: __testables__.FACES_ADD_FACES,
+      payload: {
+        imageId,
+        ids,
+        byId,
+      },
+    });
   });
 });
 
 describe('faces reducer test suite', () => {
   it('should return initial state', () => {
-    expect(reducer(undefined, testUtils.dummyTestAction()))
-      .toEqual({
-        byId: {},
-        idsByImageId: {},
-      });
+    expect(reducer(undefined, testUtils.dummyTestAction())).toEqual({
+      byId: {},
+      idsByImageId: {},
+    });
   });
 
   it('should handle FACES_ADD_FACES', () => {
@@ -60,12 +58,11 @@ describe('faces reducer test suite', () => {
       byId[id] = face;
     });
 
-    expect(reducer(undefined, reduxFaces.facesAddFaces(imageId, faces.items)))
-      .toEqual({
-        byId,
-        idsByImageId: {
-          [imageId]: ids,
-        },
-      });
+    expect(reducer(undefined, reduxFaces.facesAddFaces(imageId, faces.items))).toEqual({
+      byId,
+      idsByImageId: {
+        [imageId]: ids,
+      },
+    });
   });
 });

@@ -11,32 +11,26 @@ describe('user selector test suite', () => {
       },
       userInfoRequest: testUtils.createHocReducerState(),
       updateUserRequest: testUtils.createHocReducerState(),
-    }
+    },
   };
 
   it('should return empty object for null state', () => {
-    expect(selectors.__testables__.userStateSelector({}))
-      .toEqual({});
+    expect(selectors.__testables__.userStateSelector({})).toEqual({});
   });
 
   it('should handle userStateSelector', () => {
-    expect(selectors.__testables__.userStateSelector(initialState))
-      .toEqual(initialState.user);
-  })
+    expect(selectors.__testables__.userStateSelector(initialState)).toEqual(initialState.user);
+  });
 
   it('should handle userStateSelector', () => {
-    expect(selectors.userSelector(initialState))
-      .toEqual(initialState.user.user);
+    expect(selectors.userSelector(initialState)).toEqual(initialState.user.user);
   });
 
   it('should handle getUserInfoRequestSelector', () => {
-    expect(selectors.getUserInfoRequestSelector(initialState))
-      .toEqual(initialState.user.userInfoRequest);
+    expect(selectors.getUserInfoRequestSelector(initialState)).toEqual(initialState.user.userInfoRequest);
   });
 
   it('should handle updateUserRequestSelector', () => {
-    expect(selectors.updateUserRequestSelector(initialState))
-      .toEqual(initialState.user.updateUserRequest);
+    expect(selectors.updateUserRequestSelector(initialState)).toEqual(initialState.user.updateUserRequest);
   });
-
 });

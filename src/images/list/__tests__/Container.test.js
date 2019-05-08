@@ -1,7 +1,7 @@
 import { __testables__ } from '../Container';
 import { listImages } from '../../../redux/images';
 
-const { select, mapDispatchToProps, mapKeyToValue } = __testables__;
+const { select, mapDispatchToProps } = __testables__;
 
 describe('images list container test suite', () => {
   const expectedInitialState = {
@@ -24,10 +24,7 @@ describe('images list container test suite', () => {
     const state = select({}, initialProps);
     expect(state).toEqual(expectedInitialState);
 
-    expect(Object.keys(state)).toEqual([
-      'images',
-      'addImageRequest',
-    ]);
+    expect(Object.keys(state)).toEqual(['images', 'addImageRequest']);
   });
 
   it('should return redux actions', () => {

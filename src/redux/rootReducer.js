@@ -1,4 +1,3 @@
-/* global requestAnimationFrame */
 import { combineReducers } from 'redux';
 
 import applicationReducer, { APP_RESET } from './application';
@@ -32,6 +31,6 @@ const rootReducer = (state, action) => {
   }
 
   return reducers(usedState, action);
-}
+};
 
 export default rootReducer;

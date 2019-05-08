@@ -9,9 +9,7 @@ export const authMetaSelector = createSelector(
 
 export const isAuthenticatedSelector = createSelector(
   authMetaSelector,
-  ({ loggedIn }) => {
-    return loggedIn || false;
-  }
+  ({ loggedIn }) => loggedIn || false,
 );
 
 export const authUserIdSelector = createSelector(
@@ -36,7 +34,7 @@ export const authUsernameSelector = createSelector(
 
 export const isValidEmailSelector = createSelector(
   authStateSelector,
-  ({ validEmail }) => validEmail
+  ({ validEmail }) => validEmail,
 );
 
 export const loginRequestSelector = createSelector(

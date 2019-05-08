@@ -3,50 +3,41 @@ import React from 'react';
 
 import { mount } from 'enzyme';
 
-import { TextInput, CheckBox, Field } from '../../../ui/form/Form';
+import { TextInput, Field } from '../../../ui/form/Form';
 import Message from '../../../ui/form/Message';
 import Button from '../../../ui/form/Button';
 
 import { __testables__ } from '../CheckEmailForm';
+
 const {
-  formikConfig,
-  validationSchema,
-  mapPropsToValues,
-  handleSubmit,
-  CheckEmailForm,
+  formikConfig, validationSchema, mapPropsToValues, handleSubmit, CheckEmailForm,
 } = __testables__;
 
 describe('Register form test suite', () => {
-
   describe('Register test suite', () => {
     const inputFields = ['email'];
 
-    const getFormProps = (values) => {
+    const getFormProps = () => {
       // create basic formit state
       const props = testUtils.createFormitState(inputFields);
 
       return props;
-      // // enhance and modify for local usage
-      // return {
-      //   ...props,
-      //   error: null,
-      //   values: {
-      //     ...props.values,
-      //     'remember': false,
-      //     ...values,
-      //   },
-      // };
     };
 
-    // const disabledFilter = (a) => {
-    //   const { disabled } = a.props();
+    const defaultProps = {
+      error: '',
+    };
 
-    //   return !disabled;
-    // }
+    const getCheckEmailForm = props => mount(
+      <CheckEmailForm
+        {...defaultProps}
+        {...props}
+      />,
+    );
 
     it('should render', () => {
       const props = getFormProps();
-      const wrapper = mount(<CheckEmailForm {...props} />);
+      const wrapper = getCheckEmailForm(props);
       expect(wrapper).toBeTruthy();
     });
 
@@ -54,17 +45,23 @@ describe('Register form test suite', () => {
       // generate error state
       const props = {
         ...getFormProps(),
-        touched: inputFields.reduce((prev, cur) => ({
-          ...prev,
-          [cur]: true,
-        }), {}),
-        errors: inputFields.reduce((prev, cur) => ({
-          ...prev,
-          [cur]: true,
-        }), {}),
+        touched: inputFields.reduce(
+          (prev, cur) => ({
+            ...prev,
+            [cur]: true,
+          }),
+          {},
+        ),
+        errors: inputFields.reduce(
+          (prev, cur) => ({
+            ...prev,
+            [cur]: `Error ${cur}`,
+          }),
+          {},
+        ),
       };
-      const wrapper = mount(<CheckEmailForm {...props} />);
-      
+      const wrapper = getCheckEmailForm(props);
+
       // test fields
       const fields = wrapper.find(Field);
       fields.forEach((field) => {
@@ -82,17 +79,23 @@ describe('Register form test suite', () => {
       // generate error state
       const props = {
         ...getFormProps(),
-        touched: inputFields.reduce((prev, cur) => ({
-          ...prev,
-          [cur]: false,
-        }), {}),
-        errors: inputFields.reduce((prev, cur) => ({
-          ...prev,
-          [cur]: true,
-        }), {}),
+        touched: inputFields.reduce(
+          (prev, cur) => ({
+            ...prev,
+            [cur]: false,
+          }),
+          {},
+        ),
+        errors: inputFields.reduce(
+          (prev, cur) => ({
+            ...prev,
+            [cur]: `Error: ${cur}`,
+          }),
+          {},
+        ),
       };
-      const wrapper = mount(<CheckEmailForm {...props} />);
-      
+      const wrapper = getCheckEmailForm(props);
+
       // test fields
       const fields = wrapper.find(Field);
       fields.forEach((field) => {
@@ -107,12 +110,12 @@ describe('Register form test suite', () => {
     });
 
     it('should show error message if error props is set', () => {
-      const error = "Error message";
+      const error = 'Error message';
       const props = {
         ...getFormProps(),
         error,
       };
-      const wrapper = mount(<CheckEmailForm {...props} />);
+      const wrapper = getCheckEmailForm(props);
       expect(wrapper).toBeTruthy();
 
       // check for error message
@@ -127,7 +130,7 @@ describe('Register form test suite', () => {
         ...getFormProps(),
         validEmail,
       };
-      const wrapper = mount(<CheckEmailForm {...props} />);
+      const wrapper = getCheckEmailForm(props);
       expect(wrapper).toBeTruthy();
 
       // check for error message
@@ -142,10 +145,8 @@ describe('Register form test suite', () => {
         dirty: true,
         submitting: true,
       };
-      const wrapper = mount(<CheckEmailForm {...props} />);
-      const resetButton = wrapper
-        .find(Button)
-        .filterWhere(n => n.props().testId === 'jestResetButton');
+      const wrapper = getCheckEmailForm(props);
+      const resetButton = wrapper.find(Button).filterWhere(n => n.props().testId === 'jestResetButton');
       expect(resetButton.props().disabled).toBeTruthy();
     });
 
@@ -154,10 +155,8 @@ describe('Register form test suite', () => {
         ...getFormProps(),
         submitting: true,
       };
-      const wrapper = mount(<CheckEmailForm {...props} />);
-      const submitButton = wrapper
-        .find(Button)
-        .filterWhere(n => n.props().testId === 'jestSubmitButton');
+      const wrapper = getCheckEmailForm(props);
+      const submitButton = wrapper.find(Button).filterWhere(n => n.props().testId === 'jestSubmitButton');
       expect(submitButton.props().disabled).toBeTruthy();
     });
 
@@ -166,19 +165,15 @@ describe('Register form test suite', () => {
         ...getFormProps(),
         submitting: true,
       };
-      const wrapper = mount(<CheckEmailForm {...props} />);
-      const submitButton = wrapper
-        .find(Button)
-        .filterWhere(n => n.props().testId === 'jestSubmitButton');
+      const wrapper = getCheckEmailForm(props);
+      const submitButton = wrapper.find(Button).filterWhere(n => n.props().testId === 'jestSubmitButton');
       expect(submitButton.props().loading).toBeTruthy();
     });
 
     // important to trigger Formik
     it('submit button should be type of submit', () => {
-      const wrapper = mount(<CheckEmailForm {...getFormProps()} />);
-      const submitButton = wrapper
-        .find(Button)
-        .filterWhere(n => n.props().testId === 'jestSubmitButton');
+      const wrapper = getCheckEmailForm(getFormProps());
+      const submitButton = wrapper.find(Button).filterWhere(n => n.props().testId === 'jestSubmitButton');
       expect(submitButton.props().type).toEqual('submit');
     });
 
@@ -190,17 +185,15 @@ describe('Register form test suite', () => {
         dirty: true,
       };
 
-      const wrapper = mount(<CheckEmailForm {...props} />);
-      const resetButton = wrapper
-        .find(Button)
-        .filterWhere(n => n.props().testId === 'jestResetButton');
+      const wrapper = getCheckEmailForm(props);
+      const resetButton = wrapper.find(Button).filterWhere(n => n.props().testId === 'jestResetButton');
       expect(resetButton.exists()).toBeTruthy();
 
       expect(handleReset).not.toHaveBeenCalled();
 
       // simulate click
       resetButton.simulate('click');
-      
+
       expect(handleReset).toHaveBeenCalled();
     });
   });
@@ -225,7 +218,7 @@ describe('Register form test suite', () => {
     it('should handle mapPropsToValues', () => {
       const user = {
         name: 'User',
-        firstname: 'Test'
+        firstname: 'Test',
       };
       const props = { user };
       expect(mapPropsToValues(props)).toEqual(user);
@@ -240,7 +233,7 @@ describe('Register form test suite', () => {
       const obj = {
         props,
       };
-      
+
       // execute handleSubmit
       handleSubmit(payload, obj);
 

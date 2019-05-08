@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Heading } from 'grommet';
@@ -6,7 +6,6 @@ import { Heading } from 'grommet';
 import View from '../ui/View';
 
 import { Colors } from '../styles';
-import * as Paths from '../paths';
 
 const StyledNotFound = styled(View)`
   margin-top: 2rem;
@@ -25,15 +24,15 @@ const StyledNotFound = styled(View)`
 
 const NotFound = ({ location }) => (
   <StyledNotFound>
-      <Heading level={1}>
-        <p>
-          <strong>Whhooppss</strong>
-          {' '}
-          it seems there is no page for route:
-          <code>{location.pathname}</code>
-        </p>
-      </Heading>
-    </StyledNotFound>
+    <Heading level={1}>
+      <p>
+        <strong>Whhooppss</strong>
+        {' '}
+it seems there is no page for route:
+        <code>{location.pathname}</code>
+      </p>
+    </Heading>
+  </StyledNotFound>
 );
 
 NotFound.propTypes = {

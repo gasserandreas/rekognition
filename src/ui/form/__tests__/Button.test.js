@@ -2,7 +2,9 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 
-import Button, { StyledButton, StyledLoading, BUTTON_TYPES, __testables__ } from '../Button';
+import Button, {
+  StyledButton, StyledLoading, BUTTON_TYPES, __testables__,
+} from '../Button';
 import { Colors } from '../../../styles';
 
 it('Button should render correctly', () => {
@@ -13,7 +15,7 @@ it('Button should render correctly', () => {
 it('Button styles should be consistent', () => {
   const wrapper = shallow(<StyledButton />);
   expect(toJson(wrapper)).toMatchSnapshot();
-})
+});
 
 it('Button should render primary styles', () => {
   const wrapper = shallow(<Button buttonStyle="primary">Click me</Button>);
@@ -63,7 +65,7 @@ it('Button should render loading component if loading is true', () => {
 describe('color helper methods test suite', () => {
   const { getColor, getBackgroundColor, getBackgroundHoverColor } = __testables__;
 
-  it('should handle getColor', () =>  {
+  it('should handle getColor', () => {
     expect(getColor({ buttonStyle: BUTTON_TYPES.PRIMARY })).toEqual(Colors.ColorsPalette.White);
     expect(getColor({ buttonStyle: BUTTON_TYPES.ERROR })).toEqual(Colors.ColorsPalette.White);
     expect(getColor({ buttonStyle: BUTTON_TYPES.LINK })).toEqual(Colors.Blue.Default);

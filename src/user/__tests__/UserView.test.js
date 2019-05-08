@@ -22,17 +22,15 @@ describe('RegisterView test suite', () => {
 
   let initialProps;
 
-  const getUserView = (props) => mount(
+  const getUserView = props => mount(
     <MemoryRouter>
       <UserView {...props} />
-    </MemoryRouter>
+    </MemoryRouter>,
   );
 
   beforeEach(() => {
-    initialProps  = {
-      user: {
-
-      },
+    initialProps = {
+      user: {},
       authMeta: {
         loggedInSince: 1556144958472,
         remember: true,
@@ -144,122 +142,114 @@ describe('RegisterView test suite', () => {
   });
 
   // describe('RegisterView view tests', () => {
-    it('should render profile information', () => {
-      const wrapper = getUserView(initialProps);
-      expect(wrapper.exists()).toBeTruthy();
+  it('should render profile information', () => {
+    const wrapper = getUserView(initialProps);
+    expect(wrapper.exists()).toBeTruthy();
 
-      const jestProfileInformationElement = wrapper
-        .findWhere(n => n.props().id === jestProfileInformation);
-      expect(jestProfileInformationElement.exists()).toBeTruthy();
+    const jestProfileInformationElement = wrapper.findWhere(n => n.props().id === jestProfileInformation);
+    expect(jestProfileInformationElement.exists()).toBeTruthy();
 
-      // check heading and paragraph
-      const heading = jestProfileInformationElement.find(Heading);
-      const paragraph = jestProfileInformationElement.find(Paragraph);
+    // check heading and paragraph
+    const heading = jestProfileInformationElement.find(Heading);
+    const paragraph = jestProfileInformationElement.find(Paragraph);
 
-      expect(heading.exists()).toBeTruthy();
-      expect(paragraph.exists()).toBeTruthy();
-    });
+    expect(heading.exists()).toBeTruthy();
+    expect(paragraph.exists()).toBeTruthy();
+  });
   // });
 
-    it('should render logged in since if date available', () => {
-      const wrapper = getUserView(initialProps);
-      expect(wrapper.exists()).toBeTruthy();
+  it('should render logged in since if date available', () => {
+    const wrapper = getUserView(initialProps);
+    expect(wrapper.exists()).toBeTruthy();
 
-      const jestLoggedInSinceElement = wrapper
-        .findWhere(n => n.props().id === jestLoggedInSince);
-      expect(jestLoggedInSinceElement.exists()).toBeTruthy();
+    const jestLoggedInSinceElement = wrapper.findWhere(n => n.props().id === jestLoggedInSince);
+    expect(jestLoggedInSinceElement.exists()).toBeTruthy();
 
-      const formatedDate = getDefaultFormatedDate(initialProps.authMeta.loggedInSince);
-      expect(jestLoggedInSinceElement.text()).toEqual(formatedDate);
+    const formatedDate = getDefaultFormatedDate(initialProps.authMeta.loggedInSince);
+    expect(jestLoggedInSinceElement.text()).toEqual(formatedDate);
+  });
+
+  it('should render unknown logged in since if not date available', () => {
+    const wrapper = getUserView({
+      ...initialProps,
+      authMeta: {
+        ...initialProps.authMeta,
+        loggedInSince: null,
+      },
     });
+    expect(wrapper.exists()).toBeTruthy();
 
-    it('should render unknown logged in since if not date available', () => {
-      const wrapper = getUserView({
-        ...initialProps,
-        authMeta: {
-          ...initialProps.authMeta,
-          loggedInSince: null,
-        }
-      });
-      expect(wrapper.exists()).toBeTruthy();
+    const jestLoggedInSinceElement = wrapper.findWhere(n => n.props().id === jestLoggedInSince);
+    expect(jestLoggedInSinceElement.exists()).toBeTruthy();
 
-      const jestLoggedInSinceElement = wrapper
-        .findWhere(n => n.props().id === jestLoggedInSince);
-      expect(jestLoggedInSinceElement.exists()).toBeTruthy();
+    expect(jestLoggedInSinceElement.text()).toEqual('unknown');
+  });
 
-      expect(jestLoggedInSinceElement.text()).toEqual('unknown');
+  it('should render auto log in if enabled', () => {
+    const wrapper = getUserView(initialProps);
+    expect(wrapper.exists()).toBeTruthy();
+
+    const jestAutoLoggedInElement = wrapper.findWhere(n => n.props().id === jestAutoLoggedIn);
+
+    expect(jestAutoLoggedInElement.exists()).toBeTruthy();
+
+    expect(jestAutoLoggedInElement.text()).toEqual('enabled');
+  });
+
+  it('should render unknown logged in since if not date available', () => {
+    const wrapper = getUserView({
+      ...initialProps,
+      authMeta: {
+        ...initialProps.authMeta,
+        remember: false,
+      },
     });
+    expect(wrapper.exists()).toBeTruthy();
 
-    it('should render auto log in if enabled', () => {
-      const wrapper = getUserView(initialProps);
-      expect(wrapper.exists()).toBeTruthy();
+    const jestAutoLoggedInElement = wrapper.findWhere(n => n.props().id === jestAutoLoggedIn);
+    expect(jestAutoLoggedInElement.exists()).toBeTruthy();
 
-      const jestAutoLoggedInElement = wrapper
-        .findWhere(n => n.props().id === jestAutoLoggedIn);
+    expect(jestAutoLoggedInElement.text()).toEqual('disabled');
+  });
 
-      expect(jestAutoLoggedInElement.exists()).toBeTruthy();
+  it('should render privacy link', () => {
+    const wrapper = getUserView(initialProps);
+    expect(wrapper.exists()).toBeTruthy();
 
-      expect(jestAutoLoggedInElement.text()).toEqual('enabled');
+    const jestPrivacyLinkElement = wrapper.findWhere(n => n.props().id === jestPrivacyLink).find(Link);
+
+    expect(jestPrivacyLinkElement.exists()).toBeTruthy();
+    expect(jestPrivacyLinkElement.props().to).toEqual(Paths.PRIVACY);
+  });
+
+  it('should handle logOutUser', () => {
+    const wrapper = getUserView(initialProps);
+    expect(wrapper.exists()).toBeTruthy();
+
+    const jestLogOutUserElement = wrapper.findWhere(n => n.props().id === jestLogOutUser);
+    expect(jestLogOutUserElement.exists()).toBeTruthy();
+
+    expect(initialProps.logOutUser).not.toHaveBeenCalled();
+
+    // simulate click
+    jestLogOutUserElement.at(0).simulate('click');
+
+    expect(initialProps.logOutUser).toHaveBeenCalled();
+  });
+
+  it('should call getUserInfo if not loading, no error and never been called before', () => {
+    expect(initialProps.getUserInfo).not.toHaveBeenCalled();
+    const wrapper = getUserView({
+      ...initialProps,
+      getUserInfoRequest: {
+        ...initialProps.getUserInfoRequest,
+        loading: false,
+        lastError: null,
+        lastFetch: null,
+      },
     });
+    expect(wrapper.exists()).toBeTruthy();
 
-    it('should render unknown logged in since if not date available', () => {
-      const wrapper = getUserView({
-        ...initialProps,
-        authMeta: {
-          ...initialProps.authMeta,
-          remember: false,
-        }
-      });
-      expect(wrapper.exists()).toBeTruthy();
-
-      const jestAutoLoggedInElement = wrapper
-        .findWhere(n => n.props().id === jestAutoLoggedIn);
-      expect(jestAutoLoggedInElement.exists()).toBeTruthy();
-
-      expect(jestAutoLoggedInElement.text()).toEqual('disabled');
-    });
-
-    it('should render privacy link', () => {
-      const wrapper = getUserView(initialProps);
-      expect(wrapper.exists()).toBeTruthy();
-
-      const jestPrivacyLinkElement = wrapper
-        .findWhere(n => n.props().id === jestPrivacyLink)
-        .find(Link);
-
-      expect(jestPrivacyLinkElement.exists()).toBeTruthy();
-      expect(jestPrivacyLinkElement.props().to).toEqual(Paths.PRIVACY);
-    });
-
-    it('should handle logOutUser', () => {
-      const wrapper = getUserView(initialProps);
-      expect(wrapper.exists()).toBeTruthy();
-
-      const jestLogOutUserElement = wrapper
-        .findWhere(n => n.props().id === jestLogOutUser);
-      expect(jestLogOutUserElement.exists()).toBeTruthy();
-
-      expect(initialProps.logOutUser).not.toHaveBeenCalled();
-
-      // simulate click
-      jestLogOutUserElement.at(0).simulate('click');
-
-      expect(initialProps.logOutUser).toHaveBeenCalled();
-    });
-
-    it('should call getUserInfo if not loading, no error and never been called before', () => {
-      expect(initialProps.getUserInfo).not.toHaveBeenCalled();
-      const wrapper = getUserView({
-        ...initialProps,
-        getUserInfoRequest: {
-          ...initialProps.getUserInfoRequest,
-          loading: false,
-          lastError: null,
-          lastFetch: null,
-        },
-      });
-      expect(wrapper.exists()).toBeTruthy();
-
-      expect(initialProps.getUserInfo).toHaveBeenCalled();
-    });
+    expect(initialProps.getUserInfo).toHaveBeenCalled();
+  });
 });

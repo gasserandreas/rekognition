@@ -5,7 +5,10 @@ import toJson from 'enzyme-to-json';
 import ButtonGroup from '../ButtonGroup';
 
 it('ButtonGroup should render correctly', () => {
-  const wrapper = shallow(<ButtonGroup><button>Click me</button></ButtonGroup>);
+  const wrapper = shallow(
+    <ButtonGroup>
+      <button type="button">Click me</button>
+    </ButtonGroup>,
+  );
   expect(toJson(wrapper.dive())).toMatchSnapshot();
 });
-

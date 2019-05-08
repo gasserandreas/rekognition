@@ -10,18 +10,18 @@ export const StyledAsyncImage = styled(Box)`
   justify-content: center;
   transition: all 0.5s ease;
   img {
-    opacity: ${props => props.loaded ? '1' : '0'};
-    display: ${props => (props.loaded || props.neverHideImg) ? 'flex' : 'none'};
+    opacity: ${props => (props.loaded ? '1' : '0')};
+    display: ${props => (props.loaded || props.neverHideImg ? 'flex' : 'none')};
   }
 `;
 
 const AsyncImage = ({ onLoad, ...props }) => {
   const [loaded, setLoaded] = useState(false);
-  
+
   const handleOnImageLoad = (e) => {
     setLoaded(true);
 
-    if(onLoad) {
+    if (onLoad) {
       const { target } = e;
       onLoad(target);
     }
@@ -29,13 +29,10 @@ const AsyncImage = ({ onLoad, ...props }) => {
 
   return (
     <StyledAsyncImage loaded={loaded}>
-      { !loaded && <LoadingIndicator /> }
-      <Image
-        {...props}
-        onLoad={handleOnImageLoad}
-      />
+      {!loaded && <LoadingIndicator />}
+      <Image {...props} onLoad={handleOnImageLoad} />
     </StyledAsyncImage>
-  )
+  );
 };
 
 AsyncImage.propTypes = {

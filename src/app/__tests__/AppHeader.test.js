@@ -1,4 +1,3 @@
-/* global testUtils */
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
@@ -10,12 +9,11 @@ import Header from '../../ui/Header';
 const { AppHeader, shouldShowPreviousButton } = __testables__;
 
 describe('AppFooter test suite', () => {
-  const getWrapper = (props) => mount(<MemoryRouter>
-    <AppHeaderWithRouter
-      isAuthenticated={true}
-      {...props} 
-    />
-  </MemoryRouter>);
+  const getWrapper = props => mount(
+    <MemoryRouter>
+      <AppHeaderWithRouter isAuthenticated {...props} />
+    </MemoryRouter>,
+  );
 
   const getAppHeader = (props = {}) => {
     const wrapper = getWrapper(props);
@@ -47,7 +45,7 @@ describe('AppFooter test suite', () => {
   it('should return AppHeader component wrapped in router', () => {
     const appHeader = getAppHeader();
     const props = appHeader.props();
-    
+
     expect(props.location).toBeTruthy();
     expect(props.match).toBeTruthy();
     expect(props.history).toBeTruthy();
@@ -65,11 +63,13 @@ describe('AppFooter test suite', () => {
     const initialProps = {
       history,
       isAuthenticated: true,
-    }
+    };
 
-    const wrapper = mount(<MemoryRouter>
-      <AppHeader {...initialProps} />
-    </MemoryRouter>);
+    const wrapper = mount(
+      <MemoryRouter>
+        <AppHeader {...initialProps} />
+      </MemoryRouter>,
+    );
     const appHeader = wrapper.find(AppHeader);
     const header = appHeader.find(Header);
 

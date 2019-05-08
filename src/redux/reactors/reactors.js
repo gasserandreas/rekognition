@@ -32,7 +32,7 @@ const checkStaleImageData = createSelector(
     }
 
     return listImages();
-  }
+  },
 );
 
 export const __testables__ = {
@@ -41,6 +41,4 @@ export const __testables__ = {
   appTimeSelector,
 };
 
-export default [
-  checkStaleImageData,
-];
+export default [checkStaleImageData];

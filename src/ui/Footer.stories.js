@@ -13,18 +13,11 @@ const StyledWrapper = styled.div`
 storiesOf('Footer', module)
   .add('default', () => (
     <StyledWrapper>
-      <Footer
-        withSidebar={boolean('withSidebar', false)}
-        alternativeColor={boolean('alternativeColor', false)}
-      />
+      <Footer withSidebar={boolean('withSidebar', false)} alternativeColor={boolean('alternativeColor', false)} />
     </StyledWrapper>
   ))
   .add('with sidebar', () => (
     <StyledWrapper>
-      <Footer
-        withSidebar={boolean('withSidebar', true)}
-        alternativeColor={boolean('alternativeColor', false)}
-      />
+      <Footer withSidebar={boolean('withSidebar', true)} alternativeColor={boolean('alternativeColor', false)} />
     </StyledWrapper>
   ));
-

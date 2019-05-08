@@ -1,6 +1,5 @@
-/* global testUtils */
 import { ApolloClient } from 'apollo-client';
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 import * as apolloLinkContext from 'apollo-link-context';
 
 import GraphApi, { __testables__ } from '../GraphApi';
@@ -10,7 +9,8 @@ import * as sessionUtil from '../sessionUtil';
 
 describe('GraphApi test suite', () => {
   const mockedData = {
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MzBkZDIxNS1hNWY2LTRiMzItYmI4MS1jZjFlOGVjODkwMzkiLCJjcmVhdGVkQXQiOjE1NTMyMDEwMjM5NzYsImlhdCI6MTU1MzIwMTAyM30.CI1ZSQodWkuGMAQJQRZ5F7bGFKJHTWj-ql0f_INVALID',
+    token:
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3MzBkZDIxNS1hNWY2LTRiMzItYmI4MS1jZjFlOGVjODkwMzkiLCJjcmVhdGVkQXQiOjE1NTMyMDEwMjM5NzYsImlhdCI6MTU1MzIwMTAyM30.CI1ZSQodWkuGMAQJQRZ5F7bGFKJHTWj-ql0f_INVALID', // eslint-disable-line max-len
     endpoint: 'https://graph/api/endpoint',
   };
 
@@ -19,8 +19,7 @@ describe('GraphApi test suite', () => {
   let setContextMock;
 
   beforeAll(() => {
-    getTokenMock = jest.spyOn(sessionUtil, 'getToken')
-      .mockImplementation(() => mockedData.token);
+    getTokenMock = jest.spyOn(sessionUtil, 'getToken').mockImplementation(() => mockedData.token);
     onAuthErrorMock = jest.fn();
     setContextMock = jest.spyOn(apolloLinkContext, 'setContext');
   });
@@ -58,15 +57,17 @@ describe('GraphApi test suite', () => {
   });
 
   it('should add Bearer token to every request call', () => {
-    new GraphApi({
+    const api = new GraphApi({
       endpoint: mockedData.endpoint,
       onAuthError: onAuthErrorMock,
     });
 
+    expect(api).toBeTruthy();
+
     // check if getAuthToken was called
     expect(setContextMock).toBeCalled();
     expect(setContextMock).toBeCalledWith(__testables__.getAuthToken);
-    
+
     // check for proper getAuthToken execution
     const initialHeader = {
       headers: {
@@ -81,10 +82,9 @@ describe('GraphApi test suite', () => {
         authorization: `Bearer ${sessionUtil.getToken()}`,
       },
     };
-    expect(__testables__.getAuthToken(null, initialHeader))
-      .toEqual(expectedHeaderWithToken);
-    
-      // check for without token
+    expect(__testables__.getAuthToken(null, initialHeader)).toEqual(expectedHeaderWithToken);
+
+    // check for without token
     getTokenMock = getTokenMock.mockImplementation(() => null);
 
     const expectedHeaderWithoutToken = {
@@ -94,8 +94,7 @@ describe('GraphApi test suite', () => {
       },
     };
 
-    expect(__testables__.getAuthToken(null, initialHeader))
-      .toEqual(expectedHeaderWithoutToken);
+    expect(__testables__.getAuthToken(null, initialHeader)).toEqual(expectedHeaderWithoutToken);
   });
 
   it('should handle network errors', async (done) => {
@@ -126,8 +125,7 @@ describe('GraphApi test suite', () => {
         onAuthError: onAuthErrorMock,
       });
 
-      resetStoreMock = jest.spyOn(API.client, 'resetStore')
-        .mockImplementation(() => true);
+      resetStoreMock = jest.spyOn(API.client, 'resetStore').mockImplementation(() => true);
     });
 
     afterEach(() => {
@@ -158,7 +156,7 @@ describe('GraphApi test suite', () => {
       },
       message: 'error message',
       path: '/base/path',
-    }
+    };
 
     let API;
 
@@ -223,8 +221,7 @@ describe('GraphApi test suite', () => {
         onAuthError: onAuthErrorMock,
       });
 
-      handleGraphErrorMock = jest.spyOn(API, 'handleGraphError')
-        .mockImplementation(obj => obj);
+      handleGraphErrorMock = jest.spyOn(API, 'handleGraphError').mockImplementation(obj => obj);
     });
 
     afterEach(() => {
@@ -296,7 +293,7 @@ describe('GraphApi test suite', () => {
 
         // check call arguments
         errors.forEach((error, i) => {
-          expect(handleGraphErrorMock).toHaveBeenNthCalledWith(i+1, errors[i]);
+          expect(handleGraphErrorMock).toHaveBeenNthCalledWith(i + 1, errors[i]);
         });
       }
       done();
@@ -305,15 +302,15 @@ describe('GraphApi test suite', () => {
 
   describe('GraphApi query test suite', () => {
     const GET_DATA_QUERY = gql`
-        query getData($var1: ID!, $var2: String!) {
-          getData(var1: $var1, var2: $var2) {
-            attr1
-            attr2
-            attr3
-          }
+      query getData($var1: ID!, $var2: String!) {
+        getData(var1: $var1, var2: $var2) {
+          attr1
+          attr2
+          attr3
         }
-      `;
-    
+      }
+    `;
+
     const variables = {
       var1: 'some',
       var2: 'content',
@@ -340,14 +337,14 @@ describe('GraphApi test suite', () => {
       });
 
       // general respons handler mock
-      handleNetworkErrorMock = jest.spyOn(API, 'handleNetworkError')
-        .mockImplementation(() => ({}));
-      handleResponseMock = jest.spyOn(API, 'handleResponse')
-        .mockImplementation(() => ({}));
+      handleNetworkErrorMock = jest.spyOn(API, 'handleNetworkError').mockImplementation(() => ({}));
+      handleResponseMock = jest.spyOn(API, 'handleResponse').mockImplementation(() => ({}));
     });
 
     afterEach(() => {
-      graphApiQueryMock && graphApiQueryMock.mockClear();
+      if (graphApiQueryMock) {
+        graphApiQueryMock.mockClear();
+      }
     });
 
     afterAll(() => {
@@ -357,9 +354,8 @@ describe('GraphApi test suite', () => {
 
     it('should handle query', async (done) => {
       // test happy path
-      graphApiQueryMock = jest.spyOn(API.client, 'query')
-        .mockImplementationOnce(() => Promise.resolve(response));
-      
+      graphApiQueryMock = jest.spyOn(API.client, 'query').mockImplementationOnce(() => Promise.resolve(response));
+
       await API.query(GET_DATA_QUERY, variables);
       const call1 = graphApiQueryMock.mock.calls[0][0];
 
@@ -376,9 +372,8 @@ describe('GraphApi test suite', () => {
 
     it('should use empty variables object as default', async (done) => {
       // test happy path
-      graphApiQueryMock = jest.spyOn(API.client, 'query')
-        .mockImplementationOnce(() => Promise.resolve(response));
-      
+      graphApiQueryMock = jest.spyOn(API.client, 'query').mockImplementationOnce(() => Promise.resolve(response));
+
       await API.query(GET_DATA_QUERY);
       const call1 = graphApiQueryMock.mock.calls[0][0];
 
@@ -391,9 +386,8 @@ describe('GraphApi test suite', () => {
     it('should handle query with networkError', async (done) => {
       // check network error handling
       const error = new Error('test network error');
-      graphApiQueryMock = jest.spyOn(API.client, 'query')
-        .mockImplementationOnce(() => Promise.reject(error));
-      
+      graphApiQueryMock = jest.spyOn(API.client, 'query').mockImplementationOnce(() => Promise.reject(error));
+
       try {
         await API.query(GET_DATA_QUERY, variables);
       } catch (receivedError) {
@@ -407,17 +401,15 @@ describe('GraphApi test suite', () => {
 
   describe('GraphApi mutation test suite', () => {
     const SET_DATA_MUTATION = gql`
-        mutation setData($var1: ID!, $var2: String!) {
-          setData(input: {
-            var1: $var1, var2: $var2
-          }) {
-            attr1
-            attr2
-            attr3
-          }
+      mutation setData($var1: ID!, $var2: String!) {
+        setData(input: { var1: $var1, var2: $var2 }) {
+          attr1
+          attr2
+          attr3
         }
-      `;
-    
+      }
+    `;
+
     const variables = {
       var1: 'some',
       var2: 'content',
@@ -444,14 +436,14 @@ describe('GraphApi test suite', () => {
       });
 
       // general respons handler mock
-      handleNetworkErrorMock = jest.spyOn(API, 'handleNetworkError')
-        .mockImplementation(() => ({}));
-      handleResponseMock = jest.spyOn(API, 'handleResponse')
-        .mockImplementation(() => ({}));
+      handleNetworkErrorMock = jest.spyOn(API, 'handleNetworkError').mockImplementation(() => ({}));
+      handleResponseMock = jest.spyOn(API, 'handleResponse').mockImplementation(() => ({}));
     });
 
     afterEach(() => {
-      graphApiMutationMock && graphApiMutationMock.mockClear();
+      if (graphApiMutationMock) {
+        graphApiMutationMock.mockClear();
+      }
     });
 
     afterAll(() => {
@@ -461,9 +453,8 @@ describe('GraphApi test suite', () => {
 
     it('should handle mutation', async (done) => {
       // test happy path
-      graphApiMutationMock = jest.spyOn(API.client, 'mutate')
-        .mockImplementationOnce(() => Promise.resolve(response));
-      
+      graphApiMutationMock = jest.spyOn(API.client, 'mutate').mockImplementationOnce(() => Promise.resolve(response));
+
       await API.mutation(SET_DATA_MUTATION, variables);
       const call1 = graphApiMutationMock.mock.calls[0][0];
 
@@ -480,9 +471,8 @@ describe('GraphApi test suite', () => {
 
     it('should use empty variables object as default', async (done) => {
       // test happy path
-      graphApiMutationMock = jest.spyOn(API.client, 'mutate')
-        .mockImplementationOnce(() => Promise.resolve(response));
-      
+      graphApiMutationMock = jest.spyOn(API.client, 'mutate').mockImplementationOnce(() => Promise.resolve(response));
+
       await API.mutation(SET_DATA_MUTATION);
       const call1 = graphApiMutationMock.mock.calls[0][0];
 
@@ -495,9 +485,8 @@ describe('GraphApi test suite', () => {
     it('should handle mutation with networkError', async (done) => {
       // check network error handling
       const error = new Error('test network error');
-      graphApiMutationMock = jest.spyOn(API.client, 'mutate')
-        .mockImplementationOnce(() => Promise.reject(error));
-      
+      graphApiMutationMock = jest.spyOn(API.client, 'mutate').mockImplementationOnce(() => Promise.reject(error));
+
       try {
         await API.mutation(SET_DATA_MUTATION, variables);
       } catch (receivedError) {

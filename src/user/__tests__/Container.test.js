@@ -14,12 +14,7 @@ describe('auth register container test suite', () => {
       authMeta: {},
     });
 
-    expect(Object.keys(state)).toEqual([
-      'user',
-      'getUserInfoRequest',
-      'updateUserRequest',
-      'authMeta',
-    ]);
+    expect(Object.keys(state)).toEqual(['user', 'getUserInfoRequest', 'updateUserRequest', 'authMeta']);
   });
 
   it('should return redux actions', () => {

@@ -6,7 +6,11 @@ import ViewMessage, { StyledViewMessage, StyledViewMessageContent } from '../Vie
 
 // test styling
 it('ViewMessage should render correctly', () => {
-  const wrapper = shallow(<ViewMessage><p>Hello</p></ViewMessage>);
+  const wrapper = shallow(
+    <ViewMessage>
+      <p>Hello</p>
+    </ViewMessage>,
+  );
   expect(toJson(wrapper.dive())).toMatchSnapshot();
 });
 
@@ -21,16 +25,24 @@ it('ViewMessage content should be styled consistently', () => {
 });
 
 it('ViewMessage content should be visible', () => {
-  const wrapper = shallow(<ViewMessage show={true}><p>Hello</p></ViewMessage>);
+  const wrapper = shallow(
+    <ViewMessage show>
+      <p>Hello</p>
+    </ViewMessage>,
+  );
   expect(toJson(wrapper.dive())).toMatchSnapshot();
-})
+});
 
 // unit tests
 it('ViewMessage content should show/hide on prop change', () => {
-  const output = mount(<ViewMessage><p>Hello</p></ViewMessage>);
+  const output = mount(
+    <ViewMessage>
+      <p>Hello</p>
+    </ViewMessage>,
+  );
   expect(output).toBeTruthy();
   expect(output.props().show).toEqual(false);
-  
+
   // check for content
   let content = output.find(StyledViewMessageContent);
   expect(content).toBeTruthy();

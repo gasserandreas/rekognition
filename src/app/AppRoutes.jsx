@@ -18,29 +18,15 @@ import * as Paths from '../paths';
 
 const AppRoutes = ({ isAuthenticated }) => (
   <Switch>
-    <PrivateRoute
-      exact
-      path={Paths.HOME}
-      component={ImagesContainer}
-      isAuthenticated={isAuthenticated}
-    />
-    <PrivateRoute
-      exact
-      path={Paths.IMAGES}
-      component={ImagesContainer}
-      isAuthenticated={isAuthenticated}
-    />
+    <PrivateRoute exact path={Paths.HOME} component={ImagesContainer} isAuthenticated={isAuthenticated} />
+    <PrivateRoute exact path={Paths.IMAGES} component={ImagesContainer} isAuthenticated={isAuthenticated} />
     <PrivateRoute
       exact
       path={Paths.GET_IMAGES_DETAIL(Paths.ID)}
       component={ImagesDetailContainer}
       isAuthenticated={isAuthenticated}
     />
-    <PrivateRoute
-      exact path={Paths.USER}
-      component={UserContainer}
-      isAuthenticated={isAuthenticated}
-    />
+    <PrivateRoute exact path={Paths.USER} component={UserContainer} isAuthenticated={isAuthenticated} />
     <Route exact path={Paths.LOGIN} component={LoginContainer} />
     <Route exact path={Paths.REGISTER} component={RegisterContainer} />
     <Route exact path={Paths.PRIVACY} component={Privacy} />

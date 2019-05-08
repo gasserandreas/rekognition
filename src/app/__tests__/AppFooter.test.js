@@ -1,4 +1,3 @@
-/* global testUtils */
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
@@ -10,9 +9,11 @@ import * as Paths from '../../paths';
 const { AppFooter, isWithSidebar, isAlternativeColor } = __testables__;
 
 describe('AppFooter test suite', () => {
-  const getWrapper = (props = {}) => mount(<MemoryRouter>
-    <AppFooterWithRouter {...props} />
-  </MemoryRouter>);
+  const getWrapper = (props = {}) => mount(
+    <MemoryRouter>
+      <AppFooterWithRouter {...props} />
+    </MemoryRouter>,
+  );
 
   const getAppFooter = (props = {}) => {
     const wrapper = getWrapper(props);
@@ -28,7 +29,7 @@ describe('AppFooter test suite', () => {
   it('should return Footer component wrapped in router', () => {
     const footer = getAppFooter();
     const props = footer.props();
-    
+
     expect(props.location).toBeTruthy();
     expect(props.match).toBeTruthy();
     expect(props.history).toBeTruthy();

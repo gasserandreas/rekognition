@@ -59,11 +59,7 @@ StyledImageWrapper.defaultProps = {
 const StyledImageContainer = styled(Box)``;
 
 const getPositions = (meta, wrapperBounding) => {
-  const {
-    height: imageHeight,
-    width: imageWidth,
-    orientation,
-  } = meta;
+  const { height: imageHeight, width: imageWidth, orientation } = meta;
 
   // get wrapper positions
   const imageContainerPosition = {
@@ -75,11 +71,13 @@ const getPositions = (meta, wrapperBounding) => {
     bottom: wrapperBounding.bottom,
   };
 
-  let width, height, ratio;
+  let width;
+  let height;
+  let ratio;
 
   if (orientation === 'LANDSCAPE') {
     // simple case, use full wrapper width
-    width = imageContainerPosition.width;
+    width = imageContainerPosition.width; // eslint-disable-line prefer-destructuring
 
     // get height by sticking with the ratio
     ratio = imageWidth / width;
@@ -87,28 +85,28 @@ const getPositions = (meta, wrapperBounding) => {
 
     // check if image height fits into viewport by using max width
     if (height > imageContainerPosition.height) {
-      height = imageContainerPosition.height;
+      height = imageContainerPosition.height; // eslint-disable-line prefer-destructuring
       ratio = imageHeight / height;
       width = imageWidth / ratio;
     }
   } else {
     // portrait mode full height
-    height = imageContainerPosition.height;
+    height = imageContainerPosition.height; // eslint-disable-line prefer-destructuring
     ratio = imageHeight / height;
     width = imageWidth / ratio;
 
     // check if image width fits into viewport by using max height
     if (width > imageContainerPosition.width) {
       // scale image down to full width
-      width = imageContainerPosition.width;
+      width = imageContainerPosition.width; // eslint-disable-line prefer-destructuring
       ratio = imageWidth / width;
       height = imageHeight / ratio;
     }
   }
 
   // calculate top position (center of container)
-  const top = imageContainerPosition.height / 2 - (height / 2);
-  const left = imageContainerPosition.width / 2 -(width / 2);
+  const top = imageContainerPosition.height / 2 - height / 2;
+  const left = imageContainerPosition.width / 2 - width / 2;
 
   // define image position
   const imageWrapperPosition = {
@@ -124,37 +122,28 @@ const getPositions = (meta, wrapperBounding) => {
   };
 };
 
-const ImageContainer = ({
-  image: {
-    meta,
-    path,
-  },
-  selectedFace,
-  selectedLabel,
-}) => {
+const ImageContainer = ({ image: { meta, path }, selectedFace, selectedLabel }) => {
   const wrapperRef = useRef();
   const [state, setState] = useState({
     imageWrapperPosition: generateInitPos(),
     imageContainerPosition: generateInitPos(),
   });
 
-  const handleWrapperPosition = () => {
-    const wrapperBounding = wrapperRef.current.getBoundingClientRect();
+  useEffect(() => {
+    const handleWrapperPosition = () => {
+      const wrapperBounding = wrapperRef.current.getBoundingClientRect();
 
-    // (deep) equals check based on string
-    if (JSON.stringify(state.wrapperBounding)
-      !== JSON.stringify(wrapperBounding)) {
-
+      // (deep) equals check based on string
+      if (JSON.stringify(state.wrapperBounding) !== JSON.stringify(wrapperBounding)) {
         const { imageContainerPosition, imageWrapperPosition } = getPositions(meta, wrapperBounding);
 
         setState({
           imageContainerPosition,
           imageWrapperPosition,
         });
-    }
-  }
+      }
+    };
 
-  useEffect(() => {
     // add event listener
     window.addEventListener('resize', handleWrapperPosition);
 
@@ -163,51 +152,41 @@ const ImageContainer = ({
 
     return () => {
       window.removeEventListener('resize', handleWrapperPosition);
-    }
-  }, [path]);
-
+    };
+  }, [meta, path, state.wrapperBounding]);
 
   const { imageWrapperPosition } = state;
 
   return (
-    <StyledImageContainer
-        ref={wrapperRef}
-        style={{ justifyContent: 'center' }}
-        fill
-      >
-        <StyledImageWrapper pos={imageWrapperPosition}>
-          {selectedFace && <StyledSelector id="jestSelectedFace" pos={selectedFace.position} />}
-          {selectedLabel && (
-            <span id="jestSelectedLabel">
-              {selectedLabel.instances.map((pos, i) => (
-                <StyledSelector
-                  key={`label_selector_${i}`}
-                  pos={pos}
-                />
-              ))}
-            </span>
-          )}
-          <StyledAsyncImage
-            src={getImageSrc(path)}
-            fit="contain"
-          />
-        </StyledImageWrapper>
-      </StyledImageContainer>
+    <StyledImageContainer ref={wrapperRef} style={{ justifyContent: 'center' }} fill>
+      <StyledImageWrapper pos={imageWrapperPosition}>
+        {selectedFace && <StyledSelector id="jestSelectedFace" pos={selectedFace.position} />}
+        {selectedLabel && (
+          <span id="jestSelectedLabel">
+            {selectedLabel.instances.map((pos, i) => (
+              <StyledSelector key={`label_selector_${i}`} pos={pos} /> // eslint-disable-line react/no-array-index-key
+            ))}
+          </span>
+        )}
+        <StyledAsyncImage src={getImageSrc(path)} fit="contain" />
+      </StyledImageWrapper>
+    </StyledImageContainer>
   );
 };
 
-Image.propTypes = {
+ImageContainer.propTypes = {
   image: PropTypes.shape({
-    meta: PropTypes.shape({
-      height: PropTypes.number.isRequired,
-      width: PropTypes.number.isRequired,
-      orientation: PropTypes.string.isRequired,
-    }).isRequired,
+    meta: PropTypes.shape({}),
     path: PropTypes.string.isRequired,
-  }),
+  }).isRequired,
   selectedFace: PropTypes.shape({}),
   selectedLabel: PropTypes.shape({}),
-}
+};
+
+ImageContainer.defaultProps = {
+  selectedFace: null,
+  selectedLabel: null,
+};
 
 export const __testables__ = {
   StyledSelector,

@@ -23,6 +23,5 @@ export const labelsByImageIdSelector = (state, imageId) => {
 
   const ids = idsByImageId[imageId] || [];
 
-  return ids.map(id => byId[id])
-    .filter(label => label !== undefined);
-}
+  return ids.map(id => byId[id]).filter(label => label !== undefined);
+};

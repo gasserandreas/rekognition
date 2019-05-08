@@ -15,7 +15,7 @@ import View from '../../ui/View';
 import AsyncContainer from '../../ui/async/AsyncContainer';
 
 import { getImageCreationDateTime, getFormattedFileSize } from '../../util/util';
-import { HOCRequestPropTypes } from '../../util/PropTypes';
+import { HOCRequestPropTypes, HistoryPropType } from '../../util/PropTypes';
 
 import * as Paths from '../../paths';
 import { Colors, MediaSize, Sizes } from '../../styles';
@@ -86,7 +86,7 @@ const StyledDataBox = styled(Box)`
 
   @media (min-width: ${MediaSize.Tablet}) {
     top: ${Sizes.Header.height};
-    box-shadow: 0px 2px 4px rgba(0,0,0,0.20);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
     z-index: 51;
 
     width: ${Sizes.LeftBar.width.Tablet};
@@ -110,7 +110,7 @@ const StyledScrollableData = styled.div`
   height: 100%;
   width: 100%;
   overflow-y: scroll;
-  padding: .25rem 6px .25rem 0;
+  padding: 0.25rem 6px 0.25rem 0;
   margin: 0;
 `;
 
@@ -122,7 +122,9 @@ const StyledView = styled(View)`
 `;
 
 const convertMetaToAttributes = (meta) => {
-  const { density, height, width, type, size } = meta;
+  const {
+    density, height, width, type, size,
+  } = meta;
   return [
     {
       name: 'Type',
@@ -144,14 +146,7 @@ const convertMetaToAttributes = (meta) => {
 };
 
 const DetailView = ({
-  history,
-  image,
-  labels,
-  selectedLabel,
-  faces,
-  selectedFace,
-  getImage,
-  getImageRequest,
+  history, image, labels, selectedLabel, faces, selectedFace, getImage, getImageRequest,
 }) => {
   const { id: imageId, created, meta } = image;
   const { loading } = getImageRequest;
@@ -164,9 +159,14 @@ const DetailView = ({
   }, [imageId, faces.length, labels.length, getImage]);
 
   // generate meta render array
-  const metaValues = useMemo(() => {
-    return convertMetaToAttributes(meta);
-  }, [meta]);
+  const metaValues = useMemo(() => convertMetaToAttributes(meta), [meta]);
+
+  const setBrowserParams = (params) => {
+    const { key, value } = params;
+
+    const path = `${Paths.GET_IMAGES_DETAIL(imageId)}?${key}=${value}`;
+    history.push(path);
+  };
 
   // url handlers
   const handleFaceClick = (face) => {
@@ -179,52 +179,43 @@ const DetailView = ({
     setBrowserParams({ key: 'label', value: id });
   };
 
-  const setBrowserParams = (params) => {
-    const { key, value } = params;
-
-    const path = `${Paths.GET_IMAGES_DETAIL(imageId)}?${key}=${value}`;
-    history.push(path);
-  };
-
   return (
     <StyledView>
       <AddImageButton afterOnClick={() => history.push(Paths.HOME)} />
       <StyledImageBox fill>
         <StyledImageBoxContainer>
-          <Image
-            image={image}
-            selectedLabel={selectedLabel}
-            selectedFace={selectedFace}
-          />
+          <Image image={image} selectedLabel={selectedLabel} selectedFace={selectedFace} />
         </StyledImageBoxContainer>
       </StyledImageBox>
       <StyledDataBox pad={{ vertical: 'none', horizontal: 'small' }}>
         <StyledBackButton onClick={() => history.push(Paths.HOME)} />
         <StyledScrollableData>
-        <StyledHeading level="4" style={{ marginTop: '0rem'}}>Image Information</StyledHeading>
+          <StyledHeading level="4" style={{ marginTop: '0rem' }}>
+            Image Information
+          </StyledHeading>
           <Box id="jestImageAttributes">
             <Attribute attribute={{ name: 'Uploaded', value: getImageCreationDateTime(created) }} />
             {metaValues.map(({ name, value }) => (
               <Attribute key={`meta_attribute_${name}`} attribute={{ name, value }} />
             ))}
           </Box>
-          <StyledHeading level="4">Labels ({labels.length})</StyledHeading>
+          <StyledHeading level="4">
+Labels (
+            {labels.length}
+)
+          </StyledHeading>
           <AsyncContainer id="jestLabelsAsyncContainer" loading={loading}>
-            <Labels
-              labels={labels}
-              selectedLabel={selectedLabel}
-              onLabelClick={(label) => handleLabelClick(label)}
-            />
+            <Labels labels={labels} selectedLabel={selectedLabel} onLabelClick={label => handleLabelClick(label)} />
           </AsyncContainer>
-          { faces.length > 0 && (
+          {faces.length > 0 && (
             <div id="jestFacesContainer">
-              <StyledHeading level="4">Faces ({faces.length})</StyledHeading>
+              <StyledHeading level="4">
+Faces (
+                {faces.length}
+)
+              </StyledHeading>
               <AsyncContainer id="jestFacesAsyncContainer" loading={loading}>
-                <Faces
-                  faces={faces}
-                  selectedFace={selectedFace}
-                  onFaceClick={(face) => handleFaceClick(face)}
-                />
+                <Faces faces={faces} selectedFace={selectedFace} onFaceClick={face => handleFaceClick(face)} />
               </AsyncContainer>
             </div>
           )}
@@ -235,6 +226,7 @@ const DetailView = ({
 };
 
 DetailView.propTypes = {
+  history: HistoryPropType.isRequired,
   image: PropTypes.shape({
     id: PropTypes.string.isRequired,
     path: PropTypes.string.isRequired,
@@ -247,12 +239,12 @@ DetailView.propTypes = {
   selectedFace: PropTypes.shape({}),
   getImageRequest: HOCRequestPropTypes.isRequired,
   getImage: PropTypes.func.isRequired,
-}
+};
 
 DetailView.defaultProps = {
   selectedFace: null,
   selectedLabel: null,
-}
+};
 
 export const __testables__ = {
   StyledBackButton,
@@ -266,4 +258,3 @@ export const __testables__ = {
 };
 
 export default DetailView;
-

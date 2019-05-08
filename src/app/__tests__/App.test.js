@@ -1,4 +1,3 @@
-/* global testUtils */
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { Grommet } from 'grommet';
@@ -14,26 +13,26 @@ import PrivateRoute from '../PrivateRoute';
 import { Theme } from '../../styles';
 
 describe('App test suite', () => {
-  const initialState = {
-    auth: {
-      username: 'Test',
-      meta: {
-        loggedIn: true,
-      },
-    },
-    application: {
-      message: {
-        show: false,
-        text: '',
-        title: '',
-        showRefresh: false,
-      },
-    },
-    images: {
-      byId: {},
-      ids: [],
-    },
-  };
+  // const initialState = {
+  //   auth: {
+  //     username: 'Test',
+  //     meta: {
+  //       loggedIn: true,
+  //     },
+  //   },
+  //   application: {
+  //     message: {
+  //       show: false,
+  //       text: '',
+  //       title: '',
+  //       showRefresh: false,
+  //     },
+  //   },
+  //   images: {
+  //     byId: {},
+  //     ids: [],
+  //   },
+  // };
 
   const mockedData = {
     isAuthenticated: true,
@@ -47,14 +46,13 @@ describe('App test suite', () => {
   };
 
   const getApp = (props, initialPath = '/random') => {
-    const router = mount(<MemoryRouter initialEntries={[ initialPath ]}>
-      <App
-        loadApplication={jest.fn()}
-        {...props}
-      />
-    </MemoryRouter>)
+    const router = mount(
+      <MemoryRouter initialEntries={[initialPath]}>
+        <App loadApplication={jest.fn()} {...props} />
+      </MemoryRouter>,
+    );
     return router;
-  }
+  };
 
   it('should render', () => {
     const wrapper = getApp(mockedData);

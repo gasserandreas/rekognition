@@ -15,15 +15,18 @@ const select = state => ({
   authMeta: authMetaSelector(state),
 });
 
-const mapDispatchToProps = ({
+const mapDispatchToProps = {
   logOutUser,
   updateUser,
   getUserInfo,
-});
+};
 
 export const __testables__ = {
   select,
   mapDispatchToProps,
 };
 
-export default connect(select, mapDispatchToProps)(UserView);
+export default connect(
+  select,
+  mapDispatchToProps,
+)(UserView);

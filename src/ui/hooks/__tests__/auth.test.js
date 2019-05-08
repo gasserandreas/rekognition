@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
+import { HistoryPropType } from '../../../util/PropTypes';
 import * as authHooks from '../auth';
 
 describe('auth hooks test suite', () => {
-  
   const path = 'my/custom/path';
   const initialProps = {
     isAuthenticated: true,
@@ -12,20 +13,25 @@ describe('auth hooks test suite', () => {
       push: jest.fn(),
     },
   };
-  const clearTimeoutSpyOn = jest.spyOn(window, 'clearTimeout')
+  const clearTimeoutSpyOn = jest.spyOn(window, 'clearTimeout');
 
   beforeEach(() => {
     initialProps.history.push.mockClear();
     clearTimeoutSpyOn.mockClear();
   });
 
-
   const hook = authHooks.createUseIsAuthenticatedHistoryPush(path);
+
   const HookTester = ({ isAuthenticated, history }) => {
     hook(isAuthenticated, history);
 
     return <div>empty div</div>;
-  }
+  };
+
+  HookTester.propTypes = {
+    isAuthenticated: PropTypes.bool.isRequired,
+    history: HistoryPropType.isRequired,
+  };
 
   it('should call history push if authenticated ', (done) => {
     // should not be called
@@ -65,6 +71,6 @@ describe('auth hooks test suite', () => {
   it('should clearTimeout after hook', () => {
     // not able to test right now, waiting for hook support in enzyme
     // link: https://github.com/airbnb/enzyme/issues/2011
-    console.log('createUseIsAuthenticatedHistoryPush return value not tesable due missing hook support in enzyme');
+    console.log('createUseIsAuthenticatedHistoryPush return value not tesable due missing hook support in enzyme'); // eslint-disable-line no-console, max-len
   });
 });

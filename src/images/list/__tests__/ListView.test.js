@@ -1,8 +1,7 @@
 /* globals testUtils */
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
-import toJson from 'enzyme-to-json';
 import 'jest-styled-components';
 
 import ListView from '../ListView';
@@ -14,7 +13,6 @@ import * as Paths from '../../../paths';
 const { createMockStore } = testUtils;
 
 describe('ListView test suite', () => {
-  
   const initialProps = {
     history: {
       push: jest.fn(),
@@ -39,11 +37,8 @@ describe('ListView test suite', () => {
     const store = mockStore();
     const provider = mount(
       <Provider store={store}>
-        <ListView
-          {...initialProps}
-          {...props}
-        />
-      </Provider>
+        <ListView {...initialProps} {...props} />
+      </Provider>,
     );
 
     const wrapper = provider.find(ListView);

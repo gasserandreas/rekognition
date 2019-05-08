@@ -1,7 +1,6 @@
-/* global testUtils */
 import * as selectors from '../selectors';
 
-import * as reduxApplication from '../index'
+import * as reduxApplication from '../index';
 import messageReducer from '../message';
 
 const initialState = {
@@ -13,12 +12,10 @@ const initialState = {
 
 describe('application selector test suite', () => {
   it('should return applicationState value', () => {
-    expect(selectors.applicationStateSelector(initialState))
-      .toEqual(initialState.application);
-  })
+    expect(selectors.applicationStateSelector(initialState)).toEqual(initialState.application);
+  });
 
   it('should return applicationStatus value', () => {
-    expect(selectors.applicationStatusSelector(initialState))
-      .toEqual(initialState.application.status);
+    expect(selectors.applicationStatusSelector(initialState)).toEqual(initialState.application.status);
   });
 });

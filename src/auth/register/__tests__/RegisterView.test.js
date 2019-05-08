@@ -12,16 +12,16 @@ import { AuthHeader, AuthFooter } from '../../AuthComponents';
 describe('RegisterView test suite', () => {
   let initialProps;
 
-  const getRegisterView = (props) => mount(
+  const getRegisterView = props => mount(
     <MemoryRouter>
       <RegisterView {...props} />
-    </MemoryRouter>
+    </MemoryRouter>,
   );
 
   beforeEach(() => {
-    initialProps  = {
+    initialProps = {
       isAuthenticated: false,
-      histroy: {
+      history: {
         push: jest.fn(),
       },
       signupRequest: {

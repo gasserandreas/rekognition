@@ -5,11 +5,7 @@ import styled from 'styled-components';
 import * as Yup from 'yup';
 import { withFormik } from 'formik';
 
-import {
-  Field,
-  TextInput,
-  FieldRow,
-} from '../ui/form/Form';
+import { Field, TextInput, FieldRow } from '../ui/form/Form';
 import Button from '../ui/form/Button';
 import Message from '../ui/form/Message';
 
@@ -31,17 +27,17 @@ const mapPropsToValues = (obj) => {
   const { user } = obj;
   return {
     ...user,
-  }
+  };
 };
 
-const handleSubmit = (payload, { props }, b, c) => {
+const onHandleSubmit = (payload, { props }) => {
   props.onSubmit(payload);
 };
 
 const formikConfig = {
   validationSchema,
   mapPropsToValues,
-  handleSubmit,
+  handleSubmit: onHandleSubmit,
   displayName: 'UpdateUserForm',
 };
 
@@ -87,12 +83,7 @@ const UpdateUserForm = ({
             onBlur={handleBlur}
           />
         </Field>
-        <Field
-          id="lastname"
-          label="Lastname"
-          error={touched.lastname && errors.lastname}
-          inline
-        >
+        <Field id="lastname" label="Lastname" error={touched.lastname && errors.lastname} inline>
           <TextInput
             id="lastname"
             type="text"
@@ -112,17 +103,38 @@ const UpdateUserForm = ({
           onClick={handleOnReset}
           disabled={!dirty || submitting}
           testId="jestResetButton"
-        >Reset</Button>
+        >
+          Reset
+        </Button>
         <Button
           type="submit"
           disabled={submitting}
           buttonStyle="primary"
           style={{ marginLeft: '1rem' }}
           testId="jestSubmitButton"
-        >Update profile</Button>
+        >
+          Update profile
+        </Button>
       </ButtonGroup>
     </StyledUpdateUserForm>
   );
+};
+
+UpdateUserForm.propTypes = {
+  values: PropTypes.shape({}).isRequired,
+  touched: PropTypes.shape({}).isRequired,
+  errors: PropTypes.shape({}).isRequired,
+  dirty: PropTypes.bool.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleBlur: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  handleReset: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
+  error: PropTypes.string,
+};
+
+UpdateUserForm.defaultProps = {
+  error: null,
 };
 
 const EnhancedUpdateUserForm = formikEnhancer(UpdateUserForm);
@@ -132,7 +144,6 @@ EnhancedUpdateUserForm.propTypes = {
     firstname: PropTypes.string,
     lastname: PropTypes.string,
   }),
-  validEmail: PropTypes.bool,
 };
 
 EnhancedUpdateUserForm.defaultProps = {
@@ -147,7 +158,7 @@ export const __testables__ = {
   formikEnhancer,
   validationSchema,
   mapPropsToValues,
-  handleSubmit,
+  handleSubmit: onHandleSubmit,
   UpdateUserForm,
 };
 

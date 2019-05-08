@@ -11,7 +11,7 @@ const hoverSelectedStyles = `
 `;
 
 const handleLabelHover = ({ isClickable, selected }) => {
-  if(selected) {
+  if (selected) {
     return hoverSelectedStyles;
   }
 
@@ -50,10 +50,16 @@ const Label = (props) => {
   const { name, confidence } = label;
 
   return (
-    <StyledLabel
-      {...rest}
-    >
-      {name} { confidence && <span id="jestConfidence">({confidence.toFixed(2)})</span>}
+    <StyledLabel {...rest}>
+      {name}
+      {' '}
+      {confidence && (
+      <span id="jestConfidence">
+(
+        {confidence.toFixed(2)}
+)
+      </span>
+      )}
     </StyledLabel>
   );
 };
@@ -64,12 +70,14 @@ Label.propTypes = {
     name: PropTypes.string.isRequired,
     confidence: PropTypes.number,
     parents: PropTypes.arrayOf(PropTypes.string),
-    instances: PropTypes.arrayOf(PropTypes.shape({
-      height: PropTypes.number.isRequired,
-      width: PropTypes.number.isRequired,
-      left: PropTypes.number.isRequired,
-      top: PropTypes.number.isRequired,
-    })),
+    instances: PropTypes.arrayOf(
+      PropTypes.shape({
+        height: PropTypes.number.isRequired,
+        width: PropTypes.number.isRequired,
+        left: PropTypes.number.isRequired,
+        top: PropTypes.number.isRequired,
+      }),
+    ),
   }).isRequired,
   onClick: PropTypes.func,
   isClickable: PropTypes.bool,

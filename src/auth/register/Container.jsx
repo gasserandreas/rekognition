@@ -17,15 +17,18 @@ const select = state => ({
   checkEmailRequest: checkEmailRequestSelector(state),
 });
 
-const mapDispatchToProps = ({
+const mapDispatchToProps = {
   signupUser,
   checkEmail,
   invalidateEmail,
-});
+};
 
 export const __testables__ = {
   select,
   mapDispatchToProps,
 };
 
-export default connect(select, mapDispatchToProps)(RegisterView);
+export default connect(
+  select,
+  mapDispatchToProps,
+)(RegisterView);

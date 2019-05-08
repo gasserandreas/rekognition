@@ -5,11 +5,7 @@ import styled from 'styled-components';
 import * as Yup from 'yup';
 import { withFormik } from 'formik';
 
-import {
-  Field,
-  TextInput,
-  CheckBox,
-} from '../../ui/form/Form';
+import { Field, TextInput, CheckBox } from '../../ui/form/Form';
 import Button from '../../ui/form/Button';
 import Message from '../../ui/form/Message';
 
@@ -17,8 +13,7 @@ import ButtonGroup from '../../ui/form/ButtonGroup';
 
 // formik setups
 const validationSchema = Yup.object().shape({
-  password: Yup.string()
-    .required('Password is required!'),
+  password: Yup.string().required('Password is required!'),
   firstname: Yup.string()
     .min(2)
     .max(30)
@@ -33,18 +28,17 @@ const mapPropsToValues = (obj) => {
   const { user } = obj;
   return {
     ...user,
-  }
+  };
 };
 
-const handleSubmit = (payload, { props }, b, c) => {
+const onHandleSubmit = (payload, { props }) => {
   props.onSubmit(payload);
 };
-
 
 const formikConfig = {
   validationSchema,
   mapPropsToValues,
-  handleSubmit,
+  handleSubmit: onHandleSubmit,
   displayName: 'RegisterForm',
 };
 
@@ -75,24 +69,10 @@ const RegisterForm = ({
 
   return (
     <StyledRegisterForm onSubmit={handleSubmit}>
-      <Field
-        id="email"
-        label="Email"
-        disabled
-      >
-        <TextInput
-          id="email"
-          type="email"
-          placeholder="Enter your email"
-          value={values.email}
-          disabled
-        />
+      <Field id="email" label="Email" disabled>
+        <TextInput id="email" type="email" placeholder="Enter your email" value={values.email} disabled />
       </Field>
-      <Field
-        id="password"
-        label="Password"
-        error={touched.password && errors.password}
-      >
+      <Field id="password" label="Password" error={touched.password && errors.password}>
         <TextInput
           id="password"
           type="password"
@@ -103,11 +83,7 @@ const RegisterForm = ({
           onBlur={handleBlur}
         />
       </Field>
-      <Field
-        id="firstname"
-        label="Firstname"
-        error={touched.firstname && errors.firstname}
-      >
+      <Field id="firstname" label="Firstname" error={touched.firstname && errors.firstname}>
         <TextInput
           id="firstname"
           type="text"
@@ -118,11 +94,7 @@ const RegisterForm = ({
           onBlur={handleBlur}
         />
       </Field>
-      <Field
-        id="lastname"
-        label="Lastname"
-        error={touched.lastname && errors.lastname}
-      >
+      <Field id="lastname" label="Lastname" error={touched.lastname && errors.lastname}>
         <TextInput
           id="lastname"
           type="text"
@@ -133,11 +105,7 @@ const RegisterForm = ({
           onBlur={handleBlur}
         />
       </Field>
-      <Field
-        id="remember"
-        label="Remember me"
-        error={touched.remember && errors.remember}
-      >
+      <Field id="remember" label="Remember me" error={touched.remember && errors.remember}>
         <CheckBox
           id="remember"
           name="remember"
@@ -150,13 +118,9 @@ const RegisterForm = ({
       </Field>
       {error !== null && <Message appearance="error">{error}</Message>}
       <ButtonGroup>
-        <Button
-          type="button"
-          buttonStyle="link"
-          onClick={handleOnReset}
-          disabled={submitting}
-          testId="jestResetButton"
-        >Go back</Button>
+        <Button type="button" buttonStyle="link" onClick={handleOnReset} disabled={submitting} testId="jestResetButton">
+          Go back
+        </Button>
         <Button
           type="submit"
           disabled={submitting}
@@ -164,10 +128,29 @@ const RegisterForm = ({
           style={{ marginLeft: '1rem' }}
           loading={submitting}
           testId="jestSubmitButton"
-        >Signup</Button>
+        >
+          Signup
+        </Button>
       </ButtonGroup>
     </StyledRegisterForm>
   );
+};
+
+RegisterForm.propTypes = {
+  error: PropTypes.string,
+  values: PropTypes.shape({}).isRequired,
+  touched: PropTypes.shape({}).isRequired,
+  errors: PropTypes.shape({}).isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleBlur: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  handleReset: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
+};
+
+RegisterForm.defaultProps = {
+  error: '',
 };
 
 const EnhancedRegisterForm = formikEnhancer(RegisterForm);
@@ -193,8 +176,6 @@ EnhancedRegisterForm.defaultProps = {
     password: '',
     remember: false,
   },
-  validEmail: undefined,
-  error: '',
 };
 
 export const __testables__ = {
@@ -202,7 +183,7 @@ export const __testables__ = {
   formikEnhancer,
   validationSchema,
   mapPropsToValues,
-  handleSubmit,
+  handleSubmit: onHandleSubmit,
   RegisterForm,
 };
 

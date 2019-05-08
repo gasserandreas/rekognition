@@ -1,4 +1,5 @@
-import 'react-app-polyfill/ie9';
+/* eslint-disable react/jsx-filename-extension */
+import 'react-app-polyfill/ie9'; // eslint-disable-line import/no-extraneous-dependencies
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
@@ -13,10 +14,7 @@ import * as serviceWorker from './serviceWorker';
 import configureStore from './redux/configureStore';
 
 // create store object
-const {
-  store,
-  persistor,
-} = configureStore();
+const { store, persistor } = configureStore();
 
 // persistor.purge();
 
@@ -29,7 +27,7 @@ class Index extends Component { // eslint-disable-line react/prefer-stateless-fu
             <AppContainer />
           </BrowserRouter>
         </PersistGate>
-      </Provider>    
+      </Provider>
     );
   }
 }

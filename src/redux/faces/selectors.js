@@ -23,6 +23,5 @@ export const facesByImageId = (state, imageId) => {
 
   const ids = idsByImageId[imageId] || [];
 
-  return ids.map(id => byId[id])
-    .filter(face => face !== undefined);
-}
+  return ids.map(id => byId[id]).filter(face => face !== undefined);
+};

@@ -3,12 +3,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import {
-  Box,
-  Heading,
-} from 'grommet';
+import { Box, Heading } from 'grommet';
 
-import PreviousButton from '../ui/PreviousButton';
+import PreviousButton from './PreviousButton';
 import { Colors, MediaSize, Sizes } from '../styles';
 import * as Paths from '../paths';
 
@@ -31,7 +28,7 @@ const StyledUserProfile = styled.div`
   text-transform: capitalize;
 `;
 
-const UserProfile = (props) => (
+const UserProfile = props => (
   <StyledUserProfile>
     <Link to={Paths.USER}>
       <span className="username">{props.username}</span>
@@ -39,8 +36,17 @@ const UserProfile = (props) => (
   </StyledUserProfile>
 );
 
+UserProfile.propTypes = {
+  username: PropTypes.string,
+};
+
+UserProfile.defaultProps = {
+  username: '',
+};
+
 const StyledHeader = styled(Box)`
-  ${(props) => props.isAuthenticated ? `
+  ${props => (props.isAuthenticated
+    ? `
       color: ${Colors.ColorsPalette.Text};
       background-color: ${Colors.ColorsPalette.White};
       border-bottom: 1px solid #c9c9c9;
@@ -51,7 +57,8 @@ const StyledHeader = styled(Box)`
           color: ${Colors.ColorsPalette.TextFaded};
         }
       }
-    ` : `
+    `
+    : `
       background-color: ${Colors.ColorsPalette.Background};
       color: ${Colors.ColorsPalette.White};
 
@@ -61,8 +68,7 @@ const StyledHeader = styled(Box)`
           color: ${Colors.Neutrals.LightDark};
         }
       }
-    `
-  }
+    `)}
   height: ${Sizes.Header.height};
   z-index: 100;
   position: fixed;
@@ -80,10 +86,7 @@ const StyledHeader = styled(Box)`
  */
 const Header = (props) => {
   const {
-    isAuthenticated,
-    username,
-    showPreviousButton,
-    onGoToPrevious,
+    isAuthenticated, username, showPreviousButton, onGoToPrevious,
   } = props;
 
   const previousButtonOpacity = showPreviousButton ? 1 : 0;
@@ -92,23 +95,18 @@ const Header = (props) => {
     <StyledHeader
       tag="header"
       direction="row"
-      align='center'
-      justify='between'
+      align="center"
+      justify="between"
       isAuthenticated={isAuthenticated}
-      pad={{ horizontal: "large", vertical: "none" }}
+      pad={{ horizontal: 'large', vertical: 'none' }}
     >
-      {isAuthenticated && (
-        <StyledPreviousButton
-          onClick={onGoToPrevious}
-          opacity={previousButtonOpacity}
-        />
-      )}
+      {isAuthenticated && <StyledPreviousButton onClick={onGoToPrevious} opacity={previousButtonOpacity} />}
       <Link to={Paths.HOME}>
-        <StyledHeading  level={4}>AWS Rekognition</StyledHeading>
+        <StyledHeading level={4}>AWS Rekognition</StyledHeading>
       </Link>
       {isAuthenticated && <UserProfile username={username} />}
     </StyledHeader>
-  )
+  );
 };
 
 Header.propTypes = {
@@ -116,7 +114,7 @@ Header.propTypes = {
   username: PropTypes.string,
   showPreviousButton: PropTypes.bool,
   onGoToPrevious: PropTypes.func,
-}
+};
 
 Header.defaultProps = {
   /** Provide username */
@@ -125,7 +123,7 @@ Header.defaultProps = {
   showPreviousButton: false,
   /** Provide go previous callback */
   onGoToPrevious: () => ({}),
-}
+};
 
 export const __testables__ = {
   StyledUserProfile,

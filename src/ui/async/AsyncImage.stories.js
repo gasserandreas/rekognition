@@ -9,12 +9,7 @@ import AsyncImage from './AsyncImage';
 import { baseName, sharedKnobs } from './async.stories';
 
 storiesOf(`${baseName}/AsyncImage`, module)
-  .add('default', () => (
-    <AsyncImage
-      src={sharedKnobs.getImage()[0]}
-      onLoad={action('onLoad')}
-    />
-  ))
+  .add('default', () => <AsyncImage src={sharedKnobs.getImage()[0]} onLoad={action('onLoad')} />)
   .add('with never hide img enabled', () => (
     <AsyncImage
       src={sharedKnobs.getImage()[0]}

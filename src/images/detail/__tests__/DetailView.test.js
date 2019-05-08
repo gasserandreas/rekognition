@@ -34,9 +34,7 @@ const {
 
 const { createMockStore } = testUtils;
 
-
 describe('DetailView test suite', () => {
-  
   const initialProps = {
     history: {
       push: jest.fn(),
@@ -65,11 +63,8 @@ describe('DetailView test suite', () => {
     const store = mockStore();
     const provider = mount(
       <Provider store={store}>
-        <DetailView
-          {...initialProps}
-          {...props}
-        />
-      </Provider>
+        <DetailView {...initialProps} {...props} />
+      </Provider>,
     );
 
     const wrapper = provider.find(DetailView);
@@ -117,7 +112,7 @@ describe('DetailView test suite', () => {
     const imageAttributesWrapper = wrapper.find('#jestImageAttributes');
     expect(imageAttributesWrapper.exists()).toBeTruthy();
 
-    const metaAttributes = convertMetaToAttributes(initialProps.image.meta)
+    const metaAttributes = convertMetaToAttributes(initialProps.image.meta);
 
     const attributes = imageAttributesWrapper.find(Attribute);
     expect(attributes.length).toEqual(metaAttributes.length + 1);
@@ -125,7 +120,7 @@ describe('DetailView test suite', () => {
     const attributeNames = ['Uploaded', 'Type', 'Size', 'Dimension', 'Density'];
     attributes.forEach((attribute) => {
       expect(attributeNames.includes(attribute.props().attribute.name)).toBeTruthy();
-    })
+    });
   });
 
   it('should render labels if not loading', () => {
@@ -244,13 +239,16 @@ describe('DetailView test suite', () => {
       {
         name: 'Type',
         value: 'jpeg',
-      }, {
+      },
+      {
         name: 'Size',
         value: '2.26 MB',
-      }, {
+      },
+      {
         name: 'Dimension',
         value: '4813px x 3209px',
-      }, {
+      },
+      {
         name: 'Density',
         value: '72 DPI',
       },

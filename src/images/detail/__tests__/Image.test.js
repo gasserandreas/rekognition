@@ -6,17 +6,13 @@ import 'jest-styled-components';
 import Image, { __testables__ } from '../Image';
 
 const {
-  StyledSelector,
-  StyledAsyncImage,
-  StyledImageWrapper,
-  generateInitPos,
-  getPositions,
+  StyledSelector, StyledAsyncImage, StyledImageWrapper, generateInitPos, getPositions,
 } = __testables__;
 
- /**
-     * Can't test handleResetForm hooks with Enzyme.
-     * Waiting for Hooks support in Enzyme
-     */
+/**
+ * Can't test handleResetForm hooks with Enzyme.
+ * Waiting for Hooks support in Enzyme
+ */
 describe('Image test suite', () => {
   const mockedImage = {
     meta: {
@@ -36,31 +32,28 @@ describe('Image test suite', () => {
         left: 2,
         width: 3,
         height: 4,
-      }
+      },
     },
     selectedLabel: {
       id: 'a5dd0b74-3e17-4835-840b-031d658dba09',
-      instances: [{
-        top: 1,
-        left: 2,
-        width: 3,
-        height: 4,
-      },
-      {
-        top: 11,
-        left: 22,
-        width: 33,
-        height: 44,
-      }],
+      instances: [
+        {
+          top: 1,
+          left: 2,
+          width: 3,
+          height: 4,
+        },
+        {
+          top: 11,
+          left: 22,
+          width: 33,
+          height: 44,
+        },
+      ],
     },
   };
 
-  const getImage = (props) => mount(
-    <Image 
-      {...initialProps}
-      {...props}
-    />
-  );
+  const getImage = props => mount(<Image {...initialProps} {...props} />);
 
   it('should render', () => {
     const wrapper = getImage();
@@ -74,10 +67,8 @@ describe('Image test suite', () => {
     const wrapper = getImage();
     expect(wrapper.exists()).toBeTruthy();
 
-    const labelInstances = wrapper
-      .find('#jestSelectedLabel')
-      .find(StyledSelector);
-    
+    const labelInstances = wrapper.find('#jestSelectedLabel').find(StyledSelector);
+
     expect(labelInstances.length).toEqual(initialProps.selectedLabel.instances.length);
 
     labelInstances.forEach((instance, i) => {
@@ -138,7 +129,7 @@ describe('Image test suite', () => {
         width: 1200,
         orientation,
       };
-      
+
       const mockedImageContainerPosition = {
         x: 350,
         y: 75,
@@ -150,17 +141,38 @@ describe('Image test suite', () => {
 
       it('should handle to big height', () => {
         const { imageContainerPosition, imageWrapperPosition } = getPositions(mockedMeta, mockedImageContainerPosition);
-        expect(imageContainerPosition).toEqual({ x: 350, y: 75, width: 600, height: 800, top: 75, bottom: 800 });
-        expect(imageWrapperPosition).toEqual({ top: 175, left: 0, width: 600, height: 450 });
+        expect(imageContainerPosition).toEqual({
+          x: 350,
+          y: 75,
+          width: 600,
+          height: 800,
+          top: 75,
+          bottom: 800,
+        });
+        expect(imageWrapperPosition).toEqual({
+          top: 175, left: 0, width: 600, height: 450,
+        });
       });
 
       it('should handle default', () => {
-        const { imageContainerPosition, imageWrapperPosition } = getPositions({
-          ...mockedMeta,
-          height: 400,
-        }, mockedImageContainerPosition);
-        expect(imageContainerPosition).toEqual({ x: 350, y: 75, width: 600, height: 800, top: 75, bottom: 800 });
-        expect(imageWrapperPosition).toEqual({ top: 300, left: 0, width: 600, height: 200 });
+        const { imageContainerPosition, imageWrapperPosition } = getPositions(
+          {
+            ...mockedMeta,
+            height: 400,
+          },
+          mockedImageContainerPosition,
+        );
+        expect(imageContainerPosition).toEqual({
+          x: 350,
+          y: 75,
+          width: 600,
+          height: 800,
+          top: 75,
+          bottom: 800,
+        });
+        expect(imageWrapperPosition).toEqual({
+          top: 300, left: 0, width: 600, height: 200,
+        });
       });
     });
 
@@ -171,7 +183,7 @@ describe('Image test suite', () => {
         width: 4500,
         orientation,
       };
-      
+
       const mockedImageContainerPosition = {
         x: 356,
         y: 73,
@@ -183,20 +195,44 @@ describe('Image test suite', () => {
 
       it('should handle to big height', () => {
         const { imageContainerPosition, imageWrapperPosition } = getPositions(mockedMeta, mockedImageContainerPosition);
-        expect(imageContainerPosition).toEqual({ x: 356, y: 73, width: 612, height: 73, top: 75, bottom: 898 });
-        expect(imageWrapperPosition).toEqual( { top: 0, left: 276.66964285714283, width: 58.66071428571429, height: 73 });
+        expect(imageContainerPosition).toEqual({
+          x: 356,
+          y: 73,
+          width: 612,
+          height: 73,
+          top: 75,
+          bottom: 898,
+        });
+        expect(imageWrapperPosition).toEqual({
+          top: 0,
+          left: 276.66964285714283,
+          width: 58.66071428571429,
+          height: 73,
+        });
       });
 
       it('should handle default', () => {
-        const { imageContainerPosition, imageWrapperPosition } = getPositions({
-          ...mockedMeta,
-          width: 400,
-        }, {
-          ...mockedImageContainerPosition,
+        const { imageContainerPosition, imageWrapperPosition } = getPositions(
+          {
+            ...mockedMeta,
+            width: 400,
+          },
+          {
+            ...mockedImageContainerPosition,
+            height: 5600,
+          },
+        );
+        expect(imageContainerPosition).toEqual({
+          x: 356,
+          y: 73,
+          width: 612,
           height: 5600,
+          top: 75,
+          bottom: 898,
         });
-        expect(imageContainerPosition).toEqual({ x: 356, y: 73, width: 612, height: 5600, top: 75, bottom: 898 });
-        expect(imageWrapperPosition).toEqual({ top: 0, left: 106, width: 400, height: 5600, });
+        expect(imageWrapperPosition).toEqual({
+          top: 0, left: 106, width: 400, height: 5600,
+        });
       });
     });
   });

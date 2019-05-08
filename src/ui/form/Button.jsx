@@ -17,7 +17,7 @@ export const BUTTON_TYPES = {
 };
 
 // calculate background colors
-const getBackgroundColor = props => {
+const getBackgroundColor = (props) => {
   switch (props.buttonStyle) {
     case BUTTON_TYPES.PRIMARY:
       return Colors.Blue.Default;
@@ -28,11 +28,11 @@ const getBackgroundColor = props => {
     case BUTTON_TYPES.LINK:
       return 'inherit';
     default:
-      return 'rgba(9, 30, 66, 0.04)'
+      return 'rgba(9, 30, 66, 0.04)';
   }
-}
+};
 
-const getBackgroundHoverColor = props => {
+const getBackgroundHoverColor = (props) => {
   switch (props.buttonStyle) {
     case BUTTON_TYPES.PRIMARY:
       return Colors.Blue.Light;
@@ -45,10 +45,10 @@ const getBackgroundHoverColor = props => {
     default:
       return 'rgba(9, 30, 66, 0.08)';
   }
-}
+};
 
 // text color
-const getColor = props => {
+const getColor = (props) => {
   switch (props.buttonStyle) {
     case BUTTON_TYPES.PRIMARY:
     case BUTTON_TYPES.ERROR:
@@ -58,7 +58,7 @@ const getColor = props => {
     default:
       return '#494949';
   }
-}
+};
 
 export const StyledLoading = styled(LoadingIndicator)`
   width: 1.2rem;
@@ -87,7 +87,7 @@ export const StyledButton = styled(Grommet.Button)`
     background-color: ${props => getBackgroundHoverColor(props)};
     pointer: cursor;
     /* istanbul ignore next */
-    text-decoration: ${props => props.buttonStyle === 'link' ? 'underline' : ''};
+    text-decoration: ${props => (props.buttonStyle === 'link' ? 'underline' : '')};
   }
 `;
 
@@ -135,6 +135,6 @@ export const __testables__ = {
   getBackgroundColor,
   getBackgroundHoverColor,
   getColor,
-}
+};
 
 export default Button;

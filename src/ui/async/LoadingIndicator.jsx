@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Colors } from '../../styles';
 
-
 const StyledLoadingIndicator = styled.div`
   position: relative;
   margin: 0 auto;
@@ -79,10 +78,7 @@ const StyledLoadingIndicator = styled.div`
 
 const LoadingIndicator = ({ circleProps, ...props }) => (
   <StyledLoadingIndicator {...props}>
-    <svg
-      className="circular"
-      viewBox="25 25 50 50"
-    >
+    <svg className="circular" viewBox="25 25 50 50">
       <circle
         className="path"
         cx="50"

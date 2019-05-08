@@ -19,8 +19,12 @@ phases:
       - aws s3 cp $S3_UTILS_BUCKET$ENV_VAR ./
   build:
     commands:
+      - echo "Start linting"
+      - npm run lint
       - echo "Start test"
-      - CI=true npm test 
+      - CI=true npm test
+      - echo "Start coverage"
+      - CI=true npm run test:coverage
       - echo "Run Semantic Release"
       - GH_TOKEN="$GH_ACCESS_TOKEN" npx semantic-release
       - echo "Build started on $CODEBUILD_START_TIME"

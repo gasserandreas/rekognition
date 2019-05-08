@@ -5,7 +5,7 @@ import 'jest-styled-components';
 
 import { MemoryRouter } from 'react-router-dom';
 
-import { AuthHeader, AuthFooter, __testables__ } from '../AuthComponents';
+import { AuthHeader, AuthFooter } from '../AuthComponents';
 
 describe('AuthComponent test suite', () => {
   describe('AuthHeader test suite', () => {
@@ -23,10 +23,10 @@ describe('AuthComponent test suite', () => {
       const wrapper = mount(
         <MemoryRouter>
           <AuthFooter {...props} />
-        </MemoryRouter>
+        </MemoryRouter>,
       );
       return wrapper.find(AuthFooter);
-    }
+    };
 
     it('should render with children', () => {
       const href = 'http://www.google.com';

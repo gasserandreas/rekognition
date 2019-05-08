@@ -5,10 +5,7 @@ import styled from 'styled-components';
 import * as Yup from 'yup';
 import { withFormik } from 'formik';
 
-import {
-  Field,
-  TextInput,
-} from '../../ui/form/Form';
+import { Field, TextInput } from '../../ui/form/Form';
 import Button from '../../ui/form/Button';
 import Message from '../../ui/form/Message';
 
@@ -25,17 +22,17 @@ const mapPropsToValues = (obj) => {
   const { user } = obj;
   return {
     ...user,
-  }
+  };
 };
 
-const handleSubmit = (payload, { props }, b, c) => {
+const onHandleSubmit = (payload, { props }) => {
   props.onSubmit(payload);
 };
 
 const formikConfig = {
   validationSchema,
   mapPropsToValues,
-  handleSubmit,
+  handleSubmit: onHandleSubmit,
   displayName: 'CheckEmailForm',
 };
 
@@ -60,11 +57,7 @@ const CheckEmailForm = (props) => {
   } = props;
   return (
     <StyledCheckEmailForm onSubmit={handleSubmit}>
-      <Field
-        id="email"
-        label="Email"
-        error={touched.email && errors.email}
-      >
+      <Field id="email" label="Email" error={touched.email && errors.email}>
         <TextInput
           id="email"
           type="email"
@@ -84,7 +77,9 @@ const CheckEmailForm = (props) => {
           onClick={handleReset}
           disabled={!dirty || submitting}
           testId="jestResetButton"
-        >Cancel</Button>
+        >
+          Cancel
+        </Button>
         <Button
           type="submit"
           disabled={submitting}
@@ -92,10 +87,31 @@ const CheckEmailForm = (props) => {
           style={{ marginLeft: '1rem' }}
           loading={submitting}
           testId="jestSubmitButton"
-        >Check email</Button>
+        >
+          Check email
+        </Button>
       </ButtonGroup>
     </StyledCheckEmailForm>
   );
+};
+
+CheckEmailForm.propTypes = {
+  error: PropTypes.node,
+  validEmail: PropTypes.bool,
+  values: PropTypes.shape({}).isRequired,
+  touched: PropTypes.shape({}).isRequired,
+  errors: PropTypes.shape({}).isRequired,
+  dirty: PropTypes.bool.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleBlur: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  handleReset: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
+};
+
+CheckEmailForm.defaultProps = {
+  error: null,
+  validEmail: null,
 };
 
 const EnhancedCheckEmailForm = formikEnhancer(CheckEmailForm);
@@ -116,13 +132,12 @@ EnhancedCheckEmailForm.defaultProps = {
   error: '',
 };
 
-
 export const __testables__ = {
   formikConfig,
   formikEnhancer,
   validationSchema,
   mapPropsToValues,
-  handleSubmit,
+  handleSubmit: onHandleSubmit,
   CheckEmailForm,
 };
 

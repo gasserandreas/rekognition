@@ -7,8 +7,8 @@ import { Box } from 'grommet';
 import { Colors, MediaSize } from '../styles';
 
 export const StyledViewMessage = styled(Box)`
-  visibility: ${props => props.show ? 'visible' : 'none'};
-  display: ${props => props.show ? 'block' : 'none' };
+  visibility: ${props => (props.show ? 'visible' : 'none')};
+  display: ${props => (props.show ? 'block' : 'none')};
   position: fixed;
 
   /* positioning */
@@ -34,9 +34,9 @@ export const StyledViewMessageContent = styled(Box)`
   left: 0;
   right: 0;
   height: 100%;
-  
+
   @media (min-width: ${MediaSize.Tablet}) {
-    top: ${props => props.show ? '10rem' : '-100%'};
+    top: ${props => (props.show ? '10rem' : '-100%')};
     height: auto;
     width: 32rem;
     right: auto;
@@ -47,7 +47,11 @@ export const StyledViewMessageContent = styled(Box)`
     max-height: 30rem;
   }
 
-  h1, h2, h3, h4, h5 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
     text-transform: uppercase;
     font-size: 1.25rem;
     font-weight: 500;
@@ -59,7 +63,8 @@ export const StyledViewMessageContent = styled(Box)`
 `;
 
 /** Show App message as application modal and use fullsize on mobile devices */
-const ViewMessage = ({ children, show, ...props }) => (<StyledViewMessage show={show} {...props}>
+const ViewMessage = ({ children, show, ...props }) => (
+  <StyledViewMessage show={show} {...props}>
     <StyledViewMessageContent elevation="xlarge" show={show}>
       {children}
     </StyledViewMessageContent>
@@ -71,10 +76,10 @@ ViewMessage.propTypes = {
   children: PropTypes.node.isRequired,
   /** Boolean indicating whether message is shown or not */
   show: PropTypes.bool,
-}
+};
 
 ViewMessage.defaultProps = {
   show: false,
-}
+};
 
 export default ViewMessage;

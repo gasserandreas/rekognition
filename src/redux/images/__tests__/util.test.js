@@ -1,4 +1,4 @@
-/* global testUtils */
+/* global FileReader, File */
 import fs from 'fs';
 import path from 'path';
 
@@ -10,8 +10,11 @@ describe('images util test suite', () => {
 
   class BaseMockFileReader {
     abort() {}
+
     onerror() {}
+
     onload() {}
+
     readAsDataURL() {
       this.result = 'data:;base64,NzAxMDUxMDgxMDEzMjk5MTExMTEwMTE2MTAxMTEwMTE2';
       this.onload();
@@ -29,13 +32,12 @@ describe('images util test suite', () => {
     // fileReaderOnLoadOnSpy.mockClear();
 
     // delete file if available
-    if(fs.existsSync(filePath)) {
+    if (fs.existsSync(filePath)) {
       fs.unlinkSync(filePath);
     }
   });
 
   it('should return promise resolve onload', async (done) => {
-
     // prepare test file
     filePath = `${basePath}/testFile.txt`;
     fs.writeFileSync(filePath, 'File content');
@@ -71,7 +73,7 @@ describe('images util test suite', () => {
 
     try {
       await util.readAsDataURL(file);
-    } catch(error) {
+    } catch (error) {
       expect(error).toBeTruthy();
     }
     done();
