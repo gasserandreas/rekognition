@@ -13,7 +13,7 @@ const StyledView = styled(Box)`
 `;
 
 /** Default wrapper for application usafge */
-export const View = ({ children, ...props }) => (
+const View = ({ children, ...props }) => (
   <StyledView flex fill pad="small" {...props}>
     {children}
   </StyledView>
@@ -31,9 +31,7 @@ const StyledHeading = styled(Heading)`
 `;
 
 /** Default heading for view */
-export const ViewHeading = (props) => (
-  <StyledHeading level="4" {...props} />
-);
+export const ViewHeading = props => <StyledHeading level="4" {...props} />;
 
 View.propTypes = {
   /** Add view header here */

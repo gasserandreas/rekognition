@@ -1,17 +1,16 @@
 import { createSelector } from 'reselect';
 
-const imagesStateSelector = state => state.images;
+export const imagesStateSelector = state => state.images || {};
 
 export const imagesListSelector = createSelector(
   imagesStateSelector,
   ({ ids, byId }) => {
-    if (ids.length === 0) {
+    if (!ids || !byId || ids.length === 0) {
       return [];
     }
 
-    return ids.map(id => byId[id])
-      .filter(item => item !== null);
-  }
+    return ids.map(id => byId[id]).filter(item => item !== null && item !== undefined);
+  },
 );
 
 export const sortedImageListSelector = createSelector(
@@ -19,20 +18,24 @@ export const sortedImageListSelector = createSelector(
   (images) => {
     // sort function
     const sortBy = ({ created: createdA }, { created: createdB }) => {
-      if (!createdA || !createdB) {
-        return createdA ? 1 : -1;
+      if (!createdA) {
+        return 1;
+      }
+
+      if (!createdB) {
+        return -1;
       }
 
       return new Date(createdB) - new Date(createdA);
-    }
+    };
 
     return images.sort(sortBy);
-  }
+  },
 );
 
 export const imagesByIdSelector = createSelector(
   imagesStateSelector,
-  ({ byId }) => byId,
+  ({ byId }) => byId || {},
 );
 
 // list
@@ -41,7 +44,7 @@ export const imagesListRequestSelector = createSelector(
   ({ listImageRequest }) => listImageRequest,
 );
 
-// add image 
+// add image
 export const addImageRequestSelector = createSelector(
   imagesStateSelector,
   ({ addImageRequest }) => addImageRequest,
@@ -49,7 +52,7 @@ export const addImageRequestSelector = createSelector(
 
 export const addImageIsLoading = createSelector(
   addImageRequestSelector,
-  ({ loading }) => loading,
+  addImageRequest => (addImageRequest ? addImageRequest.loading : false),
 );
 
 // get image

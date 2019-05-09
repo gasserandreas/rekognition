@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'
+import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 
 // action types
@@ -8,7 +8,6 @@ const LABELS_ADD_LABELS = 'LABELS_ADD_LABELS';
 
 // simple actions
 export const labelsAddLabels = (imageId, labels) => {
-  
   const ids = [];
   const byId = {};
   labels.forEach((label) => {
@@ -63,10 +62,14 @@ const persistConfig = {
   stateReconciler: autoMergeLevel2,
 };
 
+export const __testables__ = {
+  LABELS_ADD_LABELS,
+};
+
 export default persistReducer(
   persistConfig,
   combineReducers({
     byId,
     idsByImageId,
-  })
+  }),
 );

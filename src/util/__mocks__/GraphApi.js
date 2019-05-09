@@ -1,4 +1,4 @@
-// store mock data
+/* global jest */
 let queryCounter = 0;
 let queryMockResponses = [];
 
@@ -9,13 +9,13 @@ export const mockReset = jest.fn().mockImplementation(() => true);
 
 export const mockQuery = jest.fn().mockImplementation(() => {
   const data = queryMockResponses[queryCounter] || {};
-  queryCounter = queryCounter + 1;
+  queryCounter += 1;
   return Promise.resolve(data);
 });
 
 export const mockMutation = jest.fn().mockImplementation(() => {
   const data = mutationMockResponses[mutationCounter] || {};
-  mutationCounter = mutationCounter + 1;
+  mutationCounter += 1;
   return Promise.resolve(data);
 });
 

@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'
+import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 
 import uuid from 'uuid';
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 import hocReducer, { hocAsyncAction, hocCreateTypes } from '../HOC';
 
@@ -18,9 +18,9 @@ const IMAGES_ADD_NEW_IMAGE = 'IMAGES_ADD_NEW_IMAGE';
 const IMAGES_ADD_IMAGES = 'IMAGES_ADD_IMAGES';
 const IMAGES_ADD_IMAGE = 'IMAGES_ADD_IMAGE';
 
-const IMAGES_ADD_REQUEST_TYPES = hocCreateTypes('IMAGES_ADD_REQUEST_TYPES');
-const IMAGES_LIST_REQUEST_TYPES = hocCreateTypes('IMAGES_LIST_REQUEST_TYPES');
-const IMAGES_GET_REQUEST_TYPES = hocCreateTypes('IMAGES_GET_REQUEST_TYPES');
+const IMAGES_ADD_REQUEST_TYPES = hocCreateTypes('IMAGES_ADD_REQUEST');
+const IMAGES_LIST_REQUEST_TYPES = hocCreateTypes('IMAGES_LIST_REQUEST');
+const IMAGES_GET_REQUEST_TYPES = hocCreateTypes('IMAGES_GET_REQUEST');
 
 // simple actions
 const imagesAddNewImage = image => ({
@@ -55,11 +55,11 @@ const imagesAddImages = (images) => {
 // complex actions
 export const addImage = hocAsyncAction(
   IMAGES_ADD_REQUEST_TYPES,
-  ({ file, shouldAnalyse = true, imageId = uuid.v4() }) => (dispatch, getState, { GraphApi }) => {
-
+  ({ file, shouldAnalyse = true, imageId = uuid.v4() }) => (dispatch, _, { GraphApi }) => {
     // get file ending
-    let filetype = undefined;
+    let filetype;
     const { type } = file;
+
     switch (type) {
       case 'image/jpeg':
         filetype = 'jpeg';
@@ -71,156 +71,115 @@ export const addImage = hocAsyncAction(
         filetype = undefined;
     }
 
+    // stop
+    if (!filetype) {
+      return Promise.reject(new Error('Not a valid file type'));
+    }
+
     // create new image name
+    /**
+     * TODO: ID handling should be done in the backend...
+     */
     const imageName = `${imageId}.${filetype}`;
 
-    return readAsDataURL(file)
-      .then((rawImageString) => {
-        const ADD_IMAGE = gql`
-          mutation addImage($file: String!, $id: ID, $type: String!, $name: String!, $analyse: Boolean) {
-            addImage(input: {
-              file: $file,
-              id: $id,
-              name: $name,
-              type: $type,
-              analyse: $analyse
-            }) {
-              image {
-                id
-                name
-                path
-                created
-                meta {
-                  type
-                  size
-                  orientation
-                  width
-                  height
-                  density
-                  numberOfLabels
-                  numberOfFaces
-                }
-                labels {
-                  items {
-                    id
-                    name
-                    confidence
-                    parents
-                    instances {
-                      height
-                      width
-                      left
-                      top
-                    }
+    return readAsDataURL(file).then((rawImageString) => {
+      const ADD_IMAGE = gql`
+        mutation addImage($file: String!, $id: ID, $type: String!, $name: String!, $analyse: Boolean) {
+          addImage(input: { file: $file, id: $id, name: $name, type: $type, analyse: $analyse }) {
+            image {
+              id
+              name
+              path
+              created
+              meta {
+                type
+                size
+                orientation
+                width
+                height
+                density
+                numberOfLabels
+                numberOfFaces
+              }
+              labels {
+                items {
+                  id
+                  name
+                  confidence
+                  parents
+                  instances {
+                    height
+                    width
+                    left
+                    top
                   }
                 }
-                faces {
-                  items {
-                    id
-                    age {
-                      low
-                      high
-                    }
-                    position {
-                      height
-                      width
-                      left
-                      top
-                    }
-                    emotions {
-                      name
-                      confidence
-                    }
-                    attributes {
-                      name
-                      confidence
-                      value
-                    }
+              }
+              faces {
+                items {
+                  id
+                  age {
+                    low
+                    high
+                  }
+                  position {
+                    height
+                    width
+                    left
+                    top
+                  }
+                  emotions {
+                    name
+                    confidence
+                  }
+                  attributes {
+                    name
+                    confidence
+                    value
                   }
                 }
               }
             }
           }
-        `;
-
-        const variables = {
-          file: rawImageString,
-          id: imageId,
-          name: imageName,
-          type,
-          analyse: shouldAnalyse,
-        };
-
-        return GraphApi.mutation(ADD_IMAGE, variables)
-          .then((data) => {
-            const { addImage: { image } } = data;
-
-            const { faces, labels, ...imageData } = image;
-            const { id } = image;
-
-            // save to redux
-            dispatch(imagesAddNewImage(imageData));
-            dispatch(labelsAddLabels(id, labels.items));
-            dispatch(facesAddFaces(id, faces.items));
-
-            return data;
-          });
-      });
-  }
-);
-
-export const listImages = hocAsyncAction(
-  IMAGES_LIST_REQUEST_TYPES,
-  () => (dispatch, _, { GraphApi }) => {
-    const LIST_IMAGE = gql`
-      query listImage($limit: Int, $nextToken: String) {
-        listImage(limit: $limit, nextToken: $nextToken) {
-          items {
-            id
-            created
-            name
-            path
-            meta {
-              type
-              size
-              orientation
-              width
-              height
-              density
-              numberOfFaces
-              numberOfLabels
-            }
-          }
         }
-      }
-    `;
-    const variables = {
-      limit: 0,
-      nextToken: '',
-    };
+      `;
 
-    return GraphApi.query(LIST_IMAGE, variables)
-      .then((data) => {
-        const { listImage: { items } } = data;
-        
-        dispatch(imagesAddImages(items));
+      const variables = {
+        file: rawImageString,
+        id: imageId,
+        name: imageName,
+        type,
+        analyse: shouldAnalyse,
+      };
+
+      return GraphApi.mutation(ADD_IMAGE, variables).then((data) => {
+        const {
+          addImage: { image },
+        } = data;
+
+        const { faces, labels, ...imageData } = image;
+        const { id } = image;
+
+        // save to redux
+        dispatch(imagesAddNewImage(imageData));
+        dispatch(labelsAddLabels(id, labels.items));
+        dispatch(facesAddFaces(id, faces.items));
 
         return data;
-      })
-  }
+      });
+    });
+  },
 );
 
-export const getImage = hocAsyncAction(
-  IMAGES_GET_REQUEST_TYPES,
-  (imageId) => (dispatch, _, { GraphApi }) => {
-
-    const GET_IMAGE = gql`
-      query getImage($imageId: ID!) {
-        getImage(image_id: $imageId) {
+export const listImages = hocAsyncAction(IMAGES_LIST_REQUEST_TYPES, () => (dispatch, _, { GraphApi }) => {
+  const LIST_IMAGE = gql`
+    query listImage($limit: Int, $nextToken: String) {
+      listImage(limit: $limit, nextToken: $nextToken) {
+        items {
           id
+          created
           name
           path
-          created
           meta {
             type
             size
@@ -228,70 +187,104 @@ export const getImage = hocAsyncAction(
             width
             height
             density
-            numberOfLabels
             numberOfFaces
+            numberOfLabels
           }
-          labels {
-            items {
-              id
-              name
-              confidence
-              parents
-              instances {
-                height
-                width
-                left
-                top
-              }
+        }
+      }
+    }
+  `;
+  const variables = {
+    limit: 0,
+    nextToken: '',
+  };
+
+  return GraphApi.query(LIST_IMAGE, variables).then((data) => {
+    const {
+      listImage: { items },
+    } = data;
+
+    dispatch(imagesAddImages(items));
+
+    return data;
+  });
+});
+
+export const getImage = hocAsyncAction(IMAGES_GET_REQUEST_TYPES, imageId => (dispatch, _, { GraphApi }) => {
+  const GET_IMAGE = gql`
+    query getImage($imageId: ID!) {
+      getImage(image_id: $imageId) {
+        id
+        name
+        path
+        created
+        meta {
+          type
+          size
+          orientation
+          width
+          height
+          density
+          numberOfLabels
+          numberOfFaces
+        }
+        labels {
+          items {
+            id
+            name
+            confidence
+            parents
+            instances {
+              height
+              width
+              left
+              top
             }
           }
-          faces {
-            items {
-              id
-              age {
-                low
-                high
-              }
-              position {
-                height
-                width
-                left
-                top
-              }
-              emotions {
-                name
-                confidence
-              }
-              attributes {
-                name
-                confidence
-                value
-              }
+        }
+        faces {
+          items {
+            id
+            age {
+              low
+              high
+            }
+            position {
+              height
+              width
+              left
+              top
+            }
+            emotions {
+              name
+              confidence
+            }
+            attributes {
+              name
+              confidence
+              value
             }
           }
         }
       }
-    `;
+    }
+  `;
 
-    const variables = {
-      imageId,
-    };
+  const variables = {
+    imageId,
+  };
 
-    return GraphApi.query(GET_IMAGE, variables)
-      .then((data) => {
-        const { getImage } = data;
+  return GraphApi.query(GET_IMAGE, variables).then((data) => {
+    const { faces, labels, ...image } = data.getImage;
+    const { id } = image;
 
-        const { faces, labels, ...image } = getImage;
-        const { id } = image;
-        
-        dispatch(imagesAddImage(image));
-        dispatch(labelsAddLabels(id, labels.items));
-        dispatch(facesAddFaces(id, faces.items));
+    dispatch(imagesAddImage(image));
+    dispatch(labelsAddLabels(id, labels.items));
+    dispatch(facesAddFaces(id, faces.items));
 
-        return data;
-      })
-  }
-);
+    return data;
+  });
+});
 
 // reducers
 const addImageRequest = hocReducer({
@@ -347,6 +340,18 @@ const persistConfig = {
   stateReconciler: autoMergeLevel2,
 };
 
+export const __testables__ = {
+  IMAGES_ADD_NEW_IMAGE,
+  IMAGES_ADD_IMAGES,
+  IMAGES_ADD_IMAGE,
+  IMAGES_ADD_REQUEST_TYPES,
+  IMAGES_LIST_REQUEST_TYPES,
+  IMAGES_GET_REQUEST_TYPES,
+  imagesAddNewImage,
+  imagesAddImage,
+  imagesAddImages,
+};
+
 export default persistReducer(
   persistConfig,
   combineReducers({
@@ -356,5 +361,5 @@ export default persistReducer(
     addImageRequest,
     listImageRequest,
     getImageRequest,
-  })
+  }),
 );

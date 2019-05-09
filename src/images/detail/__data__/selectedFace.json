@@ -1,0 +1,61 @@
+{
+	"id": "7efa73a7-6fe0-404b-a85e-e34abb20a251",
+	"age": {
+		"low": 20,
+		"high": 38,
+		"__typename": "FaceAge"
+	},
+	"position": {
+		"height": 0.16048859059810638,
+		"width": 0.06429165601730347,
+		"left": 0.7339414358139038,
+		"top": 0.25065237283706665,
+		"__typename": "BoundingBox"
+	},
+	"emotions": [{
+		"name": "CALM",
+		"confidence": 53.679351806640625,
+		"__typename": "Attribute"
+	}, {
+		"name": "DISGUSTED",
+		"confidence": 14.890134811401367,
+		"__typename": "Attribute"
+	}, {
+		"name": "SAD",
+		"confidence": 10.600337028503418,
+		"__typename": "Attribute"
+	}, {
+		"name": "ANGRY",
+		"confidence": 9.131677627563477,
+		"__typename": "Attribute"
+	}, {
+		"name": "SURPRISED",
+		"confidence": 8.68793773651123,
+		"__typename": "Attribute"
+	}, {
+		"name": "HAPPY",
+		"confidence": 0.4520353376865387,
+		"__typename": "Attribute"
+	}, {
+		"name": "CONFUSED",
+		"confidence": 0,
+		"__typename": "Attribute"
+	}],
+	"attributes": [{
+		"name": "gender",
+		"confidence": 61.0933837890625,
+		"value": "Male",
+		"__typename": "Attribute"
+	}, {
+		"name": "brightness",
+		"confidence": 100,
+		"value": "83.16773986816406",
+		"__typename": "Attribute"
+	}, {
+		"name": "sharpness",
+		"confidence": 100,
+		"value": "92.22801208496094",
+		"__typename": "Attribute"
+	}],
+	"__typename": "Face"
+}

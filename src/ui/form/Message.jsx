@@ -17,7 +17,7 @@ const getColor = (props) => {
     default:
       return Colors.ColorsPalette.Text;
   }
-}
+};
 
 const getBackgroundColor = (props) => {
   switch (props.appearance) {
@@ -28,7 +28,7 @@ const getBackgroundColor = (props) => {
     default:
       return 'inherit';
   }
-}
+};
 
 const getBorderColor = (props) => {
   switch (props.appearance) {
@@ -39,16 +39,16 @@ const getBorderColor = (props) => {
     default:
       return Colors.Neutrals.LightDark;
   }
-}
+};
 
 /* istanbul ignore next */
 const StyledMessage = styled.div`
   color: ${props => getColor(props)};
   background-color: ${props => getBackgroundColor(props)};
   border-color: ${props => getBorderColor(props)};
-  border-width: ${props => props.border ? '1px' : '0'};
+  border-width: ${props => (props.border ? '1px' : '0')};
   border-style: solid;
-  border-radius: ${props => props.rounded ? '2px' : '0'};
+  border-radius: ${props => (props.rounded ? '2px' : '0')};
   font-weight: 400;
   text-align: center;
   vertical-align: middle;
@@ -56,19 +56,11 @@ const StyledMessage = styled.div`
 `;
 
 /** Create a Message component to be used in forms */
-const Message = ({ children, ...props}) => (
-  <StyledMessage {...props}>
-    {children}
-  </StyledMessage>
-);
+const Message = ({ children, ...props }) => <StyledMessage {...props}>{children}</StyledMessage>;
 
 Message.propTypes = {
   /** Specify message appearance */
-  appearance: PropTypes.oneOf([
-    MESSAGE_TYPES.INFO,
-    MESSAGE_TYPES.ERROR,
-    MESSAGE_TYPES.WARNING,
-  ]),
+  appearance: PropTypes.oneOf([MESSAGE_TYPES.INFO, MESSAGE_TYPES.ERROR, MESSAGE_TYPES.WARNING]),
   /** Add children to be rendered */
   children: PropTypes.node.isRequired,
   /** Should be displayed with border */

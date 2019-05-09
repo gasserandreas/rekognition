@@ -1,12 +1,15 @@
 import { createSelector } from 'reselect';
 
-const authStateSelector = state => state.auth;
+const authStateSelector = state => state.auth || {};
+
+export const authMetaSelector = createSelector(
+  authStateSelector,
+  ({ meta }) => meta || {},
+);
 
 export const isAuthenticatedSelector = createSelector(
-  authStateSelector,
-  ({ meta }) => {
-    return meta.loggedIn || false;
-  }
+  authMetaSelector,
+  ({ loggedIn }) => loggedIn || false,
 );
 
 export const authUserIdSelector = createSelector(
@@ -17,11 +20,6 @@ export const authUserIdSelector = createSelector(
 export const tokenSelector = createSelector(
   authStateSelector,
   ({ token }) => token || null,
-);
-
-export const authMetaSelector = createSelector(
-  authStateSelector,
-  ({ meta }) => meta,
 );
 
 export const authRememberSelector = createSelector(
@@ -36,7 +34,7 @@ export const authUsernameSelector = createSelector(
 
 export const isValidEmailSelector = createSelector(
   authStateSelector,
-  ({ validEmail }) => validEmail
+  ({ validEmail }) => validEmail,
 );
 
 export const loginRequestSelector = createSelector(

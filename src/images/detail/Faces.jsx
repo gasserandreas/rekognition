@@ -18,19 +18,16 @@ const StyledEmotions = styled.div`
 
 const Emotions = ({ faceId, emotions, ...props }) => (
   <StyledEmotions {...props}>
-    <StyledAttrLabel
-      style={{ display: 'block'}}
-      bold
-    >Emotions</StyledAttrLabel>
-      {emotions
-        .sort((a, b) => a.confidence < b.confidence ? 1 : -1)
-        .map(({ name, confidence }) => (
-          <Label
-            key={`face_${faceId}_emotion_label_${name}`}
-            label={{ name, confidence }}
-          />
-        )
-      )}
+    <StyledAttrLabel style={{ display: 'block' }} bold>
+      Emotions
+    </StyledAttrLabel>
+    {emotions
+    /* istanbul ignore next */
+
+      .sort((a, b) => (a.confidence < b.confidence ? 1 : -1))
+      .map(({ name, confidence }) => (
+        <Label key={`face_${faceId}_emotion_label_${name}`} label={{ name, confidence }} />
+      ))}
   </StyledEmotions>
 );
 
@@ -51,14 +48,18 @@ const StyledFace = styled(Box)`
 
 StyledFace.propTypes = {
   selected: PropTypes.bool,
-}
+};
 
 StyledFace.defaultProps = {
   selected: false,
-}
+};
 
-const Face = ({ face, number, ...props }) => {
-  const { id, age, attributes, emotions } = face;
+export const Face = ({
+  face, number, selected, ...props
+}) => {
+  const {
+    id, age, attributes, emotions,
+  } = face;
 
   // generate age attribute
   const ageAttribute = {
@@ -68,30 +69,27 @@ const Face = ({ face, number, ...props }) => {
   };
 
   // generate other attributes
-  const filteredAttributes = attributes.filter(item => (
-    item.name !== 'brightness' &&
-    item.name !== 'sharpness'
-  ));
+  const filteredAttributes = attributes.filter(item => item.name !== 'brightness' && item.name !== 'sharpness');
 
   return (
-    <StyledFace {...props} >
+    <StyledFace {...props}>
       <h3 level="1">
-        Face {number}
-        {props.selected && <Text color="brand" size="small">{' '}(selected)</Text>}
+        Face
+        {' '}
+        {number}
+        {selected && (
+          <Text color="brand" size="small">
+            {' '}
+            (selected)
+          </Text>
+        )}
       </h3>
       <Box>
         <Attribute attribute={ageAttribute} />
         {filteredAttributes.map(attr => (
-          <Attribute
-            attribute={attr}
-            key={`face_attribute_${id}_${attr.name}`}
-            showConfidence
-          />
+          <Attribute attribute={attr} key={`face_attribute_${id}_${attr.name}`} showConfidence />
         ))}
-        <Emotions
-          faceId={id}
-          emotions={emotions}
-        />
+        <Emotions faceId={id} emotions={emotions} />
       </Box>
     </StyledFace>
   );
@@ -113,15 +111,25 @@ Face.propTypes = {
     emotions: PropTypes.arrayOf(AttributePropType).isRequired,
     attributes: PropTypes.arrayOf(AttributePropType).isRequired,
   }).isRequired,
+  number: PropTypes.number.isRequired,
+  selected: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
-}
+};
+
+Face.defaultProps = {
+  selected: false,
+};
 
 // faces wrapper component
 const StyledFaces = styled(Box)``;
 
-const Faces = ({ faces, onFaceClick, selectedFace, ...props }) => (
+const Faces = ({
+  faces, onFaceClick, selectedFace, ...props
+}) => (
   <StyledFaces {...props}>
-    <Paragraph size="small" margin="none">Hint: Click on faces to visualize selected face.</Paragraph>
+    <Paragraph size="small" margin="none">
+      Hint: Click on faces to visualize selected face.
+    </Paragraph>
     {faces.map((face, i) => (
       <Face
         number={i + 1}
@@ -144,6 +152,13 @@ Faces.defaultProps = {
   selectedFace: {
     id: null,
   },
-}
+};
+
+export const __testables__ = {
+  StyledEmotions,
+  Emotions,
+  StyledFace,
+  Face,
+};
 
 export default Faces;

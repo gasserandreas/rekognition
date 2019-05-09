@@ -1,22 +1,22 @@
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'
+import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 import { setToken, setUserId } from '../../util/sessionUtil';
-import hocReducer, { hocAsyncAction, hocCreateTypes  } from '../HOC';
+import hocReducer, { hocAsyncAction, hocCreateTypes } from '../HOC';
 
 import { authRememberSelector, authUsernameSelector } from './selectors';
 
-import { loadApplicationAuthenticated, appReset } from '../application';
+import { loadApplicationAuthenticated, appReset } from '../application'; // eslint-disable-line import/no-cycle
 
 // action def
 export const AUTH_LOG_IN = 'AUTH_LOG_IN';
 export const AUTH_LOG_OUT = 'AUTH_LOG_OUT';
 
 export const AUTH_SET_TOKEN = 'AUTH_SET_TOKEN';
-export const AUTH_SET_USER_ID = 'AUTH_SET_USER_ID'
+export const AUTH_SET_USER_ID = 'AUTH_SET_USER_ID';
 
 export const AUTH_SET_VALID_EMAIL = 'AUTH_SET_VALID_EMAIL';
 export const AUTH_SET_INVALID_EMAIL = 'AUTH_SET_INVALID_EMAIL';
@@ -87,7 +87,7 @@ const handleAuth = (token, user, remember) => (dispatch) => {
   dispatch(authLogin(remember, username));
 
   return Promise.resolve();
-}
+};
 
 // complex actions
 export const invalidateEmail = () => (dispatch) => {
@@ -106,7 +106,7 @@ export const logOutUser = (message, broadcast = true) => (dispatch) => {
 
   // clean up state
   try {
-    console.log('clear local & session storage');
+    console.log('clear local & session storage'); // eslint-disable-line no-console
     window.localStorage.clear();
     window.sessionStorage.clear();
 
@@ -114,10 +114,9 @@ export const logOutUser = (message, broadcast = true) => (dispatch) => {
     if (broadcast) {
       window.localStorage.logout = true;
     }
-  }
-  catch (error) {
+  } catch (error) {
     /* istanbul ignore next */
-    console.log('could not clear local and session storage');
+    console.log('could not clear local and session storage'); // eslint-disable-line no-console
   }
 
   // force reload to clear cache
@@ -129,15 +128,12 @@ export const logOutUser = (message, broadcast = true) => (dispatch) => {
 
 export const logInUser = hocAsyncAction(
   AUTH_LOGIN_REQUEST,
-  (credentials) => (dispatch, _, { GraphApi }) => {
+  credentials => (dispatch, _, { GraphApi }) => {
     const { email, password, remember } = credentials;
 
     const LOGIN_USER = gql`
       mutation loginUser($email: String!, $password: String!) {
-        loginUser(input: {
-          email: $email,
-          password: $password
-        }) {
+        loginUser(input: { email: $email, password: $password }) {
           user {
             id
             lastname
@@ -151,48 +147,35 @@ export const logInUser = hocAsyncAction(
       email,
       password,
     };
-    return GraphApi.mutation(LOGIN_USER, variables)
-      .then((data) => {
-        const { loginUser: { token, user } } = data;
-        
-        dispatch(handleAuth(token, user, remember));
+    return GraphApi.mutation(LOGIN_USER, variables).then((data) => {
+      const {
+        loginUser: { token, user },
+      } = data;
 
-        // logged in init
-        dispatch(loadApplicationAuthenticated());
+      dispatch(handleAuth(token, user, remember));
 
-        return data;
-      })
+      // logged in init
+      dispatch(loadApplicationAuthenticated());
+
+      return data;
+    });
   },
   {
     rejectable: false,
     handled: false,
-  }
+  },
 );
 
 export const signupUser = hocAsyncAction(
   AUTH_SIGNUP_REQUEST,
-  (credentials) => (dispatch, _, { GraphApi }) => {
+  credentials => (dispatch, _, { GraphApi }) => {
     const {
-      email,
-      password,
-      remember,
-      firstname,
-      lastname
+      email, password, remember, firstname, lastname,
     } = credentials;
 
     const SIGNUP_USER = gql`
-      mutation signupUser(
-        $email: String!,
-        $password: String!,
-        $firstname: String!,
-        $lastname: String!
-      ) {
-        signUpUser(input: {
-          firstname: $firstname,
-          lastname: $lastname,
-          email: $email,
-          password: $password,
-        }) {
+      mutation signupUser($email: String!, $password: String!, $firstname: String!, $lastname: String!) {
+        signUpUser(input: { firstname: $firstname, lastname: $lastname, email: $email, password: $password }) {
           user {
             id
             firstname
@@ -208,33 +191,32 @@ export const signupUser = hocAsyncAction(
       firstname,
       lastname,
     };
-    
-    return GraphApi.mutation(SIGNUP_USER, variables)
-      .then((data) => {
-        const { signUpUser: { token, user } } = data;
-        
-        dispatch(handleAuth(token, user, remember));
 
-        // logged in init
-        dispatch(loadApplicationAuthenticated());
+    return GraphApi.mutation(SIGNUP_USER, variables).then((data) => {
+      const {
+        signUpUser: { token, user },
+      } = data;
 
-        return data;
-      });
+      dispatch(handleAuth(token, user, remember));
+
+      // logged in init
+      dispatch(loadApplicationAuthenticated());
+
+      return data;
+    });
   },
   {
     rejectable: false,
     handled: false,
-  }
+  },
 );
 
 export const checkEmail = hocAsyncAction(
   AUTH_CHECK_EMAIL_REQUEST,
-  (email) => (dispatch, _, { GraphApi }) => {
+  email => (dispatch, _, { GraphApi }) => {
     const CHECK_EMAIL = gql`
       query EmailInUseMutation($email: String!) {
-        emailInUse(input: {
-          email: $email,
-        })
+        emailInUse(input: { email: $email })
       }
     `;
 
@@ -242,23 +224,22 @@ export const checkEmail = hocAsyncAction(
       email,
     };
 
-    return GraphApi.query(CHECK_EMAIL, variables)
-      .then((data) => {
-        const { emailInUse } = data;
+    return GraphApi.query(CHECK_EMAIL, variables).then((data) => {
+      const { emailInUse } = data;
 
-        if (emailInUse) {
-          dispatch(authSetInvalidEmail());
-        } else {
-          dispatch(authSetValidEmail());
-        }
+      if (emailInUse) {
+        dispatch(authSetInvalidEmail());
+      } else {
+        dispatch(authSetValidEmail());
+      }
 
-        return data;
-      });
+      return data;
+    });
   },
   {
     rejectable: false,
     handled: false,
-  }
+  },
 );
 
 export const refreshToken = (token, userId) => (dispatch, getState, { GraphApi }) => {
@@ -269,10 +250,7 @@ export const refreshToken = (token, userId) => (dispatch, getState, { GraphApi }
 
   const REFRESH_TOKEN = gql`
     mutation refreshToken($token: String!, $userId: String!) {
-      refreshToken(input: {
-        token: $token,
-        userId: $userId,
-      }) {
+      refreshToken(input: { token: $token, userId: $userId }) {
         user {
           id
           firstname
@@ -290,17 +268,16 @@ export const refreshToken = (token, userId) => (dispatch, getState, { GraphApi }
 
   return GraphApi.mutation(REFRESH_TOKEN, variables)
     .then((data) => {
-      const { refreshToken: { token }} = data;
       const user = {
         id: userId,
         firstname: username,
       };
-      dispatch(handleAuth(token, user, remember));
+      dispatch(handleAuth(data.refreshToken.token, user, remember));
     })
-    .catch((error) => {
+    .catch(() => {
       /* istanbul ignore next */
       dispatch(logOutUser('Could not refresh token', true));
-    })
+    });
 };
 
 // reducers
@@ -324,7 +301,7 @@ const userId = (state = null, action) => {
     default:
       return state;
   }
-}
+};
 
 const token = (state = null, action) => {
   switch (action.type) {
@@ -364,7 +341,7 @@ const meta = (state = {}, action) => {
     default:
       return state;
   }
-}
+};
 
 const loginRequest = hocReducer({
   ACTION_TYPE: AUTH_LOGIN_REQUEST,
@@ -400,7 +377,8 @@ export default persistReducer(
     loginRequest,
     signupRequest,
     checkEmailRequest,
-  }));
+  }),
+);
 
 export const __testables__ = {
   AUTH_LOGIN_REQUEST,

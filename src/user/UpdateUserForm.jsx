@@ -5,39 +5,43 @@ import styled from 'styled-components';
 import * as Yup from 'yup';
 import { withFormik } from 'formik';
 
-import {
-  Field,
-  TextInput,
-  FieldRow,
-} from '../ui/form/Form';
+import { Field, TextInput, FieldRow } from '../ui/form/Form';
 import Button from '../ui/form/Button';
 import Message from '../ui/form/Message';
 
 import ButtonGroup from '../ui/form/ButtonGroup';
 
 // formik setups
-const formikEnhancer = withFormik({
-  validationSchema: Yup.object().shape({
-    firstname: Yup.string()
-      .min(2)
-      .max(30)
-      .required('Firstname is required!'),
-    lastname: Yup.string()
-      .min(2)
-      .max(30)
-      .required('Lastname is required!'),
-  }),
-  mapPropsToValues: (obj) => {
-    const { user } = obj;
-    return {
-      ...user,
-    }
-  },
-  handleSubmit: (payload, { props }, b, c) => {
-    props.onSubmit(payload);
-  },
-  displayName: 'UpdateUserForm',
+const validationSchema = Yup.object().shape({
+  firstname: Yup.string()
+    .min(2)
+    .max(30)
+    .required('Firstname is required!'),
+  lastname: Yup.string()
+    .min(2)
+    .max(30)
+    .required('Lastname is required!'),
 });
+
+const mapPropsToValues = (obj) => {
+  const { user } = obj;
+  return {
+    ...user,
+  };
+};
+
+const onHandleSubmit = (payload, { props }) => {
+  props.onSubmit(payload);
+};
+
+const formikConfig = {
+  validationSchema,
+  mapPropsToValues,
+  handleSubmit: onHandleSubmit,
+  displayName: 'UpdateUserForm',
+};
+
+const formikEnhancer = withFormik(formikConfig);
 
 // styled
 const StyledUpdateUserForm = styled.form``;
@@ -79,12 +83,7 @@ const UpdateUserForm = ({
             onBlur={handleBlur}
           />
         </Field>
-        <Field
-          id="lastname"
-          label="Lastname"
-          error={touched.lastname && errors.lastname}
-          inline
-        >
+        <Field id="lastname" label="Lastname" error={touched.lastname && errors.lastname} inline>
           <TextInput
             id="lastname"
             type="text"
@@ -103,16 +102,39 @@ const UpdateUserForm = ({
           buttonStyle="link"
           onClick={handleOnReset}
           disabled={!dirty || submitting}
-        >Reset</Button>
+          testId="jestResetButton"
+        >
+          Reset
+        </Button>
         <Button
           type="submit"
           disabled={submitting}
           buttonStyle="primary"
           style={{ marginLeft: '1rem' }}
-        >Update profile</Button>
+          testId="jestSubmitButton"
+        >
+          Update profile
+        </Button>
       </ButtonGroup>
     </StyledUpdateUserForm>
   );
+};
+
+UpdateUserForm.propTypes = {
+  values: PropTypes.shape({}).isRequired,
+  touched: PropTypes.shape({}).isRequired,
+  errors: PropTypes.shape({}).isRequired,
+  dirty: PropTypes.bool.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleBlur: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  handleReset: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
+  error: PropTypes.string,
+};
+
+UpdateUserForm.defaultProps = {
+  error: null,
 };
 
 const EnhancedUpdateUserForm = formikEnhancer(UpdateUserForm);
@@ -122,7 +144,6 @@ EnhancedUpdateUserForm.propTypes = {
     firstname: PropTypes.string,
     lastname: PropTypes.string,
   }),
-  validEmail: PropTypes.bool,
 };
 
 EnhancedUpdateUserForm.defaultProps = {
@@ -130,6 +151,15 @@ EnhancedUpdateUserForm.defaultProps = {
     firstname: '',
     lastname: '',
   },
+};
+
+export const __testables__ = {
+  formikConfig,
+  formikEnhancer,
+  validationSchema,
+  mapPropsToValues,
+  handleSubmit: onHandleSubmit,
+  UpdateUserForm,
 };
 
 export default EnhancedUpdateUserForm;

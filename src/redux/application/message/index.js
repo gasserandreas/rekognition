@@ -10,7 +10,7 @@ const APPLICATION_MESSAGE_HIDE = 'APPLICATION_MESSAGE_HIDE';
 const APPLICATION_MESSAGE_ADD = 'APPLICATION_MESSAGE_ADD';
 
 // simple actions
-export const applicationMessageAdd = (message) => ({
+export const applicationMessageAdd = message => ({
   type: APPLICATION_MESSAGE_ADD,
   payload: message,
 });
@@ -39,10 +39,10 @@ export const addMessage = (message, hideTimeout = 10000) => (dispatch) => {
 };
 
 export const showMessage = () => (dispatch) => {
-  dispatch(applicationMessageShow()); 
-}
+  dispatch(applicationMessageShow());
+};
 
-export const hideMessage = () => (dispatch)  => {
+export const hideMessage = () => (dispatch) => {
   dispatch(applicationMessageHide());
 };
 
@@ -83,6 +83,12 @@ const show = (state = false, action) => {
     default:
       return state;
   }
+};
+
+export const __testables__ = {
+  APPLICATION_MESSAGE_SHOW,
+  APPLICATION_MESSAGE_HIDE,
+  APPLICATION_MESSAGE_ADD,
 };
 
 export default combineReducers({

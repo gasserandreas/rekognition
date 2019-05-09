@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { storiesOf, addDecorator } from '@storybook/react';
+import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import ButtonGroup from './ButtonGroup';
@@ -12,8 +12,6 @@ storiesOf('ButtonGroup', module)
   .addDecorator(withDefaultMargin())
   .add('default', () => (
     <ButtonGroup>
-      <Button
-        onClick={action('onClick')}
-      >Click me</Button>
+      <Button onClick={action('onClick')}>Click me</Button>
     </ButtonGroup>
-    ));
+  ));
