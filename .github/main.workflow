@@ -26,5 +26,8 @@ action "npm test" {
 action "npm coverage" {
   uses = "actions/npm@59b64a598378f31e49cb76f27d6f3312b582f680"
   needs = ["npm test"]
-  runs = "CI=true npm run test:coverage"
+  runs = "npm run test:coverage"
+  env = {
+    CI = "true"
+  }
 }
