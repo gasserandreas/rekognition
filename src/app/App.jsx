@@ -9,6 +9,8 @@ import AppHeader from './AppHeader';
 import AppFooter from './AppFooter';
 import AppRoutes from './AppRoutes';
 
+import AppLoadingView from './AppLoadingView';
+
 import { Theme } from '../styles';
 
 const StyledAppContent = styled(Box)`
@@ -23,6 +25,7 @@ const StyledAppContent = styled(Box)`
 class App extends Component {
   static propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
+    didLoad: PropTypes.bool.isRequired,
     loadApplication: PropTypes.func.isRequired,
     username: PropTypes.string,
     message: PropTypes.shape({
@@ -42,7 +45,13 @@ class App extends Component {
   }
 
   render() {
-    const { isAuthenticated, username, message } = this.props;
+    const {
+      isAuthenticated,
+      didLoad,
+      username,
+      message,
+    } = this.props;
+
     return (
       <Grommet theme={Theme} full>
         <AppMessage
@@ -54,7 +63,10 @@ class App extends Component {
         />
         <StyledAppContent fill justify="between" direction="column">
           <Box flex fill pad="none">
-            <AppRoutes isAuthenticated={isAuthenticated} />
+            { didLoad
+              ? <AppRoutes isAuthenticated={isAuthenticated} />
+              : <AppLoadingView />
+            }
             <AppFooter />
           </Box>
         </StyledAppContent>
