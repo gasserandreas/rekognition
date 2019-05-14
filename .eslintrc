@@ -26,7 +26,8 @@
     ],
     "no-underscore-dangle": "off",
     "react/destructuring-assignment": "off",
-    "eslint/no-plus-plus": "off"
+    "eslint/no-plus-plus": "off",
+    "comma-dangle": "off"
   },
   "overrides": [
     {
