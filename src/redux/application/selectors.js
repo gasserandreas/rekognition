@@ -11,5 +11,11 @@ export const applicationStatusSelector = createSelector(
 
 export const applicationDidLoadSelector = createSelector(
   applicationStatusSelector,
-  status => status && status === AppStatus.APPLICATION_DID_LOAD,
+  (status) => {
+    if (!status) {
+      return false;
+    }
+
+    return status === AppStatus.APPLICATION_DID_LOAD;
+  }
 );

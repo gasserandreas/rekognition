@@ -11,8 +11,8 @@ const StyledContainer = styled(View)`
   color: ${Colors.ColorsPalette.TextFaded};
 `;
 
-const AppLoadingView = () => (
-  <View>
+const AppLoadingView = props => (
+  <View {...props}>
     <StyledContainer>
       <h3>Please stay tuned, app is loading.</h3>
       <LoadingIndicator size={120} />

@@ -16,8 +16,8 @@ import NotFound from './NotFound';
 
 import * as Paths from '../paths';
 
-const AppRoutes = ({ isAuthenticated }) => (
-  <Switch>
+const AppRoutes = ({ isAuthenticated }, ...props) => (
+  <Switch {...props}>
     <PrivateRoute exact path={Paths.HOME} component={ImagesContainer} isAuthenticated={isAuthenticated} />
     <PrivateRoute exact path={Paths.IMAGES} component={ImagesContainer} isAuthenticated={isAuthenticated} />
     <PrivateRoute

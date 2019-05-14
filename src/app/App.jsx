@@ -64,7 +64,7 @@ class App extends Component {
         <StyledAppContent fill justify="between" direction="column">
           <Box flex fill pad="none">
             { didLoad
-              ? <AppRoutes isAuthenticated={isAuthenticated} />
+              ? <AppRoutes id="jestAppRoutes" isAuthenticated={isAuthenticated} />
               : <AppLoadingView />
             }
             <AppFooter />
