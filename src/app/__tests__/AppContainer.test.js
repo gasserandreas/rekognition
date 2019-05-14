@@ -10,16 +10,22 @@ describe('AppContainer test suite', () => {
   });
 
   it('should return props from state', () => {
-    expect(mapStateToProps({}, {})).toEqual({
-      isAuthenticated: false,
-      username: undefined,
-      message: {
-        show: undefined,
-        text: undefined,
-        title: undefined,
-        showRefresh: undefined,
-      },
-    });
+    const { message, ...attrs } = mapStateToProps({}, {});
+
+    // check common keys
+    expect(Object.keys(attrs)).toEqual([
+      'isAuthenticated',
+      'didLoad',
+      'username',
+    ]);
+
+    // check message object
+    expect(Object.keys(message)).toEqual([
+      'show',
+      'text',
+      'title',
+      'showRefresh',
+    ]);
   });
 
   it('should return redux actions', () => {

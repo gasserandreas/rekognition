@@ -9,34 +9,15 @@ import AppFooter from '../AppFooter';
 import AppHeader from '../AppHeader';
 import AppMessage from '../AppMessage';
 import PrivateRoute from '../PrivateRoute';
+import AppLoadingView from '../AppLoadingView';
 
 import { Theme } from '../../styles';
 
 describe('App test suite', () => {
-  // const initialState = {
-  //   auth: {
-  //     username: 'Test',
-  //     meta: {
-  //       loggedIn: true,
-  //     },
-  //   },
-  //   application: {
-  //     message: {
-  //       show: false,
-  //       text: '',
-  //       title: '',
-  //       showRefresh: false,
-  //     },
-  //   },
-  //   images: {
-  //     byId: {},
-  //     ids: [],
-  //   },
-  // };
-
   const mockedData = {
     isAuthenticated: true,
     username: 'Test user',
+    didLoad: true,
     message: {
       show: false,
       text: '',
@@ -56,11 +37,11 @@ describe('App test suite', () => {
 
   it('should render', () => {
     const wrapper = getApp(mockedData);
-    expect(wrapper).toBeTruthy();
+    expect(wrapper.exists()).toBeTruthy();
 
     // should init with Grommet
     const grommet = wrapper.find(Grommet);
-    expect(grommet).toBeTruthy();
+    expect(grommet.exists()).toBeTruthy();
 
     expect(grommet.props().theme).toEqual(Theme);
 
@@ -68,10 +49,10 @@ describe('App test suite', () => {
     const appHeader = wrapper.find(AppHeader);
     const appFooter = wrapper.find(AppFooter);
 
-    // should consits with message, header and footer
-    expect(appMessage).toBeTruthy();
-    expect(appHeader).toBeTruthy();
-    expect(appFooter).toBeTruthy();
+    // should consists with message, header and footer
+    expect(appMessage.exists()).toBeTruthy();
+    expect(appHeader.exists()).toBeTruthy();
+    expect(appFooter.exists()).toBeTruthy();
 
     // check for props
     expect(appMessage.props().message).toEqual(mockedData.message);
@@ -94,7 +75,25 @@ describe('App test suite', () => {
       loadApplication,
     });
 
-    expect(wrapper).toBeTruthy();
+    expect(wrapper.exists()).toBeTruthy();
     expect(loadApplication).toHaveBeenCalled();
+  });
+
+  it('should render AppLoadingView if didLoad is not set', () => {
+    const didLoad = false;
+
+    const wrapper = getApp({
+      ...mockedData,
+      didLoad,
+    });
+
+    expect(wrapper.exists()).toBeTruthy();
+
+    // find app loading view but no router
+    const appLoadingView = wrapper.find(AppLoadingView);
+    const appRoutes = wrapper.find('#jestAppRoutes');
+
+    expect(appLoadingView.exists()).toBeTruthy();
+    expect(appRoutes.exists()).toBeFalsy();
   });
 });

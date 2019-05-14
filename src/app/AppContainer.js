@@ -8,6 +8,7 @@ import { logOutUser } from '../redux/auth';
 import { isAuthenticatedSelector, authUsernameSelector } from '../redux/auth/selectors';
 
 import { loadApplication } from '../redux/application';
+import { applicationDidLoadSelector } from '../redux/application/selectors';
 import {
   messageShowSelector,
   messageTextSelector,
@@ -17,6 +18,7 @@ import {
 
 const mapStateToProps = state => ({
   isAuthenticated: isAuthenticatedSelector(state),
+  didLoad: applicationDidLoadSelector(state),
   username: authUsernameSelector(state),
   message: {
     show: messageShowSelector(state),
