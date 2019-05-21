@@ -87,6 +87,8 @@ exports[`Image test suite should render ImageContainer consistently 1`] = `
   justify-content: center;
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
+  position: relative;
+  display: inline;
 }
 
 .c5 img {
@@ -1708,6 +1710,8 @@ string",
   justify-content: center;
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
+  position: relative;
+  display: inline;
 }
 
 .c4 img {
@@ -7624,6 +7628,10 @@ string",
                         <Styled(AsyncImage)
                           fit="contain"
                           src="https://s3.amazonaws.com/529821714029-rekognition-backend-dev-image-bucket/your/image/test/path"
+                          wrapperStyles="
+            position: relative;
+            display: inline;
+          "
                         >
                           <StyledComponent
                             fit="contain"
@@ -7656,6 +7664,10 @@ string",
                             }
                             forwardedRef={null}
                             src="https://s3.amazonaws.com/529821714029-rekognition-backend-dev-image-bucket/your/image/test/path"
+                            wrapperStyles="
+            position: relative;
+            display: inline;
+          "
                           >
                             <AsyncImage
                               className="c4"
@@ -7663,6 +7675,10 @@ string",
                               neverHideImg={false}
                               onLoad={null}
                               src="https://s3.amazonaws.com/529821714029-rekognition-backend-dev-image-bucket/your/image/test/path"
+                              wrapperStyles="
+            position: relative;
+            display: inline;
+          "
                             >
                               <Styled(WithTheme(Box))
                                 direction="column"
@@ -8546,6 +8562,10 @@ string",
                                     },
                                   }
                                 }
+                                wrapperStyles="
+            position: relative;
+            display: inline;
+          "
                               >
                                 <StyledComponent
                                   direction="column"
@@ -9960,6 +9980,10 @@ string",
                                       },
                                     }
                                   }
+                                  wrapperStyles="
+            position: relative;
+            display: inline;
+          "
                                 >
                                   <WithTheme(Box)
                                     className="c5"
@@ -10844,6 +10868,10 @@ string",
                                         },
                                       }
                                     }
+                                    wrapperStyles="
+            position: relative;
+            display: inline;
+          "
                                   >
                                     <Box
                                       className="c5"
@@ -11728,6 +11756,10 @@ string",
                                           },
                                         }
                                       }
+                                      wrapperStyles="
+            position: relative;
+            display: inline;
+          "
                                     >
                                       <Box
                                         className="c5"
@@ -12613,6 +12645,10 @@ string",
                                             },
                                           }
                                         }
+                                        wrapperStyles="
+            position: relative;
+            display: inline;
+          "
                                       >
                                         <StyledBox
                                           className="c5"
@@ -13497,6 +13533,10 @@ string",
                                               },
                                             }
                                           }
+                                          wrapperStyles="
+            position: relative;
+            display: inline;
+          "
                                         >
                                           <StyledComponent
                                             className="c5"
@@ -14448,6 +14488,10 @@ string",
                                                 },
                                               }
                                             }
+                                            wrapperStyles="
+            position: relative;
+            display: inline;
+          "
                                           >
                                             <div
                                               className="c5 c6"

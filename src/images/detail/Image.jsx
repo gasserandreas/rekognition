@@ -168,7 +168,14 @@ const ImageContainer = ({ image: { meta, path }, selectedFace, selectedLabel }) 
             ))}
           </span>
         )}
-        <StyledAsyncImage src={getImageSrc(path)} fit="contain" />
+        <StyledAsyncImage
+          src={getImageSrc(path)}
+          fit="contain"
+          wrapperStyles={`
+            position: relative;
+            display: inline;
+          `}
+        />
       </StyledImageWrapper>
     </StyledImageContainer>
   );

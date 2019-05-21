@@ -17,6 +17,17 @@ it('Async image should shown with neverHideImg flag set', () => {
   expect(toJson(wrapper.dive())).toMatchSnapshot();
 });
 
+it('Async image should add additional styles if provided', () => {
+  const wrapper = shallow(
+    <AsyncImage
+      src=""
+      wrapperStyles="display: relative"
+      neverHideImg
+    />
+  );
+  expect(toJson(wrapper.dive())).toMatchSnapshot();
+});
+
 it('should show loading spinner while loading only', () => {
   const wrapper = mount(<AsyncImage src="" />);
 
