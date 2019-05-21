@@ -17,8 +17,6 @@ const RegisterContainer = React.lazy(() => import('../auth/register/Container'))
 const Privacy = React.lazy(() => import('./Privacy'));
 const NotFound = React.lazy(() => import('./NotFound'));
 
-// import * as Paths from '../paths';
-
 const AppRoutes = ({ isAuthenticated }, ...props) => (
   <Suspense fallback={<AppLoadingView />}>
     <Switch {...props}>

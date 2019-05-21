@@ -1,5 +1,10 @@
 /* global requestAnimationFrame */
-import { createStore, applyMiddleware, compose } from 'redux';
+import {
+  createStore,
+  applyMiddleware,
+  compose,
+  combineReducers,
+} from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { debounce } from 'lodash';
 import ric from 'ric-shim';
@@ -9,18 +14,38 @@ import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 
 import { createMiddleware, addUnhandledPromiseCatcher } from '../util/ErrorHandler';
-import rootReducer from './rootReducer';
+import rootReducers from './rootReducer';
 
 import configureReactors from './reactors/configureReactors';
 import reactors from './reactors/reactors';
 
-import { APP_IDLE } from './application';
+import { APP_IDLE, APP_RESET } from './application';
 import { logOutUser } from './auth';
 
 import GraphApi from '../util/GraphApi';
 import { getUrl } from '../util/services/networkUtils';
 
 import { addMessage } from './application/message';
+
+const createReducer = (asyncReducers = {}) => {
+  const reducers = combineReducers({
+    ...rootReducers,
+    ...asyncReducers,
+  });
+
+  const newRootReducer = (state, action) => {
+    let usedState = state;
+
+    // handle reset
+    if (action.type === APP_RESET) {
+      usedState = undefined;
+    }
+
+    return reducers(usedState, action);
+  };
+
+  return newRootReducer;
+};
 
 const getPersistedReducer = () => {
   // configure persist store
@@ -31,7 +56,9 @@ const getPersistedReducer = () => {
     stateReconciler: autoMergeLevel2,
   };
 
-  return persistReducer(persistConfig, rootReducer);
+  const reducer = createReducer();
+
+  return persistReducer(persistConfig, reducer);
 };
 
 const getComposeEnhancers = () => {
@@ -129,6 +156,22 @@ const configureStore = (initialState = {}) => {
   // add error handler
   addUnhandledPromiseCatcher(store);
 
+  /**
+   * Enable redux reducer split.
+   * Implementation details found here: https://redux.js.org/recipes/code-splitting
+   */
+  // Add a dictionary to keep track of the registered async reducers
+  store.asyncReducers = {};
+
+  // Create an inject reducer function
+  // This function adds the async reducer, and creates a new combined reducer
+  store.injectReducer = (key, asyncReducer) => {
+    if (!store.asyncReducers[key]) {
+      store.asyncReducers[key] = asyncReducer;
+      store.replaceReducer(createReducer(store.asyncReducers));
+    }
+  };
+
   return {
     store,
     persistor,
@@ -141,6 +184,7 @@ export const __testables__ = {
   getComposeEnhancers,
   getPersistedReducer,
   getErrorOptions,
+  createReducer,
 };
 
 export default configureStore;

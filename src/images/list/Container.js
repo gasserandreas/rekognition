@@ -2,9 +2,14 @@ import { connect } from 'react-redux';
 
 import { sortedImageListSelector, addImageRequestSelector } from '../../redux/images/selectors';
 
-import { listImages } from '../../redux/images';
+import imagesReducer, { listImages } from '../../redux/images';
 
 import ListView from './ListView';
+
+import getStore from '../../redux/getStore';
+
+const { store } = getStore();
+store.injectReducer('images', imagesReducer);
 
 const select = state => ({
   images: sortedImageListSelector(state),
