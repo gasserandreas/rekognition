@@ -1,7 +1,7 @@
 /* global it testUtils */
 import reducer, * as reduxLabels from '../index';
 
-import data from '../__data__/labels';
+import data from '../__data__/labels.json';
 
 const { __testables__ } = reduxLabels;
 

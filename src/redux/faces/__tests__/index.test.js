@@ -1,7 +1,7 @@
 /* global it testUtils */
 import reducer, * as reduxFaces from '../index';
 
-import data from '../__data__/faces';
+import data from '../__data__/faces.json';
 
 const { __testables__ } = reduxFaces;
 
