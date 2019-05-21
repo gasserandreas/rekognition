@@ -5,7 +5,7 @@ const { select, mapDispatchToProps, mapKeyToValue } = __testables__;
 
 describe('image details container test suite', () => {
   const expectedInitialState = {
-    image: undefined,
+    image: {},
     labels: [],
     faces: [],
     selectedFace: null,

@@ -2,10 +2,22 @@
 import { compose } from 'redux';
 
 import configureStore, { __testables__ } from '../configureStore';
+import rootReducers from '../rootReducer';
+
+import { appIdle, appReset, __testables__ as applicationTestables } from '../application';
+import { __testables__ as authTestables } from '../auth';
 
 import { applicationMessageAdd, applicationMessageShow } from '../application/message';
 
-const { getComposeEnhancers, getEnhancers, getErrorOptions } = __testables__;
+const { applicationDidLoad } = applicationTestables;
+const { authSetToken } = authTestables;
+
+const {
+  getComposeEnhancers,
+  getEnhancers,
+  getErrorOptions,
+  createReducer,
+} = __testables__;
 
 it('should create redux store', () => {
   const { store } = configureStore();
@@ -74,6 +86,61 @@ describe('redux getComposeEnhancers test suite', () => {
   });
 });
 
+describe('redux createReducer test suite', () => {
+  let mockedDateNow;
+
+  beforeAll(() => {
+    const now = Date.now();
+    mockedDateNow = jest.spyOn(Date, 'now').mockImplementation(() => now);
+  });
+
+  afterAll(() => {
+    mockedDateNow.restoreMock();
+  });
+
+  it('should create new reducer with static and provided reducers', () => {
+    const dynamicReducers = {
+      demo: () => null,
+    };
+    const rootReducer = createReducer(dynamicReducers);
+
+    const state = rootReducer(undefined, { type: '' });
+
+    expect(state).toBeTruthy();
+
+    const expectedKeys = Object.keys({
+      ...rootReducers,
+      ...dynamicReducers,
+    });
+    expect(Object.keys(state)).toEqual(expectedKeys);
+  });
+
+  it('should create new reducer with static and default empty dynamic reducers', () => {
+    const rootReducer = createReducer();
+
+    const state = rootReducer(undefined, { type: '' });
+
+    expect(state).toBeTruthy();
+
+    expect(Object.keys(state)).toEqual(Object.keys(rootReducers));
+  });
+
+  it('should reset reducer data on APP_RESET', () => {
+    const rootReducer = createReducer();
+
+    // fire some actions to reducer
+    const rootState1 = rootReducer(undefined, appIdle());
+    const rootState2 = rootReducer(rootState1, applicationDidLoad());
+    const rootState3 = rootReducer(rootState2, authSetToken('invalid token'));
+
+    // check for non empty redux state
+    expect(rootState3).not.toEqual(rootReducer(undefined, appIdle));
+
+    // fire reset and check again
+    expect(rootReducer(rootState3, appReset())).toEqual(rootState1);
+  });
+});
+
 describe('redux getEnhancers test suite', () => {
   it('should return default enhancers', () => {
     expect(getEnhancers()).toEqual([]);
@@ -117,5 +184,62 @@ describe('redux getErrorOptions test sutie', () => {
     logToUI(error, dispatch);
 
     expect(store.getActions()).toEqual(expectedActions);
+  });
+});
+
+describe('dynamic reducer creation test suite', () => {
+  let store;
+
+  beforeEach(() => {
+    store = configureStore().store; // eslint-disable-line prefer-destructuring
+  });
+
+  it('should be initialized with empty dynamic reducer and injectReducer function', () => {
+    expect(store.injectReducer).toBeInstanceOf(Function);
+    expect(store.asyncReducers).toEqual({});
+  });
+
+  it('should add new reducer to redux tree', () => {
+    const replaceReducerCallback = jest.fn();
+    const demoReducerCallback = jest.fn();
+
+    store.replaceReducer = replaceReducerCallback;
+
+    expect(replaceReducerCallback).not.toHaveBeenCalled();
+
+    const demoReducer = () => {
+      demoReducerCallback();
+      return null;
+    };
+    store.injectReducer('demo', demoReducer);
+
+    expect(Object.keys(store.asyncReducers)).toEqual(['demo']);
+    expect(store.asyncReducers.demo).toEqual(demoReducer);
+
+    expect(replaceReducerCallback).toHaveBeenCalled();
+  });
+
+  it('should not add new reducer to redux tree if already added', () => {
+    const replaceReducerCallback = jest.fn();
+    const demoReducerCallback = jest.fn();
+
+    store.replaceReducer = replaceReducerCallback;
+
+    expect(replaceReducerCallback).not.toHaveBeenCalled();
+
+    const demoReducer = () => {
+      demoReducerCallback();
+      return null;
+    };
+    store.injectReducer('demo', demoReducer);
+
+    expect(Object.keys(store.asyncReducers)).toEqual(['demo']);
+    expect(store.asyncReducers.demo).toEqual(demoReducer);
+
+    expect(replaceReducerCallback).toHaveBeenCalledTimes(1);
+
+    store.injectReducer('demo', demoReducer);
+    expect(Object.keys(store.asyncReducers)).toEqual(['demo']);
+    expect(replaceReducerCallback).toHaveBeenCalledTimes(1);
   });
 });

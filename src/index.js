@@ -11,10 +11,10 @@ import { PersistGate } from 'redux-persist/integration/react';
 import AppContainer from './app/AppContainer';
 import * as serviceWorker from './serviceWorker';
 
-import configureStore from './redux/configureStore';
+import getStore from './redux/getStore';
 
 // create store object
-const { store, persistor } = configureStore();
+const { store, persistor } = getStore();
 
 // persistor.purge();
 
