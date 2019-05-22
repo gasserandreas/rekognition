@@ -6,7 +6,7 @@ import {
   combineReducers,
 } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import { debounce } from 'lodash';
+import debounce from 'lodash/debounce';
 import ric from 'ric-shim';
 
 import { persistStore, persistReducer } from 'redux-persist';
