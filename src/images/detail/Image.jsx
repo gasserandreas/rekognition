@@ -27,6 +27,7 @@ const StyledSelector = styled.div`
   left: ${props => props.pos.left * 100}%;
   height: ${props => props.pos.height * 100}%;
   width: ${props => props.pos.width * 100}%;
+  z-index: 10;
 `;
 
 // image
