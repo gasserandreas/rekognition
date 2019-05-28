@@ -1,20 +1,13 @@
 import { connect } from 'react-redux';
 
-import imagesReducer, { getImage } from '../../redux/images';
-import labelsReducer from '../../redux/labels';
-import facesReducer from '../../redux/faces';
 import { imagesByIdSelector, getImageRequestSelector } from '../../redux/images/selectors';
 
 import { labelsByImageIdSelector, labelsByIdSelector } from '../../redux/labels/selectors';
 import { facesByImageId, facesByIdSelector } from '../../redux/faces/selectors';
 
-import DetailView from './DetailView';
-import getStore from '../../redux/getStore';
+import { getImage } from '../../redux/images';
 
-const { store } = getStore();
-store.injectReducer('images', imagesReducer);
-store.injectReducer('labels', labelsReducer);
-store.injectReducer('faces', facesReducer);
+import DetailView from './DetailView';
 
 const mapKeyToValue = (searchString) => {
   const params = {};

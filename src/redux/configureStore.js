@@ -156,22 +156,6 @@ const configureStore = (initialState = {}) => {
   // add error handler
   addUnhandledPromiseCatcher(store);
 
-  /**
-   * Enable redux reducer split.
-   * Implementation details found here: https://redux.js.org/recipes/code-splitting
-   */
-  // Add a dictionary to keep track of the registered async reducers
-  store.asyncReducers = {};
-
-  // Create an inject reducer function
-  // This function adds the async reducer, and creates a new combined reducer
-  store.injectReducer = (key, asyncReducer) => {
-    if (!store.asyncReducers[key]) {
-      store.asyncReducers[key] = asyncReducer;
-      store.replaceReducer(createReducer(store.asyncReducers));
-    }
-  };
-
   return {
     store,
     persistor,
