@@ -1,3 +1,4 @@
+/* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -26,7 +27,6 @@ class App extends Component {
   static propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
     didLoad: PropTypes.bool.isRequired,
-    loadApplication: PropTypes.func.isRequired,
     username: PropTypes.string,
     message: PropTypes.shape({
       show: PropTypes.bool,
@@ -38,10 +38,6 @@ class App extends Component {
 
   static defaultProps = {
     username: undefined,
-  }
-
-  componentWillMount() {
-    this.props.loadApplication();
   }
 
   render() {

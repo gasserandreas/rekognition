@@ -29,7 +29,7 @@ describe('App test suite', () => {
   const getApp = (props, initialPath = '/random') => {
     const router = mount(
       <MemoryRouter initialEntries={[initialPath]}>
-        <App loadApplication={jest.fn()} {...props} />
+        <App {...props} />
       </MemoryRouter>,
     );
     return router;
@@ -65,18 +65,6 @@ describe('App test suite', () => {
     privateRoutes.forEach((privateRoute) => {
       expect(privateRoute.props().isAuthenticated).toEqual(mockedData.isAuthenticated);
     });
-  });
-
-  it('should load application on start', () => {
-    const loadApplication = jest.fn();
-
-    const wrapper = getApp({
-      ...mockedData,
-      loadApplication,
-    });
-
-    expect(wrapper.exists()).toBeTruthy();
-    expect(loadApplication).toHaveBeenCalled();
   });
 
   it('should render AppLoadingView if didLoad is not set', () => {

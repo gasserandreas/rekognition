@@ -7,7 +7,6 @@ import App from './App';
 import { logOutUser } from '../redux/auth';
 import { isAuthenticatedSelector, authUsernameSelector } from '../redux/auth/selectors';
 
-import { loadApplication } from '../redux/application';
 import { applicationDidLoadSelector } from '../redux/application/selectors';
 import {
   messageShowSelector,
@@ -29,7 +28,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  loadApplication,
   logOutUser,
 };
 
