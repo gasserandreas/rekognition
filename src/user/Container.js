@@ -3,15 +3,10 @@ import { connect } from 'react-redux';
 import { logOutUser } from '../redux/auth';
 import { authMetaSelector } from '../redux/auth/selectors';
 
-import userReducer, { getUserInfo, updateUser } from '../redux/user';
+import { getUserInfo, updateUser } from '../redux/user';
 import { getUserInfoRequestSelector, updateUserRequestSelector, userSelector } from '../redux/user/selectors';
 
 import UserView from './UserView';
-
-import getStore from '../redux/getStore';
-
-const { store } = getStore();
-store.injectReducer('user', userReducer);
 
 const select = state => ({
   user: userSelector(state),
