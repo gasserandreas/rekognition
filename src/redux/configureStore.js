@@ -19,7 +19,7 @@ import rootReducers from './rootReducer';
 import configureReactors from './reactors/configureReactors';
 import reactors from './reactors/reactors';
 
-import { APP_IDLE, APP_RESET } from './application';
+import { APP_IDLE, APP_RESET, loadApplication } from './application';
 import { logOutUser } from './auth';
 
 import GraphApi from '../util/GraphApi';
@@ -52,7 +52,9 @@ const getPersistedReducer = () => {
   const persistConfig = {
     key: 'rekognition',
     storage,
-    whitelist: [],
+    whitelist: [
+      'auth',
+    ],
     stateReconciler: autoMergeLevel2,
   };
 
@@ -124,7 +126,7 @@ const configureStore = (initialState = {}) => {
     composeEnhancers(applyMiddleware(...middleware), ...enhancers),
   );
 
-  const persistor = persistStore(store);
+  const persistor = persistStore(store, null, () => store.dispatch(loadApplication()));
 
   // add reactors
   store.subscribe(configureReactors(store, reactors));

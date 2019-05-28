@@ -1,6 +1,5 @@
 import Container, { __testables__ } from '../AppContainer';
 import { logOutUser } from '../../redux/auth';
-import { loadApplication } from '../../redux/application';
 
 const { mapStateToProps, mapDispatchToProps } = __testables__;
 
@@ -30,7 +29,6 @@ describe('AppContainer test suite', () => {
 
   it('should return redux actions', () => {
     expect(mapDispatchToProps).toEqual({
-      loadApplication,
       logOutUser,
     });
   });
