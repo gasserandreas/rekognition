@@ -10,11 +10,20 @@ const appTimeSelector = state => state.appTime;
 const refreshTime = 180000;
 // const refreshTime = 30000;
 
+const isStateLoaded = key => state => state[key] !== undefined;
+
 const checkStaleImageData = createSelector(
+  isStateLoaded('images'),
   isAuthenticatedSelector,
   appTimeSelector,
   imagesListRequestSelector,
-  (isAuthenticated, appTime, { lastFetch, loading }) => {
+  (isLoaded, isAuthenticated, appTime, imagesListRequest) => {
+    if (!isLoaded) {
+      return null;
+    }
+
+    const { lastFetch, loading } = imagesListRequest;
+
     if (!isAuthenticated) {
       return null;
     }

@@ -84,6 +84,16 @@ describe('DetailView test suite', () => {
     expect(addImageButton.exists()).toBeTruthy();
   });
 
+  it('should not render Image component if no image id is provided', () => {
+    const wrapper = getDetailView({
+      image: {},
+    });
+    expect(wrapper.exists()).toBeTruthy();
+
+    const image = wrapper.find(Image);
+    expect(image.exists()).toBeFalsy();
+  });
+
   it('should render image with props', () => {
     const wrapper = getDetailView();
     expect(wrapper.exists()).toBeTruthy();
@@ -253,6 +263,10 @@ describe('DetailView test suite', () => {
         value: '72 DPI',
       },
     ]);
+  });
+
+  it('should return empty array if no meta is provided', () => {
+    expect(convertMetaToAttributes(undefined)).toEqual([]);
   });
 
   it('should filter out invalid image meta properties', () => {

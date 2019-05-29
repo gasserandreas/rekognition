@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
 
-import { getImage } from '../../redux/images';
 import { imagesByIdSelector, getImageRequestSelector } from '../../redux/images/selectors';
 
 import { labelsByImageIdSelector, labelsByIdSelector } from '../../redux/labels/selectors';
 import { facesByImageId, facesByIdSelector } from '../../redux/faces/selectors';
+
+import { getImage } from '../../redux/images';
 
 import DetailView from './DetailView';
 
@@ -36,7 +37,7 @@ const select = (state, props) => {
   } = props;
 
   const byId = imagesByIdSelector(state);
-  const image = byId[id];
+  const image = byId[id] || {};
 
   const params = mapKeyToValue(search);
 

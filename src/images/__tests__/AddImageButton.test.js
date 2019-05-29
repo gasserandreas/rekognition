@@ -151,8 +151,15 @@ describe('AddImageButton test suite', () => {
       // replace afterOnClick prop
       wrapper.setProps({ afterOnClick: undefined });
 
+      const dropzone = wrapper.find(Dropzone);
+      expect(dropzone.exists()).toBeTruthy();
+
       // fire event
-      wrapper.simulate('drop');
+      dropzone.simulate('drop', [
+        {
+          size: maxFileSize + 1,
+        },
+      ]);
 
       expect(initialProps.addImage).not.toHaveBeenCalled();
     });

@@ -122,6 +122,10 @@ const StyledView = styled(View)`
 `;
 
 const convertMetaToAttributes = (meta) => {
+  if (!meta) {
+    return [];
+  }
+
   const {
     density, height, width, type, size,
   } = meta;
@@ -153,7 +157,7 @@ const DetailView = ({
 
   useEffect(() => {
     // request labels and faces from backend if not yet in store
-    if (labels.length === 0 && faces.length === 0) {
+    if (imageId && labels.length === 0 && faces.length === 0) {
       getImage(imageId);
     }
   }, [imageId, faces.length, labels.length, getImage]);
@@ -184,7 +188,9 @@ const DetailView = ({
       <AddImageButton afterOnClick={() => history.push(Paths.HOME)} />
       <StyledImageBox fill>
         <StyledImageBoxContainer>
-          <Image image={image} selectedLabel={selectedLabel} selectedFace={selectedFace} />
+          { imageId
+            ? <Image image={image} selectedLabel={selectedLabel} selectedFace={selectedFace} />
+            : null }
         </StyledImageBoxContainer>
       </StyledImageBox>
       <StyledDataBox pad={{ vertical: 'none', horizontal: 'small' }}>
@@ -228,8 +234,8 @@ Faces (
 DetailView.propTypes = {
   history: HistoryPropType.isRequired,
   image: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    path: PropTypes.string.isRequired,
+    id: PropTypes.string,
+    path: PropTypes.string,
     name: PropTypes.string,
     type: PropTypes.string,
   }).isRequired,

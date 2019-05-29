@@ -1,6 +1,5 @@
 import Container, { __testables__ } from '../AppContainer';
 import { logOutUser } from '../../redux/auth';
-import { loadApplication } from '../../redux/application';
 
 const { mapStateToProps, mapDispatchToProps } = __testables__;
 
@@ -10,21 +9,26 @@ describe('AppContainer test suite', () => {
   });
 
   it('should return props from state', () => {
-    expect(mapStateToProps({}, {})).toEqual({
-      isAuthenticated: false,
-      username: undefined,
-      message: {
-        show: undefined,
-        text: undefined,
-        title: undefined,
-        showRefresh: undefined,
-      },
-    });
+    const { message, ...attrs } = mapStateToProps({}, {});
+
+    // check common keys
+    expect(Object.keys(attrs)).toEqual([
+      'isAuthenticated',
+      'didLoad',
+      'username',
+    ]);
+
+    // check message object
+    expect(Object.keys(message)).toEqual([
+      'show',
+      'text',
+      'title',
+      'showRefresh',
+    ]);
   });
 
   it('should return redux actions', () => {
     expect(mapDispatchToProps).toEqual({
-      loadApplication,
       logOutUser,
     });
   });

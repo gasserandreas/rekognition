@@ -1,7 +1,12 @@
 /* global requestAnimationFrame */
-import { createStore, applyMiddleware, compose } from 'redux';
+import {
+  createStore,
+  applyMiddleware,
+  compose,
+  combineReducers,
+} from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import { debounce } from 'lodash';
+import debounce from 'lodash/debounce';
 import ric from 'ric-shim';
 
 import { persistStore, persistReducer } from 'redux-persist';
@@ -9,12 +14,12 @@ import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 
 import { createMiddleware, addUnhandledPromiseCatcher } from '../util/ErrorHandler';
-import rootReducer from './rootReducer';
+import rootReducers from './rootReducer';
 
 import configureReactors from './reactors/configureReactors';
 import reactors from './reactors/reactors';
 
-import { APP_IDLE } from './application';
+import { APP_IDLE, APP_RESET, loadApplication } from './application';
 import { logOutUser } from './auth';
 
 import GraphApi from '../util/GraphApi';
@@ -22,16 +27,40 @@ import { getUrl } from '../util/services/networkUtils';
 
 import { addMessage } from './application/message';
 
+const createReducer = (asyncReducers = {}) => {
+  const reducers = combineReducers({
+    ...rootReducers,
+    ...asyncReducers,
+  });
+
+  const newRootReducer = (state, action) => {
+    let usedState = state;
+
+    // handle reset
+    if (action.type === APP_RESET) {
+      usedState = undefined;
+    }
+
+    return reducers(usedState, action);
+  };
+
+  return newRootReducer;
+};
+
 const getPersistedReducer = () => {
   // configure persist store
   const persistConfig = {
     key: 'rekognition',
     storage,
-    whitelist: [],
+    whitelist: [
+      'auth',
+    ],
     stateReconciler: autoMergeLevel2,
   };
 
-  return persistReducer(persistConfig, rootReducer);
+  const reducer = createReducer();
+
+  return persistReducer(persistConfig, reducer);
 };
 
 const getComposeEnhancers = () => {
@@ -97,7 +126,7 @@ const configureStore = (initialState = {}) => {
     composeEnhancers(applyMiddleware(...middleware), ...enhancers),
   );
 
-  const persistor = persistStore(store);
+  const persistor = persistStore(store, null, () => store.dispatch(loadApplication()));
 
   // add reactors
   store.subscribe(configureReactors(store, reactors));
@@ -141,6 +170,7 @@ export const __testables__ = {
   getComposeEnhancers,
   getPersistedReducer,
   getErrorOptions,
+  createReducer,
 };
 
 export default configureStore;

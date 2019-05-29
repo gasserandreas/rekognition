@@ -1,3 +1,4 @@
+/* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -8,6 +9,8 @@ import AppMessage from './AppMessage';
 import AppHeader from './AppHeader';
 import AppFooter from './AppFooter';
 import AppRoutes from './AppRoutes';
+
+import AppLoadingView from './AppLoadingView';
 
 import { Theme } from '../styles';
 
@@ -23,7 +26,7 @@ const StyledAppContent = styled(Box)`
 class App extends Component {
   static propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
-    loadApplication: PropTypes.func.isRequired,
+    didLoad: PropTypes.bool.isRequired,
     username: PropTypes.string,
     message: PropTypes.shape({
       show: PropTypes.bool,
@@ -37,12 +40,14 @@ class App extends Component {
     username: undefined,
   }
 
-  componentWillMount() {
-    this.props.loadApplication();
-  }
-
   render() {
-    const { isAuthenticated, username, message } = this.props;
+    const {
+      isAuthenticated,
+      didLoad,
+      username,
+      message,
+    } = this.props;
+
     return (
       <Grommet theme={Theme} full>
         <AppMessage
@@ -54,7 +59,10 @@ class App extends Component {
         />
         <StyledAppContent fill justify="between" direction="column">
           <Box flex fill pad="none">
-            <AppRoutes isAuthenticated={isAuthenticated} />
+            { didLoad
+              ? <AppRoutes id="jestAppRoutes" isAuthenticated={isAuthenticated} />
+              : <AppLoadingView />
+            }
             <AppFooter />
           </Box>
         </StyledAppContent>

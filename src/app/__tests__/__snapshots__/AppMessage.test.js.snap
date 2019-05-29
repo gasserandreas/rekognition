@@ -463,6 +463,16 @@ exports[`AppMessage test suite should render AppMessage 1`] = `
             },
           },
           "global": Object {
+            "active": Object {
+              "background": Object {
+                "color": "active",
+                "opacity": "medium",
+              },
+              "color": Object {
+                "dark": "white",
+                "light": "black",
+              },
+            },
             "animation": Object {
               "duration": "1s",
               "jiggle": Object {
@@ -634,14 +644,8 @@ exports[`AppMessage test suite should render AppMessage 1`] = `
             },
             "hover": Object {
               "background": Object {
-                "dark": Object {
-                  "color": "active",
-                  "opacity": "medium",
-                },
-                "light": Object {
-                  "color": "active",
-                  "opacity": "medium",
-                },
+                "color": "active",
+                "opacity": "medium",
               },
               "color": Object {
                 "dark": "white",
@@ -923,6 +927,9 @@ exports[`AppMessage test suite should render AppMessage 1`] = `
             "control": Object {},
             "icons": Object {
               "down": [Function],
+              "margin": Object {
+                "horizontal": "small",
+              },
             },
             "options": Object {
               "box": Object {
@@ -1286,10 +1293,11 @@ zoomOut
   image: string,
   position: string,
   opacity: 
+    boolean
+    number
     weak
     medium
-    strong
-    boolean,
+    strong,
   repeat: 
     no-repeat
     repeat
@@ -1597,9 +1605,9 @@ string",
               },
               Object {
                 "defaultValue": false,
-                "description": "Whether children can wrap if they
-      can't all fit.",
-                "format": "boolean",
+                "description": "Whether children can wrap if they can't all fit.",
+                "format": "boolean
+reverse",
                 "name": "wrap",
               },
             ],
@@ -1878,6 +1886,16 @@ string",
               },
             },
             "global": Object {
+              "active": Object {
+                "background": Object {
+                  "color": "active",
+                  "opacity": "medium",
+                },
+                "color": Object {
+                  "dark": "white",
+                  "light": "black",
+                },
+              },
               "animation": Object {
                 "duration": "1s",
                 "jiggle": Object {
@@ -2049,14 +2067,8 @@ string",
               },
               "hover": Object {
                 "background": Object {
-                  "dark": Object {
-                    "color": "active",
-                    "opacity": "medium",
-                  },
-                  "light": Object {
-                    "color": "active",
-                    "opacity": "medium",
-                  },
+                  "color": "active",
+                  "opacity": "medium",
                 },
                 "color": Object {
                   "dark": "white",
@@ -2338,6 +2350,9 @@ string",
               "control": Object {},
               "icons": Object {
                 "down": [Function],
+                "margin": Object {
+                  "horizontal": "small",
+                },
               },
               "options": Object {
                 "box": Object {
@@ -2763,6 +2778,16 @@ string",
                 },
               },
               "global": Object {
+                "active": Object {
+                  "background": Object {
+                    "color": "active",
+                    "opacity": "medium",
+                  },
+                  "color": Object {
+                    "dark": "white",
+                    "light": "black",
+                  },
+                },
                 "animation": Object {
                   "duration": "1s",
                   "jiggle": Object {
@@ -2934,14 +2959,8 @@ string",
                 },
                 "hover": Object {
                   "background": Object {
-                    "dark": Object {
-                      "color": "active",
-                      "opacity": "medium",
-                    },
-                    "light": Object {
-                      "color": "active",
-                      "opacity": "medium",
-                    },
+                    "color": "active",
+                    "opacity": "medium",
                   },
                   "color": Object {
                     "dark": "white",
@@ -3223,6 +3242,9 @@ string",
                 "control": Object {},
                 "icons": Object {
                   "down": [Function],
+                  "margin": Object {
+                    "horizontal": "small",
+                  },
                 },
                 "options": Object {
                   "box": Object {
@@ -3648,6 +3670,16 @@ string",
                   },
                 },
                 "global": Object {
+                  "active": Object {
+                    "background": Object {
+                      "color": "active",
+                      "opacity": "medium",
+                    },
+                    "color": Object {
+                      "dark": "white",
+                      "light": "black",
+                    },
+                  },
                   "animation": Object {
                     "duration": "1s",
                     "jiggle": Object {
@@ -3819,14 +3851,8 @@ string",
                   },
                   "hover": Object {
                     "background": Object {
-                      "dark": Object {
-                        "color": "active",
-                        "opacity": "medium",
-                      },
-                      "light": Object {
-                        "color": "active",
-                        "opacity": "medium",
-                      },
+                      "color": "active",
+                      "opacity": "medium",
                     },
                     "color": Object {
                       "dark": "white",
@@ -4108,6 +4134,9 @@ string",
                   "control": Object {},
                   "icons": Object {
                     "down": [Function],
+                    "margin": Object {
+                      "horizontal": "small",
+                    },
                   },
                   "options": Object {
                     "box": Object {
@@ -4534,6 +4563,16 @@ string",
                     },
                   },
                   "global": Object {
+                    "active": Object {
+                      "background": Object {
+                        "color": "active",
+                        "opacity": "medium",
+                      },
+                      "color": Object {
+                        "dark": "white",
+                        "light": "black",
+                      },
+                    },
                     "animation": Object {
                       "duration": "1s",
                       "jiggle": Object {
@@ -4705,14 +4744,8 @@ string",
                     },
                     "hover": Object {
                       "background": Object {
-                        "dark": Object {
-                          "color": "active",
-                          "opacity": "medium",
-                        },
-                        "light": Object {
-                          "color": "active",
-                          "opacity": "medium",
-                        },
+                        "color": "active",
+                        "opacity": "medium",
                       },
                       "color": Object {
                         "dark": "white",
@@ -4994,6 +5027,9 @@ string",
                     "control": Object {},
                     "icons": Object {
                       "down": [Function],
+                      "margin": Object {
+                        "horizontal": "small",
+                      },
                     },
                     "options": Object {
                       "box": Object {
@@ -5419,6 +5455,16 @@ string",
                       },
                     },
                     "global": Object {
+                      "active": Object {
+                        "background": Object {
+                          "color": "active",
+                          "opacity": "medium",
+                        },
+                        "color": Object {
+                          "dark": "white",
+                          "light": "black",
+                        },
+                      },
                       "animation": Object {
                         "duration": "1s",
                         "jiggle": Object {
@@ -5590,14 +5636,8 @@ string",
                       },
                       "hover": Object {
                         "background": Object {
-                          "dark": Object {
-                            "color": "active",
-                            "opacity": "medium",
-                          },
-                          "light": Object {
-                            "color": "active",
-                            "opacity": "medium",
-                          },
+                          "color": "active",
+                          "opacity": "medium",
                         },
                         "color": Object {
                           "dark": "white",
@@ -5879,6 +5919,9 @@ string",
                       "control": Object {},
                       "icons": Object {
                         "down": [Function],
+                        "margin": Object {
+                          "horizontal": "small",
+                        },
                       },
                       "options": Object {
                         "box": Object {
@@ -6371,6 +6414,16 @@ string",
                         },
                       },
                       "global": Object {
+                        "active": Object {
+                          "background": Object {
+                            "color": "active",
+                            "opacity": "medium",
+                          },
+                          "color": Object {
+                            "dark": "white",
+                            "light": "black",
+                          },
+                        },
                         "animation": Object {
                           "duration": "1s",
                           "jiggle": Object {
@@ -6542,14 +6595,8 @@ string",
                         },
                         "hover": Object {
                           "background": Object {
-                            "dark": Object {
-                              "color": "active",
-                              "opacity": "medium",
-                            },
-                            "light": Object {
-                              "color": "active",
-                              "opacity": "medium",
-                            },
+                            "color": "active",
+                            "opacity": "medium",
                           },
                           "color": Object {
                             "dark": "white",
@@ -6831,6 +6878,9 @@ string",
                         "control": Object {},
                         "icons": Object {
                           "down": [Function],
+                          "margin": Object {
+                            "horizontal": "small",
+                          },
                         },
                         "options": Object {
                           "box": Object {
@@ -7258,6 +7308,16 @@ string",
                             },
                           },
                           "global": Object {
+                            "active": Object {
+                              "background": Object {
+                                "color": "active",
+                                "opacity": "medium",
+                              },
+                              "color": Object {
+                                "dark": "white",
+                                "light": "black",
+                              },
+                            },
                             "animation": Object {
                               "duration": "1s",
                               "jiggle": Object {
@@ -7429,14 +7489,8 @@ string",
                             },
                             "hover": Object {
                               "background": Object {
-                                "dark": Object {
-                                  "color": "active",
-                                  "opacity": "medium",
-                                },
-                                "light": Object {
-                                  "color": "active",
-                                  "opacity": "medium",
-                                },
+                                "color": "active",
+                                "opacity": "medium",
                               },
                               "color": Object {
                                 "dark": "white",
@@ -7718,6 +7772,9 @@ string",
                             "control": Object {},
                             "icons": Object {
                               "down": [Function],
+                              "margin": Object {
+                                "horizontal": "small",
+                              },
                             },
                             "options": Object {
                               "box": Object {
@@ -8082,10 +8139,11 @@ zoomOut
   image: string,
   position: string,
   opacity: 
+    boolean
+    number
     weak
     medium
-    strong
-    boolean,
+    strong,
   repeat: 
     no-repeat
     repeat
@@ -8393,9 +8451,9 @@ string",
                               },
                               Object {
                                 "defaultValue": false,
-                                "description": "Whether children can wrap if they
-      can't all fit.",
-                                "format": "boolean",
+                                "description": "Whether children can wrap if they can't all fit.",
+                                "format": "boolean
+reverse",
                                 "name": "wrap",
                               },
                             ],
@@ -8673,6 +8731,16 @@ string",
                               },
                             },
                             "global": Object {
+                              "active": Object {
+                                "background": Object {
+                                  "color": "active",
+                                  "opacity": "medium",
+                                },
+                                "color": Object {
+                                  "dark": "white",
+                                  "light": "black",
+                                },
+                              },
                               "animation": Object {
                                 "duration": "1s",
                                 "jiggle": Object {
@@ -8844,14 +8912,8 @@ string",
                               },
                               "hover": Object {
                                 "background": Object {
-                                  "dark": Object {
-                                    "color": "active",
-                                    "opacity": "medium",
-                                  },
-                                  "light": Object {
-                                    "color": "active",
-                                    "opacity": "medium",
-                                  },
+                                  "color": "active",
+                                  "opacity": "medium",
                                 },
                                 "color": Object {
                                   "dark": "white",
@@ -9133,6 +9195,9 @@ string",
                               "control": Object {},
                               "icons": Object {
                                 "down": [Function],
+                                "margin": Object {
+                                  "horizontal": "small",
+                                },
                               },
                               "options": Object {
                                 "box": Object {
@@ -9558,6 +9623,16 @@ string",
                                 },
                               },
                               "global": Object {
+                                "active": Object {
+                                  "background": Object {
+                                    "color": "active",
+                                    "opacity": "medium",
+                                  },
+                                  "color": Object {
+                                    "dark": "white",
+                                    "light": "black",
+                                  },
+                                },
                                 "animation": Object {
                                   "duration": "1s",
                                   "jiggle": Object {
@@ -9729,14 +9804,8 @@ string",
                                 },
                                 "hover": Object {
                                   "background": Object {
-                                    "dark": Object {
-                                      "color": "active",
-                                      "opacity": "medium",
-                                    },
-                                    "light": Object {
-                                      "color": "active",
-                                      "opacity": "medium",
-                                    },
+                                    "color": "active",
+                                    "opacity": "medium",
                                   },
                                   "color": Object {
                                     "dark": "white",
@@ -10018,6 +10087,9 @@ string",
                                 "control": Object {},
                                 "icons": Object {
                                   "down": [Function],
+                                  "margin": Object {
+                                    "horizontal": "small",
+                                  },
                                 },
                                 "options": Object {
                                   "box": Object {
@@ -10443,6 +10515,16 @@ string",
                                   },
                                 },
                                 "global": Object {
+                                  "active": Object {
+                                    "background": Object {
+                                      "color": "active",
+                                      "opacity": "medium",
+                                    },
+                                    "color": Object {
+                                      "dark": "white",
+                                      "light": "black",
+                                    },
+                                  },
                                   "animation": Object {
                                     "duration": "1s",
                                     "jiggle": Object {
@@ -10614,14 +10696,8 @@ string",
                                   },
                                   "hover": Object {
                                     "background": Object {
-                                      "dark": Object {
-                                        "color": "active",
-                                        "opacity": "medium",
-                                      },
-                                      "light": Object {
-                                        "color": "active",
-                                        "opacity": "medium",
-                                      },
+                                      "color": "active",
+                                      "opacity": "medium",
                                     },
                                     "color": Object {
                                       "dark": "white",
@@ -10903,6 +10979,9 @@ string",
                                   "control": Object {},
                                   "icons": Object {
                                     "down": [Function],
+                                    "margin": Object {
+                                      "horizontal": "small",
+                                    },
                                   },
                                   "options": Object {
                                     "box": Object {
@@ -11329,6 +11408,16 @@ string",
                                     },
                                   },
                                   "global": Object {
+                                    "active": Object {
+                                      "background": Object {
+                                        "color": "active",
+                                        "opacity": "medium",
+                                      },
+                                      "color": Object {
+                                        "dark": "white",
+                                        "light": "black",
+                                      },
+                                    },
                                     "animation": Object {
                                       "duration": "1s",
                                       "jiggle": Object {
@@ -11500,14 +11589,8 @@ string",
                                     },
                                     "hover": Object {
                                       "background": Object {
-                                        "dark": Object {
-                                          "color": "active",
-                                          "opacity": "medium",
-                                        },
-                                        "light": Object {
-                                          "color": "active",
-                                          "opacity": "medium",
-                                        },
+                                        "color": "active",
+                                        "opacity": "medium",
                                       },
                                       "color": Object {
                                         "dark": "white",
@@ -11789,6 +11872,9 @@ string",
                                     "control": Object {},
                                     "icons": Object {
                                       "down": [Function],
+                                      "margin": Object {
+                                        "horizontal": "small",
+                                      },
                                     },
                                     "options": Object {
                                       "box": Object {
@@ -12214,6 +12300,16 @@ string",
                                       },
                                     },
                                     "global": Object {
+                                      "active": Object {
+                                        "background": Object {
+                                          "color": "active",
+                                          "opacity": "medium",
+                                        },
+                                        "color": Object {
+                                          "dark": "white",
+                                          "light": "black",
+                                        },
+                                      },
                                       "animation": Object {
                                         "duration": "1s",
                                         "jiggle": Object {
@@ -12385,14 +12481,8 @@ string",
                                       },
                                       "hover": Object {
                                         "background": Object {
-                                          "dark": Object {
-                                            "color": "active",
-                                            "opacity": "medium",
-                                          },
-                                          "light": Object {
-                                            "color": "active",
-                                            "opacity": "medium",
-                                          },
+                                          "color": "active",
+                                          "opacity": "medium",
                                         },
                                         "color": Object {
                                           "dark": "white",
@@ -12674,6 +12764,9 @@ string",
                                       "control": Object {},
                                       "icons": Object {
                                         "down": [Function],
+                                        "margin": Object {
+                                          "horizontal": "small",
+                                        },
                                       },
                                       "options": Object {
                                         "box": Object {
@@ -13166,6 +13259,16 @@ string",
                                         },
                                       },
                                       "global": Object {
+                                        "active": Object {
+                                          "background": Object {
+                                            "color": "active",
+                                            "opacity": "medium",
+                                          },
+                                          "color": Object {
+                                            "dark": "white",
+                                            "light": "black",
+                                          },
+                                        },
                                         "animation": Object {
                                           "duration": "1s",
                                           "jiggle": Object {
@@ -13337,14 +13440,8 @@ string",
                                         },
                                         "hover": Object {
                                           "background": Object {
-                                            "dark": Object {
-                                              "color": "active",
-                                              "opacity": "medium",
-                                            },
-                                            "light": Object {
-                                              "color": "active",
-                                              "opacity": "medium",
-                                            },
+                                            "color": "active",
+                                            "opacity": "medium",
                                           },
                                           "color": Object {
                                             "dark": "white",
@@ -13626,6 +13723,9 @@ string",
                                         "control": Object {},
                                         "icons": Object {
                                           "down": [Function],
+                                          "margin": Object {
+                                            "horizontal": "small",
+                                          },
                                         },
                                         "options": Object {
                                           "box": Object {
@@ -13833,6 +13933,7 @@ string",
                                               <Styled(WithTheme(Button))
                                                 buttonStyle="primary"
                                                 focusIndicator={true}
+                                                gap="small"
                                                 onClick={[Function]}
                                                 theme={
                                                   Object {
@@ -14099,6 +14200,16 @@ string",
                                                       },
                                                     },
                                                     "global": Object {
+                                                      "active": Object {
+                                                        "background": Object {
+                                                          "color": "active",
+                                                          "opacity": "medium",
+                                                        },
+                                                        "color": Object {
+                                                          "dark": "white",
+                                                          "light": "black",
+                                                        },
+                                                      },
                                                       "animation": Object {
                                                         "duration": "1s",
                                                         "jiggle": Object {
@@ -14270,14 +14381,8 @@ string",
                                                       },
                                                       "hover": Object {
                                                         "background": Object {
-                                                          "dark": Object {
-                                                            "color": "active",
-                                                            "opacity": "medium",
-                                                          },
-                                                          "light": Object {
-                                                            "color": "active",
-                                                            "opacity": "medium",
-                                                          },
+                                                          "color": "active",
+                                                          "opacity": "medium",
                                                         },
                                                         "color": Object {
                                                           "dark": "white",
@@ -14559,6 +14664,9 @@ string",
                                                       "control": Object {},
                                                       "icons": Object {
                                                         "down": [Function],
+                                                        "margin": Object {
+                                                          "horizontal": "small",
+                                                        },
                                                       },
                                                       "options": Object {
                                                         "box": Object {
@@ -14843,8 +14951,10 @@ string",
                                                         },
                                                         Object {
                                                           "defaultValue": false,
-                                                          "description": "Whether the button expands to fill all of the available width and height.",
-                                                          "format": "boolean",
+                                                          "description": "Whether the button expands to fill all of the available width and/or height.",
+                                                          "format": "horizontal
+vertical
+boolean",
                                                           "name": "fill",
                                                         },
                                                         Object {
@@ -14878,6 +14988,18 @@ background
                                                           "description": "Icon element to place in the button.",
                                                           "format": "element",
                                                           "name": "icon",
+                                                        },
+                                                        Object {
+                                                          "defaultValue": "small",
+                                                          "description": "The amount of spacing between icon and label in the button.",
+                                                          "format": "xxsmall
+xsmall
+small
+medium
+large
+xlarge
+string",
+                                                          "name": "gap",
                                                         },
                                                         Object {
                                                           "description": "Label text to place in the button.",
@@ -14931,6 +15053,7 @@ function",
                                                     }
                                                   }
                                                   forwardedRef={null}
+                                                  gap="small"
                                                   onClick={[Function]}
                                                   theme={
                                                     Object {
@@ -15197,6 +15320,16 @@ function",
                                                         },
                                                       },
                                                       "global": Object {
+                                                        "active": Object {
+                                                          "background": Object {
+                                                            "color": "active",
+                                                            "opacity": "medium",
+                                                          },
+                                                          "color": Object {
+                                                            "dark": "white",
+                                                            "light": "black",
+                                                          },
+                                                        },
                                                         "animation": Object {
                                                           "duration": "1s",
                                                           "jiggle": Object {
@@ -15368,14 +15501,8 @@ function",
                                                         },
                                                         "hover": Object {
                                                           "background": Object {
-                                                            "dark": Object {
-                                                              "color": "active",
-                                                              "opacity": "medium",
-                                                            },
-                                                            "light": Object {
-                                                              "color": "active",
-                                                              "opacity": "medium",
-                                                            },
+                                                            "color": "active",
+                                                            "opacity": "medium",
                                                           },
                                                           "color": Object {
                                                             "dark": "white",
@@ -15657,6 +15784,9 @@ function",
                                                         "control": Object {},
                                                         "icons": Object {
                                                           "down": [Function],
+                                                          "margin": Object {
+                                                            "horizontal": "small",
+                                                          },
                                                         },
                                                         "options": Object {
                                                           "box": Object {
@@ -15814,6 +15944,7 @@ function",
                                                     buttonStyle="primary"
                                                     className="c5"
                                                     focusIndicator={true}
+                                                    gap="small"
                                                     onClick={[Function]}
                                                     theme={
                                                       Object {
@@ -16080,6 +16211,16 @@ function",
                                                           },
                                                         },
                                                         "global": Object {
+                                                          "active": Object {
+                                                            "background": Object {
+                                                              "color": "active",
+                                                              "opacity": "medium",
+                                                            },
+                                                            "color": Object {
+                                                              "dark": "white",
+                                                              "light": "black",
+                                                            },
+                                                          },
                                                           "animation": Object {
                                                             "duration": "1s",
                                                             "jiggle": Object {
@@ -16251,14 +16392,8 @@ function",
                                                           },
                                                           "hover": Object {
                                                             "background": Object {
-                                                              "dark": Object {
-                                                                "color": "active",
-                                                                "opacity": "medium",
-                                                              },
-                                                              "light": Object {
-                                                                "color": "active",
-                                                                "opacity": "medium",
-                                                              },
+                                                              "color": "active",
+                                                              "opacity": "medium",
                                                             },
                                                             "color": Object {
                                                               "dark": "white",
@@ -16540,6 +16675,9 @@ function",
                                                           "control": Object {},
                                                           "icons": Object {
                                                             "down": [Function],
+                                                            "margin": Object {
+                                                              "horizontal": "small",
+                                                            },
                                                           },
                                                           "options": Object {
                                                             "box": Object {
@@ -16697,6 +16835,7 @@ function",
                                                       buttonStyle="primary"
                                                       className="c5"
                                                       focusIndicator={true}
+                                                      gap="small"
                                                       onClick={[Function]}
                                                       theme={
                                                         Object {
@@ -16963,6 +17102,16 @@ function",
                                                             },
                                                           },
                                                           "global": Object {
+                                                            "active": Object {
+                                                              "background": Object {
+                                                                "color": "active",
+                                                                "opacity": "medium",
+                                                              },
+                                                              "color": Object {
+                                                                "dark": "white",
+                                                                "light": "black",
+                                                              },
+                                                            },
                                                             "animation": Object {
                                                               "duration": "1s",
                                                               "jiggle": Object {
@@ -17134,14 +17283,8 @@ function",
                                                             },
                                                             "hover": Object {
                                                               "background": Object {
-                                                                "dark": Object {
-                                                                  "color": "active",
-                                                                  "opacity": "medium",
-                                                                },
-                                                                "light": Object {
-                                                                  "color": "active",
-                                                                  "opacity": "medium",
-                                                                },
+                                                                "color": "active",
+                                                                "opacity": "medium",
                                                               },
                                                               "color": Object {
                                                                 "dark": "white",
@@ -17423,6 +17566,9 @@ function",
                                                             "control": Object {},
                                                             "icons": Object {
                                                               "down": [Function],
+                                                              "margin": Object {
+                                                                "horizontal": "small",
+                                                              },
                                                             },
                                                             "options": Object {
                                                               "box": Object {
@@ -17582,6 +17728,7 @@ function",
                                                         className="c5"
                                                         focus={false}
                                                         focusIndicator={true}
+                                                        gap="small"
                                                         onBlur={[Function]}
                                                         onClick={[Function]}
                                                         onFocus={[Function]}
@@ -17850,6 +17997,16 @@ function",
                                                               },
                                                             },
                                                             "global": Object {
+                                                              "active": Object {
+                                                                "background": Object {
+                                                                  "color": "active",
+                                                                  "opacity": "medium",
+                                                                },
+                                                                "color": Object {
+                                                                  "dark": "white",
+                                                                  "light": "black",
+                                                                },
+                                                              },
                                                               "animation": Object {
                                                                 "duration": "1s",
                                                                 "jiggle": Object {
@@ -18021,14 +18178,8 @@ function",
                                                               },
                                                               "hover": Object {
                                                                 "background": Object {
-                                                                  "dark": Object {
-                                                                    "color": "active",
-                                                                    "opacity": "medium",
-                                                                  },
-                                                                  "light": Object {
-                                                                    "color": "active",
-                                                                    "opacity": "medium",
-                                                                  },
+                                                                  "color": "active",
+                                                                  "opacity": "medium",
                                                                 },
                                                                 "color": Object {
                                                                   "dark": "white",
@@ -18310,6 +18461,9 @@ function",
                                                               "control": Object {},
                                                               "icons": Object {
                                                                 "down": [Function],
+                                                                "margin": Object {
+                                                                  "horizontal": "small",
+                                                                },
                                                               },
                                                               "options": Object {
                                                                 "box": Object {
@@ -18468,6 +18622,7 @@ function",
                                                           className="c5"
                                                           focus={false}
                                                           focusIndicator={true}
+                                                          gap="small"
                                                           onBlur={[Function]}
                                                           onClick={[Function]}
                                                           onFocus={[Function]}
@@ -18736,6 +18891,16 @@ function",
                                                                 },
                                                               },
                                                               "global": Object {
+                                                                "active": Object {
+                                                                  "background": Object {
+                                                                    "color": "active",
+                                                                    "opacity": "medium",
+                                                                  },
+                                                                  "color": Object {
+                                                                    "dark": "white",
+                                                                    "light": "black",
+                                                                  },
+                                                                },
                                                                 "animation": Object {
                                                                   "duration": "1s",
                                                                   "jiggle": Object {
@@ -18907,14 +19072,8 @@ function",
                                                                 },
                                                                 "hover": Object {
                                                                   "background": Object {
-                                                                    "dark": Object {
-                                                                      "color": "active",
-                                                                      "opacity": "medium",
-                                                                    },
-                                                                    "light": Object {
-                                                                      "color": "active",
-                                                                      "opacity": "medium",
-                                                                    },
+                                                                    "color": "active",
+                                                                    "opacity": "medium",
                                                                   },
                                                                   "color": Object {
                                                                     "dark": "white",
@@ -19196,6 +19355,9 @@ function",
                                                                 "control": Object {},
                                                                 "icons": Object {
                                                                   "down": [Function],
+                                                                  "margin": Object {
+                                                                    "horizontal": "small",
+                                                                  },
                                                                 },
                                                                 "options": Object {
                                                                   "box": Object {
@@ -19411,6 +19573,7 @@ function",
                                                                 </button>,
                                                               }
                                                             }
+                                                            gap="small"
                                                             onBlur={[Function]}
                                                             onClick={[Function]}
                                                             onFocus={[Function]}
@@ -19679,6 +19842,16 @@ function",
                                                                   },
                                                                 },
                                                                 "global": Object {
+                                                                  "active": Object {
+                                                                    "background": Object {
+                                                                      "color": "active",
+                                                                      "opacity": "medium",
+                                                                    },
+                                                                    "color": Object {
+                                                                      "dark": "white",
+                                                                      "light": "black",
+                                                                    },
+                                                                  },
                                                                   "animation": Object {
                                                                     "duration": "1s",
                                                                     "jiggle": Object {
@@ -19850,14 +20023,8 @@ function",
                                                                   },
                                                                   "hover": Object {
                                                                     "background": Object {
-                                                                      "dark": Object {
-                                                                        "color": "active",
-                                                                        "opacity": "medium",
-                                                                      },
-                                                                      "light": Object {
-                                                                        "color": "active",
-                                                                        "opacity": "medium",
-                                                                      },
+                                                                      "color": "active",
+                                                                      "opacity": "medium",
                                                                     },
                                                                     "color": Object {
                                                                       "dark": "white",
@@ -20139,6 +20306,9 @@ function",
                                                                   "control": Object {},
                                                                   "icons": Object {
                                                                     "down": [Function],
+                                                                    "margin": Object {
+                                                                      "horizontal": "small",
+                                                                    },
                                                                   },
                                                                   "options": Object {
                                                                     "box": Object {
@@ -20297,6 +20467,7 @@ function",
                                                               className="c5"
                                                               focus={false}
                                                               focusIndicator={true}
+                                                              gap="small"
                                                               hasIcon={false}
                                                               hasLabel={false}
                                                               onBlur={[Function]}
@@ -20571,6 +20742,16 @@ function",
                                                                     },
                                                                   },
                                                                   "global": Object {
+                                                                    "active": Object {
+                                                                      "background": Object {
+                                                                        "color": "active",
+                                                                        "opacity": "medium",
+                                                                      },
+                                                                      "color": Object {
+                                                                        "dark": "white",
+                                                                        "light": "black",
+                                                                      },
+                                                                    },
                                                                     "animation": Object {
                                                                       "duration": "1s",
                                                                       "jiggle": Object {
@@ -20742,14 +20923,8 @@ function",
                                                                     },
                                                                     "hover": Object {
                                                                       "background": Object {
-                                                                        "dark": Object {
-                                                                          "color": "active",
-                                                                          "opacity": "medium",
-                                                                        },
-                                                                        "light": Object {
-                                                                          "color": "active",
-                                                                          "opacity": "medium",
-                                                                        },
+                                                                        "color": "active",
+                                                                        "opacity": "medium",
                                                                       },
                                                                       "color": Object {
                                                                         "dark": "white",
@@ -21031,6 +21206,9 @@ function",
                                                                     "control": Object {},
                                                                     "icons": Object {
                                                                       "down": [Function],
+                                                                      "margin": Object {
+                                                                        "horizontal": "small",
+                                                                      },
                                                                     },
                                                                     "options": Object {
                                                                       "box": Object {
@@ -21251,6 +21429,7 @@ function",
                                                                     </button>,
                                                                   }
                                                                 }
+                                                                gap="small"
                                                                 hasIcon={false}
                                                                 hasLabel={false}
                                                                 onBlur={[Function]}
@@ -21525,6 +21704,16 @@ function",
                                                                       },
                                                                     },
                                                                     "global": Object {
+                                                                      "active": Object {
+                                                                        "background": Object {
+                                                                          "color": "active",
+                                                                          "opacity": "medium",
+                                                                        },
+                                                                        "color": Object {
+                                                                          "dark": "white",
+                                                                          "light": "black",
+                                                                        },
+                                                                      },
                                                                       "animation": Object {
                                                                         "duration": "1s",
                                                                         "jiggle": Object {
@@ -21696,14 +21885,8 @@ function",
                                                                       },
                                                                       "hover": Object {
                                                                         "background": Object {
-                                                                          "dark": Object {
-                                                                            "color": "active",
-                                                                            "opacity": "medium",
-                                                                          },
-                                                                          "light": Object {
-                                                                            "color": "active",
-                                                                            "opacity": "medium",
-                                                                          },
+                                                                          "color": "active",
+                                                                          "opacity": "medium",
                                                                         },
                                                                         "color": Object {
                                                                           "dark": "white",
@@ -21985,6 +22168,9 @@ function",
                                                                       "control": Object {},
                                                                       "icons": Object {
                                                                         "down": [Function],
+                                                                        "margin": Object {
+                                                                          "horizontal": "small",
+                                                                        },
                                                                       },
                                                                       "options": Object {
                                                                         "box": Object {
@@ -22647,6 +22833,16 @@ exports[`AppMessage test suite should render AppMessage without refresh text 1`]
             },
           },
           "global": Object {
+            "active": Object {
+              "background": Object {
+                "color": "active",
+                "opacity": "medium",
+              },
+              "color": Object {
+                "dark": "white",
+                "light": "black",
+              },
+            },
             "animation": Object {
               "duration": "1s",
               "jiggle": Object {
@@ -22818,14 +23014,8 @@ exports[`AppMessage test suite should render AppMessage without refresh text 1`]
             },
             "hover": Object {
               "background": Object {
-                "dark": Object {
-                  "color": "active",
-                  "opacity": "medium",
-                },
-                "light": Object {
-                  "color": "active",
-                  "opacity": "medium",
-                },
+                "color": "active",
+                "opacity": "medium",
               },
               "color": Object {
                 "dark": "white",
@@ -23107,6 +23297,9 @@ exports[`AppMessage test suite should render AppMessage without refresh text 1`]
             "control": Object {},
             "icons": Object {
               "down": [Function],
+              "margin": Object {
+                "horizontal": "small",
+              },
             },
             "options": Object {
               "box": Object {
@@ -23470,10 +23663,11 @@ zoomOut
   image: string,
   position: string,
   opacity: 
+    boolean
+    number
     weak
     medium
-    strong
-    boolean,
+    strong,
   repeat: 
     no-repeat
     repeat
@@ -23781,9 +23975,9 @@ string",
               },
               Object {
                 "defaultValue": false,
-                "description": "Whether children can wrap if they
-      can't all fit.",
-                "format": "boolean",
+                "description": "Whether children can wrap if they can't all fit.",
+                "format": "boolean
+reverse",
                 "name": "wrap",
               },
             ],
@@ -24062,6 +24256,16 @@ string",
               },
             },
             "global": Object {
+              "active": Object {
+                "background": Object {
+                  "color": "active",
+                  "opacity": "medium",
+                },
+                "color": Object {
+                  "dark": "white",
+                  "light": "black",
+                },
+              },
               "animation": Object {
                 "duration": "1s",
                 "jiggle": Object {
@@ -24233,14 +24437,8 @@ string",
               },
               "hover": Object {
                 "background": Object {
-                  "dark": Object {
-                    "color": "active",
-                    "opacity": "medium",
-                  },
-                  "light": Object {
-                    "color": "active",
-                    "opacity": "medium",
-                  },
+                  "color": "active",
+                  "opacity": "medium",
                 },
                 "color": Object {
                   "dark": "white",
@@ -24522,6 +24720,9 @@ string",
               "control": Object {},
               "icons": Object {
                 "down": [Function],
+                "margin": Object {
+                  "horizontal": "small",
+                },
               },
               "options": Object {
                 "box": Object {
@@ -24947,6 +25148,16 @@ string",
                 },
               },
               "global": Object {
+                "active": Object {
+                  "background": Object {
+                    "color": "active",
+                    "opacity": "medium",
+                  },
+                  "color": Object {
+                    "dark": "white",
+                    "light": "black",
+                  },
+                },
                 "animation": Object {
                   "duration": "1s",
                   "jiggle": Object {
@@ -25118,14 +25329,8 @@ string",
                 },
                 "hover": Object {
                   "background": Object {
-                    "dark": Object {
-                      "color": "active",
-                      "opacity": "medium",
-                    },
-                    "light": Object {
-                      "color": "active",
-                      "opacity": "medium",
-                    },
+                    "color": "active",
+                    "opacity": "medium",
                   },
                   "color": Object {
                     "dark": "white",
@@ -25407,6 +25612,9 @@ string",
                 "control": Object {},
                 "icons": Object {
                   "down": [Function],
+                  "margin": Object {
+                    "horizontal": "small",
+                  },
                 },
                 "options": Object {
                   "box": Object {
@@ -25832,6 +26040,16 @@ string",
                   },
                 },
                 "global": Object {
+                  "active": Object {
+                    "background": Object {
+                      "color": "active",
+                      "opacity": "medium",
+                    },
+                    "color": Object {
+                      "dark": "white",
+                      "light": "black",
+                    },
+                  },
                   "animation": Object {
                     "duration": "1s",
                     "jiggle": Object {
@@ -26003,14 +26221,8 @@ string",
                   },
                   "hover": Object {
                     "background": Object {
-                      "dark": Object {
-                        "color": "active",
-                        "opacity": "medium",
-                      },
-                      "light": Object {
-                        "color": "active",
-                        "opacity": "medium",
-                      },
+                      "color": "active",
+                      "opacity": "medium",
                     },
                     "color": Object {
                       "dark": "white",
@@ -26292,6 +26504,9 @@ string",
                   "control": Object {},
                   "icons": Object {
                     "down": [Function],
+                    "margin": Object {
+                      "horizontal": "small",
+                    },
                   },
                   "options": Object {
                     "box": Object {
@@ -26718,6 +26933,16 @@ string",
                     },
                   },
                   "global": Object {
+                    "active": Object {
+                      "background": Object {
+                        "color": "active",
+                        "opacity": "medium",
+                      },
+                      "color": Object {
+                        "dark": "white",
+                        "light": "black",
+                      },
+                    },
                     "animation": Object {
                       "duration": "1s",
                       "jiggle": Object {
@@ -26889,14 +27114,8 @@ string",
                     },
                     "hover": Object {
                       "background": Object {
-                        "dark": Object {
-                          "color": "active",
-                          "opacity": "medium",
-                        },
-                        "light": Object {
-                          "color": "active",
-                          "opacity": "medium",
-                        },
+                        "color": "active",
+                        "opacity": "medium",
                       },
                       "color": Object {
                         "dark": "white",
@@ -27178,6 +27397,9 @@ string",
                     "control": Object {},
                     "icons": Object {
                       "down": [Function],
+                      "margin": Object {
+                        "horizontal": "small",
+                      },
                     },
                     "options": Object {
                       "box": Object {
@@ -27603,6 +27825,16 @@ string",
                       },
                     },
                     "global": Object {
+                      "active": Object {
+                        "background": Object {
+                          "color": "active",
+                          "opacity": "medium",
+                        },
+                        "color": Object {
+                          "dark": "white",
+                          "light": "black",
+                        },
+                      },
                       "animation": Object {
                         "duration": "1s",
                         "jiggle": Object {
@@ -27774,14 +28006,8 @@ string",
                       },
                       "hover": Object {
                         "background": Object {
-                          "dark": Object {
-                            "color": "active",
-                            "opacity": "medium",
-                          },
-                          "light": Object {
-                            "color": "active",
-                            "opacity": "medium",
-                          },
+                          "color": "active",
+                          "opacity": "medium",
                         },
                         "color": Object {
                           "dark": "white",
@@ -28063,6 +28289,9 @@ string",
                       "control": Object {},
                       "icons": Object {
                         "down": [Function],
+                        "margin": Object {
+                          "horizontal": "small",
+                        },
                       },
                       "options": Object {
                         "box": Object {
@@ -28555,6 +28784,16 @@ string",
                         },
                       },
                       "global": Object {
+                        "active": Object {
+                          "background": Object {
+                            "color": "active",
+                            "opacity": "medium",
+                          },
+                          "color": Object {
+                            "dark": "white",
+                            "light": "black",
+                          },
+                        },
                         "animation": Object {
                           "duration": "1s",
                           "jiggle": Object {
@@ -28726,14 +28965,8 @@ string",
                         },
                         "hover": Object {
                           "background": Object {
-                            "dark": Object {
-                              "color": "active",
-                              "opacity": "medium",
-                            },
-                            "light": Object {
-                              "color": "active",
-                              "opacity": "medium",
-                            },
+                            "color": "active",
+                            "opacity": "medium",
                           },
                           "color": Object {
                             "dark": "white",
@@ -29015,6 +29248,9 @@ string",
                         "control": Object {},
                         "icons": Object {
                           "down": [Function],
+                          "margin": Object {
+                            "horizontal": "small",
+                          },
                         },
                         "options": Object {
                           "box": Object {
@@ -29442,6 +29678,16 @@ string",
                             },
                           },
                           "global": Object {
+                            "active": Object {
+                              "background": Object {
+                                "color": "active",
+                                "opacity": "medium",
+                              },
+                              "color": Object {
+                                "dark": "white",
+                                "light": "black",
+                              },
+                            },
                             "animation": Object {
                               "duration": "1s",
                               "jiggle": Object {
@@ -29613,14 +29859,8 @@ string",
                             },
                             "hover": Object {
                               "background": Object {
-                                "dark": Object {
-                                  "color": "active",
-                                  "opacity": "medium",
-                                },
-                                "light": Object {
-                                  "color": "active",
-                                  "opacity": "medium",
-                                },
+                                "color": "active",
+                                "opacity": "medium",
                               },
                               "color": Object {
                                 "dark": "white",
@@ -29902,6 +30142,9 @@ string",
                             "control": Object {},
                             "icons": Object {
                               "down": [Function],
+                              "margin": Object {
+                                "horizontal": "small",
+                              },
                             },
                             "options": Object {
                               "box": Object {
@@ -30266,10 +30509,11 @@ zoomOut
   image: string,
   position: string,
   opacity: 
+    boolean
+    number
     weak
     medium
-    strong
-    boolean,
+    strong,
   repeat: 
     no-repeat
     repeat
@@ -30577,9 +30821,9 @@ string",
                               },
                               Object {
                                 "defaultValue": false,
-                                "description": "Whether children can wrap if they
-      can't all fit.",
-                                "format": "boolean",
+                                "description": "Whether children can wrap if they can't all fit.",
+                                "format": "boolean
+reverse",
                                 "name": "wrap",
                               },
                             ],
@@ -30857,6 +31101,16 @@ string",
                               },
                             },
                             "global": Object {
+                              "active": Object {
+                                "background": Object {
+                                  "color": "active",
+                                  "opacity": "medium",
+                                },
+                                "color": Object {
+                                  "dark": "white",
+                                  "light": "black",
+                                },
+                              },
                               "animation": Object {
                                 "duration": "1s",
                                 "jiggle": Object {
@@ -31028,14 +31282,8 @@ string",
                               },
                               "hover": Object {
                                 "background": Object {
-                                  "dark": Object {
-                                    "color": "active",
-                                    "opacity": "medium",
-                                  },
-                                  "light": Object {
-                                    "color": "active",
-                                    "opacity": "medium",
-                                  },
+                                  "color": "active",
+                                  "opacity": "medium",
                                 },
                                 "color": Object {
                                   "dark": "white",
@@ -31317,6 +31565,9 @@ string",
                               "control": Object {},
                               "icons": Object {
                                 "down": [Function],
+                                "margin": Object {
+                                  "horizontal": "small",
+                                },
                               },
                               "options": Object {
                                 "box": Object {
@@ -31742,6 +31993,16 @@ string",
                                 },
                               },
                               "global": Object {
+                                "active": Object {
+                                  "background": Object {
+                                    "color": "active",
+                                    "opacity": "medium",
+                                  },
+                                  "color": Object {
+                                    "dark": "white",
+                                    "light": "black",
+                                  },
+                                },
                                 "animation": Object {
                                   "duration": "1s",
                                   "jiggle": Object {
@@ -31913,14 +32174,8 @@ string",
                                 },
                                 "hover": Object {
                                   "background": Object {
-                                    "dark": Object {
-                                      "color": "active",
-                                      "opacity": "medium",
-                                    },
-                                    "light": Object {
-                                      "color": "active",
-                                      "opacity": "medium",
-                                    },
+                                    "color": "active",
+                                    "opacity": "medium",
                                   },
                                   "color": Object {
                                     "dark": "white",
@@ -32202,6 +32457,9 @@ string",
                                 "control": Object {},
                                 "icons": Object {
                                   "down": [Function],
+                                  "margin": Object {
+                                    "horizontal": "small",
+                                  },
                                 },
                                 "options": Object {
                                   "box": Object {
@@ -32627,6 +32885,16 @@ string",
                                   },
                                 },
                                 "global": Object {
+                                  "active": Object {
+                                    "background": Object {
+                                      "color": "active",
+                                      "opacity": "medium",
+                                    },
+                                    "color": Object {
+                                      "dark": "white",
+                                      "light": "black",
+                                    },
+                                  },
                                   "animation": Object {
                                     "duration": "1s",
                                     "jiggle": Object {
@@ -32798,14 +33066,8 @@ string",
                                   },
                                   "hover": Object {
                                     "background": Object {
-                                      "dark": Object {
-                                        "color": "active",
-                                        "opacity": "medium",
-                                      },
-                                      "light": Object {
-                                        "color": "active",
-                                        "opacity": "medium",
-                                      },
+                                      "color": "active",
+                                      "opacity": "medium",
                                     },
                                     "color": Object {
                                       "dark": "white",
@@ -33087,6 +33349,9 @@ string",
                                   "control": Object {},
                                   "icons": Object {
                                     "down": [Function],
+                                    "margin": Object {
+                                      "horizontal": "small",
+                                    },
                                   },
                                   "options": Object {
                                     "box": Object {
@@ -33513,6 +33778,16 @@ string",
                                     },
                                   },
                                   "global": Object {
+                                    "active": Object {
+                                      "background": Object {
+                                        "color": "active",
+                                        "opacity": "medium",
+                                      },
+                                      "color": Object {
+                                        "dark": "white",
+                                        "light": "black",
+                                      },
+                                    },
                                     "animation": Object {
                                       "duration": "1s",
                                       "jiggle": Object {
@@ -33684,14 +33959,8 @@ string",
                                     },
                                     "hover": Object {
                                       "background": Object {
-                                        "dark": Object {
-                                          "color": "active",
-                                          "opacity": "medium",
-                                        },
-                                        "light": Object {
-                                          "color": "active",
-                                          "opacity": "medium",
-                                        },
+                                        "color": "active",
+                                        "opacity": "medium",
                                       },
                                       "color": Object {
                                         "dark": "white",
@@ -33973,6 +34242,9 @@ string",
                                     "control": Object {},
                                     "icons": Object {
                                       "down": [Function],
+                                      "margin": Object {
+                                        "horizontal": "small",
+                                      },
                                     },
                                     "options": Object {
                                       "box": Object {
@@ -34398,6 +34670,16 @@ string",
                                       },
                                     },
                                     "global": Object {
+                                      "active": Object {
+                                        "background": Object {
+                                          "color": "active",
+                                          "opacity": "medium",
+                                        },
+                                        "color": Object {
+                                          "dark": "white",
+                                          "light": "black",
+                                        },
+                                      },
                                       "animation": Object {
                                         "duration": "1s",
                                         "jiggle": Object {
@@ -34569,14 +34851,8 @@ string",
                                       },
                                       "hover": Object {
                                         "background": Object {
-                                          "dark": Object {
-                                            "color": "active",
-                                            "opacity": "medium",
-                                          },
-                                          "light": Object {
-                                            "color": "active",
-                                            "opacity": "medium",
-                                          },
+                                          "color": "active",
+                                          "opacity": "medium",
                                         },
                                         "color": Object {
                                           "dark": "white",
@@ -34858,6 +35134,9 @@ string",
                                       "control": Object {},
                                       "icons": Object {
                                         "down": [Function],
+                                        "margin": Object {
+                                          "horizontal": "small",
+                                        },
                                       },
                                       "options": Object {
                                         "box": Object {
@@ -35350,6 +35629,16 @@ string",
                                         },
                                       },
                                       "global": Object {
+                                        "active": Object {
+                                          "background": Object {
+                                            "color": "active",
+                                            "opacity": "medium",
+                                          },
+                                          "color": Object {
+                                            "dark": "white",
+                                            "light": "black",
+                                          },
+                                        },
                                         "animation": Object {
                                           "duration": "1s",
                                           "jiggle": Object {
@@ -35521,14 +35810,8 @@ string",
                                         },
                                         "hover": Object {
                                           "background": Object {
-                                            "dark": Object {
-                                              "color": "active",
-                                              "opacity": "medium",
-                                            },
-                                            "light": Object {
-                                              "color": "active",
-                                              "opacity": "medium",
-                                            },
+                                            "color": "active",
+                                            "opacity": "medium",
                                           },
                                           "color": Object {
                                             "dark": "white",
@@ -35810,6 +36093,9 @@ string",
                                         "control": Object {},
                                         "icons": Object {
                                           "down": [Function],
+                                          "margin": Object {
+                                            "horizontal": "small",
+                                          },
                                         },
                                         "options": Object {
                                           "box": Object {
@@ -36017,6 +36303,7 @@ string",
                                               <Styled(WithTheme(Button))
                                                 buttonStyle="primary"
                                                 focusIndicator={true}
+                                                gap="small"
                                                 onClick={[Function]}
                                                 theme={
                                                   Object {
@@ -36283,6 +36570,16 @@ string",
                                                       },
                                                     },
                                                     "global": Object {
+                                                      "active": Object {
+                                                        "background": Object {
+                                                          "color": "active",
+                                                          "opacity": "medium",
+                                                        },
+                                                        "color": Object {
+                                                          "dark": "white",
+                                                          "light": "black",
+                                                        },
+                                                      },
                                                       "animation": Object {
                                                         "duration": "1s",
                                                         "jiggle": Object {
@@ -36454,14 +36751,8 @@ string",
                                                       },
                                                       "hover": Object {
                                                         "background": Object {
-                                                          "dark": Object {
-                                                            "color": "active",
-                                                            "opacity": "medium",
-                                                          },
-                                                          "light": Object {
-                                                            "color": "active",
-                                                            "opacity": "medium",
-                                                          },
+                                                          "color": "active",
+                                                          "opacity": "medium",
                                                         },
                                                         "color": Object {
                                                           "dark": "white",
@@ -36743,6 +37034,9 @@ string",
                                                       "control": Object {},
                                                       "icons": Object {
                                                         "down": [Function],
+                                                        "margin": Object {
+                                                          "horizontal": "small",
+                                                        },
                                                       },
                                                       "options": Object {
                                                         "box": Object {
@@ -37027,8 +37321,10 @@ string",
                                                         },
                                                         Object {
                                                           "defaultValue": false,
-                                                          "description": "Whether the button expands to fill all of the available width and height.",
-                                                          "format": "boolean",
+                                                          "description": "Whether the button expands to fill all of the available width and/or height.",
+                                                          "format": "horizontal
+vertical
+boolean",
                                                           "name": "fill",
                                                         },
                                                         Object {
@@ -37062,6 +37358,18 @@ background
                                                           "description": "Icon element to place in the button.",
                                                           "format": "element",
                                                           "name": "icon",
+                                                        },
+                                                        Object {
+                                                          "defaultValue": "small",
+                                                          "description": "The amount of spacing between icon and label in the button.",
+                                                          "format": "xxsmall
+xsmall
+small
+medium
+large
+xlarge
+string",
+                                                          "name": "gap",
                                                         },
                                                         Object {
                                                           "description": "Label text to place in the button.",
@@ -37115,6 +37423,7 @@ function",
                                                     }
                                                   }
                                                   forwardedRef={null}
+                                                  gap="small"
                                                   onClick={[Function]}
                                                   theme={
                                                     Object {
@@ -37381,6 +37690,16 @@ function",
                                                         },
                                                       },
                                                       "global": Object {
+                                                        "active": Object {
+                                                          "background": Object {
+                                                            "color": "active",
+                                                            "opacity": "medium",
+                                                          },
+                                                          "color": Object {
+                                                            "dark": "white",
+                                                            "light": "black",
+                                                          },
+                                                        },
                                                         "animation": Object {
                                                           "duration": "1s",
                                                           "jiggle": Object {
@@ -37552,14 +37871,8 @@ function",
                                                         },
                                                         "hover": Object {
                                                           "background": Object {
-                                                            "dark": Object {
-                                                              "color": "active",
-                                                              "opacity": "medium",
-                                                            },
-                                                            "light": Object {
-                                                              "color": "active",
-                                                              "opacity": "medium",
-                                                            },
+                                                            "color": "active",
+                                                            "opacity": "medium",
                                                           },
                                                           "color": Object {
                                                             "dark": "white",
@@ -37841,6 +38154,9 @@ function",
                                                         "control": Object {},
                                                         "icons": Object {
                                                           "down": [Function],
+                                                          "margin": Object {
+                                                            "horizontal": "small",
+                                                          },
                                                         },
                                                         "options": Object {
                                                           "box": Object {
@@ -37998,6 +38314,7 @@ function",
                                                     buttonStyle="primary"
                                                     className="c5"
                                                     focusIndicator={true}
+                                                    gap="small"
                                                     onClick={[Function]}
                                                     theme={
                                                       Object {
@@ -38264,6 +38581,16 @@ function",
                                                           },
                                                         },
                                                         "global": Object {
+                                                          "active": Object {
+                                                            "background": Object {
+                                                              "color": "active",
+                                                              "opacity": "medium",
+                                                            },
+                                                            "color": Object {
+                                                              "dark": "white",
+                                                              "light": "black",
+                                                            },
+                                                          },
                                                           "animation": Object {
                                                             "duration": "1s",
                                                             "jiggle": Object {
@@ -38435,14 +38762,8 @@ function",
                                                           },
                                                           "hover": Object {
                                                             "background": Object {
-                                                              "dark": Object {
-                                                                "color": "active",
-                                                                "opacity": "medium",
-                                                              },
-                                                              "light": Object {
-                                                                "color": "active",
-                                                                "opacity": "medium",
-                                                              },
+                                                              "color": "active",
+                                                              "opacity": "medium",
                                                             },
                                                             "color": Object {
                                                               "dark": "white",
@@ -38724,6 +39045,9 @@ function",
                                                           "control": Object {},
                                                           "icons": Object {
                                                             "down": [Function],
+                                                            "margin": Object {
+                                                              "horizontal": "small",
+                                                            },
                                                           },
                                                           "options": Object {
                                                             "box": Object {
@@ -38881,6 +39205,7 @@ function",
                                                       buttonStyle="primary"
                                                       className="c5"
                                                       focusIndicator={true}
+                                                      gap="small"
                                                       onClick={[Function]}
                                                       theme={
                                                         Object {
@@ -39147,6 +39472,16 @@ function",
                                                             },
                                                           },
                                                           "global": Object {
+                                                            "active": Object {
+                                                              "background": Object {
+                                                                "color": "active",
+                                                                "opacity": "medium",
+                                                              },
+                                                              "color": Object {
+                                                                "dark": "white",
+                                                                "light": "black",
+                                                              },
+                                                            },
                                                             "animation": Object {
                                                               "duration": "1s",
                                                               "jiggle": Object {
@@ -39318,14 +39653,8 @@ function",
                                                             },
                                                             "hover": Object {
                                                               "background": Object {
-                                                                "dark": Object {
-                                                                  "color": "active",
-                                                                  "opacity": "medium",
-                                                                },
-                                                                "light": Object {
-                                                                  "color": "active",
-                                                                  "opacity": "medium",
-                                                                },
+                                                                "color": "active",
+                                                                "opacity": "medium",
                                                               },
                                                               "color": Object {
                                                                 "dark": "white",
@@ -39607,6 +39936,9 @@ function",
                                                             "control": Object {},
                                                             "icons": Object {
                                                               "down": [Function],
+                                                              "margin": Object {
+                                                                "horizontal": "small",
+                                                              },
                                                             },
                                                             "options": Object {
                                                               "box": Object {
@@ -39766,6 +40098,7 @@ function",
                                                         className="c5"
                                                         focus={false}
                                                         focusIndicator={true}
+                                                        gap="small"
                                                         onBlur={[Function]}
                                                         onClick={[Function]}
                                                         onFocus={[Function]}
@@ -40034,6 +40367,16 @@ function",
                                                               },
                                                             },
                                                             "global": Object {
+                                                              "active": Object {
+                                                                "background": Object {
+                                                                  "color": "active",
+                                                                  "opacity": "medium",
+                                                                },
+                                                                "color": Object {
+                                                                  "dark": "white",
+                                                                  "light": "black",
+                                                                },
+                                                              },
                                                               "animation": Object {
                                                                 "duration": "1s",
                                                                 "jiggle": Object {
@@ -40205,14 +40548,8 @@ function",
                                                               },
                                                               "hover": Object {
                                                                 "background": Object {
-                                                                  "dark": Object {
-                                                                    "color": "active",
-                                                                    "opacity": "medium",
-                                                                  },
-                                                                  "light": Object {
-                                                                    "color": "active",
-                                                                    "opacity": "medium",
-                                                                  },
+                                                                  "color": "active",
+                                                                  "opacity": "medium",
                                                                 },
                                                                 "color": Object {
                                                                   "dark": "white",
@@ -40494,6 +40831,9 @@ function",
                                                               "control": Object {},
                                                               "icons": Object {
                                                                 "down": [Function],
+                                                                "margin": Object {
+                                                                  "horizontal": "small",
+                                                                },
                                                               },
                                                               "options": Object {
                                                                 "box": Object {
@@ -40652,6 +40992,7 @@ function",
                                                           className="c5"
                                                           focus={false}
                                                           focusIndicator={true}
+                                                          gap="small"
                                                           onBlur={[Function]}
                                                           onClick={[Function]}
                                                           onFocus={[Function]}
@@ -40920,6 +41261,16 @@ function",
                                                                 },
                                                               },
                                                               "global": Object {
+                                                                "active": Object {
+                                                                  "background": Object {
+                                                                    "color": "active",
+                                                                    "opacity": "medium",
+                                                                  },
+                                                                  "color": Object {
+                                                                    "dark": "white",
+                                                                    "light": "black",
+                                                                  },
+                                                                },
                                                                 "animation": Object {
                                                                   "duration": "1s",
                                                                   "jiggle": Object {
@@ -41091,14 +41442,8 @@ function",
                                                                 },
                                                                 "hover": Object {
                                                                   "background": Object {
-                                                                    "dark": Object {
-                                                                      "color": "active",
-                                                                      "opacity": "medium",
-                                                                    },
-                                                                    "light": Object {
-                                                                      "color": "active",
-                                                                      "opacity": "medium",
-                                                                    },
+                                                                    "color": "active",
+                                                                    "opacity": "medium",
                                                                   },
                                                                   "color": Object {
                                                                     "dark": "white",
@@ -41380,6 +41725,9 @@ function",
                                                                 "control": Object {},
                                                                 "icons": Object {
                                                                   "down": [Function],
+                                                                  "margin": Object {
+                                                                    "horizontal": "small",
+                                                                  },
                                                                 },
                                                                 "options": Object {
                                                                   "box": Object {
@@ -41595,6 +41943,7 @@ function",
                                                                 </button>,
                                                               }
                                                             }
+                                                            gap="small"
                                                             onBlur={[Function]}
                                                             onClick={[Function]}
                                                             onFocus={[Function]}
@@ -41863,6 +42212,16 @@ function",
                                                                   },
                                                                 },
                                                                 "global": Object {
+                                                                  "active": Object {
+                                                                    "background": Object {
+                                                                      "color": "active",
+                                                                      "opacity": "medium",
+                                                                    },
+                                                                    "color": Object {
+                                                                      "dark": "white",
+                                                                      "light": "black",
+                                                                    },
+                                                                  },
                                                                   "animation": Object {
                                                                     "duration": "1s",
                                                                     "jiggle": Object {
@@ -42034,14 +42393,8 @@ function",
                                                                   },
                                                                   "hover": Object {
                                                                     "background": Object {
-                                                                      "dark": Object {
-                                                                        "color": "active",
-                                                                        "opacity": "medium",
-                                                                      },
-                                                                      "light": Object {
-                                                                        "color": "active",
-                                                                        "opacity": "medium",
-                                                                      },
+                                                                      "color": "active",
+                                                                      "opacity": "medium",
                                                                     },
                                                                     "color": Object {
                                                                       "dark": "white",
@@ -42323,6 +42676,9 @@ function",
                                                                   "control": Object {},
                                                                   "icons": Object {
                                                                     "down": [Function],
+                                                                    "margin": Object {
+                                                                      "horizontal": "small",
+                                                                    },
                                                                   },
                                                                   "options": Object {
                                                                     "box": Object {
@@ -42481,6 +42837,7 @@ function",
                                                               className="c5"
                                                               focus={false}
                                                               focusIndicator={true}
+                                                              gap="small"
                                                               hasIcon={false}
                                                               hasLabel={false}
                                                               onBlur={[Function]}
@@ -42755,6 +43112,16 @@ function",
                                                                     },
                                                                   },
                                                                   "global": Object {
+                                                                    "active": Object {
+                                                                      "background": Object {
+                                                                        "color": "active",
+                                                                        "opacity": "medium",
+                                                                      },
+                                                                      "color": Object {
+                                                                        "dark": "white",
+                                                                        "light": "black",
+                                                                      },
+                                                                    },
                                                                     "animation": Object {
                                                                       "duration": "1s",
                                                                       "jiggle": Object {
@@ -42926,14 +43293,8 @@ function",
                                                                     },
                                                                     "hover": Object {
                                                                       "background": Object {
-                                                                        "dark": Object {
-                                                                          "color": "active",
-                                                                          "opacity": "medium",
-                                                                        },
-                                                                        "light": Object {
-                                                                          "color": "active",
-                                                                          "opacity": "medium",
-                                                                        },
+                                                                        "color": "active",
+                                                                        "opacity": "medium",
                                                                       },
                                                                       "color": Object {
                                                                         "dark": "white",
@@ -43215,6 +43576,9 @@ function",
                                                                     "control": Object {},
                                                                     "icons": Object {
                                                                       "down": [Function],
+                                                                      "margin": Object {
+                                                                        "horizontal": "small",
+                                                                      },
                                                                     },
                                                                     "options": Object {
                                                                       "box": Object {
@@ -43435,6 +43799,7 @@ function",
                                                                     </button>,
                                                                   }
                                                                 }
+                                                                gap="small"
                                                                 hasIcon={false}
                                                                 hasLabel={false}
                                                                 onBlur={[Function]}
@@ -43709,6 +44074,16 @@ function",
                                                                       },
                                                                     },
                                                                     "global": Object {
+                                                                      "active": Object {
+                                                                        "background": Object {
+                                                                          "color": "active",
+                                                                          "opacity": "medium",
+                                                                        },
+                                                                        "color": Object {
+                                                                          "dark": "white",
+                                                                          "light": "black",
+                                                                        },
+                                                                      },
                                                                       "animation": Object {
                                                                         "duration": "1s",
                                                                         "jiggle": Object {
@@ -43880,14 +44255,8 @@ function",
                                                                       },
                                                                       "hover": Object {
                                                                         "background": Object {
-                                                                          "dark": Object {
-                                                                            "color": "active",
-                                                                            "opacity": "medium",
-                                                                          },
-                                                                          "light": Object {
-                                                                            "color": "active",
-                                                                            "opacity": "medium",
-                                                                          },
+                                                                          "color": "active",
+                                                                          "opacity": "medium",
                                                                         },
                                                                         "color": Object {
                                                                           "dark": "white",
@@ -44169,6 +44538,9 @@ function",
                                                                       "control": Object {},
                                                                       "icons": Object {
                                                                         "down": [Function],
+                                                                        "margin": Object {
+                                                                          "horizontal": "small",
+                                                                        },
                                                                       },
                                                                       "options": Object {
                                                                         "box": Object {

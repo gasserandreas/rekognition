@@ -27,6 +27,7 @@ const StyledSelector = styled.div`
   left: ${props => props.pos.left * 100}%;
   height: ${props => props.pos.height * 100}%;
   width: ${props => props.pos.width * 100}%;
+  z-index: 10;
 `;
 
 // image
@@ -168,7 +169,14 @@ const ImageContainer = ({ image: { meta, path }, selectedFace, selectedLabel }) 
             ))}
           </span>
         )}
-        <StyledAsyncImage src={getImageSrc(path)} fit="contain" />
+        <StyledAsyncImage
+          src={getImageSrc(path)}
+          fit="contain"
+          wrapperStyles={`
+            position: relative;
+            display: inline;
+          `}
+        />
       </StyledImageWrapper>
     </StyledImageContainer>
   );
