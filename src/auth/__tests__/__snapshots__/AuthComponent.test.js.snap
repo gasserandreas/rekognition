@@ -66,7 +66,6 @@ exports[`AuthComponent test suite AuthFooter test suite should render with child
         className="c0"
       >
         <Link
-          replace={false}
           to="http://www.google.com"
         >
           <a
@@ -566,6 +565,16 @@ is too long to all fit.",
                 },
               },
               "global": Object {
+                "active": Object {
+                  "background": Object {
+                    "color": "active",
+                    "opacity": "medium",
+                  },
+                  "color": Object {
+                    "dark": "white",
+                    "light": "black",
+                  },
+                },
                 "animation": Object {
                   "duration": "1s",
                   "jiggle": Object {
@@ -737,14 +746,8 @@ is too long to all fit.",
                 },
                 "hover": Object {
                   "background": Object {
-                    "dark": Object {
-                      "color": "active",
-                      "opacity": "medium",
-                    },
-                    "light": Object {
-                      "color": "active",
-                      "opacity": "medium",
-                    },
+                    "color": "active",
+                    "opacity": "medium",
                   },
                   "color": Object {
                     "dark": "white",
@@ -1026,6 +1029,9 @@ is too long to all fit.",
                 "control": Object {},
                 "icons": Object {
                   "down": [Function],
+                  "margin": Object {
+                    "horizontal": "small",
+                  },
                 },
                 "options": Object {
                   "box": Object {
@@ -1488,6 +1494,16 @@ is too long to all fit.",
                   },
                 },
                 "global": Object {
+                  "active": Object {
+                    "background": Object {
+                      "color": "active",
+                      "opacity": "medium",
+                    },
+                    "color": Object {
+                      "dark": "white",
+                      "light": "black",
+                    },
+                  },
                   "animation": Object {
                     "duration": "1s",
                     "jiggle": Object {
@@ -1659,14 +1675,8 @@ is too long to all fit.",
                   },
                   "hover": Object {
                     "background": Object {
-                      "dark": Object {
-                        "color": "active",
-                        "opacity": "medium",
-                      },
-                      "light": Object {
-                        "color": "active",
-                        "opacity": "medium",
-                      },
+                      "color": "active",
+                      "opacity": "medium",
                     },
                     "color": Object {
                       "dark": "white",
@@ -1948,6 +1958,9 @@ is too long to all fit.",
                   "control": Object {},
                   "icons": Object {
                     "down": [Function],
+                    "margin": Object {
+                      "horizontal": "small",
+                    },
                   },
                   "options": Object {
                     "box": Object {

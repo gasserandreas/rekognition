@@ -212,10 +212,11 @@ zoomOut
   image: string,
   position: string,
   opacity: 
+    boolean
+    number
     weak
     medium
-    strong
-    boolean,
+    strong,
   repeat: 
     no-repeat
     repeat
@@ -523,9 +524,9 @@ string",
         },
         Object {
           "defaultValue": false,
-          "description": "Whether children can wrap if they
-      can't all fit.",
-          "format": "boolean",
+          "description": "Whether children can wrap if they can't all fit.",
+          "format": "boolean
+reverse",
           "name": "wrap",
         },
       ],
@@ -802,6 +803,16 @@ string",
         },
       },
       "global": Object {
+        "active": Object {
+          "background": Object {
+            "color": "active",
+            "opacity": "medium",
+          },
+          "color": Object {
+            "dark": "white",
+            "light": "black",
+          },
+        },
         "animation": Object {
           "duration": "1s",
           "jiggle": Object {
@@ -973,14 +984,8 @@ string",
         },
         "hover": Object {
           "background": Object {
-            "dark": Object {
-              "color": "active",
-              "opacity": "medium",
-            },
-            "light": Object {
-              "color": "active",
-              "opacity": "medium",
-            },
+            "color": "active",
+            "opacity": "medium",
           },
           "color": Object {
             "dark": "white",
@@ -1262,6 +1267,9 @@ string",
         "control": Object {},
         "icons": Object {
           "down": [Function],
+          "margin": Object {
+            "horizontal": "small",
+          },
         },
         "options": Object {
           "box": Object {
@@ -1628,10 +1636,11 @@ zoomOut
   image: string,
   position: string,
   opacity: 
+    boolean
+    number
     weak
     medium
-    strong
-    boolean,
+    strong,
   repeat: 
     no-repeat
     repeat
@@ -1939,9 +1948,9 @@ string",
         },
         Object {
           "defaultValue": false,
-          "description": "Whether children can wrap if they
-      can't all fit.",
-          "format": "boolean",
+          "description": "Whether children can wrap if they can't all fit.",
+          "format": "boolean
+reverse",
           "name": "wrap",
         },
       ],
@@ -2219,6 +2228,16 @@ string",
         },
       },
       "global": Object {
+        "active": Object {
+          "background": Object {
+            "color": "active",
+            "opacity": "medium",
+          },
+          "color": Object {
+            "dark": "white",
+            "light": "black",
+          },
+        },
         "animation": Object {
           "duration": "1s",
           "jiggle": Object {
@@ -2390,14 +2409,8 @@ string",
         },
         "hover": Object {
           "background": Object {
-            "dark": Object {
-              "color": "active",
-              "opacity": "medium",
-            },
-            "light": Object {
-              "color": "active",
-              "opacity": "medium",
-            },
+            "color": "active",
+            "opacity": "medium",
           },
           "color": Object {
             "dark": "white",
@@ -2679,6 +2692,9 @@ string",
         "control": Object {},
         "icons": Object {
           "down": [Function],
+          "margin": Object {
+            "horizontal": "small",
+          },
         },
         "options": Object {
           "box": Object {
@@ -3103,6 +3119,16 @@ string",
           },
         },
         "global": Object {
+          "active": Object {
+            "background": Object {
+              "color": "active",
+              "opacity": "medium",
+            },
+            "color": Object {
+              "dark": "white",
+              "light": "black",
+            },
+          },
           "animation": Object {
             "duration": "1s",
             "jiggle": Object {
@@ -3274,14 +3300,8 @@ string",
           },
           "hover": Object {
             "background": Object {
-              "dark": Object {
-                "color": "active",
-                "opacity": "medium",
-              },
-              "light": Object {
-                "color": "active",
-                "opacity": "medium",
-              },
+              "color": "active",
+              "opacity": "medium",
             },
             "color": Object {
               "dark": "white",
@@ -3563,6 +3583,9 @@ string",
           "control": Object {},
           "icons": Object {
             "down": [Function],
+            "margin": Object {
+              "horizontal": "small",
+            },
           },
           "options": Object {
             "box": Object {
@@ -3934,10 +3957,11 @@ zoomOut
   image: string,
   position: string,
   opacity: 
+    boolean
+    number
     weak
     medium
-    strong
-    boolean,
+    strong,
   repeat: 
     no-repeat
     repeat
@@ -4245,9 +4269,9 @@ string",
         },
         Object {
           "defaultValue": false,
-          "description": "Whether children can wrap if they
-      can't all fit.",
-          "format": "boolean",
+          "description": "Whether children can wrap if they can't all fit.",
+          "format": "boolean
+reverse",
           "name": "wrap",
         },
       ],
@@ -4524,6 +4548,16 @@ string",
         },
       },
       "global": Object {
+        "active": Object {
+          "background": Object {
+            "color": "active",
+            "opacity": "medium",
+          },
+          "color": Object {
+            "dark": "white",
+            "light": "black",
+          },
+        },
         "animation": Object {
           "duration": "1s",
           "jiggle": Object {
@@ -4695,14 +4729,8 @@ string",
         },
         "hover": Object {
           "background": Object {
-            "dark": Object {
-              "color": "active",
-              "opacity": "medium",
-            },
-            "light": Object {
-              "color": "active",
-              "opacity": "medium",
-            },
+            "color": "active",
+            "opacity": "medium",
           },
           "color": Object {
             "dark": "white",
@@ -4984,6 +5012,9 @@ string",
         "control": Object {},
         "icons": Object {
           "down": [Function],
+          "margin": Object {
+            "horizontal": "small",
+          },
         },
         "options": Object {
           "box": Object {
@@ -5350,10 +5381,11 @@ zoomOut
   image: string,
   position: string,
   opacity: 
+    boolean
+    number
     weak
     medium
-    strong
-    boolean,
+    strong,
   repeat: 
     no-repeat
     repeat
@@ -5661,9 +5693,9 @@ string",
         },
         Object {
           "defaultValue": false,
-          "description": "Whether children can wrap if they
-      can't all fit.",
-          "format": "boolean",
+          "description": "Whether children can wrap if they can't all fit.",
+          "format": "boolean
+reverse",
           "name": "wrap",
         },
       ],
@@ -5941,6 +5973,16 @@ string",
         },
       },
       "global": Object {
+        "active": Object {
+          "background": Object {
+            "color": "active",
+            "opacity": "medium",
+          },
+          "color": Object {
+            "dark": "white",
+            "light": "black",
+          },
+        },
         "animation": Object {
           "duration": "1s",
           "jiggle": Object {
@@ -6112,14 +6154,8 @@ string",
         },
         "hover": Object {
           "background": Object {
-            "dark": Object {
-              "color": "active",
-              "opacity": "medium",
-            },
-            "light": Object {
-              "color": "active",
-              "opacity": "medium",
-            },
+            "color": "active",
+            "opacity": "medium",
           },
           "color": Object {
             "dark": "white",
@@ -6401,6 +6437,9 @@ string",
         "control": Object {},
         "icons": Object {
           "down": [Function],
+          "margin": Object {
+            "horizontal": "small",
+          },
         },
         "options": Object {
           "box": Object {
@@ -6825,6 +6864,16 @@ string",
           },
         },
         "global": Object {
+          "active": Object {
+            "background": Object {
+              "color": "active",
+              "opacity": "medium",
+            },
+            "color": Object {
+              "dark": "white",
+              "light": "black",
+            },
+          },
           "animation": Object {
             "duration": "1s",
             "jiggle": Object {
@@ -6996,14 +7045,8 @@ string",
           },
           "hover": Object {
             "background": Object {
-              "dark": Object {
-                "color": "active",
-                "opacity": "medium",
-              },
-              "light": Object {
-                "color": "active",
-                "opacity": "medium",
-              },
+              "color": "active",
+              "opacity": "medium",
             },
             "color": Object {
               "dark": "white",
@@ -7285,6 +7328,9 @@ string",
           "control": Object {},
           "icons": Object {
             "down": [Function],
+            "margin": Object {
+              "horizontal": "small",
+            },
           },
           "options": Object {
             "box": Object {
