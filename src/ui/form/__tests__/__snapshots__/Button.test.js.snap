@@ -132,8 +132,10 @@ string",
         },
         Object {
           "defaultValue": false,
-          "description": "Whether the button expands to fill all of the available width and height.",
-          "format": "boolean",
+          "description": "Whether the button expands to fill all of the available width and/or height.",
+          "format": "horizontal
+vertical
+boolean",
           "name": "fill",
         },
         Object {
@@ -167,6 +169,18 @@ background
           "description": "Icon element to place in the button.",
           "format": "element",
           "name": "icon",
+        },
+        Object {
+          "defaultValue": "small",
+          "description": "The amount of spacing between icon and label in the button.",
+          "format": "xxsmall
+xsmall
+small
+medium
+large
+xlarge
+string",
+          "name": "gap",
         },
         Object {
           "description": "Label text to place in the button.",
@@ -220,6 +234,7 @@ function",
     }
   }
   forwardedRef={null}
+  gap="small"
   theme={
     Object {
       "accordion": Object {
@@ -485,6 +500,16 @@ function",
         },
       },
       "global": Object {
+        "active": Object {
+          "background": Object {
+            "color": "active",
+            "opacity": "medium",
+          },
+          "color": Object {
+            "dark": "white",
+            "light": "black",
+          },
+        },
         "animation": Object {
           "duration": "1s",
           "jiggle": Object {
@@ -656,14 +681,8 @@ function",
         },
         "hover": Object {
           "background": Object {
-            "dark": Object {
-              "color": "active",
-              "opacity": "medium",
-            },
-            "light": Object {
-              "color": "active",
-              "opacity": "medium",
-            },
+            "color": "active",
+            "opacity": "medium",
           },
           "color": Object {
             "dark": "white",
@@ -945,6 +964,9 @@ function",
         "control": Object {},
         "icons": Object {
           "down": [Function],
+          "margin": Object {
+            "horizontal": "small",
+          },
         },
         "options": Object {
           "box": Object {
@@ -1234,8 +1256,10 @@ string",
         },
         Object {
           "defaultValue": false,
-          "description": "Whether the button expands to fill all of the available width and height.",
-          "format": "boolean",
+          "description": "Whether the button expands to fill all of the available width and/or height.",
+          "format": "horizontal
+vertical
+boolean",
           "name": "fill",
         },
         Object {
@@ -1269,6 +1293,18 @@ background
           "description": "Icon element to place in the button.",
           "format": "element",
           "name": "icon",
+        },
+        Object {
+          "defaultValue": "small",
+          "description": "The amount of spacing between icon and label in the button.",
+          "format": "xxsmall
+xsmall
+small
+medium
+large
+xlarge
+string",
+          "name": "gap",
         },
         Object {
           "description": "Label text to place in the button.",
@@ -1322,6 +1358,7 @@ function",
     }
   }
   forwardedRef={null}
+  gap="small"
   theme={
     Object {
       "accordion": Object {
@@ -1587,6 +1624,16 @@ function",
         },
       },
       "global": Object {
+        "active": Object {
+          "background": Object {
+            "color": "active",
+            "opacity": "medium",
+          },
+          "color": Object {
+            "dark": "white",
+            "light": "black",
+          },
+        },
         "animation": Object {
           "duration": "1s",
           "jiggle": Object {
@@ -1758,14 +1805,8 @@ function",
         },
         "hover": Object {
           "background": Object {
-            "dark": Object {
-              "color": "active",
-              "opacity": "medium",
-            },
-            "light": Object {
-              "color": "active",
-              "opacity": "medium",
-            },
+            "color": "active",
+            "opacity": "medium",
           },
           "color": Object {
             "dark": "white",
@@ -2047,6 +2088,9 @@ function",
         "control": Object {},
         "icons": Object {
           "down": [Function],
+          "margin": Object {
+            "horizontal": "small",
+          },
         },
         "options": Object {
           "box": Object {
@@ -2336,8 +2380,10 @@ string",
         },
         Object {
           "defaultValue": false,
-          "description": "Whether the button expands to fill all of the available width and height.",
-          "format": "boolean",
+          "description": "Whether the button expands to fill all of the available width and/or height.",
+          "format": "horizontal
+vertical
+boolean",
           "name": "fill",
         },
         Object {
@@ -2371,6 +2417,18 @@ background
           "description": "Icon element to place in the button.",
           "format": "element",
           "name": "icon",
+        },
+        Object {
+          "defaultValue": "small",
+          "description": "The amount of spacing between icon and label in the button.",
+          "format": "xxsmall
+xsmall
+small
+medium
+large
+xlarge
+string",
+          "name": "gap",
         },
         Object {
           "description": "Label text to place in the button.",
@@ -2424,6 +2482,7 @@ function",
     }
   }
   forwardedRef={null}
+  gap="small"
   theme={
     Object {
       "accordion": Object {
@@ -2689,6 +2748,16 @@ function",
         },
       },
       "global": Object {
+        "active": Object {
+          "background": Object {
+            "color": "active",
+            "opacity": "medium",
+          },
+          "color": Object {
+            "dark": "white",
+            "light": "black",
+          },
+        },
         "animation": Object {
           "duration": "1s",
           "jiggle": Object {
@@ -2860,14 +2929,8 @@ function",
         },
         "hover": Object {
           "background": Object {
-            "dark": Object {
-              "color": "active",
-              "opacity": "medium",
-            },
-            "light": Object {
-              "color": "active",
-              "opacity": "medium",
-            },
+            "color": "active",
+            "opacity": "medium",
           },
           "color": Object {
             "dark": "white",
@@ -3149,6 +3212,9 @@ function",
         "control": Object {},
         "icons": Object {
           "down": [Function],
+          "margin": Object {
+            "horizontal": "small",
+          },
         },
         "options": Object {
           "box": Object {
@@ -3438,8 +3504,10 @@ string",
         },
         Object {
           "defaultValue": false,
-          "description": "Whether the button expands to fill all of the available width and height.",
-          "format": "boolean",
+          "description": "Whether the button expands to fill all of the available width and/or height.",
+          "format": "horizontal
+vertical
+boolean",
           "name": "fill",
         },
         Object {
@@ -3473,6 +3541,18 @@ background
           "description": "Icon element to place in the button.",
           "format": "element",
           "name": "icon",
+        },
+        Object {
+          "defaultValue": "small",
+          "description": "The amount of spacing between icon and label in the button.",
+          "format": "xxsmall
+xsmall
+small
+medium
+large
+xlarge
+string",
+          "name": "gap",
         },
         Object {
           "description": "Label text to place in the button.",
@@ -3526,6 +3606,7 @@ function",
     }
   }
   forwardedRef={null}
+  gap="small"
   theme={
     Object {
       "accordion": Object {
@@ -3791,6 +3872,16 @@ function",
         },
       },
       "global": Object {
+        "active": Object {
+          "background": Object {
+            "color": "active",
+            "opacity": "medium",
+          },
+          "color": Object {
+            "dark": "white",
+            "light": "black",
+          },
+        },
         "animation": Object {
           "duration": "1s",
           "jiggle": Object {
@@ -3962,14 +4053,8 @@ function",
         },
         "hover": Object {
           "background": Object {
-            "dark": Object {
-              "color": "active",
-              "opacity": "medium",
-            },
-            "light": Object {
-              "color": "active",
-              "opacity": "medium",
-            },
+            "color": "active",
+            "opacity": "medium",
           },
           "color": Object {
             "dark": "white",
@@ -4251,6 +4336,9 @@ function",
         "control": Object {},
         "icons": Object {
           "down": [Function],
+          "margin": Object {
+            "horizontal": "small",
+          },
         },
         "options": Object {
           "box": Object {
@@ -4540,8 +4628,10 @@ string",
         },
         Object {
           "defaultValue": false,
-          "description": "Whether the button expands to fill all of the available width and height.",
-          "format": "boolean",
+          "description": "Whether the button expands to fill all of the available width and/or height.",
+          "format": "horizontal
+vertical
+boolean",
           "name": "fill",
         },
         Object {
@@ -4575,6 +4665,18 @@ background
           "description": "Icon element to place in the button.",
           "format": "element",
           "name": "icon",
+        },
+        Object {
+          "defaultValue": "small",
+          "description": "The amount of spacing between icon and label in the button.",
+          "format": "xxsmall
+xsmall
+small
+medium
+large
+xlarge
+string",
+          "name": "gap",
         },
         Object {
           "description": "Label text to place in the button.",
@@ -4628,6 +4730,7 @@ function",
     }
   }
   forwardedRef={null}
+  gap="small"
   theme={
     Object {
       "accordion": Object {
@@ -4893,6 +4996,16 @@ function",
         },
       },
       "global": Object {
+        "active": Object {
+          "background": Object {
+            "color": "active",
+            "opacity": "medium",
+          },
+          "color": Object {
+            "dark": "white",
+            "light": "black",
+          },
+        },
         "animation": Object {
           "duration": "1s",
           "jiggle": Object {
@@ -5064,14 +5177,8 @@ function",
         },
         "hover": Object {
           "background": Object {
-            "dark": Object {
-              "color": "active",
-              "opacity": "medium",
-            },
-            "light": Object {
-              "color": "active",
-              "opacity": "medium",
-            },
+            "color": "active",
+            "opacity": "medium",
           },
           "color": Object {
             "dark": "white",
@@ -5353,6 +5460,9 @@ function",
         "control": Object {},
         "icons": Object {
           "down": [Function],
+          "margin": Object {
+            "horizontal": "small",
+          },
         },
         "options": Object {
           "box": Object {
@@ -5641,8 +5751,10 @@ string",
         },
         Object {
           "defaultValue": false,
-          "description": "Whether the button expands to fill all of the available width and height.",
-          "format": "boolean",
+          "description": "Whether the button expands to fill all of the available width and/or height.",
+          "format": "horizontal
+vertical
+boolean",
           "name": "fill",
         },
         Object {
@@ -5676,6 +5788,18 @@ background
           "description": "Icon element to place in the button.",
           "format": "element",
           "name": "icon",
+        },
+        Object {
+          "defaultValue": "small",
+          "description": "The amount of spacing between icon and label in the button.",
+          "format": "xxsmall
+xsmall
+small
+medium
+large
+xlarge
+string",
+          "name": "gap",
         },
         Object {
           "description": "Label text to place in the button.",
@@ -5729,6 +5853,7 @@ function",
     }
   }
   forwardedRef={null}
+  gap="small"
   theme={
     Object {
       "accordion": Object {
@@ -5994,6 +6119,16 @@ function",
         },
       },
       "global": Object {
+        "active": Object {
+          "background": Object {
+            "color": "active",
+            "opacity": "medium",
+          },
+          "color": Object {
+            "dark": "white",
+            "light": "black",
+          },
+        },
         "animation": Object {
           "duration": "1s",
           "jiggle": Object {
@@ -6165,14 +6300,8 @@ function",
         },
         "hover": Object {
           "background": Object {
-            "dark": Object {
-              "color": "active",
-              "opacity": "medium",
-            },
-            "light": Object {
-              "color": "active",
-              "opacity": "medium",
-            },
+            "color": "active",
+            "opacity": "medium",
           },
           "color": Object {
             "dark": "white",
@@ -6454,6 +6583,9 @@ function",
         "control": Object {},
         "icons": Object {
           "down": [Function],
+          "margin": Object {
+            "horizontal": "small",
+          },
         },
         "options": Object {
           "box": Object {

@@ -286,6 +286,16 @@ exports[`Header test suite should pass / show username 1`] = `
           },
         },
         "global": Object {
+          "active": Object {
+            "background": Object {
+              "color": "active",
+              "opacity": "medium",
+            },
+            "color": Object {
+              "dark": "white",
+              "light": "black",
+            },
+          },
           "animation": Object {
             "duration": "1s",
             "jiggle": Object {
@@ -457,14 +467,8 @@ exports[`Header test suite should pass / show username 1`] = `
           },
           "hover": Object {
             "background": Object {
-              "dark": Object {
-                "color": "active",
-                "opacity": "medium",
-              },
-              "light": Object {
-                "color": "active",
-                "opacity": "medium",
-              },
+              "color": "active",
+              "opacity": "medium",
             },
             "color": Object {
               "dark": "white",
@@ -746,6 +750,9 @@ exports[`Header test suite should pass / show username 1`] = `
           "control": Object {},
           "icons": Object {
             "down": [Function],
+            "margin": Object {
+              "horizontal": "small",
+            },
           },
           "options": Object {
             "box": Object {
@@ -1110,10 +1117,11 @@ zoomOut
   image: string,
   position: string,
   opacity: 
+    boolean
+    number
     weak
     medium
-    strong
-    boolean,
+    strong,
   repeat: 
     no-repeat
     repeat
@@ -1421,9 +1429,9 @@ string",
             },
             Object {
               "defaultValue": false,
-              "description": "Whether children can wrap if they
-      can't all fit.",
-              "format": "boolean",
+              "description": "Whether children can wrap if they can't all fit.",
+              "format": "boolean
+reverse",
               "name": "wrap",
             },
           ],
@@ -1708,6 +1716,16 @@ string",
             },
           },
           "global": Object {
+            "active": Object {
+              "background": Object {
+                "color": "active",
+                "opacity": "medium",
+              },
+              "color": Object {
+                "dark": "white",
+                "light": "black",
+              },
+            },
             "animation": Object {
               "duration": "1s",
               "jiggle": Object {
@@ -1879,14 +1897,8 @@ string",
             },
             "hover": Object {
               "background": Object {
-                "dark": Object {
-                  "color": "active",
-                  "opacity": "medium",
-                },
-                "light": Object {
-                  "color": "active",
-                  "opacity": "medium",
-                },
+                "color": "active",
+                "opacity": "medium",
               },
               "color": Object {
                 "dark": "white",
@@ -2168,6 +2180,9 @@ string",
             "control": Object {},
             "icons": Object {
               "down": [Function],
+              "margin": Object {
+                "horizontal": "small",
+              },
             },
             "options": Object {
               "box": Object {
@@ -2600,6 +2615,16 @@ string",
               },
             },
             "global": Object {
+              "active": Object {
+                "background": Object {
+                  "color": "active",
+                  "opacity": "medium",
+                },
+                "color": Object {
+                  "dark": "white",
+                  "light": "black",
+                },
+              },
               "animation": Object {
                 "duration": "1s",
                 "jiggle": Object {
@@ -2771,14 +2796,8 @@ string",
               },
               "hover": Object {
                 "background": Object {
-                  "dark": Object {
-                    "color": "active",
-                    "opacity": "medium",
-                  },
-                  "light": Object {
-                    "color": "active",
-                    "opacity": "medium",
-                  },
+                  "color": "active",
+                  "opacity": "medium",
                 },
                 "color": Object {
                   "dark": "white",
@@ -3060,6 +3079,9 @@ string",
               "control": Object {},
               "icons": Object {
                 "down": [Function],
+                "margin": Object {
+                  "horizontal": "small",
+                },
               },
               "options": Object {
                 "box": Object {
@@ -3492,6 +3514,16 @@ string",
                 },
               },
               "global": Object {
+                "active": Object {
+                  "background": Object {
+                    "color": "active",
+                    "opacity": "medium",
+                  },
+                  "color": Object {
+                    "dark": "white",
+                    "light": "black",
+                  },
+                },
                 "animation": Object {
                   "duration": "1s",
                   "jiggle": Object {
@@ -3663,14 +3695,8 @@ string",
                 },
                 "hover": Object {
                   "background": Object {
-                    "dark": Object {
-                      "color": "active",
-                      "opacity": "medium",
-                    },
-                    "light": Object {
-                      "color": "active",
-                      "opacity": "medium",
-                    },
+                    "color": "active",
+                    "opacity": "medium",
                   },
                   "color": Object {
                     "dark": "white",
@@ -3952,6 +3978,9 @@ string",
                 "control": Object {},
                 "icons": Object {
                   "down": [Function],
+                  "margin": Object {
+                    "horizontal": "small",
+                  },
                 },
                 "options": Object {
                   "box": Object {
@@ -4385,6 +4414,16 @@ string",
                   },
                 },
                 "global": Object {
+                  "active": Object {
+                    "background": Object {
+                      "color": "active",
+                      "opacity": "medium",
+                    },
+                    "color": Object {
+                      "dark": "white",
+                      "light": "black",
+                    },
+                  },
                   "animation": Object {
                     "duration": "1s",
                     "jiggle": Object {
@@ -4556,14 +4595,8 @@ string",
                   },
                   "hover": Object {
                     "background": Object {
-                      "dark": Object {
-                        "color": "active",
-                        "opacity": "medium",
-                      },
-                      "light": Object {
-                        "color": "active",
-                        "opacity": "medium",
-                      },
+                      "color": "active",
+                      "opacity": "medium",
                     },
                     "color": Object {
                       "dark": "white",
@@ -4845,6 +4878,9 @@ string",
                   "control": Object {},
                   "icons": Object {
                     "down": [Function],
+                    "margin": Object {
+                      "horizontal": "small",
+                    },
                   },
                   "options": Object {
                     "box": Object {
@@ -5277,6 +5313,16 @@ string",
                     },
                   },
                   "global": Object {
+                    "active": Object {
+                      "background": Object {
+                        "color": "active",
+                        "opacity": "medium",
+                      },
+                      "color": Object {
+                        "dark": "white",
+                        "light": "black",
+                      },
+                    },
                     "animation": Object {
                       "duration": "1s",
                       "jiggle": Object {
@@ -5448,14 +5494,8 @@ string",
                     },
                     "hover": Object {
                       "background": Object {
-                        "dark": Object {
-                          "color": "active",
-                          "opacity": "medium",
-                        },
-                        "light": Object {
-                          "color": "active",
-                          "opacity": "medium",
-                        },
+                        "color": "active",
+                        "opacity": "medium",
                       },
                       "color": Object {
                         "dark": "white",
@@ -5737,6 +5777,9 @@ string",
                     "control": Object {},
                     "icons": Object {
                       "down": [Function],
+                      "margin": Object {
+                        "horizontal": "small",
+                      },
                     },
                     "options": Object {
                       "box": Object {
@@ -6236,6 +6279,16 @@ string",
                       },
                     },
                     "global": Object {
+                      "active": Object {
+                        "background": Object {
+                          "color": "active",
+                          "opacity": "medium",
+                        },
+                        "color": Object {
+                          "dark": "white",
+                          "light": "black",
+                        },
+                      },
                       "animation": Object {
                         "duration": "1s",
                         "jiggle": Object {
@@ -6407,14 +6460,8 @@ string",
                       },
                       "hover": Object {
                         "background": Object {
-                          "dark": Object {
-                            "color": "active",
-                            "opacity": "medium",
-                          },
-                          "light": Object {
-                            "color": "active",
-                            "opacity": "medium",
-                          },
+                          "color": "active",
+                          "opacity": "medium",
                         },
                         "color": Object {
                           "dark": "white",
@@ -6696,6 +6743,9 @@ string",
                       "control": Object {},
                       "icons": Object {
                         "down": [Function],
+                        "margin": Object {
+                          "horizontal": "small",
+                        },
                       },
                       "options": Object {
                         "box": Object {
@@ -7071,7 +7121,6 @@ string",
                     </StyledComponent>
                   </Styled(PreviousButton)>
                   <Link
-                    replace={false}
                     to="/"
                   >
                     <a
@@ -7535,6 +7584,16 @@ is too long to all fit.",
                                     },
                                   },
                                   "global": Object {
+                                    "active": Object {
+                                      "background": Object {
+                                        "color": "active",
+                                        "opacity": "medium",
+                                      },
+                                      "color": Object {
+                                        "dark": "white",
+                                        "light": "black",
+                                      },
+                                    },
                                     "animation": Object {
                                       "duration": "1s",
                                       "jiggle": Object {
@@ -7706,14 +7765,8 @@ is too long to all fit.",
                                     },
                                     "hover": Object {
                                       "background": Object {
-                                        "dark": Object {
-                                          "color": "active",
-                                          "opacity": "medium",
-                                        },
-                                        "light": Object {
-                                          "color": "active",
-                                          "opacity": "medium",
-                                        },
+                                        "color": "active",
+                                        "opacity": "medium",
                                       },
                                       "color": Object {
                                         "dark": "white",
@@ -7995,6 +8048,9 @@ is too long to all fit.",
                                     "control": Object {},
                                     "icons": Object {
                                       "down": [Function],
+                                      "margin": Object {
+                                        "horizontal": "small",
+                                      },
                                     },
                                     "options": Object {
                                       "box": Object {
@@ -8157,7 +8213,7 @@ is too long to all fit.",
                                     "componentStyle": ComponentStyle {
                                       "componentId": "StyledHeading-sc-1rdh4aw-0",
                                       "isStatic": false,
-                                      "lastClassName": "hlZfma",
+                                      "lastClassName": "dOVRRX",
                                       "rules": Array [
                                         [Function],
                                         " ",
@@ -8457,6 +8513,16 @@ is too long to all fit.",
                                       },
                                     },
                                     "global": Object {
+                                      "active": Object {
+                                        "background": Object {
+                                          "color": "active",
+                                          "opacity": "medium",
+                                        },
+                                        "color": Object {
+                                          "dark": "white",
+                                          "light": "black",
+                                        },
+                                      },
                                       "animation": Object {
                                         "duration": "1s",
                                         "jiggle": Object {
@@ -8628,14 +8694,8 @@ is too long to all fit.",
                                       },
                                       "hover": Object {
                                         "background": Object {
-                                          "dark": Object {
-                                            "color": "active",
-                                            "opacity": "medium",
-                                          },
-                                          "light": Object {
-                                            "color": "active",
-                                            "opacity": "medium",
-                                          },
+                                          "color": "active",
+                                          "opacity": "medium",
                                         },
                                         "color": Object {
                                           "dark": "white",
@@ -8917,6 +8977,9 @@ is too long to all fit.",
                                       "control": Object {},
                                       "icons": Object {
                                         "down": [Function],
+                                        "margin": Object {
+                                          "horizontal": "small",
+                                        },
                                       },
                                       "options": Object {
                                         "box": Object {
@@ -9070,7 +9133,7 @@ is too long to all fit.",
                                 }
                               >
                                 <h4
-                                  className="sc-htpNat fzxzsV StyledHeading-sc-1rdh4aw-0 hlZfma"
+                                  className="sc-htpNat fzxzsV StyledHeading-sc-1rdh4aw-0 dOVRRX"
                                 >
                                   AWS Rekognition
                                 </h4>
@@ -9117,7 +9180,6 @@ is too long to all fit.",
                           className="sc-bxivhb hKkJTW"
                         >
                           <Link
-                            replace={false}
                             to="/user"
                           >
                             <a
@@ -9432,6 +9494,16 @@ exports[`Header test suite should render correctly 1`] = `
           },
         },
         "global": Object {
+          "active": Object {
+            "background": Object {
+              "color": "active",
+              "opacity": "medium",
+            },
+            "color": Object {
+              "dark": "white",
+              "light": "black",
+            },
+          },
           "animation": Object {
             "duration": "1s",
             "jiggle": Object {
@@ -9603,14 +9675,8 @@ exports[`Header test suite should render correctly 1`] = `
           },
           "hover": Object {
             "background": Object {
-              "dark": Object {
-                "color": "active",
-                "opacity": "medium",
-              },
-              "light": Object {
-                "color": "active",
-                "opacity": "medium",
-              },
+              "color": "active",
+              "opacity": "medium",
             },
             "color": Object {
               "dark": "white",
@@ -9892,6 +9958,9 @@ exports[`Header test suite should render correctly 1`] = `
           "control": Object {},
           "icons": Object {
             "down": [Function],
+            "margin": Object {
+              "horizontal": "small",
+            },
           },
           "options": Object {
             "box": Object {
@@ -10256,10 +10325,11 @@ zoomOut
   image: string,
   position: string,
   opacity: 
+    boolean
+    number
     weak
     medium
-    strong
-    boolean,
+    strong,
   repeat: 
     no-repeat
     repeat
@@ -10567,9 +10637,9 @@ string",
             },
             Object {
               "defaultValue": false,
-              "description": "Whether children can wrap if they
-      can't all fit.",
-              "format": "boolean",
+              "description": "Whether children can wrap if they can't all fit.",
+              "format": "boolean
+reverse",
               "name": "wrap",
             },
           ],
@@ -10854,6 +10924,16 @@ string",
             },
           },
           "global": Object {
+            "active": Object {
+              "background": Object {
+                "color": "active",
+                "opacity": "medium",
+              },
+              "color": Object {
+                "dark": "white",
+                "light": "black",
+              },
+            },
             "animation": Object {
               "duration": "1s",
               "jiggle": Object {
@@ -11025,14 +11105,8 @@ string",
             },
             "hover": Object {
               "background": Object {
-                "dark": Object {
-                  "color": "active",
-                  "opacity": "medium",
-                },
-                "light": Object {
-                  "color": "active",
-                  "opacity": "medium",
-                },
+                "color": "active",
+                "opacity": "medium",
               },
               "color": Object {
                 "dark": "white",
@@ -11314,6 +11388,9 @@ string",
             "control": Object {},
             "icons": Object {
               "down": [Function],
+              "margin": Object {
+                "horizontal": "small",
+              },
             },
             "options": Object {
               "box": Object {
@@ -11746,6 +11823,16 @@ string",
               },
             },
             "global": Object {
+              "active": Object {
+                "background": Object {
+                  "color": "active",
+                  "opacity": "medium",
+                },
+                "color": Object {
+                  "dark": "white",
+                  "light": "black",
+                },
+              },
               "animation": Object {
                 "duration": "1s",
                 "jiggle": Object {
@@ -11917,14 +12004,8 @@ string",
               },
               "hover": Object {
                 "background": Object {
-                  "dark": Object {
-                    "color": "active",
-                    "opacity": "medium",
-                  },
-                  "light": Object {
-                    "color": "active",
-                    "opacity": "medium",
-                  },
+                  "color": "active",
+                  "opacity": "medium",
                 },
                 "color": Object {
                   "dark": "white",
@@ -12206,6 +12287,9 @@ string",
               "control": Object {},
               "icons": Object {
                 "down": [Function],
+                "margin": Object {
+                  "horizontal": "small",
+                },
               },
               "options": Object {
                 "box": Object {
@@ -12638,6 +12722,16 @@ string",
                 },
               },
               "global": Object {
+                "active": Object {
+                  "background": Object {
+                    "color": "active",
+                    "opacity": "medium",
+                  },
+                  "color": Object {
+                    "dark": "white",
+                    "light": "black",
+                  },
+                },
                 "animation": Object {
                   "duration": "1s",
                   "jiggle": Object {
@@ -12809,14 +12903,8 @@ string",
                 },
                 "hover": Object {
                   "background": Object {
-                    "dark": Object {
-                      "color": "active",
-                      "opacity": "medium",
-                    },
-                    "light": Object {
-                      "color": "active",
-                      "opacity": "medium",
-                    },
+                    "color": "active",
+                    "opacity": "medium",
                   },
                   "color": Object {
                     "dark": "white",
@@ -13098,6 +13186,9 @@ string",
                 "control": Object {},
                 "icons": Object {
                   "down": [Function],
+                  "margin": Object {
+                    "horizontal": "small",
+                  },
                 },
                 "options": Object {
                   "box": Object {
@@ -13531,6 +13622,16 @@ string",
                   },
                 },
                 "global": Object {
+                  "active": Object {
+                    "background": Object {
+                      "color": "active",
+                      "opacity": "medium",
+                    },
+                    "color": Object {
+                      "dark": "white",
+                      "light": "black",
+                    },
+                  },
                   "animation": Object {
                     "duration": "1s",
                     "jiggle": Object {
@@ -13702,14 +13803,8 @@ string",
                   },
                   "hover": Object {
                     "background": Object {
-                      "dark": Object {
-                        "color": "active",
-                        "opacity": "medium",
-                      },
-                      "light": Object {
-                        "color": "active",
-                        "opacity": "medium",
-                      },
+                      "color": "active",
+                      "opacity": "medium",
                     },
                     "color": Object {
                       "dark": "white",
@@ -13991,6 +14086,9 @@ string",
                   "control": Object {},
                   "icons": Object {
                     "down": [Function],
+                    "margin": Object {
+                      "horizontal": "small",
+                    },
                   },
                   "options": Object {
                     "box": Object {
@@ -14423,6 +14521,16 @@ string",
                     },
                   },
                   "global": Object {
+                    "active": Object {
+                      "background": Object {
+                        "color": "active",
+                        "opacity": "medium",
+                      },
+                      "color": Object {
+                        "dark": "white",
+                        "light": "black",
+                      },
+                    },
                     "animation": Object {
                       "duration": "1s",
                       "jiggle": Object {
@@ -14594,14 +14702,8 @@ string",
                     },
                     "hover": Object {
                       "background": Object {
-                        "dark": Object {
-                          "color": "active",
-                          "opacity": "medium",
-                        },
-                        "light": Object {
-                          "color": "active",
-                          "opacity": "medium",
-                        },
+                        "color": "active",
+                        "opacity": "medium",
                       },
                       "color": Object {
                         "dark": "white",
@@ -14883,6 +14985,9 @@ string",
                     "control": Object {},
                     "icons": Object {
                       "down": [Function],
+                      "margin": Object {
+                        "horizontal": "small",
+                      },
                     },
                     "options": Object {
                       "box": Object {
@@ -15382,6 +15487,16 @@ string",
                       },
                     },
                     "global": Object {
+                      "active": Object {
+                        "background": Object {
+                          "color": "active",
+                          "opacity": "medium",
+                        },
+                        "color": Object {
+                          "dark": "white",
+                          "light": "black",
+                        },
+                      },
                       "animation": Object {
                         "duration": "1s",
                         "jiggle": Object {
@@ -15553,14 +15668,8 @@ string",
                       },
                       "hover": Object {
                         "background": Object {
-                          "dark": Object {
-                            "color": "active",
-                            "opacity": "medium",
-                          },
-                          "light": Object {
-                            "color": "active",
-                            "opacity": "medium",
-                          },
+                          "color": "active",
+                          "opacity": "medium",
                         },
                         "color": Object {
                           "dark": "white",
@@ -15842,6 +15951,9 @@ string",
                       "control": Object {},
                       "icons": Object {
                         "down": [Function],
+                        "margin": Object {
+                          "horizontal": "small",
+                        },
                       },
                       "options": Object {
                         "box": Object {
@@ -15998,7 +16110,6 @@ string",
                   className="sc-ifAKCX kHdcAp StyledBox-sc-13pk1d4-0 etZkbE"
                 >
                   <Link
-                    replace={false}
                     to="/"
                   >
                     <a
@@ -16462,6 +16573,16 @@ is too long to all fit.",
                                     },
                                   },
                                   "global": Object {
+                                    "active": Object {
+                                      "background": Object {
+                                        "color": "active",
+                                        "opacity": "medium",
+                                      },
+                                      "color": Object {
+                                        "dark": "white",
+                                        "light": "black",
+                                      },
+                                    },
                                     "animation": Object {
                                       "duration": "1s",
                                       "jiggle": Object {
@@ -16633,14 +16754,8 @@ is too long to all fit.",
                                     },
                                     "hover": Object {
                                       "background": Object {
-                                        "dark": Object {
-                                          "color": "active",
-                                          "opacity": "medium",
-                                        },
-                                        "light": Object {
-                                          "color": "active",
-                                          "opacity": "medium",
-                                        },
+                                        "color": "active",
+                                        "opacity": "medium",
                                       },
                                       "color": Object {
                                         "dark": "white",
@@ -16922,6 +17037,9 @@ is too long to all fit.",
                                     "control": Object {},
                                     "icons": Object {
                                       "down": [Function],
+                                      "margin": Object {
+                                        "horizontal": "small",
+                                      },
                                     },
                                     "options": Object {
                                       "box": Object {
@@ -17084,7 +17202,7 @@ is too long to all fit.",
                                     "componentStyle": ComponentStyle {
                                       "componentId": "StyledHeading-sc-1rdh4aw-0",
                                       "isStatic": false,
-                                      "lastClassName": "hlZfma",
+                                      "lastClassName": "dOVRRX",
                                       "rules": Array [
                                         [Function],
                                         " ",
@@ -17384,6 +17502,16 @@ is too long to all fit.",
                                       },
                                     },
                                     "global": Object {
+                                      "active": Object {
+                                        "background": Object {
+                                          "color": "active",
+                                          "opacity": "medium",
+                                        },
+                                        "color": Object {
+                                          "dark": "white",
+                                          "light": "black",
+                                        },
+                                      },
                                       "animation": Object {
                                         "duration": "1s",
                                         "jiggle": Object {
@@ -17555,14 +17683,8 @@ is too long to all fit.",
                                       },
                                       "hover": Object {
                                         "background": Object {
-                                          "dark": Object {
-                                            "color": "active",
-                                            "opacity": "medium",
-                                          },
-                                          "light": Object {
-                                            "color": "active",
-                                            "opacity": "medium",
-                                          },
+                                          "color": "active",
+                                          "opacity": "medium",
                                         },
                                         "color": Object {
                                           "dark": "white",
@@ -17844,6 +17966,9 @@ is too long to all fit.",
                                       "control": Object {},
                                       "icons": Object {
                                         "down": [Function],
+                                        "margin": Object {
+                                          "horizontal": "small",
+                                        },
                                       },
                                       "options": Object {
                                         "box": Object {
@@ -17997,7 +18122,7 @@ is too long to all fit.",
                                 }
                               >
                                 <h4
-                                  className="sc-htpNat fzxzsV StyledHeading-sc-1rdh4aw-0 hlZfma"
+                                  className="sc-htpNat fzxzsV StyledHeading-sc-1rdh4aw-0 dOVRRX"
                                 >
                                   AWS Rekognition
                                 </h4>
@@ -18305,6 +18430,16 @@ exports[`Header test suite should render is authenticated 1`] = `
           },
         },
         "global": Object {
+          "active": Object {
+            "background": Object {
+              "color": "active",
+              "opacity": "medium",
+            },
+            "color": Object {
+              "dark": "white",
+              "light": "black",
+            },
+          },
           "animation": Object {
             "duration": "1s",
             "jiggle": Object {
@@ -18476,14 +18611,8 @@ exports[`Header test suite should render is authenticated 1`] = `
           },
           "hover": Object {
             "background": Object {
-              "dark": Object {
-                "color": "active",
-                "opacity": "medium",
-              },
-              "light": Object {
-                "color": "active",
-                "opacity": "medium",
-              },
+              "color": "active",
+              "opacity": "medium",
             },
             "color": Object {
               "dark": "white",
@@ -18765,6 +18894,9 @@ exports[`Header test suite should render is authenticated 1`] = `
           "control": Object {},
           "icons": Object {
             "down": [Function],
+            "margin": Object {
+              "horizontal": "small",
+            },
           },
           "options": Object {
             "box": Object {
@@ -19129,10 +19261,11 @@ zoomOut
   image: string,
   position: string,
   opacity: 
+    boolean
+    number
     weak
     medium
-    strong
-    boolean,
+    strong,
   repeat: 
     no-repeat
     repeat
@@ -19440,9 +19573,9 @@ string",
             },
             Object {
               "defaultValue": false,
-              "description": "Whether children can wrap if they
-      can't all fit.",
-              "format": "boolean",
+              "description": "Whether children can wrap if they can't all fit.",
+              "format": "boolean
+reverse",
               "name": "wrap",
             },
           ],
@@ -19727,6 +19860,16 @@ string",
             },
           },
           "global": Object {
+            "active": Object {
+              "background": Object {
+                "color": "active",
+                "opacity": "medium",
+              },
+              "color": Object {
+                "dark": "white",
+                "light": "black",
+              },
+            },
             "animation": Object {
               "duration": "1s",
               "jiggle": Object {
@@ -19898,14 +20041,8 @@ string",
             },
             "hover": Object {
               "background": Object {
-                "dark": Object {
-                  "color": "active",
-                  "opacity": "medium",
-                },
-                "light": Object {
-                  "color": "active",
-                  "opacity": "medium",
-                },
+                "color": "active",
+                "opacity": "medium",
               },
               "color": Object {
                 "dark": "white",
@@ -20187,6 +20324,9 @@ string",
             "control": Object {},
             "icons": Object {
               "down": [Function],
+              "margin": Object {
+                "horizontal": "small",
+              },
             },
             "options": Object {
               "box": Object {
@@ -20619,6 +20759,16 @@ string",
               },
             },
             "global": Object {
+              "active": Object {
+                "background": Object {
+                  "color": "active",
+                  "opacity": "medium",
+                },
+                "color": Object {
+                  "dark": "white",
+                  "light": "black",
+                },
+              },
               "animation": Object {
                 "duration": "1s",
                 "jiggle": Object {
@@ -20790,14 +20940,8 @@ string",
               },
               "hover": Object {
                 "background": Object {
-                  "dark": Object {
-                    "color": "active",
-                    "opacity": "medium",
-                  },
-                  "light": Object {
-                    "color": "active",
-                    "opacity": "medium",
-                  },
+                  "color": "active",
+                  "opacity": "medium",
                 },
                 "color": Object {
                   "dark": "white",
@@ -21079,6 +21223,9 @@ string",
               "control": Object {},
               "icons": Object {
                 "down": [Function],
+                "margin": Object {
+                  "horizontal": "small",
+                },
               },
               "options": Object {
                 "box": Object {
@@ -21511,6 +21658,16 @@ string",
                 },
               },
               "global": Object {
+                "active": Object {
+                  "background": Object {
+                    "color": "active",
+                    "opacity": "medium",
+                  },
+                  "color": Object {
+                    "dark": "white",
+                    "light": "black",
+                  },
+                },
                 "animation": Object {
                   "duration": "1s",
                   "jiggle": Object {
@@ -21682,14 +21839,8 @@ string",
                 },
                 "hover": Object {
                   "background": Object {
-                    "dark": Object {
-                      "color": "active",
-                      "opacity": "medium",
-                    },
-                    "light": Object {
-                      "color": "active",
-                      "opacity": "medium",
-                    },
+                    "color": "active",
+                    "opacity": "medium",
                   },
                   "color": Object {
                     "dark": "white",
@@ -21971,6 +22122,9 @@ string",
                 "control": Object {},
                 "icons": Object {
                   "down": [Function],
+                  "margin": Object {
+                    "horizontal": "small",
+                  },
                 },
                 "options": Object {
                   "box": Object {
@@ -22404,6 +22558,16 @@ string",
                   },
                 },
                 "global": Object {
+                  "active": Object {
+                    "background": Object {
+                      "color": "active",
+                      "opacity": "medium",
+                    },
+                    "color": Object {
+                      "dark": "white",
+                      "light": "black",
+                    },
+                  },
                   "animation": Object {
                     "duration": "1s",
                     "jiggle": Object {
@@ -22575,14 +22739,8 @@ string",
                   },
                   "hover": Object {
                     "background": Object {
-                      "dark": Object {
-                        "color": "active",
-                        "opacity": "medium",
-                      },
-                      "light": Object {
-                        "color": "active",
-                        "opacity": "medium",
-                      },
+                      "color": "active",
+                      "opacity": "medium",
                     },
                     "color": Object {
                       "dark": "white",
@@ -22864,6 +23022,9 @@ string",
                   "control": Object {},
                   "icons": Object {
                     "down": [Function],
+                    "margin": Object {
+                      "horizontal": "small",
+                    },
                   },
                   "options": Object {
                     "box": Object {
@@ -23296,6 +23457,16 @@ string",
                     },
                   },
                   "global": Object {
+                    "active": Object {
+                      "background": Object {
+                        "color": "active",
+                        "opacity": "medium",
+                      },
+                      "color": Object {
+                        "dark": "white",
+                        "light": "black",
+                      },
+                    },
                     "animation": Object {
                       "duration": "1s",
                       "jiggle": Object {
@@ -23467,14 +23638,8 @@ string",
                     },
                     "hover": Object {
                       "background": Object {
-                        "dark": Object {
-                          "color": "active",
-                          "opacity": "medium",
-                        },
-                        "light": Object {
-                          "color": "active",
-                          "opacity": "medium",
-                        },
+                        "color": "active",
+                        "opacity": "medium",
                       },
                       "color": Object {
                         "dark": "white",
@@ -23756,6 +23921,9 @@ string",
                     "control": Object {},
                     "icons": Object {
                       "down": [Function],
+                      "margin": Object {
+                        "horizontal": "small",
+                      },
                     },
                     "options": Object {
                       "box": Object {
@@ -24255,6 +24423,16 @@ string",
                       },
                     },
                     "global": Object {
+                      "active": Object {
+                        "background": Object {
+                          "color": "active",
+                          "opacity": "medium",
+                        },
+                        "color": Object {
+                          "dark": "white",
+                          "light": "black",
+                        },
+                      },
                       "animation": Object {
                         "duration": "1s",
                         "jiggle": Object {
@@ -24426,14 +24604,8 @@ string",
                       },
                       "hover": Object {
                         "background": Object {
-                          "dark": Object {
-                            "color": "active",
-                            "opacity": "medium",
-                          },
-                          "light": Object {
-                            "color": "active",
-                            "opacity": "medium",
-                          },
+                          "color": "active",
+                          "opacity": "medium",
                         },
                         "color": Object {
                           "dark": "white",
@@ -24715,6 +24887,9 @@ string",
                       "control": Object {},
                       "icons": Object {
                         "down": [Function],
+                        "margin": Object {
+                          "horizontal": "small",
+                        },
                       },
                       "options": Object {
                         "box": Object {
@@ -25090,7 +25265,6 @@ string",
                     </StyledComponent>
                   </Styled(PreviousButton)>
                   <Link
-                    replace={false}
                     to="/"
                   >
                     <a
@@ -25554,6 +25728,16 @@ is too long to all fit.",
                                     },
                                   },
                                   "global": Object {
+                                    "active": Object {
+                                      "background": Object {
+                                        "color": "active",
+                                        "opacity": "medium",
+                                      },
+                                      "color": Object {
+                                        "dark": "white",
+                                        "light": "black",
+                                      },
+                                    },
                                     "animation": Object {
                                       "duration": "1s",
                                       "jiggle": Object {
@@ -25725,14 +25909,8 @@ is too long to all fit.",
                                     },
                                     "hover": Object {
                                       "background": Object {
-                                        "dark": Object {
-                                          "color": "active",
-                                          "opacity": "medium",
-                                        },
-                                        "light": Object {
-                                          "color": "active",
-                                          "opacity": "medium",
-                                        },
+                                        "color": "active",
+                                        "opacity": "medium",
                                       },
                                       "color": Object {
                                         "dark": "white",
@@ -26014,6 +26192,9 @@ is too long to all fit.",
                                     "control": Object {},
                                     "icons": Object {
                                       "down": [Function],
+                                      "margin": Object {
+                                        "horizontal": "small",
+                                      },
                                     },
                                     "options": Object {
                                       "box": Object {
@@ -26176,7 +26357,7 @@ is too long to all fit.",
                                     "componentStyle": ComponentStyle {
                                       "componentId": "StyledHeading-sc-1rdh4aw-0",
                                       "isStatic": false,
-                                      "lastClassName": "hlZfma",
+                                      "lastClassName": "dOVRRX",
                                       "rules": Array [
                                         [Function],
                                         " ",
@@ -26476,6 +26657,16 @@ is too long to all fit.",
                                       },
                                     },
                                     "global": Object {
+                                      "active": Object {
+                                        "background": Object {
+                                          "color": "active",
+                                          "opacity": "medium",
+                                        },
+                                        "color": Object {
+                                          "dark": "white",
+                                          "light": "black",
+                                        },
+                                      },
                                       "animation": Object {
                                         "duration": "1s",
                                         "jiggle": Object {
@@ -26647,14 +26838,8 @@ is too long to all fit.",
                                       },
                                       "hover": Object {
                                         "background": Object {
-                                          "dark": Object {
-                                            "color": "active",
-                                            "opacity": "medium",
-                                          },
-                                          "light": Object {
-                                            "color": "active",
-                                            "opacity": "medium",
-                                          },
+                                          "color": "active",
+                                          "opacity": "medium",
                                         },
                                         "color": Object {
                                           "dark": "white",
@@ -26936,6 +27121,9 @@ is too long to all fit.",
                                       "control": Object {},
                                       "icons": Object {
                                         "down": [Function],
+                                        "margin": Object {
+                                          "horizontal": "small",
+                                        },
                                       },
                                       "options": Object {
                                         "box": Object {
@@ -27089,7 +27277,7 @@ is too long to all fit.",
                                 }
                               >
                                 <h4
-                                  className="sc-htpNat fzxzsV StyledHeading-sc-1rdh4aw-0 hlZfma"
+                                  className="sc-htpNat fzxzsV StyledHeading-sc-1rdh4aw-0 dOVRRX"
                                 >
                                   AWS Rekognition
                                 </h4>
@@ -27136,7 +27324,6 @@ is too long to all fit.",
                           className="sc-bxivhb hKkJTW"
                         >
                           <Link
-                            replace={false}
                             to="/user"
                           >
                             <a
