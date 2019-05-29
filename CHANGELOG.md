@@ -1,3 +1,27 @@
+# [1.3.0](https://github.com/gasserandreas/rekognition/compare/v1.2.0...v1.3.0) (2019-05-29)
+
+
+### Bug Fixes
+
+* **#113:** init app properly before loading additional views to prevent invalid auth session states ([6e8528d](https://github.com/gasserandreas/rekognition/commit/6e8528d)), closes [#113](https://github.com/gasserandreas/rekognition/issues/113)
+* **#117:** Updated snapshots after Jest upgrade ([656ff72](https://github.com/gasserandreas/rekognition/commit/656ff72)), closes [#117](https://github.com/gasserandreas/rekognition/issues/117)
+* **#118:** Fixed npm vulnerability issues ([328b512](https://github.com/gasserandreas/rekognition/commit/328b512))
+* **#121:** fixed display bug for detail view image ([e525860](https://github.com/gasserandreas/rekognition/commit/e525860))
+* **#124:** Change file ending for json data files ([6e3fb36](https://github.com/gasserandreas/rekognition/commit/6e3fb36)), closes [#124](https://github.com/gasserandreas/rekognition/issues/124)
+* **#130:** Fixed visibility bug for image / label selector ([7e6265f](https://github.com/gasserandreas/rekognition/commit/7e6265f))
+* **#132:** app is loaded after rehydration ([ebc388f](https://github.com/gasserandreas/rekognition/commit/ebc388f)), closes [#132](https://github.com/gasserandreas/rekognition/issues/132)
+* **#133:** revert redux bundle split ([52d612a](https://github.com/gasserandreas/rekognition/commit/52d612a)), closes [#133](https://github.com/gasserandreas/rekognition/issues/133)
+* **#136:** updated packages and dependencies ([fe1d691](https://github.com/gasserandreas/rekognition/commit/fe1d691)), closes [#136](https://github.com/gasserandreas/rekognition/issues/136)
+
+
+### Features
+
+* **#110:** added GitHub actions for new PRs ([2fcaa24](https://github.com/gasserandreas/rekognition/commit/2fcaa24)), closes [#110](https://github.com/gasserandreas/rekognition/issues/110)
+* **#115:** added dynamic import to redux implementation ([8f295e0](https://github.com/gasserandreas/rekognition/commit/8f295e0)), closes [#115](https://github.com/gasserandreas/rekognition/issues/115)
+* **#115:** enabled lazy loading for AppRoutes ([da9e6f8](https://github.com/gasserandreas/rekognition/commit/da9e6f8)), closes [#115](https://github.com/gasserandreas/rekognition/issues/115)
+* **#117:** Updated to latest react-scripts ([ef3bc86](https://github.com/gasserandreas/rekognition/commit/ef3bc86)), closes [#117](https://github.com/gasserandreas/rekognition/issues/117)
+* **#125:** improved lodash import ([81bddf9](https://github.com/gasserandreas/rekognition/commit/81bddf9)), closes [#125](https://github.com/gasserandreas/rekognition/issues/125)
+
 # [1.2.0](https://github.com/gasserandreas/rekognition/compare/v1.1.0...v1.2.0) (2019-05-08)
 
 
